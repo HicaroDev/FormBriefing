@@ -1,0 +1,8 @@
+node_modules/
+.vite/
+dist/
+*.log
+.env
+.env.local
+.envv
+02.md

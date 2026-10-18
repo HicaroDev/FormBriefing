@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StudioIntake - Event Production &amp; Conference Brief</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed": "#351000",
+            "tertiary": "#7e3000",
+            "on-tertiary": "#ffffff",
+            "surface-dim": "#d3daef",
+            "on-surface": "#141b2b",
+            "primary-fixed": "#e2dfff",
+            "on-primary-fixed": "#0f0069",
+            "error": "#ba1a1a",
+            "surface-tint": "#4d44e3",
+            "inverse-primary": "#c3c0ff",
+            "on-tertiary-fixed-variant": "#7b2f00",
+            "on-secondary-container": "#596374",
+            "on-background": "#141b2b",
+            "inverse-on-surface": "#edf0ff",
+            "primary": "#3525cd",
+            "surface-container-high": "#e1e8fd",
+            "surface": "#f9f9ff",
+            "surface-bright": "#f9f9ff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-surface": "#293040",
+            "surface-container-highest": "#dce2f7",
+            "tertiary-fixed": "#ffdbcc",
+            "tertiary-container": "#a44100",
+            "surface-container": "#e9edff",
+            "on-secondary-fixed-variant": "#3d4757",
+            "on-secondary-fixed": "#121c2a",
+            "on-primary": "#ffffff",
+            "on-tertiary-container": "#ffd2be",
+            "primary-container": "#4f46e5",
+            "on-primary-fixed-variant": "#3323cc",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#464555",
+            "secondary-container": "#d6e0f4",
+            "outline-variant": "#c7c4d8",
+            "on-error": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "primary-fixed-dim": "#c3c0ff",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#bdc7db",
+            "secondary": "#555f70",
+            "outline": "#777587",
+            "surface-variant": "#dce2f7",
+            "tertiary-fixed-dim": "#ffb695",
+            "background": "#f9f9ff",
+            "secondary-fixed": "#d9e3f7",
+            "on-primary-container": "#dad7ff",
+            "on-error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "margin": "3rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1.25rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          "fontSize": {
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Subtle custom card ambient shadow from Design System guidance */
+    .brief-card {
+      box-shadow: 0 1px 3px 0 rgba(17, 24, 39, 0.04), 0 1px 2px -1px rgba(17, 24, 39, 0.03);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- TopNavBar (Shared Component from JSON) -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-space-lg max-w-5xl mx-auto h-16">
+<!-- Brand & Left Navigation Links -->
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-on-surface text-surface flex items-center justify-center font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-lg" data-icon="deployed_code">deployed_code</span>
+</span>
+<span class="font-headline-sm text-headline-sm text-on-surface dark:text-inverse-on-surface tracking-tight">StudioIntake</span>
+</div>
+<nav class="hidden md:flex items-center gap-6 pt-1">
+<!-- Dashboard link -->
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+            Dashboard
+          </a>
+<!-- Pilates Brief link -->
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+            Pilates Brief
+          </a>
+<!-- Physio Brief link -->
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+            Physio Brief
+          </a>
+<!-- Events Brief link (ACTIVE MAPPING) -->
+<a class="font-label-md text-label-md border-b-2 border-primary dark:border-inverse-primary text-primary dark:text-inverse-primary pb-1 hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 font-semibold" href="#">
+            Events Brief
+          </a>
+</nav>
+</div>
+<!-- Trailing Action Buttons & Profile Image -->
+<div class="flex items-center gap-3">
+<!-- Secondary Trailing Action: Export -->
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+<span>Export</span>
+</button>
+<!-- Primary Trailing Action: New Brief -->
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-on-surface text-surface font-label-md text-label-md hover:bg-on-surface-variant transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-base" data-icon="add">add</span>
+<span>New Brief</span>
+</button>
+<div class="h-5 w-px bg-outline-variant mx-1"></div>
+<!-- Trailing Icon Actions: notifications, help -->
+<button aria-label="Notifications" class="text-on-surface-variant hover:text-primary transition-colors duration-150 p-1" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Help" class="text-on-surface-variant hover:text-primary transition-colors duration-150 p-1" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
+</button>
+<!-- Profile Avatar -->
+<div class="ml-2 w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-sm text-label-sm border border-outline-variant" title="Studio Director profile avatar">
+<span class="font-semibold">SD</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="max-w-5xl mx-auto px-space-md sm:px-space-lg py-8 pb-24">
+<!-- Hero / Brief Document Header -->
+<div class="mb-8">
+<div class="flex flex-wrap items-center justify-between gap-4 border-b border-outline-variant pb-6">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider font-semibold">
+              Live Intake Canvas
+            </span>
+<span class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Auto-saved 2m ago
+            </span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Event Production Brief</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1.5">
+            Form Ref: <span class="font-semibold text-on-surface">EVT-9421</span> • Client: <span class="font-semibold text-on-surface">Horizon Tech Summit 2025 &amp; Gala</span>
+</p>
+</div>
+<!-- Header Quick Stats Strip -->
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3 px-4 text-right">
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Production Lead</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Marcus Vance, VP</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3 px-4 text-right">
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Target Date</span>
+<span class="font-label-lg text-label-lg text-primary font-semibold">Oct 14-16, 2025</span>
+</div>
+</div>
+</div>
+</div>
+<!-- The Intake Form Container -->
+<form class="space-y-space-xl" onsubmit="event.preventDefault();">
+<!-- SECTION 1: Event Scope & Commercial Goals -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 sm:p-8 brief-card">
+<div class="flex items-start justify-between border-b border-outline-variant pb-4 mb-6">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold tracking-wide">
+              01. SCOPE &amp; GOALS
+            </span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Event Scope &amp; Commercial Goals</h2>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="flag">flag</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Event Type Multi-Choice Bento -->
+<div class="md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-2 font-medium">
+              Event Classification &amp; Format <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<!-- Flagship Conference (Selected) -->
+<label class="relative flex flex-col p-4 rounded-xl border-2 border-primary bg-primary-fixed/30 cursor-pointer transition-all duration-150">
+<input checked="" class="sr-only" name="event_type" type="radio" value="flagship"/>
+<span class="material-symbols-outlined text-primary mb-2" data-icon="domain" data-weight="fill">domain</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Flagship Conference</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Multi-stage convention &amp; expo hall</span>
+</label>
+<!-- VIP Gala (Selected multi) -->
+<label class="relative flex flex-col p-4 rounded-xl border border-outline-variant bg-surface-container-lowest hover:border-outline cursor-pointer transition-all duration-150">
+<input class="sr-only" name="event_type" type="radio" value="vip_gala"/>
+<span class="material-symbols-outlined text-secondary mb-2" data-icon="celebration">celebration</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">VIP Gala</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Black-tie banquet &amp; awards reception</span>
+</label>
+<!-- Hybrid Summit -->
+<label class="relative flex flex-col p-4 rounded-xl border border-outline-variant bg-surface-container-lowest hover:border-outline cursor-pointer transition-all duration-150">
+<input class="sr-only" name="event_type" type="radio" value="hybrid"/>
+<span class="material-symbols-outlined text-secondary mb-2" data-icon="stream">stream</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Hybrid Summit</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Synchronized broadcast &amp; physical floor</span>
+</label>
+<!-- Product Keynote -->
+<label class="relative flex flex-col p-4 rounded-xl border border-outline-variant bg-surface-container-lowest hover:border-outline cursor-pointer transition-all duration-150">
+<input class="sr-only" name="event_type" type="radio" value="keynote"/>
+<span class="material-symbols-outlined text-secondary mb-2" data-icon="mic">mic</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Product Keynote</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Theatrical auditorium launch production</span>
+</label>
+</div>
+</div>
+<!-- Target Headcount Inputs -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="in_person_headcount">
+              In-Person Ticket Capacity
+            </label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="groups">groups</span>
+</span>
+<input class="w-full pl-10 pr-3 py-2.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-colors" id="in_person_headcount" type="text" value="2,500 in-person delegates"/>
+</div>
+<span class="block mt-1 font-body-sm text-body-sm text-on-surface-variant">Main auditorium seated maximum: 2,800</span>
+</div>
+<!-- Digital Stream Headcount -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="stream_headcount">
+              Digital / Hybrid Stream Projection
+            </label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="cast">cast</span>
+</span>
+<input class="w-full pl-10 pr-3 py-2.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-colors" id="stream_headcount" type="text" value="5,000 stream attendees"/>
+</div>
+<span class="block mt-1 font-body-sm text-body-sm text-on-surface-variant">Global low-latency CDN broadcast tier</span>
+</div>
+<!-- Sponsor Revenue Target & Ticket Revenue -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="sponsor_target">
+              Sponsor Revenue Target (USD)
+            </label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline font-semibold">
+                $
+              </span>
+<input class="w-full pl-8 pr-3 py-2.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-colors font-medium" id="sponsor_target" type="text" value="1,750,000"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="key_milestone">
+              Key Production Milestone Target
+            </label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="event_upcoming">event_upcoming</span>
+</span>
+<input class="w-full pl-10 pr-3 py-2.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-colors" id="key_milestone" type="text" value="Keynote stage lockdown: August 15, 2025"/>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Audience & Delegate Profile -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 sm:p-8 brief-card">
+<div class="flex items-start justify-between border-b border-outline-variant pb-4 mb-6">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold tracking-wide">
+              02. DELEGATE PROFILE
+            </span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Audience Persona &amp; Access Tiers</h2>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="badge">badge</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-5">
+          Specify access zoning, lanyard color codes, and high-security credentials across verified participant clusters.
+        </p>
+<!-- Persona Matrix Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Persona 1: Executive VIPs -->
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-low/50 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center font-bold text-sm">
+<span class="material-symbols-outlined text-base" data-icon="stars">stars</span>
+</span>
+<span class="px-2 py-0.5 rounded text-xs font-semibold bg-on-tertiary-fixed text-tertiary-fixed">Tier A</span>
+</div>
+<h3 class="font-label-lg text-label-lg font-semibold text-on-surface">Executive VIPs</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">C-Suite leaders, Keynote speakers, Founders.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60">
+<label class="flex items-center gap-2 cursor-pointer font-label-sm text-label-sm text-on-surface">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span>RFID Lounge &amp; Backstage Pass</span>
+</label>
+</div>
+</div>
+<!-- Persona 2: Developers & Builders -->
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-low/50 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center font-bold text-sm">
+<span class="material-symbols-outlined text-base" data-icon="terminal">terminal</span>
+</span>
+<span class="px-2 py-0.5 rounded text-xs font-semibold bg-surface-container text-primary">Tier B</span>
+</div>
+<h3 class="font-label-lg text-label-lg font-semibold text-on-surface">Developers &amp; Engineers</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Technical leads, hackathon participants, architects.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60">
+<label class="flex items-center gap-2 cursor-pointer font-label-sm text-label-sm text-on-surface">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span>Hands-on Lab &amp; Workshop Zone</span>
+</label>
+</div>
+</div>
+<!-- Persona 3: Enterprise Sponsors -->
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-low/50 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center font-bold text-sm">
+<span class="material-symbols-outlined text-base" data-icon="apartment">apartment</span>
+</span>
+<span class="px-2 py-0.5 rounded text-xs font-semibold bg-surface-container text-primary">Tier C</span>
+</div>
+<h3 class="font-label-lg text-label-lg font-semibold text-on-surface">Enterprise Sponsors</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Exhibitor crews, brand ambassadors, sales leads.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60">
+<label class="flex items-center gap-2 cursor-pointer font-label-sm text-label-sm text-on-surface">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span>Lead Retrieval Scanner Access</span>
+</label>
+</div>
+</div>
+<!-- Persona 4: Press & Media -->
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-low/50 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center font-bold text-sm">
+<span class="material-symbols-outlined text-base" data-icon="videocam">videocam</span>
+</span>
+<span class="px-2 py-0.5 rounded text-xs font-semibold bg-surface-container text-secondary">Tier D</span>
+</div>
+<h3 class="font-label-lg text-label-lg font-semibold text-on-surface">Press &amp; Media</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Journalists, photographers, podcast producers.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60">
+<label class="flex items-center gap-2 cursor-pointer font-label-sm text-label-sm text-on-surface">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span>Dedicated Media Hub &amp; Press Pit</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Access & Verification Requirements -->
+<div class="mt-6 pt-5 border-t border-outline-variant grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2 font-medium">Lanyard Colorway &amp; Material Coding</label>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface font-label-sm text-label-sm text-on-surface">
+<span class="w-3 h-3 rounded-full bg-indigo-600"></span> Deep Obsidian (VIP)
+              </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface font-label-sm text-label-sm text-on-surface">
+<span class="w-3 h-3 rounded-full bg-blue-500"></span> Cobalt Blue (General)
+              </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface font-label-sm text-label-sm text-on-surface">
+<span class="w-3 h-3 rounded-full bg-amber-500"></span> Amber Gold (Exhibitors)
+              </span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2 font-medium">Physical Credential Type</label>
+<div class="flex items-center gap-4 text-on-surface font-body-sm text-body-sm">
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary" name="badge_tech" type="radio"/>
+<span>Encrypted NFC Wood Badges</span>
+</label>
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary" name="badge_tech" type="radio"/>
+<span>Standard QR High-Gloss PVC</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Event Logistics & Digital Infrastructure -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 sm:p-8 brief-card">
+<div class="flex items-start justify-between border-b border-outline-variant pb-4 mb-6">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold tracking-wide">
+              03. INFRASTRUCTURE &amp; LOGISTICS
+            </span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Event Logistics &amp; Digital Infrastructure</h2>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="hub">hub</span>
+</div>
+<div class="space-y-6">
+<!-- Ticketing Platform Integration (Tito, Stripe, Eventbrite) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2 font-medium">
+              Primary Ticketing &amp; Registration Gateway
+            </label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<label class="flex items-center justify-between p-3.5 rounded-xl border-2 border-primary bg-primary-fixed/20 cursor-pointer">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="confirmation_number">confirmation_number</span>
+<div>
+<span class="block font-label-lg text-label-lg font-semibold text-on-surface">Tito Conference API</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">Direct webhook sync</span>
+</div>
+</div>
+<input checked="" class="text-primary focus:ring-primary" name="ticket_gateway" type="radio"/>
+</label>
+<label class="flex items-center justify-between p-3.5 rounded-xl border border-outline-variant bg-surface hover:border-outline cursor-pointer">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="credit_card">credit_card</span>
+<div>
+<span class="block font-label-lg text-label-lg font-semibold text-on-surface">Stripe Custom Portal</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">White-label checkout</span>
+</div>
+</div>
+<input class="text-primary focus:ring-primary" name="ticket_gateway" type="radio"/>
+</label>
+<label class="flex items-center justify-between p-3.5 rounded-xl border border-outline-variant bg-surface hover:border-outline cursor-pointer">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="airplane_ticket">airplane_ticket</span>
+<div>
+<span class="block font-label-lg text-label-lg font-semibold text-on-surface">Eventbrite Enterprise</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">Global partner sync</span>
+</div>
+</div>
+<input class="text-primary focus:ring-primary" name="ticket_gateway" type="radio"/>
+</label>
+</div>
+</div>
+<!-- Speaker Schedule Multi-Track Agenda Builder -->
+<div class="p-5 rounded-xl border border-outline-variant bg-surface-container-low/40">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="view_timeline">view_timeline</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Multi-Track Agenda Matrix</span>
+</div>
+<button class="inline-flex items-center gap-1 text-primary hover:text-primary-container font-label-md text-label-md font-semibold" type="button">
+<span class="material-symbols-outlined text-base" data-icon="add_circle">add_circle</span>
+<span>Add Track</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<!-- Stage 1 -->
+<div class="bg-surface-container-lowest p-3.5 rounded-lg border border-outline-variant">
+<div class="flex justify-between items-center mb-1.5">
+<span class="font-label-sm text-label-sm font-semibold text-primary">TRACK 01</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hall A (2,500 Cap)</span>
+</div>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface block">Keynotes &amp; Global Policy</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Simultaneous translation, 4K livestream mix, live stage confidence monitors.</p>
+</div>
+<!-- Stage 2 -->
+<div class="bg-surface-container-lowest p-3.5 rounded-lg border border-outline-variant">
+<div class="flex justify-between items-center mb-1.5">
+<span class="font-label-sm text-label-sm font-semibold text-secondary">TRACK 02</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Auditorium B (800 Cap)</span>
+</div>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface block">Deep Tech &amp; Applied AI</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Developer fireside breakouts, live coding mirrors, dual-screen presentations.</p>
+</div>
+<!-- Stage 3 -->
+<div class="bg-surface-container-lowest p-3.5 rounded-lg border border-outline-variant">
+<div class="flex justify-between items-center mb-1.5">
+<span class="font-label-sm text-label-sm font-semibold text-tertiary">TRACK 03</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Terrace Lounge (350 Cap)</span>
+</div>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface block">Founder Pitch &amp; Gala Mixer</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Acoustic paneling, roving wireless lavs, ambient spotlighting for dinner presentations.</p>
+</div>
+</div>
+</div>
+<!-- Live Q&A, Polling, Venue Catering Flow -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Digital Interaction Platform -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2 font-medium">
+                Live Audience Engagement &amp; Polling
+              </label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-3 rounded-lg border border-outline-variant bg-surface hover:bg-surface-container-lowest cursor-pointer">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-semibold">Slido Keynote Q&amp;A Integration</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">Moderated stage screen projection &amp; mobile voting</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg border border-outline-variant bg-surface hover:bg-surface-container-lowest cursor-pointer">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-semibold">Native Summit Companion App</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">Personalized schedule, 1:1 direct messaging</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Venue Maps & Dietary Flow -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2 font-medium">
+                Venue Zoning &amp; Catering Dynamics
+              </label>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="restaurant">restaurant</span>
+<div>
+<span class="block font-label-md text-label-md font-semibold text-on-surface">Dietary Buffet Flow Routing</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">6 separate allergen-certified islands</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-xs font-semibold bg-surface-container text-on-surface">Configured</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="map">map</span>
+<div>
+<span class="block font-label-md text-label-md font-semibold text-on-surface">Interactive Wayfinding Kiosks</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">8 floor standing 65" touchscreen maps</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-xs font-semibold bg-surface-container text-on-surface">Included</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: Visual Identity, Stage Specs & Suggestions -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 sm:p-8 brief-card">
+<div class="flex items-start justify-between border-b border-outline-variant pb-4 mb-6">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold tracking-wide">
+              04. PRODUCTION &amp; STAGING
+            </span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Visual Identity, Stage Specs &amp; Suggestions</h2>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="theaters">theaters</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- AV Production & Stage Specs -->
+<div class="space-y-4">
+<h3 class="font-label-lg text-label-lg font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" data-icon="tv">tv</span>
+<span>LED Wall &amp; Display Architecture</span>
+</h3>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-medium" for="wall_ratio">Center Stage Wall Ratio</label>
+<select class="w-full py-2.5 px-3 rounded-lg border border-outline-variant bg-surface font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="wall_ratio">
+<option selected="">32:9 Curved Seamless 1.9mm Pixel Pitch</option>
+<option>16:9 Cinema Uncompressed 4K LED</option>
+<option>Custom 3-Sided Immersive Cube Stage</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-medium" for="audio_spec">Broadcast Sound Spec</label>
+<input class="w-full py-2.5 px-3 rounded-lg border border-outline-variant bg-surface font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="audio_spec" type="text" value="D&amp;B Audiotechnik Line Array + Dante Redundancy"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-medium" for="lighting_cue">Lighting Programming Style</label>
+<input class="w-full py-2.5 px-3 rounded-lg border border-outline-variant bg-surface font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="lighting_cue" type="text" value="Architectural Warm Tungsten &amp; Kinetic Moving Beams"/>
+</div>
+</div>
+<!-- Sponsor Brand Packages -->
+<div class="space-y-4">
+<h3 class="font-label-lg text-label-lg font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" data-icon="workspace_premium">workspace_premium</span>
+<span>Sponsor Brand Package Tiers</span>
+</h3>
+<!-- Headline Tier -->
+<div class="p-3.5 rounded-lg border border-outline-variant bg-surface-container-low flex items-start gap-3">
+<span class="w-7 h-7 rounded-full bg-on-tertiary-fixed text-tertiary-fixed flex items-center justify-center font-bold text-xs shrink-0">H</span>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface block">Headline Tier ($250k)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Stage naming rights, opening video ident, VIP gala host.</span>
+</div>
+</div>
+<!-- Platinum Tier -->
+<div class="p-3.5 rounded-lg border border-outline-variant bg-surface-container-low flex items-start gap-3">
+<span class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs shrink-0">P</span>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface block">Platinum Tier ($100k)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Track sponsor, dedicated 20x20 expo pavilion, app banner.</span>
+</div>
+</div>
+<!-- Gold Tier -->
+<div class="p-3.5 rounded-lg border border-outline-variant bg-surface-container-low flex items-start gap-3">
+<span class="w-7 h-7 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-xs shrink-0">G</span>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface block">Gold Tier ($40k)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Coffee lounge branding, lanyard logo insertion, digital kiosk.</span>
+</div>
+</div>
+</div>
+<!-- Physical Swag & Physical Materials Briefing -->
+<div class="space-y-4">
+<h3 class="font-label-lg text-label-lg font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" data-icon="inventory_2">inventory_2</span>
+<span>Physical Swag &amp; Collateral</span>
+</h3>
+<div class="p-4 rounded-xl border border-dashed border-outline-variant bg-surface space-y-3">
+<label class="flex items-start gap-2.5 text-on-surface cursor-pointer">
+<input checked="" class="mt-0.5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<span class="font-label-md text-label-md font-medium block">Sustainable Matte Metal Drinkware</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Laser-etched summit emblem, 2,500 units</span>
+</div>
+</label>
+<label class="flex items-start gap-2.5 text-on-surface cursor-pointer">
+<input checked="" class="mt-0.5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<span class="font-label-md text-label-md font-medium block">Recycled Woven Technical Backpacks</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Co-branded minimal waterproof shell</span>
+</div>
+</label>
+<label class="flex items-start gap-2.5 text-on-surface cursor-pointer">
+<input checked="" class="mt-0.5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<span class="font-label-md text-label-md font-medium block">Editorial Print Summit Guidebook</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">120-page offset litho, soft-touch cover</span>
+</div>
+</label>
+</div>
+<!-- Upload Area for Brand Guidelines -->
+<div class="border-2 border-dashed border-outline-variant hover:border-primary rounded-xl p-4 text-center cursor-pointer bg-surface-container-low transition-colors duration-150">
+<span class="material-symbols-outlined text-outline text-2xl mb-1" data-icon="cloud_upload">cloud_upload</span>
+<span class="block font-label-md text-label-md font-semibold text-on-surface">Upload Brand Assets (ZIP, SVG, AI)</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">Drop vector marks, color specs up to 50MB</span>
+</div>
+</div>
+</div>
+<!-- Staging Notes & Additional Specs -->
+<div class="mt-6 pt-5 border-t border-outline-variant">
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="special_instructions">
+            Special Staging Directives &amp; Teleprompter Placement Notes
+          </label>
+<textarea class="w-full p-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none resize-none" id="special_instructions" placeholder="Specify any unique keynote reveal mechanics, robotic cameras, pyrotechnics, or VIP green room backstage requirements..." rows="3">Keynote opens with a seamless 2-minute 3D generative sequence rendered across the full 32:9 canvas. Two robotic tracking jib cameras required for Track 01 broadcast. VIP Green Room requires hardwired 1Gbps private uplink.</textarea>
+</div>
+</section>
+<!-- Sticky Action Bar / Form Bottom Controls -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4 brief-card">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="verified">verified</span>
+</span>
+<div>
+<span class="block font-label-md text-label-md font-semibold text-on-surface">Intake Readiness: 92%</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">All 4 production chapters meet briefing criteria.</span>
+</div>
+</div>
+<!-- Action Buttons: Save Progress, Export Briefing CSV, Submit Event Brief -->
+<div class="flex items-center gap-3">
+<!-- Save Progress -->
+<button class="px-4 py-2 rounded-lg border border-outline-variant hover:bg-surface-container-low text-on-surface font-label-md text-label-md transition-colors duration-150 inline-flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-base" data-icon="save">save</span>
+<span>Save Progress</span>
+</button>
+<!-- Export Briefing CSV -->
+<button class="px-4 py-2 rounded-lg border border-outline-variant hover:bg-surface-container-low text-on-surface font-label-md text-label-md transition-colors duration-150 inline-flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-base" data-icon="table_view">table_view</span>
+<span>Export Briefing CSV</span>
+</button>
+<!-- Submit Event Brief (Primary Critical Action) -->
+<button class="px-5 py-2.5 rounded-lg bg-on-surface hover:bg-on-surface-variant text-surface font-label-md text-label-md font-semibold transition-colors duration-150 shadow-sm inline-flex items-center gap-2" type="submit">
+<span>Submit Event Brief</span>
+<span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</form>
+</main>
+</body></html>

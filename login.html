@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Acesse o StudioIntake | Enterprise Client Discovery</title>
+<!-- Material Symbols Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Typography Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Verbatim Tailwind Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-tint": "#4d44e3",
+            "on-secondary-fixed-variant": "#3d4757",
+            "on-secondary-fixed": "#121c2a",
+            "inverse-on-surface": "#edf0ff",
+            "on-secondary-container": "#596374",
+            "outline-variant": "#c7c4d8",
+            "primary-fixed-dim": "#c3c0ff",
+            "primary-container": "#4f46e5",
+            "surface-container-highest": "#dce2f7",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#a44100",
+            "on-error-container": "#93000a",
+            "inverse-primary": "#c3c0ff",
+            "on-tertiary-container": "#ffd2be",
+            "surface-bright": "#f9f9ff",
+            "surface-container-high": "#e1e8fd",
+            "secondary": "#555f70",
+            "surface-container-low": "#f1f3ff",
+            "tertiary-fixed": "#ffdbcc",
+            "surface": "#f9f9ff",
+            "background": "#f9f9ff",
+            "on-surface": "#141b2b",
+            "outline": "#777587",
+            "tertiary": "#7e3000",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "on-tertiary-fixed": "#351000",
+            "inverse-surface": "#293040",
+            "secondary-fixed": "#d9e3f7",
+            "on-primary-fixed": "#0f0069",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#e2dfff",
+            "on-primary": "#ffffff",
+            "surface-dim": "#d3daef",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#3323cc",
+            "on-error": "#ffffff",
+            "surface-container": "#e9edff",
+            "tertiary-fixed-dim": "#ffb695",
+            "secondary-fixed-dim": "#bdc7db",
+            "on-background": "#141b2b",
+            "on-primary-container": "#dad7ff",
+            "secondary-container": "#d6e0f4",
+            "primary": "#3525cd",
+            "on-surface-variant": "#464555",
+            "surface-variant": "#dce2f7",
+            "on-tertiary-fixed-variant": "#7b2f00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "margin-mobile": "1.25rem",
+            "space-xs": "0.25rem",
+            "margin": "3rem",
+            "space-sm": "0.5rem",
+            "gutter-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-xl": [
+              "Plus Jakarta Sans"
+            ],
+            "body-md": [
+              "Inter"
+            ],
+            "headline-lg": [
+              "Plus Jakarta Sans"
+            ],
+            "body-lg": [
+              "Inter"
+            ],
+            "headline-sm": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-md": [
+              "Plus Jakarta Sans"
+            ],
+            "label-md": [
+              "Inter"
+            ],
+            "label-sm": [
+              "Inter"
+            ],
+            "label-lg": [
+              "Inter"
+            ],
+            "body-sm": [
+              "Inter"
+            ],
+            "headline-xl-mobile": [
+              "Plus Jakarta Sans"
+            ]
+          },
+          "fontSize": {
+            "headline-xl": [
+              "40px",
+              {
+                "lineHeight": "48px",
+                "fontWeight": "700"
+              }
+            ],
+            "body-md": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-lg": [
+              "28px",
+              {
+                "lineHeight": "36px",
+                "fontWeight": "600"
+              }
+            ],
+            "body-lg": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-sm": [
+              "18px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "600"
+              }
+            ],
+            "headline-md": [
+              "22px",
+              {
+                "lineHeight": "28px",
+                "fontWeight": "600"
+              }
+            ],
+            "label-md": [
+              "12px",
+              {
+                "lineHeight": "16px",
+                "fontWeight": "500"
+              }
+            ],
+            "label-sm": [
+              "11px",
+              {
+                "lineHeight": "14px",
+                "fontWeight": "600"
+              }
+            ],
+            "label-lg": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "500"
+              }
+            ],
+            "body-sm": [
+              "13px",
+              {
+                "lineHeight": "18px",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-xl-mobile": [
+              "30px",
+              {
+                "lineHeight": "38px",
+                "fontWeight": "700"
+              }
+            ]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-shadow-card {
+      box-shadow: 0 1px 3px 0 rgba(17, 24, 39, 0.04), 0 1px 2px -1px rgba(17, 24, 39, 0.03);
+    }
+    .custom-shadow-float {
+      box-shadow: 0 10px 15px -3px rgba(17, 24, 39, 0.06), 0 4px 6px -4px rgba(17, 24, 39, 0.04);
+    }
+  </style>
+</head>
+<body class="h-full bg-background text-on-surface antialiased flex flex-col justify-between selection:bg-primary-container selection:text-on-primary">
+<main class="min-h-screen flex flex-col lg:flex-row w-full">
+<!-- Left Section: Welcome Panel, Editorial Proof & Metrics (Split-screen) -->
+<section class="lg:w-1/2 bg-surface-container-low border-r border-outline-variant/40 flex flex-col justify-between p-space-lg lg:p-space-xl relative overflow-hidden">
+<!-- Ambient subtle background decorative geometric layer -->
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -right-24 w-80 h-80 bg-surface-container-high/60 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Top Header / Monogram & Compliance -->
+<div class="relative z-10 flex flex-wrap items-center justify-between gap-space-sm mb-space-xl">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest border border-outline-variant flex items-center justify-center custom-shadow-card">
+<span class="material-symbols-outlined text-primary" data-icon="dashboard">dashboard</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight block">StudioIntake</span>
+<span class="font-label-sm text-label-sm text-secondary">Atelier Intake Enterprise</span>
+</div>
+</div>
+<!-- Security & Compliance Badge -->
+<div class="inline-flex items-center gap-space-xs bg-surface-container-lowest border border-outline-variant/60 rounded-full px-3 py-1 custom-shadow-card">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="verified_user">verified_user</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">SOC-2 Type II &amp; HIPAA Compliant</span>
+</div>
+</div>
+<!-- Center Hero: Editorial Framing & Brief Preview Component -->
+<div class="relative z-10 my-auto py-space-lg space-y-space-lg max-w-xl">
+<div class="space-y-space-xs">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container/60 text-on-secondary-fixed-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+            Ecosystem de Descoberta &amp; Onboarding
+          </div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">
+            Precisão editorial na recepção dos seus clientes.
+          </h1>
+<p class="font-body-lg text-body-lg text-secondary">
+            Elimine briefings redundantes. Estruture diagnósticos para Pilates, Fisioterapia e Eventos de alto padrão com governança de dados instantânea.
+          </p>
+</div>
+<!-- Interactive Floating Mock Preview of Brief Discovery -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md custom-shadow-float transition-all hover:border-primary/40 duration-200">
+<div class="flex items-center justify-between pb-3 border-b border-surface-container-high mb-3">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Active Brief: Pilates &amp; Movement Lab</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded">Status: 92% Concluído</span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs text-left">
+<div class="p-2 rounded bg-surface-container-low">
+<span class="block font-label-sm text-label-sm text-secondary">Protocolo</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Pilates Intake</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low">
+<span class="block font-label-sm text-label-sm text-secondary">Validação</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Clínica &amp; Cargas</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low">
+<span class="block font-label-sm text-label-sm text-secondary">Tempo Médio</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">3.8 min</span>
+</div>
+</div>
+</div>
+<!-- Impact Metrics Grid -->
+<div class="grid grid-cols-2 gap-space-md pt-space-xs">
+<div class="border-l-2 border-primary pl-space-sm space-y-0.5">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight">+40%</span>
+<p class="font-body-sm text-body-sm text-secondary">Velocidade de fechamento e onboarding técnico.</p>
+</div>
+<div class="border-l-2 border-primary pl-space-sm space-y-0.5">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight">98%</span>
+<p class="font-body-sm text-body-sm text-secondary">Taxa de preenchimento autônomo sem suporte.</p>
+</div>
+</div>
+</div>
+<!-- Bottom Testimonial / Social Proof -->
+<div class="relative z-10 pt-space-md border-t border-outline-variant/40">
+<blockquote class="font-body-sm text-body-sm text-on-surface-variant italic mb-space-sm">
+          "O StudioIntake transformou o primeiro contato com clientes executivos em uma experiência de pura elegância e assertividade clínica."
+        </blockquote>
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center font-headline-sm text-headline-sm text-primary">
+            M
+          </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">Mariana Silveira</div>
+<div class="font-label-sm text-label-sm text-secondary">Studio Director &amp; Clinical Lead</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Section: Clean Authentication Workspace -->
+<section class="lg:w-1/2 bg-surface-container-lowest flex flex-col justify-between p-space-lg lg:p-space-xl">
+<!-- Top helper / support navigation -->
+<div class="flex items-center justify-between w-full max-w-md mx-auto mb-space-lg">
+<div class="flex items-center gap-1.5 text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span>Sessão Criptografada SSL/TLS</span>
+</div>
+<a class="font-label-md text-label-md text-primary hover:underline flex items-center gap-1 transition-colors duration-150" href="#ajuda">
+<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
+          Precisa de ajuda?
+        </a>
+</div>
+<!-- Auth Form Container -->
+<div class="w-full max-w-md mx-auto space-y-space-md my-auto">
+<!-- Header Text -->
+<div class="space-y-space-xs text-left">
+<div class="inline-block p-2 rounded-lg bg-surface-container border border-outline-variant/50 mb-1 lg:hidden">
+<span class="material-symbols-outlined text-primary" data-icon="dashboard">dashboard</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+            Acesse o StudioIntake
+          </h2>
+<p class="font-body-md text-body-md text-secondary">
+            Entre com suas credenciais de estúdio ou utilize SSO corporativo.
+          </p>
+</div>
+<!-- SSO Identity Providers -->
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<!-- Google Workspace SSO -->
+<button class="flex items-center justify-center gap-2 h-10 px-3 border border-outline-variant hover:border-outline bg-surface-container-lowest rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-bright transition-colors duration-150 custom-shadow-card active:scale-95" type="button">
+<svg aria-hidden="true" class="w-4 h-4" viewbox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.4 7.34 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.6 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+</svg>
+<span>Google Workspace</span>
+</button>
+<!-- Microsoft Entra ID / Okta SSO -->
+<button class="flex items-center justify-center gap-2 h-10 px-3 border border-outline-variant hover:border-outline bg-surface-container-lowest rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-bright transition-colors duration-150 custom-shadow-card active:scale-95" type="button">
+<svg aria-hidden="true" class="w-4 h-4" viewbox="0 0 24 24">
+<path d="M1 1h10v10H1z" fill="#F25022"></path>
+<path d="M13 1h10v10H13z" fill="#7FBA00"></path>
+<path d="M1 13h10v10H1z" fill="#00A4EF"></path>
+<path d="M13 13h10v10H13z" fill="#FFB900"></path>
+</svg>
+<span>Microsoft Entra</span>
+</button>
+</div>
+<!-- Separator -->
+<div class="relative flex items-center justify-center py-2">
+<div class="border-t border-outline-variant w-full"></div>
+<span class="bg-surface-container-lowest px-3 font-label-sm text-label-sm text-secondary uppercase tracking-wider relative z-10">ou continue com</span>
+</div>
+<!-- Main Form -->
+<form class="space-y-space-md" id="loginForm" onsubmit="event.preventDefault(); handleLoginSubmit();">
+<!-- Email Input -->
+<div class="space-y-1 text-left">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="work-email">
+              E-mail Corporativo de Estúdio
+            </label>
+<div class="relative rounded-lg">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-lg" data-icon="mail">mail</span>
+</span>
+<input class="block w-full pl-10 pr-3 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all duration-150" id="work-email" name="email" placeholder="nome@atelierstudio.com" required="" type="email"/>
+</div>
+<p class="font-label-sm text-label-sm text-secondary">Insira o e-mail associado à sua conta de diretor ou terapeuta.</p>
+</div>
+<!-- Password Input -->
+<div class="space-y-1 text-left">
+<div class="flex items-center justify-between">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="password">
+                Senha de Acesso
+              </label>
+<a class="font-label-sm text-label-sm text-primary hover:text-primary-container hover:underline transition-colors duration-150" href="#recuperar-senha">
+                Esqueceu a senha?
+              </a>
+</div>
+<div class="relative rounded-lg">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-lg" data-icon="key">key</span>
+</span>
+<input class="block w-full pl-10 pr-10 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all duration-150" id="password" name="password" placeholder="••••••••••••" required="" type="password"/>
+<button aria-label="Alternar visibilidade da senha" class="absolute inset-y-0 right-0 pr-3 flex items-center text-secondary hover:text-on-surface transition-colors" id="togglePasswordBtn" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="visibility" id="passwordEyeIcon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Device & Fast Access -->
+<div class="flex items-center justify-between pt-1">
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input class="rounded border-outline-variant text-primary-container focus:ring-2 focus:ring-primary-container/20 w-4 h-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lembrar este dispositivo por 30 dias</span>
+</label>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container-low px-2 py-0.5 rounded">2FA Ativo</span>
+</div>
+<!-- Submit Button -->
+<div class="pt-2">
+<button class="w-full flex items-center justify-center gap-2 h-11 px-space-lg bg-primary-container hover:bg-primary text-on-primary rounded-lg font-label-lg text-label-lg font-medium transition-all duration-150 custom-shadow-card active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-primary-container/30" id="submitBtn" type="submit">
+<span id="btnText">Entrar na Plataforma</span>
+<span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- Feedback Alert Container (Hidden by default, triggered on submit) -->
+<div class="hidden rounded-lg p-3 bg-secondary-container/50 border border-secondary text-left transition-all" id="statusNotification">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">Autenticando sessão segura no ecossistema StudioIntake...</p>
+</div>
+</div>
+<!-- Registration Link Helper -->
+<div class="text-center pt-2">
+<p class="font-body-sm text-body-sm text-secondary">
+            Novo estúdio ou consultório credenciado? 
+            <a class="text-primary font-semibold hover:underline transition-colors" href="#solicitar-acesso">Solicitar adesão enterprise</a>
+</p>
+</div>
+</div>
+<!-- Legal and Compliance Footer -->
+<footer class="w-full max-w-md mx-auto pt-space-md border-t border-outline-variant/40 flex flex-col sm:flex-row items-center justify-between text-secondary font-label-sm text-label-sm gap-2">
+<div>
+<span>© 2025 StudioIntake Inc.</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<a class="hover:text-on-surface transition-colors" href="#termos">Termos de Uso</a>
+<span>•</span>
+<a class="hover:text-on-surface transition-colors" href="#privacidade">Privacidade</a>
+<span>•</span>
+<a class="hover:text-on-surface transition-colors" href="#seguranca">Segurança</a>
+</div>
+</footer>
+</section>
+</main>
+<script>
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('password');
+      const eyeIcon = document.getElementById('passwordEyeIcon');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.textContent = 'visibility_off';
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.textContent = 'visibility';
+      }
+    }
+
+    function handleLoginSubmit() {
+      const email = document.getElementById('work-email').value;
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const notification = document.getElementById('statusNotification');
+
+      if (!email) return;
+
+      // Visual feedback loading state
+      btnText.textContent = "Validando credenciais...";
+      submitBtn.classList.add('opacity-90', 'cursor-wait');
+
+      setTimeout(() => {
+        notification.classList.remove('hidden');
+        btnText.textContent = "Entrando...";
+        setTimeout(() => {
+          btnText.textContent = "Entrar na Plataforma";
+          submitBtn.classList.remove('opacity-90', 'cursor-wait'); setTimeout(() => { window.location.href = 'index.html'; }, 400);
+        }, 1500);
+      }, 600);
+    }
+  </script>
+</body></html>

@@ -1,0 +1,15 @@
+{
+  "name": "studiointake",
+  "version": "1.0.0",
+  "description": "StudioIntake: Enterprise Client Discovery & Intake Ecosystem",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

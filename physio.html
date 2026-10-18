@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background text-on-background" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physio Brief | StudioIntake</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed": "#351000",
+            "tertiary": "#7e3000",
+            "on-tertiary": "#ffffff",
+            "surface-dim": "#d3daef",
+            "on-surface": "#141b2b",
+            "primary-fixed": "#e2dfff",
+            "on-primary-fixed": "#0f0069",
+            "error": "#ba1a1a",
+            "surface-tint": "#4d44e3",
+            "inverse-primary": "#c3c0ff",
+            "on-tertiary-fixed-variant": "#7b2f00",
+            "on-secondary-container": "#596374",
+            "on-background": "#141b2b",
+            "inverse-on-surface": "#edf0ff",
+            "primary": "#3525cd",
+            "surface-container-high": "#e1e8fd",
+            "surface": "#f9f9ff",
+            "surface-bright": "#f9f9ff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-surface": "#293040",
+            "surface-container-highest": "#dce2f7",
+            "tertiary-fixed": "#ffdbcc",
+            "tertiary-container": "#a44100",
+            "surface-container": "#e9edff",
+            "on-secondary-fixed-variant": "#3d4757",
+            "on-secondary-fixed": "#121c2a",
+            "on-primary": "#ffffff",
+            "on-tertiary-container": "#ffd2be",
+            "primary-container": "#4f46e5",
+            "on-primary-fixed-variant": "#3323cc",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#464555",
+            "secondary-container": "#d6e0f4",
+            "outline-variant": "#c7c4d8",
+            "on-error": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "primary-fixed-dim": "#c3c0ff",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#bdc7db",
+            "secondary": "#555f70",
+            "outline": "#777587",
+            "surface-variant": "#dce2f7",
+            "tertiary-fixed-dim": "#ffb695",
+            "background": "#f9f9ff",
+            "secondary-fixed": "#d9e3f7",
+            "on-primary-container": "#dad7ff",
+            "on-error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "margin": "3rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1.25rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "label-lg": [
+              "Inter"
+            ],
+            "headline-md": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-xl": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-lg": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-xl-mobile": [
+              "Plus Jakarta Sans"
+            ],
+            "label-sm": [
+              "Inter"
+            ],
+            "body-sm": [
+              "Inter"
+            ],
+            "headline-sm": [
+              "Plus Jakarta Sans"
+            ],
+            "body-md": [
+              "Inter"
+            ],
+            "body-lg": [
+              "Inter"
+            ],
+            "label-md": [
+              "Inter"
+            ]
+          },
+          "fontSize": {
+            "label-lg": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "500"
+              }
+            ],
+            "headline-md": [
+              "22px",
+              {
+                "lineHeight": "28px",
+                "fontWeight": "600"
+              }
+            ],
+            "headline-xl": [
+              "40px",
+              {
+                "lineHeight": "48px",
+                "fontWeight": "700"
+              }
+            ],
+            "headline-lg": [
+              "28px",
+              {
+                "lineHeight": "36px",
+                "fontWeight": "600"
+              }
+            ],
+            "headline-xl-mobile": [
+              "30px",
+              {
+                "lineHeight": "38px",
+                "fontWeight": "700"
+              }
+            ],
+            "label-sm": [
+              "11px",
+              {
+                "lineHeight": "14px",
+                "fontWeight": "600"
+              }
+            ],
+            "body-sm": [
+              "13px",
+              {
+                "lineHeight": "18px",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-sm": [
+              "18px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "600"
+              }
+            ],
+            "body-md": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "400"
+              }
+            ],
+            "body-lg": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "400"
+              }
+            ],
+            "label-md": [
+              "12px",
+              {
+                "lineHeight": "16px",
+                "fontWeight": "500"
+              }
+            ]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-shadow-card {
+      box-shadow: 0 1px 3px 0 rgba(17, 24, 39, 0.04), 0 1px 2px -1px rgba(17, 24, 39, 0.03);
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col font-body-md text-body-md antialiased bg-background">
+<!-- TopNavBar (Shared Component Anchor) -->
+<header class="w-full bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-space-lg max-w-5xl mx-auto h-16">
+<!-- Brand & Search cluster -->
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface dark:text-inverse-on-surface tracking-tight">StudioIntake</span>
+</div>
+<!-- Search Bar (on_left per JSON specification) -->
+<div class="hidden md:flex items-center relative">
+<span class="material-symbols-outlined absolute left-3 text-secondary text-base" data-icon="search">search</span>
+<input class="pl-9 pr-3 py-1.5 bg-surface-container-low text-on-surface placeholder:text-secondary rounded-lg border border-outline-variant font-body-sm text-body-sm focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container w-52 transition-colors duration-150" placeholder="Search briefs or metrics..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links (Exact labels: Dashboard, Pilates Brief, Physio Brief, Events Brief) -->
+<!-- 'Physio Brief' is strictly marked ACTIVE using style_active_navigation -->
+<nav class="hidden md:flex items-center space-x-6 h-full pt-1">
+<a class="text-on-surface-variant dark:text-outline-variant pb-1 font-label-md text-label-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="index.html">Dashboard</a>
+<a class="text-on-surface-variant dark:text-outline-variant pb-1 font-label-md text-label-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="pilates.html">Pilates Brief</a>
+<a class="border-b-2 border-primary dark:border-inverse-primary text-primary dark:text-inverse-primary pb-1 font-label-md text-label-md" href="#physio">Physio Brief</a>
+<a class="text-on-surface-variant dark:text-outline-variant pb-1 font-label-md text-label-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="events.html">Events Brief</a>
+</nav>
+<!-- Trailing Actions & Icons -->
+<div class="flex items-center space-x-3">
+<!-- Icon actions: notifications, help -->
+<button class="p-2 text-secondary hover:text-on-surface transition-colors duration-150 rounded-lg hover:bg-surface-container-low" title="Notifications">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-secondary hover:text-on-surface transition-colors duration-150 rounded-lg hover:bg-surface-container-low" title="Help Center">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-5 w-px bg-outline-variant mx-1"></div>
+<!-- Trailing secondary action: Export -->
+<button class="hidden sm:inline-flex items-center px-3 py-1.5 border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150">
+<span class="material-symbols-outlined text-sm mr-1.5" data-icon="file_download">file_download</span>
+          Export
+        </button>
+<!-- Trailing primary action: New Brief -->
+<button class="inline-flex items-center px-3 py-1.5 bg-on-background text-on-primary rounded-lg font-label-md text-label-md hover:bg-secondary transition-colors duration-150">
+<span class="material-symbols-outlined text-sm mr-1.5" data-icon="add">add</span>
+          New Brief
+        </button>
+<!-- Director Avatar -->
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2 ring-1 ring-surface-container-high">
+<img alt="Studio Director profile avatar" class="w-full h-full object-cover" data-alt="Editorial portrait of an experienced medical and clinical practice director in high-key natural clinic lighting, wearing professional charcoal scrubs with poise and calm authority against an architectural minimalist studio backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACuKyOrHF2wr5PbrvAcJ-kMd8k3cUEEt2yYN8xaS_gXRJWAYZiJy_L6pRgxXPMW32NFD6ipnIxkxaTAqZv7YkA8L0aAvfeTJ3gN6JL_kUT3E38_hq_rEcQMRXvcLw9djghZn2BeARR6BcMcXqoGgWVcp76kzZR6Ej9bemSk4TEVPC87q7iBQ-sIUbzbd3q1rl920NVGaz6noFW7ST3xvyBvJUBQ6oBRGub47JAWfXA7M1YarffL5C-"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Mobile Sub-navigation Bar -->
+<div class="md:hidden bg-surface-container-lowest border-b border-outline-variant px-space-md py-2 overflow-x-auto flex space-x-4">
+<span class="text-on-surface-variant font-label-md text-label-md whitespace-nowrap">Dashboard</span>
+<span class="text-on-surface-variant font-label-md text-label-md whitespace-nowrap">Pilates Brief</span>
+<span class="text-primary font-label-md text-label-md whitespace-nowrap border-b-2 border-primary pb-0.5">Physio Brief</span>
+<span class="text-on-surface-variant font-label-md text-label-md whitespace-nowrap">Events Brief</span>
+</div>
+<!-- Main Canvas: Constrained Centered Shell (max-w-5xl) -->
+<main class="flex-1 w-full max-w-5xl mx-auto px-space-md sm:px-space-lg py-space-xl">
+<!-- Header Section -->
+<div class="mb-space-xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-outline-variant">
+<div>
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm mb-2.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            Practice Intake Brief
+          </div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Physiotherapy &amp; Sports Rehab</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Form Ref: <span class="font-label-md text-on-surface font-semibold">PHY-8802</span> • Client: <span class="font-label-md text-on-surface font-semibold">Apex Health &amp; Biomechanics Physio</span>
+</p>
+</div>
+<!-- Progress Overview Widget -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl border border-outline-variant custom-shadow-card min-w-[240px]">
+<div class="flex items-center justify-between text-on-surface-variant mb-1.5 font-label-sm text-label-sm">
+<span>Intake Readiness</span>
+<span class="font-semibold text-primary">65% Completed</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-300" style="width: 65%"></div>
+</div>
+<div class="flex items-center gap-3 mt-2 text-secondary font-label-sm text-label-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary" data-icon="check_circle">check_circle</span> 2 of 4 sections filled</span>
+<span>•</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span> ~8 min remaining</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Structured Form Body -->
+<form class="space-y-space-xl" onsubmit="event.preventDefault();">
+<!-- SECTION 1: Clinical Practice Goals -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 sm:p-space-xl custom-shadow-card">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm tracking-wide">01</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Clinical Practice Goals</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Define core acquisition streams and statutory clinical credentialing to showcase.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="track_changes">track_changes</span>
+</div>
+<!-- Primary Goals Selector (Bento Selection Grid) -->
+<div class="space-y-3 mb-6">
+<label class="font-label-lg text-label-lg text-on-surface block">
+            Primary Patient Inflow Goals <span class="text-error">*</span>
+<span class="font-body-sm text-body-sm text-secondary font-normal ml-1">(Select all that apply)</span>
+</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<!-- Goal 1: Active Selection -->
+<label class="relative flex items-start p-4 rounded-lg border-2 border-primary-container bg-surface-container-low cursor-pointer transition-all duration-150">
+<input checked="" class="mt-0.5 rounded border-outline-variant text-primary focus:ring-primary-container h-4 w-4" type="checkbox"/>
+<div class="ml-3">
+<span class="block font-label-lg text-label-lg text-primary font-semibold">Doctor/GP Referral Pipeline</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant mt-0.5">Automated referral ingestion, direct clinical report exports back to medical centers.</span>
+</div>
+</label>
+<!-- Goal 2: Active Selection -->
+<label class="relative flex items-start p-4 rounded-lg border-2 border-primary-container bg-surface-container-low cursor-pointer transition-all duration-150">
+<input checked="" class="mt-0.5 rounded border-outline-variant text-primary focus:ring-primary-container h-4 w-4" type="checkbox"/>
+<div class="ml-3">
+<span class="block font-label-lg text-label-lg text-primary font-semibold">Direct Private Patient Bookings</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant mt-0.5">High-converting online self-triage scheduling with credit card holds.</span>
+</div>
+</label>
+<!-- Goal 3: Unchecked -->
+<label class="relative flex items-start p-4 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-outline cursor-pointer transition-all duration-150">
+<input class="mt-0.5 rounded border-outline-variant text-primary focus:ring-primary-container h-4 w-4" type="checkbox"/>
+<div class="ml-3">
+<span class="block font-label-lg text-label-lg text-on-surface font-medium">Corporate Ergonomics Contracts</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant mt-0.5">B2B retainer packages, on-site injury prevention, and workstation risk assessments.</span>
+</div>
+</label>
+<!-- Goal 4: Active Selection -->
+<label class="relative flex items-start p-4 rounded-lg border-2 border-primary-container bg-surface-container-low cursor-pointer transition-all duration-150">
+<input checked="" class="mt-0.5 rounded border-outline-variant text-primary focus:ring-primary-container h-4 w-4" type="checkbox"/>
+<div class="ml-3">
+<span class="block font-label-lg text-label-lg text-primary font-semibold">Telehealth Rollout</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant mt-0.5">Encrypted remote consultations for regional or post-op follow-up rehab exercises.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Accreditations & Insurance Clearance -->
+<div class="space-y-3">
+<label class="font-label-lg text-label-lg text-on-surface block">
+            Accreditations &amp; Insurance Badges to Prominently Display
+          </label>
+<div class="flex flex-wrap gap-2.5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary-container bg-surface-container text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+              APA Titled Sports Physiotherapists
+              <button class="hover:opacity-70"><span class="material-symbols-outlined text-xs" data-icon="close">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary-container bg-surface-container text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="health_and_safety">health_and_safety</span>
+              Direct Health Fund Rebates (HICAPS / Private Health)
+              <button class="hover:opacity-70"><span class="material-symbols-outlined text-xs" data-icon="close">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary-container bg-surface-container text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="policy">policy</span>
+              Workers' Compensation &amp; Third-Party Claims
+              <button class="hover:opacity-70"><span class="material-symbols-outlined text-xs" data-icon="close">close</span></button>
+</span>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-outline text-secondary hover:text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+              Add Credential Badge
+            </button>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Patient Demographics & Treatment Specialties -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 sm:p-space-xl custom-shadow-card">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm tracking-wide">02</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Patient Demographics &amp; Treatment Specialties</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Calibrate clinical intake paths to the targeted rehabilitation cohorts.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="groups">groups</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Treatment Specialties Chips -->
+<div>
+<label class="font-label-lg text-label-lg text-on-surface block mb-3">
+              Clinical Focus Areas &amp; Modalities
+            </label>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-low">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="accessibility_new">accessibility_new</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Musculoskeletal (MSK)</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm">Primary (60%)</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-low">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="healing">healing</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Post-Operative Orthopedics</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm">High Priority</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-low">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="sports_gymnastics">sports_gymnastics</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Elite Sports Rehab &amp; Biomechanics</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm">Key Differentiator</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-lowest">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="psychology">psychology</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Chronic Pain &amp; Central Sensitization</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm">Active</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-lowest">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="balance">balance</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Vestibular &amp; Dizziness Therapy</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm">Secondary</span>
+</div>
+</div>
+</div>
+<!-- Patient Profile Range Cards -->
+<div>
+<label class="font-label-lg text-label-lg text-on-surface block mb-3">
+              Patient Profile Segmentation
+            </label>
+<div class="space-y-3">
+<!-- Profile 1 -->
+<div class="p-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-colors duration-150">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Weekend Warriors &amp; Club Athletes</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">45% Volume</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ages 22–45; Acute ligament, tendon, and shoulder impingement injuries requiring return-to-sport metrics.</p>
+</div>
+<!-- Profile 2 -->
+<div class="p-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-colors duration-150">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Post-Surgical Joint Replacement &amp; ACLs</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">30% Volume</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Care pathways structured with orthopedic surgeon protocols and milestones.</p>
+</div>
+<!-- Profile 3 -->
+<div class="p-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-colors duration-150">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Active Seniors &amp; Mobility Preservation</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">25% Volume</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ages 60+; Osteoarthritis management, fall-prevention balance clinics, and bone health.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Technical & Compliance Key Ideas -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 sm:p-space-xl custom-shadow-card">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm tracking-wide">03</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Technical &amp; Compliance Key Ideas</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">EHR integrations, digital consent automation, and transparent financial mechanics.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="integration_instructions">integration_instructions</span>
+</div>
+<div class="space-y-6">
+<!-- EMR / EHR Integration Radio Picker -->
+<div>
+<label class="font-label-lg text-label-lg text-on-surface block mb-2">
+              Primary Practice Management (EMR/EHR) Integration Target
+            </label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<label class="flex flex-col p-3.5 rounded-lg border-2 border-primary-container bg-surface-container-low cursor-pointer">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md font-semibold text-primary">Cliniko API</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="check_circle">check_circle</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Live calendar slot sync, practitioner roster mapping, automated SMS confirmations.</span>
+</label>
+<label class="flex flex-col p-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-outline cursor-pointer">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Jane App</span>
+<input class="text-primary focus:ring-primary-container h-4 w-4" name="emr" type="radio"/>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Bi-directional SOAP notes, chart templates, and telehealth video room handoff.</span>
+</label>
+<label class="flex flex-col p-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-outline cursor-pointer">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Kareo / Tebra</span>
+<input class="text-primary focus:ring-primary-container h-4 w-4" name="emr" type="radio"/>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Enterprise billing clearinghouse integration and patient portal embedding.</span>
+</label>
+</div>
+</div>
+<!-- Intake Automation & Compliance Checklist -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+<div class="p-4 rounded-lg border border-outline-variant bg-surface-container-low/50">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Intake Questionnaire Automation</span>
+</div>
+<div class="space-y-2">
+<label class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+<span>Interactive visual body-pain mapping canvas (pre-visit)</span>
+</label>
+<label class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+<span>Automated outcome measurement baseline (VAS &amp; QuickDASH)</span>
+</label>
+<label class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+<span>Pre-appointment imaging upload (MRI / X-Ray DICOM portal)</span>
+</label>
+</div>
+</div>
+<div class="p-4 rounded-lg border border-outline-variant bg-surface-container-low/50">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary" data-icon="lock">lock</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Compliance &amp; Financial Transparency</span>
+</div>
+<div class="space-y-2">
+<label class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+<span>HIPAA &amp; GDPR encrypted consent capture with audit trail</span>
+</label>
+<label class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+<span>Interactive Health Fund Rebate &amp; Gap Fee Calculator widget</span>
+</label>
+<label class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+<span>Cancellation policy acknowledgement with automated reminders</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: Brand Tone & Practitioner Suggestions -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 sm:p-space-xl custom-shadow-card">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm tracking-wide">04</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Brand Tone &amp; Practitioner Suggestions</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Editorial harmony: clinical credibility meets warm human reassurance.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="sentiment_satisfied">sentiment_satisfied</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+<!-- Tone Balance Slider / Representation -->
+<div class="p-4 rounded-lg border border-outline-variant bg-surface-container-low">
+<span class="font-label-md text-label-md font-semibold text-on-surface block mb-2">Bedside Tone Equilibrium</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Balance objective biomechanics jargon with accessible, reassuring care prose.</p>
+<div class="space-y-1.5">
+<div class="flex justify-between font-label-sm text-label-sm text-secondary">
+<span>Clinical Precision (70%)</span>
+<span>Warm Empathy (30%)</span>
+</div>
+<div class="w-full bg-outline-variant h-2 rounded-full overflow-hidden flex">
+<div class="bg-primary w-[70%] h-full"></div>
+<div class="bg-tertiary-fixed-dim w-[30%] h-full"></div>
+</div>
+</div>
+</div>
+<!-- Video Exercise Library Requirement -->
+<div class="p-4 rounded-lg border border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-1.5 mb-2">
+<span class="material-symbols-outlined text-primary text-base" data-icon="videocam">videocam</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Prescription Video Library</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Integrate high-definition practitioner-led exercise shorts directly into client discharge briefs.</p>
+<span class="inline-flex items-center text-xs font-semibold text-primary gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="check">check</span> Clinically verified format
+            </span>
+</div>
+<!-- Multilingual Bios -->
+<div class="p-4 rounded-lg border border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-1.5 mb-2">
+<span class="material-symbols-outlined text-primary text-base" data-icon="translate">translate</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Multilingual Clinician Bios</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Include practitioner spoken languages to accommodate diverse local demographics (e.g., Cantonese, Spanish, Greek).</p>
+<span class="inline-flex items-center text-xs font-semibold text-primary gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="check">check</span> 4 languages supported
+            </span>
+</div>
+</div>
+<!-- Practitioner Narrative Field -->
+<div>
+<label class="font-label-lg text-label-lg text-on-surface block mb-2">
+            Practice Narrative &amp; Key Clinician Note
+          </label>
+<textarea class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest p-3 font-body-md text-body-md text-on-surface placeholder:text-secondary focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors duration-150" placeholder="e.g. Apex emphasizes evidence-based load management over passive therapies. Our lead clinicians come from Olympic gymnastics and Premier League sports science backgrounds..." rows="3">Apex Health combines elite musculoskeletal biomechanics with deeply attentive community care. We strictly reject the conveyor-belt physiotherapy model. Every patient receives minimum 45-minute 1-on-1 consultations with force-plate testing and structured home exercise progressions.</textarea>
+</div>
+</section>
+<!-- File Attachment & Dropzone -->
+<section class="border-1.5 border-dashed border-outline-variant hover:border-primary rounded-xl p-6 bg-surface-container-low/40 transition-colors duration-150 flex flex-col items-center justify-center text-center">
+<div class="w-10 h-10 rounded-full bg-surface-container text-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface">Attach Existing Clinical Guidelines, Price Schedules, or Referral Sheets</p>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Drag and drop PDF, DOCX, or DICOM packages (Max 50MB)</p>
+<button class="mt-3 px-3 py-1.5 border border-outline-variant bg-surface-container-lowest text-on-surface rounded-lg font-label-md text-label-md hover:bg-surface-container transition-colors duration-150" type="button">
+          Browse Files
+        </button>
+</section>
+<!-- Action Bar: Sticky or Docked Bottom Container -->
+<div class="sticky bottom-4 z-30 bg-surface-container-lowest/95 backdrop-blur-md border border-outline-variant rounded-xl p-4 custom-shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center space-x-2 text-secondary font-body-sm text-body-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>Draft autosaved 2 minutes ago (ID: #PHY-8802)</span>
+</div>
+<div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+<button class="px-4 py-2 border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150" type="button">
+            Save Draft
+          </button>
+<button class="px-4 py-2 border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150 inline-flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="attach_file">attach_file</span>
+            Attach Existing Assets
+          </button>
+<button class="px-5 py-2 bg-on-background text-on-primary rounded-lg font-label-md text-label-md hover:bg-secondary transition-colors duration-150 inline-flex items-center gap-2 shadow-sm" type="submit">
+<span>Submit Clinical Briefing</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</form>
+</main>
+<!-- Editorial Sub-Footer -->
+<footer class="w-full border-t border-outline-variant py-6 bg-surface-container-lowest mt-12">
+<div class="max-w-5xl mx-auto px-space-lg flex flex-col sm:flex-row justify-between items-center text-secondary font-label-sm text-label-sm gap-2">
+<div class="flex items-center space-x-2">
+<span class="font-semibold text-on-surface">StudioIntake</span>
+<span>•</span>
+<span>Clinical Intake System for Modern Allied Health</span>
+</div>
+<div class="flex space-x-4">
+<a class="hover:text-primary transition-colors" href="#privacy">Privacy &amp; Compliance</a>
+<a class="hover:text-primary transition-colors" href="#protocols">Clinical Protocols</a>
+<a class="hover:text-primary transition-colors" href="#support">Practitioner Support</a>
+</div>
+</div>
+</footer>
+</body></html>
