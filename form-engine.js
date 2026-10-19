@@ -862,11 +862,81 @@ function setupAutosaveAndDock() {
 // FLUXO DE SUBMISSÃO FINAL
 // ============================================================================
 
+const SUBMIT_CONFIRM_STRINGS = {
+  titulo: { pt: 'Confirmar envio do briefing', it: 'Conferma invio del briefing', en: 'Confirm briefing submission' },
+  descricao: {
+    pt: 'Para sua segurança, confirme seu nome e e-mail antes do envio final. Após o envio, as respostas serão congeladas.',
+    it: 'Per la tua sicurezza, conferma il tuo nome e la tua email prima dell\'invio finale. Dopo l\'invio, le risposte saranno bloccate.',
+    en: 'For your security, confirm your name and email before final submission. After submitting, your answers will be locked.'
+  },
+  nomeLabel: { pt: 'Nome completo', it: 'Nome completo', en: 'Full name' },
+  emailLabel: { pt: 'E-mail', it: 'Email', en: 'Email' },
+  cancelar: { pt: 'Cancelar', it: 'Annulla', en: 'Cancel' },
+  confirmarEnvio: { pt: 'Confirmar e Enviar', it: 'Conferma e Invia', en: 'Confirm and Submit' },
+  erroObrigatorio: { pt: 'Preencha nome e e-mail para confirmar o envio.', it: 'Compila nome ed email per confermare l\'invio.', en: 'Fill in name and email to confirm submission.' },
+  erroEmailInvalido: { pt: 'Informe um e-mail válido.', it: 'Inserisci un\'email valida.', en: 'Enter a valid email.' }
+};
+
 function handleFinalSubmission() {
   if (!activeInstance || !activeClient) return;
 
-  const confirmed = confirm('Deseja submeter este briefing oficialmente para a equipe do StudioIntake?\n\nApós o envio, as respostas serão congeladas para início imediato do sprint criativo.');
-  if (!confirmed) return;
+  const existingModal = document.getElementById('submit-confirm-modal');
+  if (existingModal) existingModal.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'submit-confirm-modal';
+  modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4';
+  modal.innerHTML = `
+    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-xl p-6 max-w-sm w-full">
+      <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-1.5">${t(SUBMIT_CONFIRM_STRINGS.titulo)}</h3>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">${t(SUBMIT_CONFIRM_STRINGS.descricao)}</p>
+      <div class="space-y-3 mb-2">
+        <div>
+          <label class="font-label-md text-label-md text-on-surface font-semibold block mb-1" for="submit-confirm-nome">${t(SUBMIT_CONFIRM_STRINGS.nomeLabel)}</label>
+          <input type="text" id="submit-confirm-nome" value="${escapeHtml(activeClient.nome_responsavel || '')}" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md">
+        </div>
+        <div>
+          <label class="font-label-md text-label-md text-on-surface font-semibold block mb-1" for="submit-confirm-email">${t(SUBMIT_CONFIRM_STRINGS.emailLabel)}</label>
+          <input type="email" id="submit-confirm-email" value="${escapeHtml(activeClient.email || '')}" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md">
+        </div>
+        <p id="submit-confirm-error" class="text-rose-600 text-xs hidden"></p>
+      </div>
+      <div class="flex items-center justify-end gap-2 mt-4">
+        <button type="button" id="submit-confirm-cancel" class="px-4 py-2 rounded-lg border border-outline-variant text-on-surface text-label-md font-semibold">${t(SUBMIT_CONFIRM_STRINGS.cancelar)}</button>
+        <button type="button" id="submit-confirm-ok" class="px-5 py-2 rounded-lg bg-primary text-on-primary text-label-md font-semibold">${t(SUBMIT_CONFIRM_STRINGS.confirmarEnvio)}</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  document.getElementById('submit-confirm-cancel').addEventListener('click', () => modal.remove());
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+
+  document.getElementById('submit-confirm-ok').addEventListener('click', () => {
+    const nome = document.getElementById('submit-confirm-nome').value.trim();
+    const email = document.getElementById('submit-confirm-email').value.trim();
+    const errorEl = document.getElementById('submit-confirm-error');
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!nome || !email) {
+      errorEl.textContent = t(SUBMIT_CONFIRM_STRINGS.erroObrigatorio);
+      errorEl.classList.remove('hidden');
+      return;
+    }
+    if (!emailValido) {
+      errorEl.textContent = t(SUBMIT_CONFIRM_STRINGS.erroEmailInvalido);
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    modal.remove();
+    executeFinalSubmission(nome, email);
+  });
+}
+
+function executeFinalSubmission(confirmadoNome, confirmadoEmail) {
+  formAnswers.__confirmado_nome = confirmadoNome;
+  formAnswers.__confirmado_email = confirmadoEmail;
 
   // Atualiza instância
   updateBriefingStatus(activeInstance.id, 'submetido');
