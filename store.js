@@ -1074,7 +1074,10 @@ export function generateProductionDigest(briefingId) {
   if (client.vertical === 'events') integracoes.push('Sistema de Credenciamento NFC & Ingressos');
   if (integracoes.length === 0) integracoes.push('StudioIntake Webhooks & API REST');
 
-  // 5. Checklist de Kickoff inteligente
+  // 5. Checklist de Kickoff inteligente. Os 3 primeiros itens são
+  // calculados automaticamente a cada vez (nunca "lembram" de um status
+  // anterior); só itens de vertical abaixo são marcáveis manualmente.
+  const qtdItensAutomaticos = 3;
   const checklist = [
     { item: `Validação das respostas oficiais de ${client.empresa} (${client.codigo_unico})`, status: hasAnyAnswer ? 'concluido' : 'pendente' },
     { item: `Análise técnica de ${(instance.anexos || []).length} anexo(s) submetido(s)`, status: (instance.anexos || []).length > 0 ? 'concluido' : 'pendente' },
@@ -1096,8 +1099,10 @@ export function generateProductionDigest(briefingId) {
 
   // Preserva marcações manuais feitas pelo usuário nos checkboxes do
   // checklist anterior (casando pelo texto do item), em vez de descartar
-  // o progresso toda vez que o digest é resintetizado.
-  const checklistComProgresso = checklist.map(item => {
+  // o progresso toda vez que o digest é resintetizado. Os itens
+  // automáticos (índices 0-2) são sempre recalculados do zero.
+  const checklistComProgresso = checklist.map((item, idx) => {
+    if (idx < qtdItensAutomaticos) return item;
     const anterior = existingDigest?.checklist_kickoff?.find(c => c.item === item.item);
     return anterior ? { ...item, status: anterior.status } : item;
   });
