@@ -32,6 +32,86 @@ let uploadedFiles = [];
 let autosaveTimer = null;
 
 // ============================================================================
+// INTERNACIONALIZAÇÃO (PT / IT / EN) — Briefings Multilíngues
+// ============================================================================
+
+const SUPPORTED_LOCALES = ['pt', 'it', 'en'];
+const LOCALE_LABELS = { pt: 'PT', it: 'IT', en: 'EN' };
+let activeLocale = 'pt';
+
+const UI_STRINGS = {
+  selecioneOpcao: { pt: 'Selecione uma opção...', it: 'Seleziona un\'opzione...', en: 'Select an option...' },
+  selecioneTodos: { pt: '(Selecione todos que se aplicam)', it: '(Seleziona tutte le opzioni pertinenti)', en: '(Select all that apply)' },
+  arrasteArquivos: { pt: 'Arraste seus arquivos aqui ou clique para selecionar', it: 'Trascina i file qui o clicca per selezionare', en: 'Drag your files here or click to select' },
+  formatosAceitos: { pt: 'Formatos aceitos', it: 'Formati accettati', en: 'Accepted formats' },
+  ateMB: { pt: 'Até {n}MB por arquivo', it: 'Fino a {n}MB per file', en: 'Up to {n}MB per file' },
+  anexado: { pt: '✓ Anexado', it: '✓ Allegato', en: '✓ Attached' },
+  ola: { pt: 'Olá, {nome}!', it: 'Ciao, {nome}!', en: 'Hi, {nome}!' },
+  introBriefing: {
+    pt: 'Este briefing foi estruturado sob medida para o projeto da <strong>{empresa}</strong>. Suas respostas definem diretamente a direção de arte e a arquitetura técnica antes do kickoff oficial de produção.',
+    it: 'Questo briefing è stato strutturato su misura per il progetto di <strong>{empresa}</strong>. Le tue risposte definiscono direttamente la direzione artistica e l\'architettura tecnica prima del kickoff ufficiale di produzione.',
+    en: 'This briefing was custom-built for the <strong>{empresa}</strong> project. Your answers directly shape the art direction and technical architecture ahead of the official production kickoff.'
+  }
+};
+
+function getLocale() {
+  return activeLocale;
+}
+
+function setLocale(locale) {
+  if (!SUPPORTED_LOCALES.includes(locale)) return;
+  activeLocale = locale;
+  try { localStorage.setItem('studiointake_locale', locale); } catch (e) {}
+  renderClientHeader();
+  renderDynamicFormSections();
+  renderLanguageSwitcher();
+}
+
+/**
+ * Resolve um valor textual para o idioma ativo.
+ * Aceita string pura (compatibilidade com templates antigos) ou objeto {pt, it, en}.
+ */
+function t(val, vars) {
+  let resolved = '';
+  if (val == null) {
+    resolved = '';
+  } else if (typeof val === 'string') {
+    resolved = val;
+  } else if (typeof val === 'object') {
+    resolved = val[activeLocale] || val.pt || val.it || val.en || Object.values(val)[0] || '';
+  } else {
+    resolved = String(val);
+  }
+  if (vars) {
+    Object.keys(vars).forEach(k => {
+      resolved = resolved.replaceAll(`{${k}}`, vars[k]);
+    });
+  }
+  return resolved;
+}
+
+function renderLanguageSwitcher() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  let bar = document.getElementById('locale-switcher');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'locale-switcher';
+    bar.className = 'flex items-center gap-1 px-1 py-1 rounded-full bg-surface-container border border-outline-variant';
+    const pinBadge = header.querySelector('.bg-surface-container.rounded-full, header .flex.items-center.gap-3');
+    header.appendChild(bar);
+  }
+  bar.innerHTML = SUPPORTED_LOCALES.map(loc => `
+    <button type="button" data-locale-btn="${loc}" class="px-2.5 py-1 rounded-full text-[11px] font-bold transition-all ${loc === activeLocale ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:bg-surface-container-high'}">
+      ${LOCALE_LABELS[loc]}
+    </button>
+  `).join('');
+  bar.querySelectorAll('[data-locale-btn]').forEach(btn => {
+    btn.addEventListener('click', () => setLocale(btn.getAttribute('data-locale-btn')));
+  });
+}
+
+// ============================================================================
 // INICIALIZAÇÃO DO PORTAL DO CLIENTE
 // ============================================================================
 
@@ -84,8 +164,15 @@ export function initClientPortal() {
   formAnswers = (activeInstance && activeInstance.respostas_brutas) ? { ...activeInstance.respostas_brutas } : {};
   uploadedFiles = (activeInstance && activeInstance.anexos) ? [ ...activeInstance.anexos ] : [];
 
+  // Resolve idioma ativo: ?lang= na URL > preferência salva > português
+  const langParam = params.get('lang');
+  let savedLocale = null;
+  try { savedLocale = localStorage.getItem('studiointake_locale'); } catch (e) {}
+  activeLocale = SUPPORTED_LOCALES.includes(langParam) ? langParam : (SUPPORTED_LOCALES.includes(savedLocale) ? savedLocale : 'pt');
+
   // 2. Aplica isolamento de papéis (Gate 4)
   enforceRoleIsolation();
+  renderLanguageSwitcher();
 
   // 3. Renderiza cabeçalho de contexto do cliente
   renderClientHeader();
@@ -142,18 +229,18 @@ function renderClientHeader() {
   // Título da etapa do briefing
   const titleH1 = document.querySelector('h1.font-headline-lg');
   if (titleH1) {
-    titleH1.textContent = activeTemplate?.titulo || activeInstance.etapa_nome;
+    titleH1.textContent = t(activeTemplate?.titulo) || activeInstance.etapa_nome;
   }
 
   // Card Introdutório
   const introCard = document.querySelector('main .bg-surface-container-lowest.border');
   if (introCard) {
     const h2 = introCard.querySelector('h2');
-    if (h2) h2.textContent = `Olá, ${activeClient.nome_responsavel}!`;
+    if (h2) h2.textContent = t(UI_STRINGS.ola, { nome: activeClient.nome_responsavel });
 
     const p = introCard.querySelector('p');
     if (p) {
-      p.innerHTML = `Este briefing foi estruturado sob medida para o projeto da <strong>${activeClient.empresa}</strong>. Suas respostas definem diretamente a direção de arte e a arquitetura técnica antes do kickoff oficial de produção.`;
+      p.innerHTML = t(UI_STRINGS.introBriefing, { empresa: activeClient.empresa });
     }
 
     // Se a agência solicitou ajustes
@@ -211,8 +298,8 @@ function renderDynamicFormSections() {
             0${sIdx + 1}
           </div>
           <div>
-            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">${secao.titulo}</h2>
-            ${secao.descricao ? `<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-0.5">${secao.descricao}</p>` : ''}
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">${t(secao.titulo)}</h2>
+            ${secao.descricao ? `<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-0.5">${t(secao.descricao)}</p>` : ''}
           </div>
         </div>
 
@@ -239,9 +326,9 @@ function renderField(campo, isReadOnly) {
       return `
         <div>
           <label class="font-label-md text-label-md text-on-surface font-semibold block mb-1.5" for="${campo.id}">
-            ${campo.label} ${campo.obrigatorio ? '<span class="text-rose-600">*</span>' : ''}
+            ${t(campo.label)} ${campo.obrigatorio ? '<span class="text-rose-600">*</span>' : ''}
           </label>
-          <input ${disabledAttr} type="text" id="${campo.id}" name="${campo.id}" value="${escapeHtml(value)}" placeholder="${campo.placeholder || ''}" class="form-input w-full px-4 py-2.5 bg-surface-container-low border border-outline-variant rounded-xl text-body-md font-body-md placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all ${isReadOnly ? 'opacity-70 cursor-not-allowed bg-surface-container' : ''}">
+          <input ${disabledAttr} type="text" id="${campo.id}" name="${campo.id}" value="${escapeHtml(value)}" placeholder="${escapeHtml(t(campo.placeholder))}" class="form-input w-full px-4 py-2.5 bg-surface-container-low border border-outline-variant rounded-xl text-body-md font-body-md placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all ${isReadOnly ? 'opacity-70 cursor-not-allowed bg-surface-container' : ''}">
         </div>
       `;
 
@@ -249,9 +336,9 @@ function renderField(campo, isReadOnly) {
       return `
         <div>
           <label class="font-label-md text-label-md text-on-surface font-semibold block mb-1.5" for="${campo.id}">
-            ${campo.label} ${campo.obrigatorio ? '<span class="text-rose-600">*</span>' : ''}
+            ${t(campo.label)} ${campo.obrigatorio ? '<span class="text-rose-600">*</span>' : ''}
           </label>
-          <textarea ${disabledAttr} id="${campo.id}" name="${campo.id}" rows="4" placeholder="${campo.placeholder || ''}" class="form-input w-full px-4 py-2.5 bg-surface-container-low border border-outline-variant rounded-xl text-body-md font-body-md placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-y ${isReadOnly ? 'opacity-70 cursor-not-allowed bg-surface-container' : ''}">${escapeHtml(value)}</textarea>
+          <textarea ${disabledAttr} id="${campo.id}" name="${campo.id}" rows="4" placeholder="${escapeHtml(t(campo.placeholder))}" class="form-input w-full px-4 py-2.5 bg-surface-container-low border border-outline-variant rounded-xl text-body-md font-body-md placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-y ${isReadOnly ? 'opacity-70 cursor-not-allowed bg-surface-container' : ''}">${escapeHtml(value)}</textarea>
         </div>
       `;
 
@@ -259,11 +346,15 @@ function renderField(campo, isReadOnly) {
       return `
         <div>
           <label class="font-label-md text-label-md text-on-surface font-semibold block mb-1.5" for="${campo.id}">
-            ${campo.label} ${campo.obrigatorio ? '<span class="text-rose-600">*</span>' : ''}
+            ${t(campo.label)} ${campo.obrigatorio ? '<span class="text-rose-600">*</span>' : ''}
           </label>
           <select ${disabledAttr} id="${campo.id}" name="${campo.id}" class="form-input w-full px-4 py-2.5 bg-surface-container-low border border-outline-variant rounded-xl text-body-md font-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all ${isReadOnly ? 'opacity-70 cursor-not-allowed' : ''}">
-            <option value="">Selecione uma opção...</option>
-            ${(campo.opcoes || []).map(opt => `<option value="${escapeHtml(opt)}" ${value === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+            <option value="">${t(UI_STRINGS.selecioneOpcao)}</option>
+            ${(campo.opcoes || []).map(opt => {
+              const optVal = typeof opt === 'string' ? opt : opt.valor;
+              const optLabel = typeof opt === 'string' ? opt : t(opt.label);
+              return `<option value="${escapeHtml(optVal)}" ${value === optVal ? 'selected' : ''}>${escapeHtml(optLabel)}</option>`;
+            }).join('')}
           </select>
         </div>
       `;
@@ -272,13 +363,13 @@ function renderField(campo, isReadOnly) {
       return `
         <div>
           <label class="font-label-md text-label-md text-on-surface font-semibold block mb-2">
-            ${campo.label} ${campo.obrigatorio ? '<span class="text-rose-600">*</span>' : ''}
+            ${t(campo.label)} ${campo.obrigatorio ? '<span class="text-rose-600">*</span>' : ''}
           </label>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5" data-field-id="${campo.id}">
             ${(campo.opcoes || []).map(opt => {
               const optVal = typeof opt === 'string' ? opt : opt.valor;
-              const optLabel = typeof opt === 'string' ? opt : opt.rotulo;
-              const optSub = typeof opt === 'object' ? opt.subtitulo : '';
+              const optLabel = typeof opt === 'string' ? opt : t(opt.rotulo);
+              const optSub = typeof opt === 'object' ? t(opt.subtitulo) : '';
               const isSelected = value === optVal;
 
               return `
@@ -303,14 +394,16 @@ function renderField(campo, isReadOnly) {
       return `
         <div>
           <label class="font-label-md text-label-md text-on-surface font-semibold block mb-2">
-            ${campo.label} <span class="text-xs text-on-surface-variant font-normal">(Selecione todos que se aplicam)</span>
+            ${t(campo.label)} <span class="text-xs text-on-surface-variant font-normal">${t(UI_STRINGS.selecioneTodos)}</span>
           </label>
           <div class="flex flex-wrap gap-2" data-chips-id="${campo.id}">
             ${(campo.opcoes || []).map(chip => {
-              const isSelected = selectedChips.includes(chip);
+              const chipVal = typeof chip === 'string' ? chip : chip.valor;
+              const chipLabel = typeof chip === 'string' ? chip : t(chip.label);
+              const isSelected = selectedChips.includes(chipVal);
               return `
-                <button type="button" ${disabledAttr} class="chip-option px-3.5 py-1.5 rounded-lg border text-xs font-semibold transition-all ${isSelected ? 'bg-primary text-on-primary border-primary shadow-xs' : 'bg-surface-container-lowest text-on-surface-variant border-outline-variant hover:border-primary/50'} ${isReadOnly ? 'cursor-not-allowed' : 'cursor-pointer'}" data-chip="${escapeHtml(chip)}">
-                  ${chip}
+                <button type="button" ${disabledAttr} class="chip-option px-3.5 py-1.5 rounded-lg border text-xs font-semibold transition-all ${isSelected ? 'bg-primary text-on-primary border-primary shadow-xs' : 'bg-surface-container-lowest text-on-surface-variant border-outline-variant hover:border-primary/50'} ${isReadOnly ? 'cursor-not-allowed' : 'cursor-pointer'}" data-chip="${escapeHtml(chipVal)}">
+                  ${escapeHtml(chipLabel)}
                 </button>
               `;
             }).join('')}
@@ -325,7 +418,7 @@ function renderField(campo, isReadOnly) {
         <div>
           <div class="flex items-center justify-between mb-2">
             <label class="font-label-md text-label-md text-on-surface font-semibold" for="${campo.id}">
-              ${campo.label}
+              ${t(campo.label)}
             </label>
             <span id="slider-val-${campo.id}" class="px-2 py-0.5 rounded bg-surface-container text-primary font-bold text-xs font-mono">
               ${sliderVal}%
@@ -333,8 +426,8 @@ function renderField(campo, isReadOnly) {
           </div>
           <input ${disabledAttr} type="range" id="${campo.id}" name="${campo.id}" min="${campo.min || 0}" max="${campo.max || 100}" step="${campo.passo || 5}" value="${sliderVal}" class="slider-input w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary">
           <div class="flex justify-between items-center text-[11px] text-on-surface-variant font-label-sm mt-1.5">
-            <span>${campo.legendaMin || '0% Minimalista'}</span>
-            <span>${campo.legendaMax || '100% Expressivo'}</span>
+            <span>${t(campo.legendaMin) || '0% Minimalista'}</span>
+            <span>${t(campo.legendaMax) || '100% Expressivo'}</span>
           </div>
         </div>
       `;
@@ -343,14 +436,14 @@ function renderField(campo, isReadOnly) {
       return `
         <div>
           <label class="font-label-md text-label-md text-on-surface font-semibold block mb-2">
-            ${campo.label}
+            ${t(campo.label)}
           </label>
           ${!isReadOnly ? `
             <div id="dropzone-${campo.id}" class="border-2 border-dashed border-outline-variant hover:border-primary bg-surface-container-low/50 hover:bg-surface-container-low rounded-2xl p-6 text-center transition-all cursor-pointer">
               <span class="material-symbols-outlined text-4xl text-primary mb-2 block">cloud_upload</span>
-              <p class="font-label-md text-label-md text-on-surface font-bold">Arraste seus arquivos aqui ou clique para selecionar</p>
+              <p class="font-label-md text-label-md text-on-surface font-bold">${t(UI_STRINGS.arrasteArquivos)}</p>
               <p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">
-                Formatos aceitos: ${(campo.formatos || ['PDF', 'PNG', 'JPG', 'DWG', 'ZIP']).join(', ').toUpperCase()} • Até 50MB por arquivo
+                ${t(UI_STRINGS.formatosAceitos)}: ${(campo.formatos || ['PDF', 'PNG', 'JPG', 'DWG', 'ZIP']).join(', ').toUpperCase()} • ${t(UI_STRINGS.ateMB, { n: campo.limiteMB || 50 })}
               </p>
               <input type="file" id="file-input-${campo.id}" multiple class="hidden">
             </div>
@@ -371,7 +464,7 @@ function renderField(campo, isReadOnly) {
                   <button type="button" class="btn-remove-file p-1 text-on-surface-variant hover:text-rose-600 rounded" data-index="${fIdx}">
                     <span class="material-symbols-outlined text-base">close</span>
                   </button>
-                ` : '<span class="text-xs font-semibold text-emerald-600">✓ Anexado</span>'}
+                ` : `<span class="text-xs font-semibold text-emerald-600">${t(UI_STRINGS.anexado)}</span>`}
               </div>
             `).join('')}
           </div>

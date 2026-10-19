@@ -228,6 +228,7 @@ export function renderTable() {
     let verticalName = 'Geral';
     if (client.vertical === 'pilates') { icon = 'spa'; verticalName = 'Pilates'; }
     else if (client.vertical === 'physio') { icon = 'medical_services'; verticalName = 'Fisioterapia'; }
+    else if (client.vertical === 'fisio_pilates') { icon = 'medical_services'; verticalName = 'Fisio & Pilates'; }
     else if (client.vertical === 'events') { icon = 'celebration'; verticalName = 'Eventos'; }
 
     let statusBadge = '';
@@ -945,6 +946,7 @@ function setupModal() {
               <select id="client-vertical" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md font-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all">
                 <option value="pilates">Pilates Reformer & Wellness</option>
                 <option value="physio">Fisioterapia & Saúde Clínica</option>
+                <option value="fisio_pilates">Fisioterapia & Pilates (Híbrido)</option>
                 <option value="events">Eventos & Grande Porte</option>
                 <option value="universal">Universal / Corporativo (BriefOS)</option>
               </select>
@@ -1000,17 +1002,34 @@ function openNewClientModal() {
   if (modal) modal.classList.remove('hidden');
 }
 
+function templateLabel(tpl) {
+  const titulo = tpl.titulo;
+  if (typeof titulo === 'string') return titulo;
+  if (titulo && typeof titulo === 'object') return titulo.pt || titulo.it || titulo.en || tpl.id;
+  return tpl.id;
+}
+
 function openNewBriefModalForClient(clientId) {
   const client = getClientById(clientId);
   if (!client) return;
 
-  const stage = prompt(`Disparar nova etapa de briefing para ${client.empresa}:\n\nDigite o nome da etapa:`, 'Fase 2: Identidade & Direção de Arte');
-  if (!stage) return;
+  let defaultTemplateId = 'tpl-universal-v1';
+  if (client.vertical === 'pilates') defaultTemplateId = 'tpl-pilates-v1';
+  else if (client.vertical === 'physio') defaultTemplateId = 'tpl-physio-v1';
+  else if (client.vertical === 'fisio_pilates') defaultTemplateId = 'tpl-fisio-pilates-v1';
+  else if (client.vertical === 'events') defaultTemplateId = 'tpl-events-v1';
 
-  let templateId = 'tpl-universal-v1';
-  if (client.vertical === 'pilates') templateId = 'tpl-pilates-v1';
-  else if (client.vertical === 'physio') templateId = 'tpl-physio-v1';
-  else if (client.vertical === 'events') templateId = 'tpl-events-v1';
+  const templates = getTemplates();
+  const defaultIdx = templates.findIndex(tpl => tpl.id === defaultTemplateId);
+  const listText = templates.map((tpl, i) => `${i + 1}. ${templateLabel(tpl)}${tpl.id === defaultTemplateId ? ' (sugerido)' : ''}`).join('\n');
+  const choice = prompt(`Disparar novo briefing para ${client.empresa}:\n\nEscolha o template (digite o número):\n${listText}`, String(defaultIdx + 1));
+  if (!choice) return;
+  const chosenIdx = parseInt(choice, 10) - 1;
+  const templateId = (templates[chosenIdx] ? templates[chosenIdx].id : defaultTemplateId);
+  const chosenTemplate = templates[chosenIdx] || templates[defaultIdx];
+
+  const stage = prompt(`Nome da etapa deste briefing:`, chosenTemplate ? templateLabel(chosenTemplate) : 'Fase 2: Identidade & Direção de Arte');
+  if (!stage) return;
 
   const newInstance = createBriefingInstance({
     cliente_id: client.id,
@@ -1058,6 +1077,7 @@ function handleCreateClientSubmit() {
   let templateId = 'tpl-universal-v1';
   if (vertical === 'pilates') templateId = 'tpl-pilates-v1';
   else if (vertical === 'physio') templateId = 'tpl-physio-v1';
+  else if (vertical === 'fisio_pilates') templateId = 'tpl-fisio-pilates-v1';
   else if (vertical === 'events') templateId = 'tpl-events-v1';
 
   const newInstance = createBriefingInstance({
