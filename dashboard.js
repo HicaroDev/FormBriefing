@@ -1228,19 +1228,6 @@ function setupEventListeners() {
   if (btnExportReport) {
     btnExportReport.addEventListener('click', () => exportAllBriefingsCSV());
   }
-
-  // Barra de pesquisa
-  const searchInput = document.querySelector('header input[type="search"]');
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      const rows = document.querySelectorAll('table tbody tr');
-      rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(q) ? '' : 'none';
-      });
-    });
-  }
 }
 
 function resetPillStyles() {
