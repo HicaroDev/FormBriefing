@@ -29,10 +29,8 @@ Compara qualquer tela implementada contra o mockup original correspondente em `m
 | `login_studiointake/code.html` | `login.html` |
 | `acesso_ao_formul_rio_c_digo_do_cliente/code.html` | `portal.html` |
 | `preenchimento_do_briefing_portal_do_cliente/code.html` | `client-form.html` + `form-engine.js` |
-| `briefing_pilates/code.html` | `pilates.html` |
-| `briefing_physiotherapy/code.html` | `physio.html` |
-| `briefing_events/code.html` | `events.html` |
-| `universal_briefing_form_template/code.html` | `universal.html` |
+
+> `pilates.html`, `physio.html`, `events.html` e `universal.html` foram removidos do projeto em 2026-10-19 (mockups órfãos do Stitch, nunca migrados para dados reais — ver `PROJECT_LOG.md`). Os mockups correspondentes (`briefing_pilates/`, `briefing_physiotherapy/`, `briefing_events/`, `universal_briefing_form_template/`) continuam em `modelo_site/` só como referência histórica de design, sem tela implementada para comparar.
 
 ### Gate 1: Tipografia
 - [ ] Títulos/headlines usam `Plus Jakarta Sans` peso 600/700/800.
