@@ -299,6 +299,12 @@ function renderClientHeader() {
     brandSubtext.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ${activeClient.empresa}`;
   }
 
+  // Nome da empresa na nota legal do rodapé (nunca deixar nome de outro cliente vazar)
+  const legalFootnote = document.getElementById('legal-footnote-empresa');
+  if (legalFootnote) {
+    legalFootnote.textContent = `Conexão criptografada TLS 1.3 • Seus dados estratégicos são de propriedade exclusiva do(a) ${activeClient.empresa}.`;
+  }
+
   // Título da etapa do briefing
   const titleH1 = document.querySelector('h1.font-headline-lg');
   if (titleH1) {

@@ -110,6 +110,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const instances = getBriefingInstances();
     if (instances.length > 0) {
       selectBrief(instances[0].id);
+    } else {
+      renderEmptyInspectorState();
     }
 
     window.addEventListener('hashchange', checkHashRoute);
@@ -145,6 +147,8 @@ export function refreshDashboardData() {
   renderTable();
   if (selectedBriefId) {
     selectBrief(selectedBriefId, false);
+  } else if (getBriefingInstances().length === 0) {
+    renderEmptyInspectorState();
   }
 }
 
@@ -614,6 +618,37 @@ function renderClientsTable(tbody, thead, titleEl, subtitleEl, activeCountEl) {
 // ============================================================================
 // INSPETOR LATERAL (SNAPSHOT DETAIL)
 // ============================================================================
+
+function renderEmptyInspectorState() {
+  const aside = document.querySelector('aside.xl\\:col-span-4');
+  if (!aside) return;
+  const clientTitle = aside.querySelector('h3.font-headline-sm');
+  if (clientTitle) clientTitle.textContent = 'Nenhum briefing cadastrado';
+
+  const refBadge = aside.querySelector('.text-xs.font-semibold.px-2.py-0\\.5');
+  if (refBadge) refBadge.textContent = '—';
+
+  const clientConcept = aside.querySelector('h3.font-headline-sm + p');
+  if (clientConcept) clientConcept.textContent = 'Crie um briefing para ver o resumo aqui.';
+
+  const urgencySpan = aside.querySelector('span.border-rose-200');
+  if (urgencySpan) urgencySpan.textContent = '';
+
+  const tagsContainer = aside.querySelector('.flex.flex-wrap.gap-1\\.5');
+  if (tagsContainer) tagsContainer.textContent = '';
+
+  const contentArea = aside.querySelector('.space-y-3\\.5');
+  if (contentArea) contentArea.textContent = '';
+
+  const initialsContact = aside.querySelector('.w-9.h-9.rounded-full');
+  if (initialsContact) initialsContact.textContent = '—';
+
+  const contactName = aside.querySelector('p.font-label-md.text-label-md.font-semibold.truncate');
+  if (contactName) contactName.textContent = '—';
+
+  const contactRole = aside.querySelector('p.text-\\[11px\\].text-outline.truncate');
+  if (contactRole) contactRole.textContent = '';
+}
 
 export function selectBrief(briefId, reRenderTable = true) {
   selectedBriefId = briefId;
@@ -1119,6 +1154,16 @@ function setupEventListeners() {
   const btnAi = document.getElementById('btn-open-ai-generator');
   if (btnAi) {
     btnAi.addEventListener('click', () => openAIGeneratorModal());
+  }
+
+  const btnNotifications = document.getElementById('btn-notifications');
+  if (btnNotifications) {
+    btnNotifications.addEventListener('click', () => showToast('🔔 Central de notificações ainda não implementada.'));
+  }
+
+  const btnHeaderHelp = document.getElementById('btn-header-help');
+  if (btnHeaderHelp) {
+    btnHeaderHelp.addEventListener('click', () => showToast('❓ Central de suporte ainda não implementada. Fale com a agência diretamente.'));
   }
 
   const btnMarkRead = document.getElementById('btn-mark-activity-read');
