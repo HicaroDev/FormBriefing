@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Se já veio com código e briefing na URL, redireciona diretamente para o formulário
   if (codeParam && briefParam) {
-    window.location.href = `client-form.html?code=${codeParam}&brief=${briefParam}`;
+    const langParam = params.get('lang');
+    const langSuffix = langParam ? `&lang=${langParam}` : '';
+    window.location.href = `client-form.html?code=${codeParam}&brief=${briefParam}${langSuffix}`;
     return;
   }
 
@@ -175,6 +177,8 @@ async function handlePortalAccess() {
   btn.classList.add('bg-primary-container', 'text-white');
 
   setTimeout(() => {
-    window.location.href = `client-form.html?code=${client.codigo_unico}&brief=${briefId}`;
+    const langParam = new URLSearchParams(window.location.search).get('lang');
+    const langSuffix = langParam ? `&lang=${langParam}` : '';
+    window.location.href = `client-form.html?code=${client.codigo_unico}&brief=${briefId}${langSuffix}`;
   }, 500);
 }
