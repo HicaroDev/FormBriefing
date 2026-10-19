@@ -833,7 +833,21 @@ export function getTemplates() {
       localStorage.setItem(STORAGE_KEYS.TEMPLATES, JSON.stringify(SEED_TEMPLATES));
       return SEED_TEMPLATES;
     }
-    return JSON.parse(raw);
+    const cached = JSON.parse(raw);
+
+    // Funde: templates do código (SEED_TEMPLATES) sempre sobrescrevem a
+    // versão em cache pelo mesmo id (garante que mudanças no código chegam
+    // a navegadores que já visitaram o site antes). Templates só existentes
+    // no cache (ex: gerados por IA pelo usuário) são preservados.
+    const merged = new Map(cached.map(t => [t.id, t]));
+    SEED_TEMPLATES.forEach(t => merged.set(t.id, t));
+    const result = Array.from(merged.values());
+
+    if (result.length !== cached.length || SEED_TEMPLATES.some(t => JSON.stringify(cached.find(c => c.id === t.id)) !== JSON.stringify(t))) {
+      localStorage.setItem(STORAGE_KEYS.TEMPLATES, JSON.stringify(result));
+    }
+
+    return result;
   } catch (e) {
     console.error('Erro ao ler templates:', e);
     return SEED_TEMPLATES;
