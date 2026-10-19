@@ -8,12 +8,15 @@
  * - Máquina de Estados: rascunho -> enviado -> em_preenchimento -> submetido -> em_revisao -> ajustes_solicitados -> aprovado_kickoff
  */
 
+// v3: bump sempre que SEED_TEMPLATES mudar estruturalmente — força o
+// navegador a descartar o cache antigo de templates em vez de ficar
+// preso para sempre na primeira versão que ele já viu.
 const STORAGE_KEYS = {
-  CLIENTS: 'studiointake_clientes_v2',
-  TEMPLATES: 'studiointake_templates_v2',
-  INSTANCES: 'studiointake_instancias_v2',
-  DIGESTS: 'studiointake_digests_v2',
-  CONFIG: 'studiointake_config_v2'
+  CLIENTS: 'studiointake_clientes_v3',
+  TEMPLATES: 'studiointake_templates_v3',
+  INSTANCES: 'studiointake_instancias_v3',
+  DIGESTS: 'studiointake_digests_v3',
+  CONFIG: 'studiointake_config_v3'
 };
 
 // ============================================================================
