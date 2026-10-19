@@ -350,7 +350,7 @@ function renderRecentActivity() {
         <p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] line-clamp-2 mt-1">${inst.etapa_nome || 'Briefing'} • ${respostasCount} campo(s) respondido(s).</p>
         <div class="mt-3 pt-2.5 border-t border-outline-variant/50 flex items-center justify-between">
           <span class="text-[11px] font-medium text-primary">#${inst.id}</span>
-          <button type="button" class="text-xs text-on-surface hover:text-primary font-semibold">Abrir →</button>
+          <button type="button" class="btn-open-activity-brief text-xs text-on-surface hover:text-primary font-semibold" data-activity-brief-open="${inst.id}">Abrir →</button>
         </div>
       </div>
     `;
@@ -361,6 +361,16 @@ function renderRecentActivity() {
       currentView = 'briefs';
       selectBrief(card.getAttribute('data-activity-brief'));
       document.getElementById('roster-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  list.querySelectorAll('.btn-open-activity-brief').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const briefId = btn.getAttribute('data-activity-brief-open');
+      currentView = 'briefs';
+      selectBrief(briefId);
+      openExpandedRawModal(briefId);
     });
   });
 }
@@ -1188,7 +1198,12 @@ function setupEventListeners() {
 
   const btnAi = document.getElementById('btn-open-ai-generator');
   if (btnAi) {
-    btnAi.addEventListener('click', () => openAIGeneratorModal());
+    btnAi.addEventListener('click', () => showToast('✨ Gerador de templates com IA ainda não implementado — em breve.'));
+  }
+
+  const btnStakeholderChat = document.getElementById('btn-stakeholder-chat');
+  if (btnStakeholderChat) {
+    btnStakeholderChat.addEventListener('click', () => showToast('💬 Integração com Slack ainda não implementada.'));
   }
 
   const btnNotifications = document.getElementById('btn-notifications');
