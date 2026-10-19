@@ -180,7 +180,48 @@ function renderMetrics() {
   if (metricReady) metricReady.textContent = metrics.ready;
   if (metricDrafts) metricDrafts.textContent = metrics.drafts;
 
+  renderCalculatedMetrics();
   updateFormsMenuCounts();
+}
+
+/** Calcula SLA médio, tempo de descoberta e clientes ativos a partir de dados reais. */
+function renderCalculatedMetrics() {
+  const instances = getBriefingInstances();
+  const clients = getClients();
+
+  // SLA médio: horas entre envio e resposta, para instâncias já respondidas
+  const respondidas = instances.filter(i => i.data_envio && i.data_resposta);
+  const slaEl = document.getElementById('metric-sla');
+  if (slaEl) {
+    if (respondidas.length > 0) {
+      const mediaHoras = respondidas.reduce((acc, i) => {
+        return acc + (new Date(i.data_resposta) - new Date(i.data_envio)) / 3600000;
+      }, 0) / respondidas.length;
+      slaEl.textContent = `SLA médio: ${mediaHoras.toFixed(1)} horas`;
+    } else {
+      slaEl.textContent = 'SLA médio: sem dados ainda';
+    }
+  }
+
+  // Tempo de descoberta: dias entre envio e aprovação de kickoff
+  const aprovados = instances.filter(i => i.status === 'aprovado_kickoff' && i.data_envio && i.data_resposta);
+  const discoveryEl = document.getElementById('metric-discovery-time');
+  if (discoveryEl) {
+    if (aprovados.length > 0) {
+      const mediaDias = aprovados.reduce((acc, i) => {
+        return acc + (new Date(i.data_resposta) - new Date(i.data_envio)) / 86400000;
+      }, 0) / aprovados.length;
+      discoveryEl.innerHTML = `${mediaDias.toFixed(1)} <span class="text-xs font-normal text-outline">dias</span>`;
+    } else {
+      discoveryEl.innerHTML = `— <span class="text-xs font-normal text-outline">dias</span>`;
+    }
+  }
+
+  const clientsActiveEl = document.getElementById('metric-clients-active');
+  if (clientsActiveEl) {
+    const ativos = clients.filter(c => c.status_cliente === 'ativo').length;
+    clientsActiveEl.innerHTML = `Clientes ativos: <strong>${ativos}</strong>`;
+  }
 }
 
 /** Atualiza os contadores do submenu lateral "Formulários". */
@@ -933,6 +974,49 @@ function exportBriefingMarkdown(briefId) {
   });
 }
 
+/** Exporta todos os briefings atuais (filtrados ou não) como CSV real. */
+function exportAllBriefingsCSV() {
+  const instances = getBriefingInstances();
+  const clients = getClients();
+  const clientsMap = new Map(clients.map(c => [c.id, c]));
+
+  if (instances.length === 0) {
+    showToast('📄 Nenhum briefing para exportar ainda.');
+    return;
+  }
+
+  const header = ['ID', 'Cliente', 'Código', 'Vertical', 'Etapa', 'Status', 'Progresso (%)', 'Data de Envio', 'Data de Resposta'];
+  const rows = instances.map(inst => {
+    const client = clientsMap.get(inst.cliente_id) || {};
+    return [
+      inst.id,
+      client.empresa || '',
+      client.codigo_unico || '',
+      client.vertical || '',
+      inst.etapa_nome || '',
+      inst.status || '',
+      inst.progresso_percentual ?? 0,
+      inst.data_envio || '',
+      inst.data_resposta || ''
+    ];
+  });
+
+  const csvEscape = (val) => `"${String(val).replace(/"/g, '""')}"`;
+  const csvContent = [header, ...rows].map(row => row.map(csvEscape).join(',')).join('\n');
+
+  const blob = new Blob(['﻿' + csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `studiointake_briefings_${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showToast(`📄 Relatório exportado: ${instances.length} briefing(s) em CSV.`);
+}
+
 function shareWhatsApp(clientId, briefId) {
   const msg = generateWhatsAppMessage(clientId, briefId);
   navigator.clipboard.writeText(msg).then(() => {
@@ -1043,6 +1127,26 @@ function setupEventListeners() {
       const list = document.getElementById('recent-activity-list');
       if (list) list.innerHTML = `<p class="text-xs text-on-surface-variant col-span-3">Tudo em dia — nenhuma atividade pendente de leitura.</p>`;
     });
+  }
+
+  const btnSettings = document.getElementById('nav-settings');
+  if (btnSettings) {
+    btnSettings.addEventListener('click', () => showToast('⚙️ Tela de Configurações ainda não implementada.'));
+  }
+
+  const btnSupport = document.getElementById('nav-support');
+  if (btnSupport) {
+    btnSupport.addEventListener('click', () => showToast('💬 Central de Suporte ainda não implementada.'));
+  }
+
+  const btnGlobalFilters = document.getElementById('btn-global-filters');
+  if (btnGlobalFilters) {
+    btnGlobalFilters.addEventListener('click', () => showToast('🔍 Use os filtros Aberto/Em Processo/Respondidos/Arquivados no menu "Formulários" ou as abas da tabela abaixo.'));
+  }
+
+  const btnExportReport = document.getElementById('btn-export-report');
+  if (btnExportReport) {
+    btnExportReport.addEventListener('click', () => exportAllBriefingsCSV());
   }
 
   // Barra de pesquisa
