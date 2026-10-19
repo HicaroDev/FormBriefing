@@ -269,7 +269,9 @@ export const SEED_TEMPLATES = [
               { valor: 'godaddy', label: { pt: 'GoDaddy', it: 'GoDaddy', en: 'GoDaddy' } },
               { valor: 'wordpress', label: { pt: 'WordPress.com', it: 'WordPress.com', en: 'WordPress.com' } },
               { valor: 'outro', label: { pt: 'Outro / Não sei', it: 'Altro / Non lo so', en: 'Other / Not sure' } }
-            ]
+            ],
+            outraOpcaoValor: 'outro',
+            outraOpcaoLabel: { pt: 'Qual é a hospedagem?', it: "Qual è l'hosting?", en: 'Which hosting?' }
           },
           {
             id: 'hosting_status', tipo: 'cards_single_select',
@@ -501,7 +503,9 @@ export const SEED_TEMPLATES = [
               { valor: 'godaddy', label: { pt: 'GoDaddy', it: 'GoDaddy', en: 'GoDaddy' } },
               { valor: 'wordpress', label: { pt: 'WordPress.com', it: 'WordPress.com', en: 'WordPress.com' } },
               { valor: 'outro', label: { pt: 'Outro / Não sei', it: 'Altro / Non lo so', en: 'Other / Not sure' } }
-            ]
+            ],
+            outraOpcaoValor: 'outro',
+            outraOpcaoLabel: { pt: 'Qual é a hospedagem?', it: "Qual è l'hosting?", en: 'Which hosting?' }
           },
           {
             id: 'hosting_status', tipo: 'cards_single_select',

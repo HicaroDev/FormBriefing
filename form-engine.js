@@ -471,13 +471,16 @@ function renderField(campo, isReadOnly) {
         </div>
       `;
 
-    case 'select':
+    case 'select': {
+      const outroFieldId = campo.outraOpcaoValor ? `${campo.id}__outro` : null;
+      const outroValue = outroFieldId ? (formAnswers[outroFieldId] || '') : '';
+      const showOutro = campo.outraOpcaoValor && value === campo.outraOpcaoValor;
       return `
         <div>
           <label class="font-label-md text-label-md text-on-surface font-semibold block mb-1.5" for="${campo.id}">
             ${t(campo.label)} ${campo.obrigatorio ? '<span class="text-rose-600">*</span>' : ''}
           </label>
-          <select ${disabledAttr} id="${campo.id}" name="${campo.id}" class="form-input w-full px-4 py-2.5 bg-surface-container-low border border-outline-variant rounded-xl text-body-md font-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all ${isReadOnly ? 'opacity-70 cursor-not-allowed' : ''}">
+          <select ${disabledAttr} id="${campo.id}" name="${campo.id}" ${outroFieldId ? `data-outro-for="${outroFieldId}" data-outro-trigger="${escapeHtml(campo.outraOpcaoValor)}"` : ''} class="form-input w-full px-4 py-2.5 bg-surface-container-low border border-outline-variant rounded-xl text-body-md font-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all ${isReadOnly ? 'opacity-70 cursor-not-allowed' : ''}">
             <option value="">${t(UI_STRINGS.selecioneOpcao)}</option>
             ${(campo.opcoes || []).map(opt => {
               const optVal = typeof opt === 'string' ? opt : opt.valor;
@@ -485,8 +488,12 @@ function renderField(campo, isReadOnly) {
               return `<option value="${escapeHtml(optVal)}" ${value === optVal ? 'selected' : ''}>${escapeHtml(optLabel)}</option>`;
             }).join('')}
           </select>
+          ${outroFieldId ? `
+            <input ${disabledAttr} type="text" id="${outroFieldId}" name="${outroFieldId}" value="${escapeHtml(outroValue)}" placeholder="${escapeHtml(t(campo.outraOpcaoLabel))}" class="form-input w-full px-4 py-2.5 bg-surface-container-low border border-outline-variant rounded-xl text-body-md font-body-md placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all mt-2 ${showOutro ? '' : 'hidden'} ${isReadOnly ? 'opacity-70 cursor-not-allowed bg-surface-container' : ''}">
+          ` : ''}
         </div>
       `;
+    }
 
     case 'cards_single_select':
       return `
@@ -617,6 +624,23 @@ function attachFieldEventListeners(container, isReadOnly) {
     el.addEventListener('input', () => {
       formAnswers[el.name] = el.value;
       triggerAutosave();
+    });
+  });
+
+  // 1b. Selects com campo "Outro" (mostra/esconde o campo de texto livre)
+  container.querySelectorAll('select[data-outro-for]').forEach(select => {
+    select.addEventListener('change', () => {
+      const outroInput = document.getElementById(select.getAttribute('data-outro-for'));
+      if (!outroInput) return;
+      const shouldShow = select.value === select.getAttribute('data-outro-trigger');
+      outroInput.classList.toggle('hidden', !shouldShow);
+      if (shouldShow) {
+        outroInput.focus();
+      } else {
+        outroInput.value = '';
+        formAnswers[outroInput.name] = '';
+        triggerAutosave();
+      }
     });
   });
 
