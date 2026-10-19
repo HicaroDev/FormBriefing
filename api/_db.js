@@ -8,8 +8,15 @@
  */
 import { neon } from '@neondatabase/serverless';
 
+function sanitize(str) {
+  if (!str) return str;
+  // Remove BOM e espaços/quebras de linha que podem ter entrado ao colar a
+  // connection string em um terminal Windows (PowerShell injeta ﻿).
+  return str.replace(/[﻿​]/g, '').trim();
+}
+
 function resolveConnectionString() {
-  return (
+  return sanitize(
     process.env.DATABASE_URL ||
     process.env.POSTGRES_URL ||
     process.env.POSTGRES_PRISMA_URL ||
