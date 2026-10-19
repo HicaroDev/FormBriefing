@@ -294,7 +294,7 @@ function renderClientHeader() {
   }
 
   // PIN/Código no badge do cabeçalho (nunca deixar o PIN fake do mockup vazar)
-  const pinBadge = document.querySelector('header .bg-surface-container span:last-child');
+  const pinBadge = document.getElementById('header-pin-badge');
   if (pinBadge) {
     pinBadge.textContent = `Código: ${activeClient.codigo_unico}`;
   }
