@@ -1003,47 +1003,67 @@ export function generateProductionDigest(briefingId) {
 
   const raw = instance.respostas_brutas || {};
   let existingDigest = getDigestByBriefingId(briefingId);
+  const hasAnyAnswer = Object.keys(raw).some(k => {
+    const v = raw[k];
+    return Array.isArray(v) ? v.length > 0 : (v !== undefined && v !== null && String(v).trim().length > 0);
+  });
 
-  // 1. Objetivo central sintetizado
-  let objetivo = raw.desafio_central || raw.primaryGoal || raw.objetivo_evento || raw.objetivo_clinica || '';
+  // Resolve o template real da instância para extrair o digest a partir dos
+  // campos de verdade (nunca nomes fixos de templates antigos) — qualquer
+  // template novo funciona automaticamente, sem precisar editar esta função.
+  const template = getTemplateById(instance.template_id);
+  const todosCampos = template ? template.secoes.flatMap(s => s.campos) : [];
+
+  function labelDoCampo(campoId) {
+    const campo = todosCampos.find(c => c.id === campoId);
+    return campo ? resolvePt(campo.label) : campoId;
+  }
+
+  function rotuloDaOpcao(campo, valor) {
+    const opt = (campo.opcoes || []).find(o => (typeof o === 'string' ? o : o.valor) === valor);
+    if (!opt) return valor;
+    return typeof opt === 'string' ? opt : resolvePt(opt.rotulo || opt.label);
+  }
+
+  function resolvePt(val) {
+    if (val == null) return '';
+    if (typeof val === 'string') return val;
+    return val.pt || val.it || val.en || '';
+  }
+
+  // 1. Objetivo central sintetizado: junta as respostas de todos os campos
+  // de texto livre (textarea) que o cliente realmente preencheu.
+  const textosLivres = todosCampos
+    .filter(c => c.tipo === 'textarea' && raw[c.id] && String(raw[c.id]).trim().length > 0)
+    .map(c => `${labelDoCampo(c.id)}: ${raw[c.id]}`);
+
+  let objetivo = textosLivres.length > 0 ? textosLivres.join(' | ') : '';
   if (!objetivo) {
-    objetivo = `Estruturação estratégica e implementação de alto impacto para a marca ${client.empresa} na vertical ${client.vertical}.`;
+    objetivo = hasAnyAnswer
+      ? `Respostas recebidas de ${client.empresa}, aguardando síntese detalhada da equipe.`
+      : `Aguardando o preenchimento do briefing por ${client.empresa}. Nenhuma resposta recebida ainda.`;
   }
 
-  // 2. Pilares de design extraídos
+  // 2. Pilares extraídos de seleções únicas (cards_single_select / select)
   const pilares = [];
-  if (raw.seletor_tom) {
-    pilares.push(`Atmosfera: ${raw.seletor_tom}`);
-  }
-  if (raw.slider_estilo !== undefined) {
-    const val = Number(raw.slider_estilo);
-    pilares.push(`Direção de Estilo: ${val}% ${val > 50 ? 'Expressivo & Vibrante' : 'Minimalista & Contido'}`);
-  }
-  if (raw.estilo_visual) {
-    pilares.push(`Linguagem Visual: ${raw.estilo_visual}`);
-  }
+  todosCampos
+    .filter(c => (c.tipo === 'cards_single_select' || c.tipo === 'select') && raw[c.id])
+    .forEach(c => {
+      pilares.push(`${labelDoCampo(c.id)}: ${rotuloDaOpcao(c, raw[c.id])}`);
+    });
   if (pilares.length === 0) {
-    if (client.vertical === 'pilates') {
-      pilares.push('Estética Serene & Arquitetônica (Madeira nobre e iluminação difusa)', 'Tipografia editorial sofisticada', 'Equilíbrio sensorial e precisão motora');
-    } else if (client.vertical === 'physio') {
-      pilares.push('Autoridade Médica e Clareza Diagnóstica', 'Acessibilidade universal para pacientes lesionados', 'Precisão técnica e confiança clínica');
-    } else if (client.vertical === 'events') {
-      pilares.push('Imersão Visual de Grande Escala', 'Cenografia com alta fidelidade de iluminação e LED', 'Fluxo dinâmico de credenciamento sem atrito');
-    } else {
-      pilares.push('Design Moderno e Funcional', 'Hierarquia de informação clara', 'Consistência de marca corporativa');
-    }
+    pilares.push(hasAnyAnswer ? 'Direção estética ainda não definida pelo cliente.' : 'Aguardando respostas do cliente.');
   }
 
-  // 3. Entregáveis confirmados
+  // 3. Entregáveis/prioridades confirmadas: qualquer chips_multiselect preenchido
   let entregaveis = [];
-  if (Array.isArray(raw.escopo_chips) && raw.escopo_chips.length > 0) {
-    entregaveis = [...raw.escopo_chips];
-  } else if (Array.isArray(raw.itens_cenografia) && raw.itens_cenografia.length > 0) {
-    entregaveis = [...raw.itens_cenografia];
-  } else if (Array.isArray(raw.modulos_sistema) && raw.modulos_sistema.length > 0) {
-    entregaveis = [...raw.modulos_sistema];
-  } else {
-    entregaveis = ['Brandbook Completo', 'Design System Digital', 'Ativos de Produção & Guidelines'];
+  todosCampos
+    .filter(c => c.tipo === 'chips_multiselect' && Array.isArray(raw[c.id]) && raw[c.id].length > 0)
+    .forEach(c => {
+      raw[c.id].forEach(v => entregaveis.push(rotuloDaOpcao(c, v)));
+    });
+  if (entregaveis.length === 0) {
+    entregaveis = hasAnyAnswer ? [] : [];
   }
 
   // 4. Integrações técnicas
