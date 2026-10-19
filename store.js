@@ -1270,3 +1270,83 @@ if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
     resetStorageToSeed();
   }
 }
+
+// ============================================================================
+// SINCRONIZAÇÃO REMOTA (Postgres via /api) — Camada Híbrida
+// ============================================================================
+// O app funciona 100% offline via localStorage (cache rápido por navegador).
+// Estas funções sincronizam com o banco real para que um cliente abrindo o
+// link em outro dispositivo veja seus próprios dados. Falhas de rede nunca
+// quebram o app — são "fire and forget" ou com fallback silencioso.
+
+async function apiCall(path, options) {
+  try {
+    const res = await fetch(path, options);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    console.warn(`[sync] Falha ao chamar ${path}:`, e.message);
+    return null;
+  }
+}
+
+/** Envia (cria/atualiza) um cliente no banco remoto. Não bloqueia a UI. */
+export function syncClientRemote(client) {
+  apiCall('/api/clients', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(client)
+  });
+}
+
+/** Envia (cria/atualiza) uma instância de briefing no banco remoto. */
+export function syncInstanceRemote(instance) {
+  apiCall('/api/instances', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(instance)
+  });
+}
+
+/** Atualiza parcialmente uma instância no banco remoto (usado no autosave). */
+export function patchInstanceRemote(partial) {
+  apiCall('/api/instances', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(partial)
+  });
+}
+
+/** Busca um cliente pelo código diretamente no banco remoto. */
+export async function fetchClientByCodeRemote(code) {
+  const data = await apiCall(`/api/clients?code=${encodeURIComponent(code)}`);
+  return data ? data.client : null;
+}
+
+/** Busca uma instância de briefing pelo id diretamente no banco remoto. */
+export async function fetchInstanceByIdRemote(id) {
+  const data = await apiCall(`/api/instances?id=${encodeURIComponent(id)}`);
+  return data ? data.instance : null;
+}
+
+/** Puxa todos os clientes e instâncias do banco remoto e funde no cache local. */
+export async function syncAllFromRemote() {
+  const [clientsData, instancesData] = await Promise.all([
+    apiCall('/api/clients'),
+    apiCall('/api/instances')
+  ]);
+
+  if (clientsData && Array.isArray(clientsData.clients) && clientsData.clients.length > 0) {
+    const local = getClients();
+    const byId = new Map(local.map(c => [c.id, c]));
+    clientsData.clients.forEach(c => byId.set(c.id, c));
+    saveClients(Array.from(byId.values()));
+  }
+
+  if (instancesData && Array.isArray(instancesData.instances) && instancesData.instances.length > 0) {
+    const local = getBriefingInstances();
+    const byId = new Map(local.map(i => [i.id, i]));
+    instancesData.instances.forEach(i => byId.set(i.id, i));
+    saveBriefingInstances(Array.from(byId.values()));
+  }
+}

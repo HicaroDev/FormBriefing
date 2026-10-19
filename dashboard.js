@@ -28,7 +28,11 @@ import {
   generateClientCode,
   generateWhatsAppMessage,
   exportDigestToMarkdown,
-  resetStorageToSeed
+  resetStorageToSeed,
+  syncClientRemote,
+  syncInstanceRemote,
+  syncAllFromRemote,
+  patchInstanceRemote
 } from './store.js';
 
 import {
@@ -80,6 +84,12 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         refreshDashboardData();
       }
     }, 3500);
+
+    // Sincroniza com o banco remoto (pega respostas de clientes em outros dispositivos)
+    syncAllFromRemote().then(refreshDashboardData);
+    setInterval(() => {
+      syncAllFromRemote().then(refreshDashboardData);
+    }, 10000);
   });
 }
 
@@ -726,7 +736,8 @@ function renderInspectorRaw(container, instance, client) {
 
 function approveBriefing(briefId) {
   updateBriefingStatus(briefId, 'aprovado_kickoff');
-  
+  patchInstanceRemote({ id: briefId, status: 'aprovado_kickoff' });
+
   // Atualiza ou cria o Digest se não existir
   let digest = getDigestByBriefingId(briefId);
   if (!digest) {
@@ -1039,6 +1050,9 @@ function openNewBriefModalForClient(clientId) {
     budget: 'A definir'
   });
 
+  syncClientRemote(client);
+  syncInstanceRemote(newInstance);
+
   renderMetrics();
   renderTable();
   selectBrief(newInstance.id);
@@ -1087,6 +1101,9 @@ function handleCreateClientSubmit() {
     urgencia: 'high',
     budget: 'R$ 150.000,00'
   });
+
+  syncClientRemote(newClient);
+  syncInstanceRemote(newInstance);
 
   closeModal();
   document.getElementById('form-client-intake').reset();
@@ -1231,6 +1248,11 @@ function handleConfirmAdjustments() {
   const note = textarea ? textarea.value.trim() : '';
 
   updateBriefingStatus(activeAdjustmentBriefId, 'ajustes_solicitados', {
+    feedback_ajustes: note || 'Ajustes solicitados pela equipe criativa.'
+  });
+  patchInstanceRemote({
+    id: activeAdjustmentBriefId,
+    status: 'ajustes_solicitados',
     feedback_ajustes: note || 'Ajustes solicitados pela equipe criativa.'
   });
 

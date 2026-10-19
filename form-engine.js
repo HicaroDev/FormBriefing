@@ -21,7 +21,12 @@ import {
   updateBriefingInstance,
   updateBriefingStatus,
   getDigestByBriefingId,
-  saveDigest
+  saveDigest,
+  saveClients,
+  saveBriefingInstances,
+  fetchClientByCodeRemote,
+  fetchInstanceByIdRemote,
+  patchInstanceRemote
 } from './store.js';
 
 let activeClient = null;
@@ -119,14 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initClientPortal();
 });
 
-export function initClientPortal() {
+export async function initClientPortal() {
   const params = new URLSearchParams(window.location.search);
   const codeParam = params.get('code') || params.get('pin');
   const briefParam = params.get('brief') || params.get('id');
 
-  // 1. Resolve o cliente e a instância
-  const instances = getBriefingInstances();
-  const clients = getClients();
+  // 1. Resolve o cliente e a instância (cache local primeiro)
+  let instances = getBriefingInstances();
+  let clients = getClients();
 
   if (briefParam) {
     activeInstance = getBriefingInstanceById(briefParam);
@@ -136,12 +141,32 @@ export function initClientPortal() {
     activeClient = getClientByCode(codeParam);
   }
 
+  // Não achou localmente (ex: cliente abrindo o link em outro dispositivo):
+  // busca no banco remoto antes de cair no fallback de demonstração.
+  if ((codeParam && !activeClient) || (briefParam && !activeInstance)) {
+    const [remoteClient, remoteInstance] = await Promise.all([
+      codeParam && !activeClient ? fetchClientByCodeRemote(codeParam) : Promise.resolve(null),
+      briefParam && !activeInstance ? fetchInstanceByIdRemote(briefParam) : Promise.resolve(null)
+    ]);
+
+    if (remoteClient) {
+      clients = [remoteClient, ...clients.filter(c => c.id !== remoteClient.id)];
+      saveClients(clients);
+      activeClient = remoteClient;
+    }
+    if (remoteInstance) {
+      instances = [remoteInstance, ...instances.filter(i => i.id !== remoteInstance.id)];
+      saveBriefingInstances(instances);
+      activeInstance = remoteInstance;
+    }
+  }
+
   // Fallbacks inteligentes se não informou parâmetros
   if (!activeInstance && activeClient) {
     const clientBriefs = instances.filter(i => i.cliente_id === activeClient.id);
     activeInstance = clientBriefs[0] || null;
   } else if (activeInstance && !activeClient) {
-    activeClient = getClientById(activeInstance.cliente_id);
+    activeClient = getClientById(activeInstance.cliente_id) || await fetchClientByCodeRemote(codeParam);
   }
 
   // Se ainda assim não encontrou, usa o primeiro cliente como demonstração
@@ -634,11 +659,21 @@ function triggerAutosave() {
       const filledCount = Object.keys(formAnswers).filter(k => formAnswers[k] && formAnswers[k].length > 0).length;
       const progressPercent = Math.min(100, Math.round((filledCount / totalFields) * 100));
 
+      const novoStatus = activeInstance.status === 'rascunho' ? 'em_preenchimento' : activeInstance.status;
       updateBriefingInstance(activeInstance.id, {
         respostas_brutas: formAnswers,
         anexos: uploadedFiles,
         progresso_percentual: progressPercent,
-        status: activeInstance.status === 'rascunho' ? 'em_preenchimento' : activeInstance.status
+        status: novoStatus
+      });
+
+      // Sincroniza com o banco remoto (não bloqueia a UI)
+      patchInstanceRemote({
+        id: activeInstance.id,
+        respostas_brutas: formAnswers,
+        anexos: uploadedFiles,
+        progresso_percentual: progressPercent,
+        status: novoStatus
       });
 
       // Atualiza visual do indicador
@@ -722,6 +757,16 @@ function handleFinalSubmission() {
     respostas_brutas: formAnswers,
     anexos: uploadedFiles,
     progresso_percentual: 100
+  });
+
+  // Sincroniza submissão final com o banco remoto
+  patchInstanceRemote({
+    id: activeInstance.id,
+    status: 'submetido',
+    respostas_brutas: formAnswers,
+    anexos: uploadedFiles,
+    progresso_percentual: 100,
+    data_resposta: new Date().toISOString()
   });
 
   // Gera o Digest preliminar para a agência
