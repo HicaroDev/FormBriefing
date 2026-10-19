@@ -4,9 +4,18 @@
  * Valida o código único do cliente (CLI-XXXX) ou PIN e redireciona para o formulário correto.
  */
 
-import { getClients, getClientByCode, getBriefingInstances, getBriefingsByClientId } from './store.js';
+import {
+  getClients,
+  getClientByCode,
+  getBriefingInstances,
+  getBriefingsByClientId,
+  saveClients,
+  saveBriefingInstances,
+  fetchClientByCodeRemote,
+  fetchInstancesByClientRemote
+} from './store.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const codeParam = params.get('code') || params.get('pin');
   const briefParam = params.get('brief') || params.get('id');
@@ -19,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Se veio apenas com código, resolve o briefing e atualiza o card de boas-vindas
   if (codeParam) {
-    const client = getClientByCode(codeParam);
+    const client = await resolveClientByCode(codeParam);
     if (client) {
       updateWelcomeBanner(client);
       prefillPinDigits(client.codigo_unico.replace('CLI-', ''));
@@ -29,6 +38,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // Prepara inputs de PIN
   setupPinInputs();
 });
+
+/**
+ * Busca o cliente localmente; se não encontrar (ex: dispositivo novo do
+ * cliente, sem cache local), busca no banco remoto e guarda em cache.
+ */
+async function resolveClientByCode(code) {
+  let client = getClientByCode(code);
+  if (client) return client;
+
+  client = await fetchClientByCodeRemote(code);
+  if (client) {
+    const clients = getClients();
+    saveClients([client, ...clients.filter(c => c.id !== client.id)]);
+  }
+  return client;
+}
 
 function updateWelcomeBanner(client) {
   const banner = document.querySelector('span.font-label-md');
@@ -87,7 +112,7 @@ function setupPinInputs() {
   }
 }
 
-function handlePortalAccess() {
+async function handlePortalAccess() {
   const inputs = Array.from(document.querySelectorAll('.pin-input'));
   const digits = inputs.map(i => i.value).join('');
   const btn = document.getElementById('submitBtn');
@@ -103,34 +128,53 @@ function handlePortalAccess() {
   `;
   btn.disabled = true;
 
-  // Busca cliente pelo código CLI-XXXX ou pelos dígitos
+  // Busca cliente pelo código CLI-XXXX (local e, se preciso, no banco remoto)
   const formattedCode = `CLI-${digits.slice(0, 4)}`;
-  let client = getClientByCode(formattedCode);
+  let client = await resolveClientByCode(formattedCode);
 
   if (!client) {
     const allClients = getClients();
     client = allClients.find(c => c.codigo_unico.includes(digits) || digits.includes(c.codigo_unico.replace('CLI-', '')));
   }
 
-  // Fallback para o primeiro cliente se o usuário digitou qualquer código de teste
   if (!client) {
-    const allClients = getClients();
-    client = allClients[0];
+    btn.innerHTML = `
+      <span class="material-symbols-outlined text-[20px]">error</span>
+      <span>Código não encontrado</span>
+    `;
+    btn.disabled = false;
+    alert('Não encontramos um cadastro com esse código. Confira o código recebido ou entre em contato com a agência.');
+    return;
   }
 
-  const clientBriefs = getBriefingsByClientId(client.id);
-  const briefId = clientBriefs.length > 0 ? clientBriefs[0].id : 'BRF-2025-089';
+  let clientBriefs = getBriefingsByClientId(client.id);
+  if (clientBriefs.length === 0) {
+    const remoteInstances = await fetchInstancesByClientRemote(client.id);
+    if (remoteInstances.length > 0) {
+      const existing = getBriefingInstances();
+      saveBriefingInstances([...remoteInstances, ...existing.filter(i => !remoteInstances.some(r => r.id === i.id))]);
+      clientBriefs = remoteInstances;
+    }
+  }
+  const briefId = clientBriefs.length > 0 ? clientBriefs[0].id : null;
+
+  if (!briefId) {
+    btn.innerHTML = `
+      <span class="material-symbols-outlined text-[20px]">error</span>
+      <span>Nenhum briefing pendente</span>
+    `;
+    btn.disabled = false;
+    return;
+  }
+
+  btn.innerHTML = `
+    <span class="material-symbols-outlined text-[20px]">check_circle</span>
+    <span>Acesso Autorizado! Redirecionando...</span>
+  `;
+  btn.classList.remove('bg-on-surface');
+  btn.classList.add('bg-primary-container', 'text-white');
 
   setTimeout(() => {
-    btn.innerHTML = `
-      <span class="material-symbols-outlined text-[20px]">check_circle</span>
-      <span>Acesso Autorizado! Redirecionando...</span>
-    `;
-    btn.classList.remove('bg-on-surface');
-    btn.classList.add('bg-primary-container', 'text-white');
-
-    setTimeout(() => {
-      window.location.href = `client-form.html?code=${client.codigo_unico}&brief=${briefId}`;
-    }, 500);
-  }, 600);
+    window.location.href = `client-form.html?code=${client.codigo_unico}&brief=${briefId}`;
+  }, 500);
 }

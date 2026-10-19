@@ -1173,6 +1173,12 @@ export async function fetchInstanceByIdRemote(id) {
   return data ? data.instance : null;
 }
 
+/** Busca todas as instâncias de um cliente diretamente no banco remoto. */
+export async function fetchInstancesByClientRemote(clienteId) {
+  const data = await apiCall(`/api/instances?cliente_id=${encodeURIComponent(clienteId)}`);
+  return data && Array.isArray(data.instances) ? data.instances : [];
+}
+
 /** Puxa todos os clientes e instâncias do banco remoto e funde no cache local. */
 export async function syncAllFromRemote() {
   const [clientsData, instancesData] = await Promise.all([
