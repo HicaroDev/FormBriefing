@@ -458,26 +458,52 @@
       }
     }
 
-    function handleLoginSubmit() {
+    async function handleLoginSubmit() {
       const email = document.getElementById('work-email').value;
+      const password = document.getElementById('password').value;
       const submitBtn = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
       const notification = document.getElementById('statusNotification');
+      const notificationText = notification.querySelector('p');
 
-      if (!email) return;
+      if (!email || !password) return;
 
-      // Visual feedback loading state
       btnText.textContent = "Validando credenciais...";
       submitBtn.classList.add('opacity-90', 'cursor-wait');
+      submitBtn.disabled = true;
 
-      setTimeout(() => {
+      try {
+        const res = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'login', email, password })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.token) {
+          notification.classList.remove('hidden');
+          notification.classList.remove('bg-secondary-container/50', 'border-secondary');
+          notification.classList.add('bg-rose-50', 'border-rose-300');
+          notificationText.textContent = data.error || 'E-mail ou senha incorretos.';
+          btnText.textContent = "Entrar na Plataforma";
+          submitBtn.classList.remove('opacity-90', 'cursor-wait');
+          submitBtn.disabled = false;
+          return;
+        }
+
+        localStorage.setItem('studiointake_admin_token', data.token);
         notification.classList.remove('hidden');
         btnText.textContent = "Entrando...";
-        setTimeout(() => {
-          btnText.textContent = "Entrar na Plataforma";
-          submitBtn.classList.remove('opacity-90', 'cursor-wait'); setTimeout(() => { window.location.href = 'index.html'; }, 400);
-        }, 1500);
-      }, 600);
+        setTimeout(() => { window.location.href = 'index.html'; }, 500);
+      } catch (e) {
+        notification.classList.remove('hidden');
+        notification.classList.remove('bg-secondary-container/50', 'border-secondary');
+        notification.classList.add('bg-rose-50', 'border-rose-300');
+        notificationText.textContent = 'Erro de conexão. Tente novamente.';
+        btnText.textContent = "Entrar na Plataforma";
+        submitBtn.classList.remove('opacity-90', 'cursor-wait');
+        submitBtn.disabled = false;
+      }
     }
   </script>
 </body></html>

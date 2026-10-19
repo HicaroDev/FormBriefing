@@ -51,8 +51,52 @@ let lastInstancesHash = '';
 // INICIALIZAÇÃO DO DASHBOARD
 // ============================================================================
 
+// ============================================================================
+// AUTENTICAÇÃO DO DASHBOARD
+// ============================================================================
+
+async function requireAuth() {
+  const token = localStorage.getItem('studiointake_admin_token');
+  if (!token) {
+    window.location.href = 'login.html';
+    return false;
+  }
+  try {
+    const res = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'verify', token })
+    });
+    const data = await res.json();
+    if (!data.valid) {
+      localStorage.removeItem('studiointake_admin_token');
+      window.location.href = 'login.html';
+      return false;
+    }
+    return true;
+  } catch (e) {
+    // Falha de rede: não derruba a sessão, apenas segue (evita travar o
+    // dashboard offline por causa de uma checagem de auth que falhou).
+    return true;
+  }
+}
+
+function setupLogout() {
+  const btn = document.getElementById('btn-logout');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      localStorage.removeItem('studiointake_admin_token');
+      window.location.href = 'login.html';
+    });
+  }
+}
+
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
+    const authorized = await requireAuth();
+    if (!authorized) return;
+    setupLogout();
+
     renderMetrics();
     renderDistribution();
     setupEventListeners();
