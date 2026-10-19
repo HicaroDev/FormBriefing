@@ -5,6 +5,7 @@
  * GET    (sem params)          → lista todas as instâncias
  * POST   { ...dados }          → cria uma instância
  * PATCH  { id, ...parcial }    → atualiza uma instância (usado pelo autosave)
+ * DELETE ?id=BRF-XXX           → remove uma instância
  */
 import { getSql, jsonResponse } from './_db.js';
 
@@ -76,6 +77,13 @@ export default async function handler(req, res) {
           atualizado_em = NOW()
         WHERE id = ${d.id}
       `;
+      return jsonResponse(res, 200, { ok: true });
+    }
+
+    if (req.method === 'DELETE') {
+      const { id } = req.query;
+      if (!id) return jsonResponse(res, 400, { error: 'Parâmetro obrigatório: id' });
+      await sql`DELETE FROM instancias_briefing WHERE id = ${id}`;
       return jsonResponse(res, 200, { ok: true });
     }
 
