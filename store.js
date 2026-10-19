@@ -1076,7 +1076,7 @@ export function generateProductionDigest(briefingId) {
 
   // 5. Checklist de Kickoff inteligente
   const checklist = [
-    { item: `Validação das respostas oficiais de ${client.empresa} (${client.codigo_unico})`, status: 'concluido' },
+    { item: `Validação das respostas oficiais de ${client.empresa} (${client.codigo_unico})`, status: hasAnyAnswer ? 'concluido' : 'pendente' },
     { item: `Análise técnica de ${(instance.anexos || []).length} anexo(s) submetido(s)`, status: (instance.anexos || []).length > 0 ? 'concluido' : 'pendente' },
     { item: 'Alocação de squad criativo e design lead', status: instance.status === 'aprovado_kickoff' ? 'concluido' : 'pendente' }
   ];
@@ -1094,6 +1094,14 @@ export function generateProductionDigest(briefingId) {
     checklist.push({ item: 'Kickoff formal de abertura do sprint de produção', status: 'pendente' });
   }
 
+  // Preserva marcações manuais feitas pelo usuário nos checkboxes do
+  // checklist anterior (casando pelo texto do item), em vez de descartar
+  // o progresso toda vez que o digest é resintetizado.
+  const checklistComProgresso = checklist.map(item => {
+    const anterior = existingDigest?.checklist_kickoff?.find(c => c.item === item.item);
+    return anterior ? { ...item, status: anterior.status } : item;
+  });
+
   const digestData = {
     briefing_id: briefingId,
     cliente_nome: client.empresa,
@@ -1101,7 +1109,7 @@ export function generateProductionDigest(briefingId) {
     pilares_design: pilares,
     entregaveis_confirmados: entregaveis,
     integracoes_tecnicas: integracoes,
-    checklist_kickoff: checklist,
+    checklist_kickoff: checklistComProgresso,
     aprovado_por: existingDigest?.aprovado_por || 'Diretoria de Criação',
     data_aprovacao: existingDigest?.data_aprovacao || (instance.status === 'aprovado_kickoff' ? new Date().toISOString() : null)
   };

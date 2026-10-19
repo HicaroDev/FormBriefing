@@ -418,11 +418,11 @@ export function selectBrief(briefId, reRenderTable = true) {
     vertical: 'universal'
   };
 
-  // Garante que o digest existe ou auto-sintetiza
-  let digest = getDigestByBriefingId(briefId);
-  if (!digest) {
-    digest = generateProductionDigest(briefId);
-  }
+  // Sempre resintetiza o digest a partir das respostas atuais (preserva
+  // aprovado_por/data_aprovacao de um digest anterior, se houver) — nunca
+  // fica preso a um resumo desatualizado quando o cliente responde mais
+  // tarde ou quando a instância é reiniciada.
+  let digest = generateProductionDigest(briefId);
 
   // Re-renderiza a tabela para atualizar a linha selecionada
   if (reRenderTable && currentView === 'briefs') {
