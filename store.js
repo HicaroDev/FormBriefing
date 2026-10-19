@@ -1451,17 +1451,15 @@ export async function syncAllFromRemote() {
     apiCall('/api/instances')
   ]);
 
-  if (clientsData && Array.isArray(clientsData.clients) && clientsData.clients.length > 0) {
-    const local = getClients();
-    const byId = new Map(local.map(c => [c.id, c]));
-    clientsData.clients.forEach(c => byId.set(c.id, c));
-    saveClients(Array.from(byId.values()));
+  // O banco remoto é a fonte de verdade: o Dashboard da agência sempre
+  // reflete exatamente o que está no servidor, nunca um cache "somado" —
+  // senão clientes/briefings excluídos remotamente continuariam
+  // aparecendo para sempre neste navegador.
+  if (clientsData && Array.isArray(clientsData.clients)) {
+    saveClients(clientsData.clients);
   }
 
-  if (instancesData && Array.isArray(instancesData.instances) && instancesData.instances.length > 0) {
-    const local = getBriefingInstances();
-    const byId = new Map(local.map(i => [i.id, i]));
-    instancesData.instances.forEach(i => byId.set(i.id, i));
-    saveBriefingInstances(Array.from(byId.values()));
+  if (instancesData && Array.isArray(instancesData.instances)) {
+    saveBriefingInstances(instancesData.instances);
   }
 }
