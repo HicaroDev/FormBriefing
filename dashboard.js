@@ -44,6 +44,7 @@ import {
 let currentFilter = 'all';
 let currentView = 'briefs'; // 'briefs' ou 'clients'
 let selectedBriefId = null;
+let searchQuery = '';
 let currentInspectorTab = 'digest'; // 'digest' ou 'raw'
 let lastInstancesHash = '';
 
@@ -413,6 +414,18 @@ export function renderTable() {
     filtered = instances.filter(i => i.status === 'em_preenchimento' || i.status === 'ajustes_solicitados');
   }
 
+  if (searchQuery.trim()) {
+    const q = searchQuery.trim().toLowerCase();
+    filtered = filtered.filter(i => {
+      const client = clientsMap.get(i.cliente_id);
+      const haystack = [
+        client?.empresa, client?.codigo_unico, client?.vertical, client?.nome_responsavel,
+        i.id, i.etapa_nome
+      ].filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(q);
+    });
+  }
+
   // Atualiza contador de ativos no topo da tabela
   if (activeCountEl) {
     activeCountEl.textContent = `${filtered.length} briefs`;
@@ -506,8 +519,11 @@ export function renderTable() {
         <td class="py-3.5 px-3">${statusBadge}</td>
         <td class="py-3.5 px-4 text-right">
           <div class="flex items-center justify-end gap-1.5">
-            <a href="${inst.link_seguro}" target="_blank" class="p-1.5 rounded text-primary hover:bg-surface-container-high transition-colors" title="Abrir Portal do Cliente">
+            <button class="btn-view-brief p-1.5 rounded text-primary hover:bg-surface-container-high transition-colors" data-brief-id="${inst.id}" title="Ver Briefing Completo" type="button">
               <span class="material-symbols-outlined text-base">visibility</span>
+            </button>
+            <a href="${inst.link_seguro}" target="_blank" class="p-1.5 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" title="Abrir Portal do Cliente (link que o cliente vê)">
+              <span class="material-symbols-outlined text-base">open_in_new</span>
             </a>
             <button class="btn-whatsapp-share p-1.5 rounded text-on-surface-variant hover:text-emerald-600 hover:bg-surface-container-high transition-colors" data-client-id="${client.id}" data-brief-id="${inst.id}" title="Copiar Mensagem WhatsApp" type="button">
               <span class="material-symbols-outlined text-base">share</span>
@@ -525,6 +541,16 @@ export function renderTable() {
       if (e.target.closest('button') || e.target.closest('a')) return;
       const id = row.getAttribute('data-brief-id');
       selectBrief(id);
+    });
+  });
+
+  // Ícone de olho: abre direto a tela cheia com o briefing completo
+  tbody.querySelectorAll('.btn-view-brief').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const briefId = btn.getAttribute('data-brief-id');
+      selectBrief(briefId);
+      openExpandedRawModal(briefId);
     });
   });
 
@@ -1066,6 +1092,15 @@ function shareWhatsApp(clientId, briefId) {
 // ============================================================================
 
 function setupEventListeners() {
+  // Busca global (filtra o roster por empresa, código, vertical ou responsável)
+  const searchInput = document.getElementById('global-search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      searchQuery = searchInput.value;
+      renderTable();
+    });
+  }
+
   // Filtros de pílula
   const btnAll = document.getElementById('filter-all');
   const btnSubmitted = document.getElementById('filter-submitted');
@@ -1661,10 +1696,13 @@ export function setupExpandedRawModal() {
         </div>
 
         <!-- Footer -->
-        <div class="pt-4 border-t border-outline-variant flex items-center justify-between shrink-0">
+        <div class="pt-4 border-t border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
           <span id="expanded-raw-footer-info" class="text-xs text-outline font-mono">Protocolo: #BRF-...</span>
+          <div id="expanded-raw-actions" class="flex items-center gap-2 flex-wrap justify-end">
+            <!-- Botões de decisão (Aprovar/Ajustes/Exportar), gerados dinamicamente -->
+          </div>
           <button id="btn-close-expanded-footer" type="button" class="px-4 py-2 rounded-lg bg-surface-container font-label-md text-label-md font-semibold hover:bg-surface-container-high transition-colors">
-            Fechar Visualizador
+            Fechar
           </button>
         </div>
       </div>
@@ -1686,18 +1724,53 @@ export function openExpandedRawModal(briefId) {
   const client = getClientById(instance.cliente_id) || { empresa: 'Cliente', codigo_unico: 'CLI-0000' };
   const raw = instance.respostas_brutas || {};
   const entries = Object.entries(raw);
+  const aindaNaoRespondeu = instance.status === 'enviado' || instance.status === 'rascunho' || instance.status === 'em_preenchimento';
 
   const titleEl = document.getElementById('expanded-raw-title');
   const subtitleEl = document.getElementById('expanded-raw-subtitle');
   const footerEl = document.getElementById('expanded-raw-footer-info');
   const bodyEl = document.getElementById('expanded-raw-body');
+  const actionsEl = document.getElementById('expanded-raw-actions');
 
-  if (titleEl) titleEl.textContent = `Raio-X: ${client.empresa} (${client.codigo_unico})`;
-  if (subtitleEl) subtitleEl.textContent = `${instance.etapa_nome} • Enviado em ${instance.data_resposta ? new Date(instance.data_resposta).toLocaleString('pt-BR') : 'Pendente'}`;
+  if (titleEl) titleEl.textContent = `${client.empresa} (${client.codigo_unico})`;
+  if (subtitleEl) subtitleEl.textContent = `${instance.etapa_nome} • ${instance.data_resposta ? 'Respondido em ' + new Date(instance.data_resposta).toLocaleString('pt-BR') : 'Ainda não respondido'}`;
   if (footerEl) footerEl.textContent = `Identificador do Briefing: ${instance.id} • ${entries.length} campos respondidos`;
 
+  if (actionsEl) {
+    const isApproved = instance.status === 'aprovado_kickoff';
+    actionsEl.innerHTML = aindaNaoRespondeu ? '' : `
+      <button id="btn-expanded-export" type="button" class="px-3 py-2 rounded-lg border border-outline-variant text-on-surface-variant font-label-md text-label-md text-xs font-semibold hover:bg-surface-container transition-colors flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-sm">file_download</span> Exportar MD
+      </button>
+      <button id="btn-expanded-adjust" type="button" class="px-3 py-2 rounded-lg border border-outline-variant text-on-surface-variant font-label-md text-label-md text-xs font-semibold hover:bg-surface-container transition-colors flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-sm">edit_note</span> Pedir Ajustes
+      </button>
+      <button id="btn-expanded-approve" type="button" class="px-3 py-2 rounded-lg ${isApproved ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-primary hover:bg-primary-container'} text-on-primary font-label-md text-label-md text-xs font-semibold transition-colors flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-sm">${isApproved ? 'verified' : 'check_circle'}</span> ${isApproved ? 'Aprovado (Kickoff Ativo)' : 'Aprovar & Gerar Kickoff'}
+      </button>
+    `;
+    const btnExport = document.getElementById('btn-expanded-export');
+    if (btnExport) btnExport.onclick = () => exportBriefingMarkdown(briefId);
+    const btnAdjust = document.getElementById('btn-expanded-adjust');
+    if (btnAdjust) btnAdjust.onclick = () => openAdjustmentsModal(briefId);
+    const btnApprove = document.getElementById('btn-expanded-approve');
+    if (btnApprove) btnApprove.onclick = () => { approveBriefing(briefId); openExpandedRawModal(briefId); };
+  }
+
+  const btnWhatsapp = document.getElementById('btn-expanded-whatsapp');
+  if (btnWhatsapp) btnWhatsapp.onclick = () => shareWhatsApp(instance.cliente_id, briefId);
+
   if (bodyEl) {
-    bodyEl.innerHTML = `
+    bodyEl.innerHTML = aindaNaoRespondeu ? `
+      <div class="flex flex-col items-center justify-center text-center py-16 gap-3">
+        <span class="material-symbols-outlined text-4xl text-outline">hourglass_empty</span>
+        <h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Aguardando resposta do cliente</h4>
+        <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">${client.nome_responsavel} (${client.email}) ainda não preencheu este briefing. Assim que responder, as respostas completas aparecem aqui.</p>
+        <button id="btn-expanded-whatsapp" type="button" class="mt-2 px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-sm">share</span> Copiar Mensagem de Cobrança (WhatsApp)
+        </button>
+      </div>
+    ` : `
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 p-3 bg-surface-container-low rounded-xl border border-outline-variant/60 text-xs">
         <div><strong>Empresa:</strong> ${client.empresa}</div>
         <div><strong>Responsável:</strong> ${client.nome_responsavel} (${client.cargo || 'Gestor'})</div>
