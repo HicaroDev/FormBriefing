@@ -364,61 +364,8 @@
 </div>
 <span class="px-2 py-0.5 text-xs bg-surface-container rounded-md font-semibold text-primary">Q3 Atual</span>
 </div>
-<!-- Progress Bars per Vertical -->
-<div class="space-y-3.5">
-<!-- Item 1 -->
-<div>
-<div class="flex justify-between items-center text-xs mb-1">
-<span class="font-medium text-on-surface flex items-center gap-1.5">
-<span class="w-2.5 h-2.5 rounded-sm bg-primary"></span>
-                    Pilates &amp; Bem-Estar
-                  </span>
-<span class="font-semibold text-on-surface">19 briefs <span class="text-outline font-normal">(40%)</span></span>
-</div>
-<div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full" style="width: 40%"></div>
-</div>
-</div>
-<!-- Item 2 -->
-<div>
-<div class="flex justify-between items-center text-xs mb-1">
-<span class="font-medium text-on-surface flex items-center gap-1.5">
-<span class="w-2.5 h-2.5 rounded-sm bg-primary-container"></span>
-                    Fisioterapia &amp; Reabilitação
-                  </span>
-<span class="font-semibold text-on-surface">14 briefs <span class="text-outline font-normal">(29%)</span></span>
-</div>
-<div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
-<div class="h-full bg-primary-container rounded-full" style="width: 29%"></div>
-</div>
-</div>
-<!-- Item 3 -->
-<div>
-<div class="flex justify-between items-center text-xs mb-1">
-<span class="font-medium text-on-surface flex items-center gap-1.5">
-<span class="w-2.5 h-2.5 rounded-sm bg-tertiary-container"></span>
-                    Eventos &amp; Cúpulas Tech
-                  </span>
-<span class="font-semibold text-on-surface">9 briefs <span class="text-outline font-normal">(19%)</span></span>
-</div>
-<div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
-<div class="h-full bg-tertiary-container rounded-full" style="width: 19%"></div>
-</div>
-</div>
-<!-- Item 4 -->
-<div>
-<div class="flex justify-between items-center text-xs mb-1">
-<span class="font-medium text-on-surface flex items-center gap-1.5">
-<span class="w-2.5 h-2.5 rounded-sm bg-secondary"></span>
-                    Branding &amp; Design Corporativo
-                  </span>
-<span class="font-semibold text-on-surface">6 briefs <span class="text-outline font-normal">(12%)</span></span>
-</div>
-<div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
-<div class="h-full bg-secondary rounded-full" style="width: 12%"></div>
-</div>
-</div>
-</div>
+<!-- Progress Bars per Vertical (populado dinamicamente por dashboard.js) -->
+<div class="space-y-3.5" id="vertical-distribution-list"></div>
 </div>
 <div class="pt-4 mt-4 border-t border-outline-variant/60 flex items-center justify-between text-xs text-on-surface-variant">
 <span>Capacidade da Agência: <strong>82%</strong></span>
@@ -432,49 +379,9 @@
 <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Fluxo Recente</span>
 <h2 class="font-headline-sm text-headline-sm text-on-surface">Atualizações &amp; Disparos do Sistema</h2>
 </div>
-<button class="text-xs font-semibold text-primary hover:text-primary-container transition-colors" type="button">Marcar lidos</button>
+<button id="btn-mark-activity-read" class="text-xs font-semibold text-primary hover:text-primary-container transition-colors" type="button">Marcar lidos</button>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-<!-- Card 1 -->
-<div class="p-3.5 rounded-xl border border-outline-variant/70 bg-surface-container-lowest hover:shadow-xs transition-shadow">
-<div class="flex items-center justify-between text-xs mb-2">
-<span class="px-2 py-0.5 bg-amber-50 text-amber-700 font-semibold rounded text-[10px]">Revisão de Escopo</span>
-<span class="text-outline text-[11px]">há 12 min</span>
-</div>
-<p class="font-label-md text-label-md text-on-surface font-semibold truncate">Lumina Pilates Sanctuary</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] line-clamp-2 mt-1">Briefing submetido com 14 anexos de branding e requisições arquitetônicas 3D.</p>
-<div class="mt-3 pt-2.5 border-t border-outline-variant/50 flex items-center justify-between">
-<span class="text-[11px] font-medium text-primary">Diretor: Carla S.</span>
-<button class="text-xs text-on-surface hover:text-primary font-semibold" type="button">Avaliar →</button>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="p-3.5 rounded-xl border border-outline-variant/70 bg-surface-container-lowest hover:shadow-xs transition-shadow">
-<div class="flex items-center justify-between text-xs mb-2">
-<span class="px-2 py-0.5 bg-blue-50 text-primary font-semibold rounded text-[10px]">Kickoff Marcado</span>
-<span class="text-outline text-[11px]">há 45 min</span>
-</div>
-<p class="font-label-md text-label-md text-on-surface font-semibold truncate">OrthoMovement Institute</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] line-clamp-2 mt-1">Validação clínica e formulário de conformidade médica aprovados integralmente.</p>
-<div class="mt-3 pt-2.5 border-t border-outline-variant/50 flex items-center justify-between">
-<span class="text-[11px] font-medium text-emerald-700 font-semibold">Aprovado p/ Sprint</span>
-<button class="text-xs text-on-surface hover:text-primary font-semibold" type="button">Agenda →</button>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="p-3.5 rounded-xl border border-outline-variant/70 bg-surface-container-lowest hover:shadow-xs transition-shadow">
-<div class="flex items-center justify-between text-xs mb-2">
-<span class="px-2 py-0.5 bg-purple-50 text-purple-700 font-semibold rounded text-[10px]">Aditivo Orçamentário</span>
-<span class="text-outline text-[11px]">há 2h</span>
-</div>
-<p class="font-label-md text-label-md text-on-surface font-semibold truncate">Apex BioTech Summit 2025</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] line-clamp-2 mt-1">Acréscimo de credenciamento biométrico e cenografia para 3.500 participantes.</p>
-<div class="mt-3 pt-2.5 border-t border-outline-variant/50 flex items-center justify-between">
-<span class="text-[11px] font-medium text-outline">Tier Enterprise</span>
-<button class="text-xs text-on-surface hover:text-primary font-semibold" type="button">Detalhes →</button>
-</div>
-</div>
-</div>
+<div id="recent-activity-list" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
 </div>
 </section>
 <!-- MAIN CONTENT SPLIT: Interactive Table + Inspector Drawer -->
@@ -738,13 +645,11 @@
 </div>
 <!-- Table Pagination Footer -->
 <div class="p-3.5 bg-surface-container-lowest border-t border-outline-variant flex items-center justify-between text-xs text-on-surface-variant">
-<span>Mostrando <strong>1-5</strong> de <strong>48</strong> briefings</span>
+<span id="table-pagination-label">Mostrando <strong>0</strong> de <strong>0</strong> briefings</span>
 <div class="flex items-center gap-1">
 <button class="px-2.5 py-1 rounded border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors disabled:opacity-40" disabled="" type="button">Anterior</button>
 <button class="px-2.5 py-1 rounded border border-outline-variant bg-primary text-on-primary font-semibold" type="button">1</button>
-<button class="px-2.5 py-1 rounded border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors" type="button">2</button>
-<button class="px-2.5 py-1 rounded border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors" type="button">3</button>
-<button class="px-2.5 py-1 rounded border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors" type="button">Próximo</button>
+<button class="px-2.5 py-1 rounded border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors disabled:opacity-40" disabled="" type="button">Próximo</button>
 </div>
 </div>
 </div>

@@ -99,6 +99,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 
     renderMetrics();
     renderDistribution();
+    renderRecentActivity();
     setupEventListeners();
     setupModal();
     setupAdjustmentsModal();
@@ -140,6 +141,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 export function refreshDashboardData() {
   renderMetrics();
   renderDistribution();
+  renderRecentActivity();
   renderTable();
   if (selectedBriefId) {
     selectBrief(selectedBriefId, false);
@@ -197,29 +199,124 @@ function updateFormsMenuCounts() {
   });
 }
 
+const VERTICAL_LABELS = {
+  pilates: { nome: 'Pilates & Bem-Estar', cor: 'bg-primary' },
+  physio: { nome: 'Fisioterapia & Reabilitação', cor: 'bg-primary-container' },
+  fisio_pilates: { nome: 'Fisio & Pilates', cor: 'bg-primary-container' },
+  events: { nome: 'Eventos', cor: 'bg-tertiary-container' },
+  universal: { nome: 'Universal / Corporativo', cor: 'bg-secondary' }
+};
+
 function renderDistribution() {
+  const list = document.getElementById('vertical-distribution-list');
+  if (!list) return;
+
   const instances = getBriefingInstances();
   const clients = getClients();
   const clientsMap = new Map(clients.map(c => [c.id, c]));
 
-  const counts = { pilates: 0, physio: 0, events: 0, universal: 0 };
+  const counts = {};
   instances.forEach(inst => {
     const client = clientsMap.get(inst.cliente_id);
     const vert = client ? client.vertical : 'universal';
     counts[vert] = (counts[vert] || 0) + 1;
   });
 
-  const total = instances.length || 1;
-  // Atualiza barras se os elementos existirem
-  const pilatesBar = document.getElementById('bar-pilates');
-  const physioBar = document.getElementById('bar-physio');
-  const eventsBar = document.getElementById('bar-events');
-  const universalBar = document.getElementById('bar-universal');
+  const total = instances.length;
 
-  if (pilatesBar) pilatesBar.style.width = `${Math.round((counts.pilates / total) * 100)}%`;
-  if (physioBar) physioBar.style.width = `${Math.round((counts.physio / total) * 100)}%`;
-  if (eventsBar) eventsBar.style.width = `${Math.round((counts.events / total) * 100)}%`;
-  if (universalBar) universalBar.style.width = `${Math.round((counts.universal / total) * 100)}%`;
+  if (total === 0) {
+    list.innerHTML = `<p class="text-xs text-on-surface-variant">Nenhum briefing cadastrado ainda.</p>`;
+    return;
+  }
+
+  list.innerHTML = Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([vert, count]) => {
+      const info = VERTICAL_LABELS[vert] || { nome: vert, cor: 'bg-outline' };
+      const pct = Math.round((count / total) * 100);
+      return `
+        <div>
+          <div class="flex justify-between items-center text-xs mb-1">
+            <span class="font-medium text-on-surface flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-sm ${info.cor}"></span>
+              ${info.nome}
+            </span>
+            <span class="font-semibold text-on-surface">${count} brief${count === 1 ? '' : 's'} <span class="text-outline font-normal">(${pct}%)</span></span>
+          </div>
+          <div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
+            <div class="h-full ${info.cor} rounded-full" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+}
+
+function timeAgo(isoDate) {
+  if (!isoDate) return '';
+  const diffMs = Date.now() - new Date(isoDate).getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return 'agora mesmo';
+  if (mins < 60) return `há ${mins} min`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `há ${hours}h`;
+  return `há ${Math.floor(hours / 24)}d`;
+}
+
+const STATUS_ACTIVITY_META = {
+  enviado: { label: 'Aguardando Resposta', classe: 'bg-surface-container text-on-surface-variant' },
+  em_preenchimento: { label: 'Em Preenchimento', classe: 'bg-blue-50 text-primary' },
+  submetido: { label: 'Revisão de Escopo', classe: 'bg-amber-50 text-amber-700' },
+  em_revisao: { label: 'Em Revisão', classe: 'bg-amber-50 text-amber-700' },
+  ajustes_solicitados: { label: 'Ajustes Solicitados', classe: 'bg-rose-50 text-rose-700' },
+  aprovado_kickoff: { label: 'Kickoff Aprovado', classe: 'bg-emerald-50 text-emerald-700' }
+};
+
+function renderRecentActivity() {
+  const list = document.getElementById('recent-activity-list');
+  if (!list) return;
+
+  const instances = getBriefingInstances();
+  const clients = getClients();
+  const clientsMap = new Map(clients.map(c => [c.id, c]));
+
+  const recent = [...instances]
+    .sort((a, b) => new Date(b.data_resposta || b.data_envio || 0) - new Date(a.data_resposta || a.data_envio || 0))
+    .slice(0, 3);
+
+  if (recent.length === 0) {
+    list.innerHTML = `<p class="text-xs text-on-surface-variant col-span-3">Nenhuma atividade ainda.</p>`;
+    return;
+  }
+
+  list.innerHTML = recent.map(inst => {
+    const client = clientsMap.get(inst.cliente_id) || { empresa: 'Cliente' };
+    const meta = STATUS_ACTIVITY_META[inst.status] || { label: inst.status, classe: 'bg-surface-container text-on-surface-variant' };
+    const quando = timeAgo(inst.data_resposta || inst.data_envio);
+    const respostasCount = Object.keys(inst.respostas_brutas || {}).length;
+
+    return `
+      <div class="p-3.5 rounded-xl border border-outline-variant/70 bg-surface-container-lowest hover:shadow-xs transition-shadow cursor-pointer" data-activity-brief="${inst.id}">
+        <div class="flex items-center justify-between text-xs mb-2">
+          <span class="px-2 py-0.5 ${meta.classe} font-semibold rounded text-[10px]">${meta.label}</span>
+          <span class="text-outline text-[11px]">${quando}</span>
+        </div>
+        <p class="font-label-md text-label-md text-on-surface font-semibold truncate">${client.empresa}</p>
+        <p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] line-clamp-2 mt-1">${inst.etapa_nome || 'Briefing'} • ${respostasCount} campo(s) respondido(s).</p>
+        <div class="mt-3 pt-2.5 border-t border-outline-variant/50 flex items-center justify-between">
+          <span class="text-[11px] font-medium text-primary">#${inst.id}</span>
+          <button type="button" class="text-xs text-on-surface hover:text-primary font-semibold">Abrir →</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  list.querySelectorAll('[data-activity-brief]').forEach(card => {
+    card.addEventListener('click', () => {
+      currentView = 'briefs';
+      selectBrief(card.getAttribute('data-activity-brief'));
+      document.getElementById('roster-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
 }
 
 // ============================================================================
@@ -274,6 +371,13 @@ export function renderTable() {
   // Atualiza contador de ativos no topo da tabela
   if (activeCountEl) {
     activeCountEl.textContent = `${filtered.length} briefs`;
+  }
+
+  const paginationLabel = document.getElementById('table-pagination-label');
+  if (paginationLabel) {
+    paginationLabel.innerHTML = filtered.length > 0
+      ? `Mostrando <strong>1-${filtered.length}</strong> de <strong>${filtered.length}</strong> briefings`
+      : `Mostrando <strong>0</strong> de <strong>0</strong> briefings`;
   }
 
   if (filtered.length === 0) {
@@ -933,6 +1037,14 @@ function setupEventListeners() {
     btnAi.addEventListener('click', () => openAIGeneratorModal());
   }
 
+  const btnMarkRead = document.getElementById('btn-mark-activity-read');
+  if (btnMarkRead) {
+    btnMarkRead.addEventListener('click', () => {
+      const list = document.getElementById('recent-activity-list');
+      if (list) list.innerHTML = `<p class="text-xs text-on-surface-variant col-span-3">Tudo em dia — nenhuma atividade pendente de leitura.</p>`;
+    });
+  }
+
   // Barra de pesquisa
   const searchInput = document.querySelector('header input[type="search"]');
   if (searchInput) {
@@ -1200,6 +1312,7 @@ function handleCreateClientSubmit() {
 
   renderMetrics();
   renderDistribution();
+  renderRecentActivity();
   renderTable();
   selectBrief(newInstance.id);
 
