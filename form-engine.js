@@ -396,7 +396,7 @@ function renderDynamicFormSections() {
       <section class="bg-surface-container-lowest rounded-2xl border border-outline-variant p-6 sm:p-8 shadow-xs form-section-block">
         <div class="flex items-center gap-3 pb-4 mb-6 border-b border-outline-variant/60">
           <div class="w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center font-bold text-sm">
-            0${sIdx + 1}
+            ${String(sIdx + 1).padStart(2, '0')}
           </div>
           <div>
             <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">${t(secao.titulo)}</h2>
