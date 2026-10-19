@@ -272,18 +272,6 @@ function enforceRoleIsolation() {
       </div>
     `;
   }
-
-  // Atualiza PIN/Código no cabeçalho
-  const pinBadge = document.querySelector('header .bg-surface-container span:last-child');
-  if (pinBadge && activeClient) {
-    pinBadge.textContent = `Código: ${activeClient.codigo_unico}`;
-  }
-
-  // Avatar do cliente
-  const avatarEl = document.querySelector('header .rounded-full.bg-surface-container-high');
-  if (avatarEl && activeClient) {
-    avatarEl.textContent = activeClient.empresa.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-  }
 }
 
 // ============================================================================
@@ -303,6 +291,18 @@ function renderClientHeader() {
   const legalFootnote = document.getElementById('legal-footnote-empresa');
   if (legalFootnote) {
     legalFootnote.textContent = `Conexão criptografada TLS 1.3 • Seus dados estratégicos são de propriedade exclusiva do(a) ${activeClient.empresa}.`;
+  }
+
+  // PIN/Código no badge do cabeçalho (nunca deixar o PIN fake do mockup vazar)
+  const pinBadge = document.querySelector('header .bg-surface-container span:last-child');
+  if (pinBadge) {
+    pinBadge.textContent = `Código: ${activeClient.codigo_unico}`;
+  }
+
+  // Avatar do cliente (iniciais da empresa, nunca as iniciais fake do mockup)
+  const avatarEl = document.querySelector('header .rounded-full.bg-surface-container-high');
+  if (avatarEl) {
+    avatarEl.textContent = activeClient.empresa.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
   }
 
   // Título da etapa do briefing
