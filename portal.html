@@ -163,7 +163,7 @@
 <div class="inline-flex items-center gap-2 px-space-md py-1.5 rounded-full bg-surface-container border border-outline-variant/50 shadow-sm">
 <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
 <span class="font-label-md text-label-md text-on-surface font-medium">
-            Convite exclusivo: <strong class="font-semibold text-primary">Atelier Intake</strong> para <strong class="font-semibold text-on-surface">Lumina Movement / Pilates Studio</strong>
+            Convite exclusivo: <strong class="font-semibold text-primary">Atelier Intake</strong>
 </span>
 </div>
 </div>
@@ -180,7 +180,7 @@
             Bem-vindo ao seu Briefing Estratégico
           </h1>
 <p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto leading-relaxed">
-            Digite o código de 6 dígitos enviado por e-mail ou WhatsApp para liberar o preenchimento seguro do seu questionário.
+            Digite o código de 4 dígitos (após "CLI-") enviado por e-mail ou WhatsApp para liberar o preenchimento seguro do seu questionário.
           </p>
 </div>
 <!-- PIN Verification Cluster -->
@@ -197,12 +197,10 @@
 </div>
 <!-- 6-Box Segmented Inputs -->
 <div class="grid grid-cols-6 gap-2 sm:gap-3" id="pin-container">
-<input aria-label="Dígito 1" autofocus="" class="pin-input w-full h-14 sm:h-16 text-center font-headline-md text-headline-md font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container transition-all" id="pin-1" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text" value="8"/>
-<input aria-label="Dígito 2" class="pin-input w-full h-14 sm:h-16 text-center font-headline-md text-headline-md font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container transition-all" id="pin-2" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text" value="4"/>
-<input aria-label="Dígito 3" class="pin-input w-full h-14 sm:h-16 text-center font-headline-md text-headline-md font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container transition-all" id="pin-3" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text" value="2"/>
+<input aria-label="Dígito 1" autofocus="" class="pin-input w-full h-14 sm:h-16 text-center font-headline-md text-headline-md font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container transition-all" id="pin-1" inputmode="numeric" maxlength="1" pattern="[0-9]*" placeholder="·" type="text"/>
+<input aria-label="Dígito 2" class="pin-input w-full h-14 sm:h-16 text-center font-headline-md text-headline-md font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container transition-all" id="pin-2" inputmode="numeric" maxlength="1" pattern="[0-9]*" placeholder="·" type="text"/>
+<input aria-label="Dígito 3" class="pin-input w-full h-14 sm:h-16 text-center font-headline-md text-headline-md font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container transition-all" id="pin-3" inputmode="numeric" maxlength="1" pattern="[0-9]*" placeholder="·" type="text"/>
 <input aria-label="Dígito 4" class="pin-input w-full h-14 sm:h-16 text-center font-headline-md text-headline-md font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container transition-all" id="pin-4" inputmode="numeric" maxlength="1" pattern="[0-9]*" placeholder="·" type="text"/>
-<input aria-label="Dígito 5" class="pin-input w-full h-14 sm:h-16 text-center font-headline-md text-headline-md font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container transition-all" id="pin-5" inputmode="numeric" maxlength="1" pattern="[0-9]*" placeholder="·" type="text"/>
-<input aria-label="Dígito 6" class="pin-input w-full h-14 sm:h-16 text-center font-headline-md text-headline-md font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container transition-all" id="pin-6" inputmode="numeric" maxlength="1" pattern="[0-9]*" placeholder="·" type="text"/>
 </div>
 </div>
 <!-- Client Context Summary Chip -->
@@ -213,12 +211,9 @@
 <div class="flex-1 min-w-0">
 <p class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-semibold">Briefing Vinculado</p>
 <p class="font-body-sm text-body-sm text-on-surface font-medium truncate">
-                Reformer Studio Launch &amp; Branding <span class="text-secondary font-normal">• Ref: #PLT-2024-08</span>
+                Digite seu código para identificar o briefing
 </p>
 </div>
-<div class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-lowest border border-outline-variant text-[11px] font-label-sm text-primary font-semibold">
-              Pilates Brief
-            </div>
 </div>
 <!-- Primary Submit CTA Button -->
 <button class="w-full h-12 bg-on-surface hover:bg-slate-800 text-surface-container-lowest font-headline-sm text-headline-sm font-semibold rounded-lg shadow-sm transition-all duration-150 flex items-center justify-center gap-2 group active:scale-[0.99] focus:ring-2 focus:ring-primary focus:ring-offset-2" id="submitBtn" type="submit">
@@ -276,55 +271,11 @@
 </div>
 </div>
 </footer>
-<!-- Micro-interactions Script for Segmented Inputs -->
+<!-- Timer visual do código. A lógica real dos campos de PIN (digitação,
+     colar, avanço automático, envio) vive inteiramente em portal-auth.js
+     para não duplicar/conflitar listeners no mesmo input. -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const inputs = Array.from(document.querySelectorAll('.pin-input'));
-      
-      // Focus 4th input as first three have sample filled values
-      if (inputs[3]) {
-        inputs[3].focus();
-        inputs[3].select();
-      }
-
-      inputs.forEach((input, index) => {
-        input.addEventListener('input', (e) => {
-          const value = e.target.value.replace(/[^0-9]/g, '');
-          e.target.value = value;
-          
-          if (value.length >= 1) {
-            e.target.placeholder = '';
-            if (index < inputs.length - 1) {
-              inputs[index + 1].focus();
-              inputs[index + 1].select();
-            }
-          }
-        });
-
-        input.addEventListener('keydown', (e) => {
-          if (e.key === 'Backspace' && !e.target.value && index > 0) {
-            inputs[index - 1].focus();
-            inputs[index - 1].value = '';
-          }
-        });
-
-        input.addEventListener('paste', (e) => {
-          e.preventDefault();
-          const pastedData = (e.clipboardData || window.clipboardData).getData('text').trim();
-          const digits = pastedData.replace(/[^0-9]/g, '').slice(0, inputs.length);
-          
-          digits.split('').forEach((char, i) => {
-            if (inputs[i]) {
-              inputs[i].value = char;
-            }
-          });
-          
-          const nextIndex = Math.min(digits.length, inputs.length - 1);
-          inputs[nextIndex].focus();
-        });
-      });
-
-      // Simple Timer Simulation
       let seconds = 45;
       const countdownEl = document.getElementById('countdown');
       const timer = setInterval(() => {
@@ -337,11 +288,6 @@
         }
       }, 1000);
     });
-
-    // Fallback inline handler
-    function handleAccess() {
-      // Handled by portal-auth.js
-    }
   </script>
   <script type="module" src="/portal-auth.js"></script>
 </body></html>
