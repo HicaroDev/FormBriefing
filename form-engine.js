@@ -56,7 +56,13 @@ const UI_STRINGS = {
     pt: 'Este briefing foi estruturado sob medida para o projeto da <strong>{empresa}</strong>. Suas respostas definem diretamente a direção de arte e a arquitetura técnica antes do kickoff oficial de produção.',
     it: 'Questo briefing è stato strutturato su misura per il progetto di <strong>{empresa}</strong>. Le tue risposte definiscono direttamente la direzione artistica e l\'architettura tecnica prima del kickoff ufficiale di produzione.',
     en: 'This briefing was custom-built for the <strong>{empresa}</strong> project. Your answers directly shape the art direction and technical architecture ahead of the official production kickoff.'
-  }
+  },
+  salvandoAlteracoes: { pt: 'Salvando alterações...', it: 'Salvataggio in corso...', en: 'Saving changes...' },
+  salvoAgora: { pt: 'Salvo automaticamente agora mesmo', it: 'Salvato automaticamente ora', en: 'Auto-saved just now' },
+  respostasSalvas: { pt: 'Suas respostas são salvas automaticamente em tempo real.', it: 'Le tue risposte vengono salvate automaticamente in tempo reale.', en: 'Your answers are saved automatically in real time.' },
+  briefingSubmetidoTravado: { pt: 'Briefing submetido e travado para produção.', it: 'Briefing inviato e bloccato per la produzione.', en: 'Briefing submitted and locked for production.' },
+  submeterBriefing: { pt: 'Submeter Briefing Oficial', it: 'Invia Briefing Ufficiale', en: 'Submit Official Briefing' },
+  protocoloEnviado: { pt: 'Protocolo Enviado: #{id}', it: 'Protocollo Inviato: #{id}', en: 'Protocol Sent: #{id}' }
 };
 
 function getLocale() {
@@ -70,6 +76,7 @@ function setLocale(locale) {
   renderClientHeader();
   renderDynamicFormSections();
   renderLanguageSwitcher();
+  renderActionDock();
 }
 
 /**
@@ -745,7 +752,7 @@ function handleFileAddition(filesList, fieldId) {
 function triggerAutosave() {
   const autosaveSignal = document.querySelector('section.bg-surface-container-lowest .text-on-surface-variant span:last-child');
   if (autosaveSignal) {
-    autosaveSignal.textContent = 'Salvando alterações...';
+    autosaveSignal.textContent = t(UI_STRINGS.salvandoAlteracoes);
   }
 
   clearTimeout(autosaveTimer);
@@ -775,7 +782,7 @@ function triggerAutosave() {
 
       // Atualiza visual do indicador
       if (autosaveSignal) {
-        autosaveSignal.textContent = 'Salvo automaticamente agora mesmo';
+        autosaveSignal.textContent = t(UI_STRINGS.salvoAgora);
       }
 
       // Atualiza barra de progresso no topo (dados reais, não decorativos)
@@ -784,48 +791,47 @@ function triggerAutosave() {
   }, 600);
 }
 
-function setupAutosaveAndDock() {
-  // Ajusta o botão principal de envio no rodapé fixo
-  const submitBtn = document.querySelector('footer button.bg-primary') || document.querySelector('button#submit-briefing-btn');
-  
-  // Se não encontrar o dock flutuante no DOM existente, injeta dock premium
+function renderActionDock() {
   let dock = document.getElementById('client-action-dock');
   if (!dock) {
     dock = document.createElement('div');
     dock.id = 'client-action-dock';
     dock.className = 'fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/90 backdrop-blur-md border-t border-outline-variant py-3.5 px-6 shadow-xl';
-    
-    const isSubmitted = activeInstance?.status === 'submetido' || activeInstance?.status === 'aprovado_kickoff';
-
-    dock.innerHTML = `
-      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div class="flex items-center gap-2 text-xs font-medium text-on-surface-variant">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span id="dock-status-text">${isSubmitted ? 'Briefing submetido e travado para produção.' : 'Suas respostas são salvas automaticamente em tempo real.'}</span>
-        </div>
-        <div class="flex items-center gap-3 w-full sm:w-auto">
-          ${!isSubmitted ? `
-            <button id="btn-submit-final-briefing" type="button" class="w-full sm:w-auto px-6 py-2.5 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95">
-              <span class="material-symbols-outlined text-base">send</span>
-              Submeter Briefing Oficial
-            </button>
-          ` : `
-            <div class="px-5 py-2 bg-emerald-100 text-emerald-800 rounded-xl text-xs font-bold flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-base">verified</span>
-              Protocolo Enviado: #${activeInstance.id}
-            </div>
-          `}
-        </div>
-      </div>
-    `;
-
     document.body.appendChild(dock);
-
-    const btnSubmit = document.getElementById('btn-submit-final-briefing');
-    if (btnSubmit) {
-      btnSubmit.addEventListener('click', handleFinalSubmission);
-    }
   }
+
+  const isSubmitted = activeInstance?.status === 'submetido' || activeInstance?.status === 'aprovado_kickoff';
+
+  dock.innerHTML = `
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2 text-xs font-medium text-on-surface-variant">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="dock-status-text">${isSubmitted ? t(UI_STRINGS.briefingSubmetidoTravado) : t(UI_STRINGS.respostasSalvas)}</span>
+      </div>
+      <div class="flex items-center gap-3 w-full sm:w-auto">
+        ${!isSubmitted ? `
+          <button id="btn-submit-final-briefing" type="button" class="w-full sm:w-auto px-6 py-2.5 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95">
+            <span class="material-symbols-outlined text-base">send</span>
+            ${t(UI_STRINGS.submeterBriefing)}
+          </button>
+        ` : `
+          <div class="px-5 py-2 bg-emerald-100 text-emerald-800 rounded-xl text-xs font-bold flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-base">verified</span>
+            ${t(UI_STRINGS.protocoloEnviado, { id: activeInstance.id })}
+          </div>
+        `}
+      </div>
+    </div>
+  `;
+
+  const btnSubmit = document.getElementById('btn-submit-final-briefing');
+  if (btnSubmit) {
+    btnSubmit.addEventListener('click', handleFinalSubmission);
+  }
+}
+
+function setupAutosaveAndDock() {
+  renderActionDock();
 }
 
 // ============================================================================

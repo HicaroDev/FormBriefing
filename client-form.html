@@ -552,53 +552,8 @@
 </div>
 </div>
 </main>
-<!-- STICKY ACTION DOCK / BOTTOM ACTION BAR -->
-<aside class="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant shadow-lg py-3 px-space-lg">
-<div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-<!-- Autosave State Feedback -->
-<div class="flex items-center gap-3">
-<div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
-<div>
-<span class="font-label-md text-label-md text-on-surface font-semibold block">Rascunho seguro e sincronizado</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Sessão #842-910 atualizada em tempo real</span>
-</div>
-</div>
-<!-- Action Group -->
-<div class="flex items-center gap-3 w-full sm:w-auto justify-end">
-<!-- Salvar Rascunho -->
-<button class="px-4 py-2 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors duration-150 flex items-center gap-1.5" type="button">
-<span class="material-symbols-outlined text-[18px] text-secondary" data-icon="save">save</span>
-<span>Salvar Rascunho</span>
-</button>
-<!-- Concluir e Enviar Briefing -->
-<button class="px-5 py-2.5 rounded-lg bg-on-surface hover:bg-secondary text-white font-label-md text-label-md font-semibold transition-all duration-150 shadow-sm flex items-center gap-2 group" onclick="handleSubmit()" type="button">
-<span>Concluir e Enviar Briefing ao Estúdio</span>
-<span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
-</button>
-</div>
-</div>
-</aside>
-<!-- Lightweight Micro-Interaction Logic -->
-<script>
-    function handleSubmit() {
-      const btn = event.currentTarget;
-      const originalText = btn.innerHTML;
-      btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin" data-icon="sync">sync</span> <span>Transmitindo Briefing Seguro...</span>`;
-      btn.classList.add('opacity-80', 'pointer-events-none');
-      
-      setTimeout(() => {
-        btn.innerHTML = `<span class="material-symbols-outlined text-[18px] text-emerald-400" data-icon="check_circle">check_circle</span> <span>Briefing Recebido com Sucesso!</span>`;
-        btn.classList.remove('opacity-80');
-        btn.classList.add('bg-emerald-800');
-        
-        // Show subtle notification banner
-        const notice = document.createElement('div');
-        notice.className = 'fixed top-4 right-4 bg-on-surface text-white px-4 py-3 rounded-lg shadow-xl text-sm flex items-center gap-2 z-50 animate-bounce';
-        notice.innerHTML = `<span class="material-symbols-outlined text-emerald-400">task_alt</span> Briefing enviado para a diretoria criativa da StudioIntake. Protocolo #BRF-2025-901.`;
-        document.body.appendChild(notice);
-        setTimeout(() => notice.remove(), 4000);
-      }, 1200);
-    }
-  </script>
+<!-- O dock de ações (salvar/enviar) é criado dinamicamente por form-engine.js
+     (setupAutosaveAndDock), que salva de verdade no banco. Removido o
+     mockup estático que só simulava sucesso visualmente sem salvar nada. -->
   <script type="module" src="/form-engine.js"></script>
 </body></html>
