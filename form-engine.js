@@ -153,12 +153,14 @@ export async function initClientPortal() {
     activeClient = getClientByCode(codeParam);
   }
 
-  // Não achou localmente (ex: cliente abrindo o link em outro dispositivo):
-  // busca no banco remoto antes de cair no fallback de demonstração.
-  if ((codeParam && !activeClient) || (briefParam && !activeInstance)) {
+  // Sempre revalida contra o banco remoto quando há parâmetros explícitos
+  // na URL — nunca confia cegamente no cache local. Isso evita que o
+  // cliente veja um estado desatualizado (ex: status "submetido" antigo
+  // quando a agência já aprovou/pediu ajustes em outro dispositivo).
+  if (codeParam || briefParam) {
     const [remoteClient, remoteInstance] = await Promise.all([
-      codeParam && !activeClient ? fetchClientByCodeRemote(codeParam) : Promise.resolve(null),
-      briefParam && !activeInstance ? fetchInstanceByIdRemote(briefParam) : Promise.resolve(null)
+      codeParam ? fetchClientByCodeRemote(codeParam) : Promise.resolve(null),
+      briefParam ? fetchInstanceByIdRemote(briefParam) : Promise.resolve(null)
     ]);
 
     if (remoteClient) {
