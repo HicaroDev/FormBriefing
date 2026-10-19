@@ -826,6 +826,9 @@ function renderActionDock() {
   }
 
   const isSubmitted = activeInstance?.status === 'submetido' || activeInstance?.status === 'aprovado_kickoff';
+  // Edição só pode ser solicitada enquanto está "submetido" aguardando revisão.
+  // Depois que a agência aprova (aprovado_kickoff), fica travado para sempre.
+  const podeSolicitarEdicao = activeInstance?.status === 'submetido';
 
   dock.innerHTML = `
     <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -844,9 +847,11 @@ function renderActionDock() {
             <span class="material-symbols-outlined text-base">verified</span>
             ${t(UI_STRINGS.protocoloEnviado, { id: activeInstance.id })}
           </div>
-          <button id="btn-request-edit" type="button" class="text-xs font-semibold text-primary hover:underline">
-            ${t(UI_STRINGS.quizerEditar)}
-          </button>
+          ${podeSolicitarEdicao ? `
+            <button id="btn-request-edit" type="button" class="text-xs font-semibold text-primary hover:underline">
+              ${t(UI_STRINGS.quizerEditar)}
+            </button>
+          ` : ''}
         `}
       </div>
     </div>
