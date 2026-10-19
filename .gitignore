@@ -6,3 +6,5 @@ dist/
 .env.local
 .envv
 02.md
+
+.vercel

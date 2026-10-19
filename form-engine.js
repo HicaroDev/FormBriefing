@@ -169,12 +169,17 @@ export async function initClientPortal() {
     activeClient = getClientById(activeInstance.cliente_id) || await fetchClientByCodeRemote(codeParam);
   }
 
-  // Se ainda assim não encontrou, usa o primeiro cliente como demonstração
+  // Se ainda assim não encontrou, usa o primeiro cliente disponível (apenas se existir algum)
   if (!activeClient) {
-    activeClient = clients[0];
+    activeClient = clients[0] || null;
   }
-  if (!activeInstance) {
-    activeInstance = instances.find(i => i.cliente_id === activeClient.id) || instances[0];
+  if (!activeInstance && activeClient) {
+    activeInstance = instances.find(i => i.cliente_id === activeClient.id) || instances[0] || null;
+  }
+
+  if (!activeClient || !activeInstance) {
+    renderNoBriefingState();
+    return;
   }
 
   // Resolve o template de perguntas
@@ -212,6 +217,18 @@ export async function initClientPortal() {
 // ============================================================================
 // GATE 4: ISOLAMENTO RIGIDO DE PAPÉIS (ZERO-LEAKAGE)
 // ============================================================================
+
+function renderNoBriefingState() {
+  const main = document.querySelector('main');
+  if (!main) return;
+  main.innerHTML = `
+    <div class="max-w-lg mx-auto mt-20 text-center p-8 rounded-2xl border border-outline-variant bg-surface-container-lowest">
+      <span class="material-symbols-outlined text-4xl text-primary mb-3 block">link_off</span>
+      <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-2">Link inválido ou expirado</h2>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">Não encontramos um briefing para este código. Confira o link recebido ou entre em contato com a agência.</p>
+    </div>
+  `;
+}
 
 function enforceRoleIsolation() {
   // Remove links internos da agência (Dashboard, outros briefs de terceiros)
