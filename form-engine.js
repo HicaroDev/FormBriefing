@@ -129,6 +129,10 @@ export async function initClientPortal() {
   const codeParam = params.get('code') || params.get('pin');
   const briefParam = params.get('brief') || params.get('id');
 
+  // Isolamento de papéis (Gate 4) sempre primeiro — mesmo a tela de "link
+  // inválido" nunca pode expor menus/links internos da agência.
+  enforceRoleIsolation();
+
   // 1. Resolve o cliente e a instância (cache local primeiro)
   let instances = getBriefingInstances();
   let clients = getClients();
@@ -208,8 +212,6 @@ export async function initClientPortal() {
   try { savedLocale = localStorage.getItem('studiointake_locale'); } catch (e) {}
   activeLocale = SUPPORTED_LOCALES.includes(langParam) ? langParam : (SUPPORTED_LOCALES.includes(savedLocale) ? savedLocale : 'pt');
 
-  // 2. Aplica isolamento de papéis (Gate 4)
-  enforceRoleIsolation();
   renderLanguageSwitcher();
 
   // 3. Renderiza cabeçalho de contexto do cliente
@@ -227,6 +229,17 @@ export async function initClientPortal() {
 // ============================================================================
 
 function renderNoBriefingState() {
+  // Limpa qualquer texto/dado de demonstração remanescente no cabeçalho
+  // estático (nome de empresa, título do briefing, stepper fake).
+  const brandSubtext = document.querySelector('header .text-on-surface-variant.flex.items-center');
+  if (brandSubtext) brandSubtext.innerHTML = '';
+
+  const titleH1 = document.querySelector('h1.font-headline-lg');
+  if (titleH1) titleH1.textContent = '';
+
+  const stepperBox = document.querySelector('section.bg-surface-container-lowest .bg-surface-container-low.border');
+  if (stepperBox) stepperBox.remove();
+
   const main = document.querySelector('main');
   if (!main) return;
   main.innerHTML = `
