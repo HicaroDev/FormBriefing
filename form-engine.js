@@ -161,20 +161,28 @@ export async function initClientPortal() {
     }
   }
 
-  // Fallbacks inteligentes se não informou parâmetros
+  // Isolamento Zero-Leakage: se um código ou brief FOI informado na URL mas
+  // não resolveu (nem local, nem remoto), é um link inválido — nunca cair
+  // no fallback de "primeiro cliente disponível", ou vazaríamos os dados de
+  // outro cliente real que por acaso esteja em cache neste navegador.
+  if ((codeParam && !activeClient) || (briefParam && !activeInstance)) {
+    renderNoBriefingState();
+    return;
+  }
+
+  // Fallbacks inteligentes apenas quando NENHUM parâmetro foi informado
   if (!activeInstance && activeClient) {
     const clientBriefs = instances.filter(i => i.cliente_id === activeClient.id);
     activeInstance = clientBriefs[0] || null;
   } else if (activeInstance && !activeClient) {
-    activeClient = getClientById(activeInstance.cliente_id) || await fetchClientByCodeRemote(codeParam);
+    activeClient = getClientById(activeInstance.cliente_id);
   }
 
-  // Se ainda assim não encontrou, usa o primeiro cliente disponível (apenas se existir algum)
-  if (!activeClient) {
-    activeClient = clients[0] || null;
-  }
-  if (!activeInstance && activeClient) {
-    activeInstance = instances.find(i => i.cliente_id === activeClient.id) || instances[0] || null;
+  if (!codeParam && !briefParam) {
+    if (!activeClient) activeClient = clients[0] || null;
+    if (!activeInstance && activeClient) {
+      activeInstance = instances.find(i => i.cliente_id === activeClient.id) || instances[0] || null;
+    }
   }
 
   if (!activeClient || !activeInstance) {
