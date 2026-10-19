@@ -476,6 +476,220 @@ export const SEED_TEMPLATES = [
     ]
   },
   {
+    id: 'tpl-kalea-completo-v1',
+    titulo: { pt: 'Briefing Completo — Kalea Pilates & Fisio', it: 'Briefing Completo — Kalea Pilates & Fisio', en: 'Complete Briefing — Kalea Pilates & Fisio' },
+    vertical: 'fisio_pilates',
+    etapa: 'diagnostico_completo',
+    versao: 1,
+    partes: [
+      { pt: 'Finalização do Site Pilates', it: 'Finalizzazione Sito Pilates', en: 'Pilates Website Finalization' },
+      { pt: 'Diagnóstico Site Fisio', it: 'Diagnosi Sito Fisio', en: 'Fisio Website Diagnosis' },
+      { pt: 'Automação & IA', it: 'Automazione & IA', en: 'Automation & AI' }
+    ],
+    secoes: [
+      {
+        id: 'sec_01', parte: 1,
+        titulo: { pt: '01. Hospedagem & Acesso Atual', it: '01. Hosting & Accesso Attuale', en: '01. Current Hosting & Access' },
+        descricao: { pt: 'Onde o site está hospedado hoje e condições de transferência de acesso.', it: "Dove è ospitato oggi il sito e condizioni per il trasferimento dell'accesso.", en: 'Where the site is currently hosted and conditions for access handover.' },
+        campos: [
+          {
+            id: 'hosting_atual', tipo: 'select',
+            label: { pt: 'Onde o site está hospedado hoje?', it: 'Dove è ospitato oggi il sito?', en: 'Where is the website currently hosted?' },
+            opcoes: [
+              { valor: 'vercel', label: { pt: 'Vercel', it: 'Vercel', en: 'Vercel' } },
+              { valor: 'hostinger', label: { pt: 'Hostinger', it: 'Hostinger', en: 'Hostinger' } },
+              { valor: 'godaddy', label: { pt: 'GoDaddy', it: 'GoDaddy', en: 'GoDaddy' } },
+              { valor: 'wordpress', label: { pt: 'WordPress.com', it: 'WordPress.com', en: 'WordPress.com' } },
+              { valor: 'outro', label: { pt: 'Outro / Não sei', it: 'Altro / Non lo so', en: 'Other / Not sure' } }
+            ]
+          },
+          {
+            id: 'hosting_status', tipo: 'cards_single_select',
+            label: { pt: 'A hospedagem atual está funcionando bem?', it: "L'hosting attuale funziona bene?", en: 'Is the current hosting working well?' },
+            opcoes: [
+              { valor: 'ok', rotulo: { pt: 'Sim, sem problemas', it: 'Sì, senza problemi', en: 'Yes, no issues' }, subtitulo: { pt: 'Tudo estável, sem reclamações.', it: 'Tutto stabile, nessun reclamo.', en: 'Everything stable, no complaints.' } },
+              { valor: 'problemas', rotulo: { pt: 'Tem alguns problemas', it: 'Ci sono alcuni problemi', en: 'There are some issues' }, subtitulo: { pt: 'Lentidão, instabilidade ou erros ocasionais.', it: 'Lentezza, instabilità o errori occasionali.', en: 'Slowness, instability or occasional errors.' } },
+              { valor: 'trocar', rotulo: { pt: 'Quero trocar', it: 'Voglio cambiare', en: 'I want to switch' }, subtitulo: { pt: 'Prefiro migrar para outra hospedagem.', it: "Preferisco migrare verso un altro hosting.", en: 'I prefer to migrate to another host.' } }
+            ]
+          },
+          {
+            id: 'libera_acesso', tipo: 'select',
+            label: { pt: 'Após fechar o contrato, você pode nos passar acesso total (domínio + hospedagem)?', it: "Dopo la firma del contratto, puoi darci accesso completo (dominio + hosting)?", en: 'After signing the contract, can you give us full access (domain + hosting)?' },
+            opcoes: [
+              { valor: 'sim', label: { pt: 'Sim, sem problemas', it: 'Sì, senza problemi', en: 'Yes, no problem' } },
+              { valor: 'verificar', label: { pt: 'Preciso verificar', it: 'Devo verificare', en: 'I need to check' } },
+              { valor: 'nao', label: { pt: 'Prefiro não repassar', it: 'Preferisco non trasferirlo', en: "I'd rather not transfer it" } }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'sec_02', parte: 1,
+        titulo: { pt: '02. Painel de Controle & Autonomia', it: '02. Pannello di Controllo & Autonomia', en: '02. Control Panel & Autonomy' },
+        descricao: { pt: 'Como você prefere editar o site no dia a dia.', it: 'Come preferisci modificare il sito quotidianamente.', en: 'How you prefer to edit the site day-to-day.' },
+        campos: [
+          {
+            id: 'quer_painel', tipo: 'cards_single_select',
+            label: { pt: 'Como você quer editar o site no dia a dia?', it: 'Come vuoi modificare il sito quotidianamente?', en: 'How do you want to edit the site day-to-day?' },
+            opcoes: [
+              { valor: 'painel_visual', rotulo: { pt: 'Painel Visual Simples (sem código)', it: 'Pannello Visuale Semplice (senza codice)', en: 'Simple Visual Panel (no code)' }, subtitulo: { pt: 'Você edita textos e fotos sozinha, sem mexer em código.', it: 'Modifichi testi e foto da sola, senza toccare il codice.', en: 'You edit text and photos yourself, no coding needed.' } },
+              { valor: 'pedir_sempre', rotulo: { pt: 'Prefiro pedir pra vocês sempre', it: 'Preferisco chiedere sempre a voi', en: "I'd rather always ask you" }, subtitulo: { pt: 'Qualquer alteração passa pela nossa equipe.', it: 'Ogni modifica passa dal nostro team.', en: 'Any change goes through our team.' } },
+              { valor: 'nao_precisa', rotulo: { pt: 'Não preciso editar sozinha', it: 'Non ho bisogno di modificare da sola', en: "I don't need to edit it myself" }, subtitulo: { pt: 'O site fica praticamente estático.', it: 'Il sito resta praticamente statico.', en: 'The site stays mostly static.' } }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'sec_03', parte: 1,
+        titulo: { pt: '03. Finalização Técnica', it: '03. Finalizzazione Tecnica', en: '03. Technical Finalization' },
+        descricao: { pt: 'O que falta para o site funcionar 100%.', it: 'Cosa manca perché il sito funzioni al 100%.', en: "What's left for the site to be 100% functional." },
+        campos: [
+          {
+            id: 'desafio_tecnico', tipo: 'textarea', obrigatorio: true,
+            label: { pt: 'O que falta para o site funcionar 100%? (formulários, agenda, pagamento etc.)', it: 'Cosa manca perché il sito funzioni al 100%? (moduli, calendario, pagamenti ecc.)', en: "What's missing for the site to work 100%? (forms, scheduling, payments, etc.)" },
+            placeholder: { pt: 'Descreva em detalhes o que ainda precisa ser resolvido...', it: 'Descrivi in dettaglio cosa deve ancora essere risolto...', en: 'Describe in detail what still needs to be resolved...' }
+          },
+          {
+            id: 'prioridade_chips', tipo: 'chips_multiselect',
+            label: { pt: 'O que é mais urgente finalizar?', it: 'Cosa è più urgente finalizzare?', en: "What's most urgent to finish?" },
+            opcoes: [
+              { valor: 'backend', label: { pt: 'Back-end & Integrações', it: 'Back-end & Integrazioni', en: 'Backend & Integrations' } },
+              { valor: 'visual', label: { pt: 'Refino do HTML/Visual', it: 'Rifinitura HTML/Visuale', en: 'HTML/Visual Refinement' } },
+              { valor: 'banco_dados', label: { pt: 'Banco de Dados', it: 'Database', en: 'Database' } },
+              { valor: 'contato', label: { pt: 'Formulário de Contato', it: 'Modulo di Contatto', en: 'Contact Form' } },
+              { valor: 'agendamento', label: { pt: 'Agendamento Online', it: 'Prenotazione Online', en: 'Online Booking' } }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'sec_04', parte: 1,
+        titulo: { pt: '04. Referências & Anexos', it: '04. Riferimenti & Allegati', en: '04. References & Attachments' },
+        descricao: { pt: 'Prints da hospedagem atual e inspirações visuais.', it: "Screenshot dell'hosting attuale e ispirazioni visive.", en: 'Screenshots of current hosting and visual inspiration.' },
+        campos: [
+          { id: 'anexo_hospedagem', tipo: 'file_upload', label: { pt: 'Print da hospedagem/domínio atual', it: "Screenshot dell'hosting/dominio attuale", en: 'Screenshot of current hosting/domain' }, formatos: ['pdf', 'png', 'jpg'], limiteMB: 20 },
+          { id: 'anexo_inspiracao', tipo: 'file_upload', label: { pt: 'Prints de inspiração (sites que você gosta)', it: 'Screenshot di ispirazione (siti che ti piacciono)', en: 'Inspiration screenshots (sites you like)' }, formatos: ['pdf', 'png', 'jpg', 'zip'], limiteMB: 30 }
+        ]
+      },
+      {
+        id: 'sec_05', parte: 2,
+        titulo: { pt: '05. Situação Atual da Fisio', it: '05. Situazione Attuale della Fisio', en: '05. Fisio Current Situation' },
+        campos: [
+          {
+            id: 'site_atual', tipo: 'select',
+            label: { pt: 'A Fisio já tem site hoje?', it: 'La Fisio ha già un sito oggi?', en: 'Does Fisio already have a website today?' },
+            opcoes: [
+              { valor: 'sim_ok', label: { pt: 'Sim, funcionando bem', it: 'Sì, funziona bene', en: 'Yes, working well' } },
+              { valor: 'sim_desatualizado', label: { pt: 'Sim, mas desatualizado', it: 'Sì, ma obsoleto', en: 'Yes, but outdated' } },
+              { valor: 'nao_tem', label: { pt: 'Não tem site', it: 'Non ha un sito', en: 'No website' } }
+            ]
+          },
+          {
+            id: 'quer_refazer', tipo: 'cards_single_select',
+            label: { pt: 'O que você imagina para o novo site?', it: 'Cosa immagini per il nuovo sito?', en: 'What do you envision for the new site?' },
+            opcoes: [
+              { valor: 'refazer_zero', rotulo: { pt: 'Refazer do zero', it: 'Rifare da zero', en: 'Rebuild from scratch' }, subtitulo: { pt: 'Novo site, nova estrutura e novo visual.', it: 'Nuovo sito, nuova struttura e nuovo look.', en: 'New site, new structure and new look.' } },
+              { valor: 'modernizar', rotulo: { pt: 'Só modernizar o visual', it: 'Solo modernizzare il visual', en: 'Just modernize the look' }, subtitulo: { pt: 'Manter estrutura, atualizar design.', it: 'Mantenere la struttura, aggiornare il design.', en: 'Keep the structure, update the design.' } },
+              { valor: 'manter', rotulo: { pt: 'Manter como está, só ajustar conteúdo', it: "Mantenere così com'è, solo aggiustare i contenuti", en: 'Keep as is, just adjust content' }, subtitulo: { pt: 'Pequenos ajustes pontuais.', it: 'Piccole modifiche puntuali.', en: 'Small targeted tweaks.' } }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'sec_06', parte: 2,
+        titulo: { pt: '06. Objetivo & Conteúdo da Fisio', it: '06. Obiettivo & Contenuti della Fisio', en: '06. Fisio Goal & Content' },
+        campos: [
+          {
+            id: 'objetivo_central', tipo: 'textarea', obrigatorio: true,
+            label: { pt: 'Qual o principal objetivo do site da Fisio?', it: 'Qual è l\'obiettivo principale del sito della Fisio?', en: 'What is the main goal of the Fisio website?' },
+            placeholder: { pt: 'Ex: atrair pacientes, mostrar especialidades, agendamento online...', it: 'Es: attirare pazienti, mostrare le specialità, prenotazione online...', en: 'E.g.: attract patients, showcase specialties, online booking...' }
+          },
+          {
+            id: 'paginas_chips', tipo: 'chips_multiselect',
+            label: { pt: 'Quais páginas/seções são essenciais?', it: 'Quali pagine/sezioni sono essenziali?', en: 'Which pages/sections are essential?' },
+            opcoes: [
+              { valor: 'sobre', label: { pt: 'Sobre a Clínica', it: 'Chi Siamo', en: 'About the Clinic' } },
+              { valor: 'especialidades', label: { pt: 'Especialidades/Tratamentos', it: 'Specialità/Trattamenti', en: 'Specialties/Treatments' } },
+              { valor: 'equipe', label: { pt: 'Equipe', it: 'Il Nostro Team', en: 'Team' } },
+              { valor: 'agendamento', label: { pt: 'Agendamento Online', it: 'Prenotazione Online', en: 'Online Booking' } },
+              { valor: 'blog', label: { pt: 'Blog/Conteúdo', it: 'Blog/Contenuti', en: 'Blog/Content' } },
+              { valor: 'depoimentos', label: { pt: 'Depoimentos', it: 'Testimonianze', en: 'Testimonials' } }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'sec_07', parte: 2,
+        titulo: { pt: '07. Anexos da Fisio', it: '07. Allegati della Fisio', en: '07. Fisio Attachments' },
+        campos: [
+          { id: 'anexo_fisio', tipo: 'file_upload', label: { pt: 'Print do site atual da Fisio (se tiver) ou referências', it: "Screenshot del sito attuale della Fisio (se esiste) o riferimenti", en: "Screenshot of Fisio's current site (if any) or references" }, formatos: ['pdf', 'png', 'jpg', 'zip'], limiteMB: 30 }
+        ]
+      },
+      {
+        id: 'sec_08', parte: 3,
+        titulo: { pt: '08. Redes Sociais', it: '08. Social Media', en: '08. Social Media' },
+        campos: [
+          {
+            id: 'redes_atuais', tipo: 'chips_multiselect',
+            label: { pt: 'Quais redes sociais vocês usam hoje?', it: 'Quali social media usate oggi?', en: 'Which social media do you use today?' },
+            opcoes: [
+              { valor: 'instagram', label: { pt: 'Instagram', it: 'Instagram', en: 'Instagram' } },
+              { valor: 'facebook', label: { pt: 'Facebook', it: 'Facebook', en: 'Facebook' } },
+              { valor: 'tiktok', label: { pt: 'TikTok', it: 'TikTok', en: 'TikTok' } },
+              { valor: 'whatsapp', label: { pt: 'WhatsApp Business', it: 'WhatsApp Business', en: 'WhatsApp Business' } },
+              { valor: 'nenhuma', label: { pt: 'Nenhuma ainda', it: 'Nessuno ancora', en: 'None yet' } }
+            ]
+          },
+          {
+            id: 'quer_automacao_posts', tipo: 'cards_single_select',
+            label: { pt: 'Quer que a gente automatize as postagens?', it: 'Vuoi che automatizziamo i post?', en: 'Do you want us to automate posts?' },
+            opcoes: [
+              { valor: 'sim_auto', rotulo: { pt: 'Sim, postagens automáticas', it: 'Sì, post automatici', en: 'Yes, automatic posts' }, subtitulo: { pt: 'A IA cria e publica por você.', it: "L'IA crea e pubblica per te.", en: 'AI creates and publishes for you.' } },
+              { valor: 'sugestoes', rotulo: { pt: 'Só quero sugestões, eu posto', it: 'Voglio solo suggerimenti, pubblico io', en: "Just suggestions, I'll post" }, subtitulo: { pt: 'Você recebe ideias prontas.', it: 'Ricevi idee già pronte.', en: 'You get ready-made ideas.' } },
+              { valor: 'nao_ainda', rotulo: { pt: 'Não, por enquanto não', it: 'No, per ora no', en: 'No, not for now' } }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'sec_09', parte: 3,
+        titulo: { pt: '09. Atendimento com IA', it: '09. Assistenza con IA', en: '09. AI-Powered Support' },
+        campos: [
+          {
+            id: 'quer_agente_ia', tipo: 'cards_single_select',
+            label: { pt: 'Quer um agente de IA conversando com clientes?', it: 'Vuoi un agente IA che parli con i clienti?', en: 'Do you want an AI agent talking to clients?' },
+            opcoes: [
+              { valor: 'site_instagram', rotulo: { pt: 'Sim, no site e no Instagram', it: 'Sì, sul sito e su Instagram', en: 'Yes, on the site and Instagram' } },
+              { valor: 'so_site', rotulo: { pt: 'Só no site', it: 'Solo sul sito', en: 'Only on the site' } },
+              { valor: 'so_whatsapp', rotulo: { pt: 'Só no WhatsApp', it: 'Solo su WhatsApp', en: 'Only on WhatsApp' } }
+            ]
+          },
+          {
+            id: 'objetivo_ia', tipo: 'textarea',
+            label: { pt: 'O que você gostaria que esse agente de IA fizesse?', it: 'Cosa vorresti che questo agente IA facesse?', en: 'What would you like this AI agent to do?' },
+            placeholder: { pt: 'Ex: responder dúvidas, agendar aulas/consultas, qualificar leads...', it: 'Es: rispondere a domande, prenotare lezioni/visite, qualificare i contatti...', en: 'E.g.: answer questions, book classes/appointments, qualify leads...' }
+          }
+        ]
+      },
+      {
+        id: 'sec_10', parte: 3,
+        titulo: { pt: '10. Performance & Marketing', it: '10. Performance & Marketing', en: '10. Performance & Marketing' },
+        campos: [
+          {
+            id: 'prioridade_marketing', tipo: 'chips_multiselect',
+            label: { pt: 'Qual sua maior prioridade de marketing hoje?', it: 'Qual è la tua priorità di marketing principale oggi?', en: "What's your top marketing priority today?" },
+            opcoes: [
+              { valor: 'seguidores', label: { pt: 'Mais seguidores', it: 'Più follower', en: 'More followers' } },
+              { valor: 'agendamentos', label: { pt: 'Mais agendamentos', it: 'Più prenotazioni', en: 'More bookings' } },
+              { valor: 'engajamento', label: { pt: 'Mais engajamento', it: 'Più engagement', en: 'More engagement' } },
+              { valor: 'autoridade', label: { pt: 'Construir autoridade/marca', it: 'Costruire autorità/brand', en: 'Build authority/brand' } }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'tpl-universal-v1',
     titulo: 'BriefOS — Diagnóstico Estratégico Universal de Negócios',
     vertical: 'universal',

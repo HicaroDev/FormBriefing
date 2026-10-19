@@ -305,6 +305,47 @@ function renderClientHeader() {
       introCard.insertAdjacentHTML('beforeend', alertHtml);
     }
   }
+
+  renderProgressStepper();
+}
+
+/**
+ * Calcula e renderiza a barra/estepper de progresso com dados reais do
+ * template ativo — nunca o texto fixo "Etapa 1 de 4 • 25%" herdado do
+ * mockup estático.
+ */
+function renderProgressStepper() {
+  if (!activeTemplate) return;
+
+  const totalFields = activeTemplate.secoes.reduce((acc, s) => acc + s.campos.length, 0);
+  const filledCount = Object.keys(formAnswers).filter(k => {
+    const v = formAnswers[k];
+    return Array.isArray(v) ? v.length > 0 : (v !== undefined && v !== null && String(v).length > 0);
+  }).length;
+  const percent = totalFields > 0 ? Math.min(100, Math.round((filledCount / totalFields) * 100)) : 0;
+
+  const stepLabels = Array.isArray(activeTemplate.partes) && activeTemplate.partes.length > 0
+    ? activeTemplate.partes.map(p => t(p))
+    : activeTemplate.secoes.map(s => t(s.titulo));
+  const totalSteps = stepLabels.length;
+
+  const bar = document.querySelector('section.bg-surface-container-lowest .bg-primary.h-2');
+  if (bar) bar.style.width = `${percent}%`;
+
+  const percentLabel = document.querySelector('section.bg-surface-container-lowest .text-primary.font-semibold');
+  if (percentLabel) {
+    percentLabel.textContent = `${percent}% ${t({ pt: 'Concluído', it: 'Completato', en: 'Completed' })}`;
+  }
+
+  const stepsRow = percentLabel?.closest('.bg-surface-container-low')?.querySelector('.mt-2.flex.justify-between');
+  if (stepsRow) {
+    stepsRow.innerHTML = stepLabels.map((label, i) => `<span>${i + 1}. ${label}</span>`).join('');
+  }
+
+  const etaLabel = document.querySelector('section.bg-surface-container-lowest .text-on-surface-variant');
+  if (etaLabel && etaLabel.textContent.includes('restantes')) {
+    etaLabel.textContent = `${totalSteps} ${t({ pt: totalSteps === 1 ? 'parte' : 'partes', it: 'parti', en: 'parts' })}`;
+  }
 }
 
 // ============================================================================
@@ -332,8 +373,26 @@ function renderDynamicFormSections() {
 
   const isSubmitted = activeInstance?.status === 'submetido' || activeInstance?.status === 'aprovado_kickoff';
 
+  const partes = activeTemplate.partes;
+  let lastParte = null;
+
   formContainer.innerHTML = activeTemplate.secoes.map((secao, sIdx) => {
+    let dividerHtml = '';
+    if (partes && secao.parte && secao.parte !== lastParte) {
+      lastParte = secao.parte;
+      dividerHtml = `
+        <div class="flex items-center gap-3 pt-2 ${sIdx > 0 ? 'mt-2' : ''}">
+          <span class="px-3 py-1 rounded-full bg-primary text-on-primary text-xs font-bold tracking-wide uppercase">
+            ${t({ pt: 'Parte', it: 'Parte', en: 'Part' })} ${secao.parte} ${t({ pt: 'de', it: 'di', en: 'of' })} ${partes.length}
+          </span>
+          <span class="font-headline-sm text-headline-sm font-bold text-on-surface">${t(partes[secao.parte - 1])}</span>
+          <div class="flex-1 h-px bg-outline-variant"></div>
+        </div>
+      `;
+    }
+
     return `
+      ${dividerHtml}
       <section class="bg-surface-container-lowest rounded-2xl border border-outline-variant p-6 sm:p-8 shadow-xs form-section-block">
         <div class="flex items-center gap-3 pb-4 mb-6 border-b border-outline-variant/60">
           <div class="w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center font-bold text-sm">
@@ -698,20 +757,10 @@ function triggerAutosave() {
         autosaveSignal.textContent = 'Salvo automaticamente agora mesmo';
       }
 
-      // Atualiza barra de progresso no topo
-      updateTopProgressBar(progressPercent);
+      // Atualiza barra de progresso no topo (dados reais, não decorativos)
+      renderProgressStepper();
     }
   }, 600);
-}
-
-function updateTopProgressBar(percent) {
-  const bar = document.querySelector('section.bg-surface-container-lowest .bg-primary.h-2');
-  if (bar) bar.style.width = `${percent}%`;
-
-  const percentLabel = document.querySelector('section.bg-surface-container-lowest .text-primary.font-semibold');
-  if (percentLabel) {
-    percentLabel.textContent = `Progresso do Briefing • ${percent}% Concluído`;
-  }
 }
 
 function setupAutosaveAndDock() {
