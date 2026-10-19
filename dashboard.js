@@ -177,6 +177,24 @@ function renderMetrics() {
   if (metricReview) metricReview.textContent = metrics.review;
   if (metricReady) metricReady.textContent = metrics.ready;
   if (metricDrafts) metricDrafts.textContent = metrics.drafts;
+
+  updateFormsMenuCounts();
+}
+
+/** Atualiza os contadores do submenu lateral "Formulários". */
+function updateFormsMenuCounts() {
+  const instances = getBriefingInstances();
+  const counts = {
+    open: instances.filter(i => i.status === 'enviado' || i.status === 'rascunho').length,
+    processing: instances.filter(i => i.status === 'em_preenchimento' || i.status === 'ajustes_solicitados').length,
+    submitted: instances.filter(i => i.status === 'submetido' || i.status === 'em_revisao').length,
+    ready: instances.filter(i => i.status === 'aprovado_kickoff').length
+  };
+
+  Object.entries(counts).forEach(([key, value]) => {
+    const el = document.getElementById(`count-form-${key}`);
+    if (el) el.textContent = value > 0 ? value : '';
+  });
 }
 
 function renderDistribution() {
@@ -247,6 +265,10 @@ export function renderTable() {
     filtered = instances.filter(i => i.status === 'em_revisao');
   } else if (currentFilter === 'ready') {
     filtered = instances.filter(i => i.status === 'aprovado_kickoff');
+  } else if (currentFilter === 'open') {
+    filtered = instances.filter(i => i.status === 'enviado' || i.status === 'rascunho');
+  } else if (currentFilter === 'processing') {
+    filtered = instances.filter(i => i.status === 'em_preenchimento' || i.status === 'ajustes_solicitados');
   }
 
   // Atualiza contador de ativos no topo da tabela
@@ -865,6 +887,30 @@ function setupEventListeners() {
       renderTable();
     });
   }
+
+  // Menu lateral "Formulários" (Aberto / Em Processo / Respondidos / Arquivados)
+  const navFormsToggle = document.getElementById('nav-forms-toggle');
+  const navFormsSubmenu = document.getElementById('nav-forms-submenu');
+  const navFormsChevron = document.getElementById('nav-forms-chevron');
+  if (navFormsToggle && navFormsSubmenu) {
+    navFormsToggle.addEventListener('click', () => {
+      const willOpen = navFormsSubmenu.classList.contains('hidden');
+      navFormsSubmenu.classList.toggle('hidden', !willOpen);
+      if (navFormsChevron) navFormsChevron.style.transform = willOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+    });
+  }
+
+  document.querySelectorAll('.nav-forms-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const filter = item.getAttribute('data-form-filter');
+      setFilter(filter, null);
+      document.querySelectorAll('.nav-forms-item').forEach(i => {
+        i.classList.remove('text-primary', 'bg-surface-container-low', 'font-semibold');
+      });
+      item.classList.add('text-primary', 'bg-surface-container-low', 'font-semibold');
+    });
+  });
 
   // Botões "New Brief" (no topo e no sub-header)
   const newBriefBtn = document.querySelector('header button.bg-on-surface');
