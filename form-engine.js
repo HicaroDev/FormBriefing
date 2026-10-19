@@ -62,7 +62,8 @@ const UI_STRINGS = {
   respostasSalvas: { pt: 'Suas respostas são salvas automaticamente em tempo real.', it: 'Le tue risposte vengono salvate automaticamente in tempo reale.', en: 'Your answers are saved automatically in real time.' },
   briefingSubmetidoTravado: { pt: 'Briefing submetido e travado para produção.', it: 'Briefing inviato e bloccato per la produzione.', en: 'Briefing submitted and locked for production.' },
   submeterBriefing: { pt: 'Submeter Briefing Oficial', it: 'Invia Briefing Ufficiale', en: 'Submit Official Briefing' },
-  protocoloEnviado: { pt: 'Protocolo Enviado: #{id}', it: 'Protocollo Inviato: #{id}', en: 'Protocol Sent: #{id}' }
+  protocoloEnviado: { pt: 'Protocolo Enviado: #{id}', it: 'Protocollo Inviato: #{id}', en: 'Protocol Sent: #{id}' },
+  quizerEditar: { pt: 'Quer editar sua resposta?', it: 'Vuoi modificare la tua risposta?', en: 'Want to edit your answer?' }
 };
 
 function getLocale() {
@@ -843,6 +844,9 @@ function renderActionDock() {
             <span class="material-symbols-outlined text-base">verified</span>
             ${t(UI_STRINGS.protocoloEnviado, { id: activeInstance.id })}
           </div>
+          <button id="btn-request-edit" type="button" class="text-xs font-semibold text-primary hover:underline">
+            ${t(UI_STRINGS.quizerEditar)}
+          </button>
         `}
       </div>
     </div>
@@ -852,6 +856,73 @@ function renderActionDock() {
   if (btnSubmit) {
     btnSubmit.addEventListener('click', handleFinalSubmission);
   }
+
+  const btnRequestEdit = document.getElementById('btn-request-edit');
+  if (btnRequestEdit) {
+    btnRequestEdit.addEventListener('click', openEditUnlockModal);
+  }
+}
+
+const EDIT_UNLOCK_STRINGS = {
+  titulo: { pt: 'Confirmar identidade para editar', it: 'Conferma identità per modificare', en: 'Confirm identity to edit' },
+  descricao: {
+    pt: 'Para sua segurança, confirme o e-mail usado no envio original para liberar a edição.',
+    it: 'Per la tua sicurezza, conferma l\'email usata nell\'invio originale per sbloccare la modifica.',
+    en: 'For your security, confirm the email used in the original submission to unlock editing.'
+  },
+  emailLabel: { pt: 'E-mail', it: 'Email', en: 'Email' },
+  cancelar: { pt: 'Cancelar', it: 'Annulla', en: 'Cancel' },
+  liberar: { pt: 'Liberar Edição', it: 'Sblocca Modifica', en: 'Unlock Editing' },
+  erroNaoBate: { pt: 'E-mail não confere com o do envio original.', it: 'L\'email non corrisponde a quella dell\'invio originale.', en: 'Email does not match the original submission.' }
+};
+
+function openEditUnlockModal() {
+  const existing = document.getElementById('edit-unlock-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'edit-unlock-modal';
+  modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4';
+  modal.innerHTML = `
+    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-xl p-6 max-w-sm w-full">
+      <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-1.5">${t(EDIT_UNLOCK_STRINGS.titulo)}</h3>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">${t(EDIT_UNLOCK_STRINGS.descricao)}</p>
+      <label class="font-label-md text-label-md text-on-surface font-semibold block mb-1" for="edit-unlock-email">${t(EDIT_UNLOCK_STRINGS.emailLabel)}</label>
+      <input type="email" id="edit-unlock-email" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md">
+      <p id="edit-unlock-error" class="text-rose-600 text-xs mt-1.5 hidden">${t(EDIT_UNLOCK_STRINGS.erroNaoBate)}</p>
+      <div class="flex items-center justify-end gap-2 mt-4">
+        <button type="button" id="edit-unlock-cancel" class="px-4 py-2 rounded-lg border border-outline-variant text-on-surface text-label-md font-semibold">${t(EDIT_UNLOCK_STRINGS.cancelar)}</button>
+        <button type="button" id="edit-unlock-ok" class="px-5 py-2 rounded-lg bg-primary text-on-primary text-label-md font-semibold">${t(EDIT_UNLOCK_STRINGS.liberar)}</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  document.getElementById('edit-unlock-cancel').addEventListener('click', () => modal.remove());
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+
+  document.getElementById('edit-unlock-ok').addEventListener('click', () => {
+    const emailDigitado = document.getElementById('edit-unlock-email').value.trim().toLowerCase();
+    const emailOriginal = (formAnswers.__confirmado_email || '').trim().toLowerCase();
+    const errorEl = document.getElementById('edit-unlock-error');
+
+    if (!emailDigitado || !emailOriginal || emailDigitado !== emailOriginal) {
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    modal.remove();
+    unlockForEditing();
+  });
+}
+
+function unlockForEditing() {
+  const novoStatus = 'em_preenchimento';
+  updateBriefingInstance(activeInstance.id, { status: novoStatus });
+  patchInstanceRemote({ id: activeInstance.id, status: novoStatus });
+  activeInstance.status = novoStatus;
+  renderDynamicFormSections();
+  renderActionDock();
 }
 
 function setupAutosaveAndDock() {
