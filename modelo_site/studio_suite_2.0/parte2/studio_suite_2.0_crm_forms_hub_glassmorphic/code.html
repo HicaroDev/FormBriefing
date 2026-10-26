@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Studio Suite 2.0 - CRM &amp; Forms Hub</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons for UI symbols -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#f97316',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              sky: '#0284c7'
+            }
+          },
+          boxShadow: {
+            'glass': '0 20px 50px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05)',
+            'glass-subtle': '0 8px 30px rgba(0, 0, 0, 0.06)',
+            'glow-orange': '0 10px 25px -5px rgba(249, 115, 22, 0.35)',
+            'glow-emerald': '0 10px 25px -5px rgba(16, 185, 129, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Glassmorphism Styles matching SCREEN_2 -->
+<style data-purpose="glassmorphic-effects">
+    body {
+      background-color: #d1cdc7;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(245, 235, 225, 0.8) 0%, transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(230, 215, 200, 0.7) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(215, 205, 195, 0.9) 0%, transparent 60%),
+        linear-gradient(135deg, #e7e2dc 0%, #cfc8bf 50%, #b8af9f 100%);
+      min-height: 100vh;
+      color: #1e293b;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .spatial-glass-panel {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12),
+                  0 0 0 1px rgba(255, 255, 255, 0.7) inset,
+                  0 8px 24px -4px rgba(0, 0, 0, 0.04);
+    }
+
+    .spatial-card-subtle {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 10px 25px -5px rgba(20, 20, 30, 0.05),
+                  0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    }
+
+    .spatial-dock {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1),
+                  0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+    }
+
+    .spatial-browser-bar {
+      background: rgba(45, 52, 65, 0.45);
+      backdrop-filter: blur(30px) saturate(190%);
+      -webkit-backdrop-filter: blur(30px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.25);
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.25);
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-5 md:p-8 flex flex-col items-center justify-start min-h-screen relative font-sans selection:bg-orange-500 selection:text-white">
+<!-- BEGIN: Ambient Background Lighting Elements -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0" data-purpose="ambient-lighting">
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-amber-200/40 rounded-full blur-3xl"></div>
+<div class="absolute top-1/3 -right-20 w-[450px] h-[450px] bg-orange-200/30 rounded-full blur-[100px]"></div>
+<div class="absolute -bottom-20 left-1/4 w-[500px] h-[500px] bg-sky-100/40 rounded-full blur-[120px]"></div>
+</div>
+<!-- END: Ambient Background Lighting Elements -->
+<!-- BEGIN: VisionOS Top Floating Control Bar -->
+<header class="w-full max-w-[1440px] mb-5 z-20 flex justify-center">
+<div class="spatial-browser-bar text-white px-5 py-2.5 rounded-full flex items-center justify-between w-full max-w-3xl text-xs sm:text-sm font-medium tracking-wide">
+<!-- Controls -->
+<div class="flex items-center gap-2 text-slate-300">
+<button aria-label="Visualização em abas" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" type="button">
+<i class="fa-regular fa-clone text-xs"></i>
+</button>
+<button aria-label="Voltar" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" type="button">
+<i class="fa-solid fa-chevron-left text-[10px]"></i>
+</button>
+<button aria-label="Avançar" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-slate-400" type="button">
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</button>
+<button aria-label="Tipografia" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 hidden sm:flex items-center justify-center transition" type="button">
+<span class="text-[11px] font-semibold">aA</span>
+</button>
+</div>
+<!-- Domain / URL Pill Badge -->
+<div class="flex items-center gap-2 bg-black/25 px-4 py-1.5 rounded-full border border-white/15 text-slate-200">
+<span class="w-2 h-2 rounded-full bg-emerald-400 shadow-sm animate-pulse"></span>
+<span class="text-xs tracking-wider font-mono">studiosuite.app/crm-forms</span>
+<button aria-label="Atualizar dados" class="ml-1 text-slate-400 hover:text-white transition" type="button">
+<i class="fa-solid fa-arrow-rotate-right text-[10px]"></i>
+</button>
+</div>
+<!-- Action Utilities -->
+<div class="flex items-center gap-2 text-slate-300">
+<button aria-label="Compartilhar painel" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" type="button">
+<i class="fa-solid fa-arrow-up-from-bracket text-xs"></i>
+</button>
+<button aria-label="Nova ação rápida" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" type="button">
+<i class="fa-solid fa-plus text-xs"></i>
+</button>
+<button aria-label="Painéis abertos" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" type="button">
+<i class="fa-regular fa-square text-xs"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- END: VisionOS Top Floating Control Bar -->
+<!-- BEGIN: Master Spatial Glass Workspace Container -->
+<main class="w-full max-w-[1440px] flex items-start gap-4 sm:gap-6 z-10 relative">
+<!-- BEGIN: Left Vertical Floating Navigation Dock -->
+<aside aria-label="Navegação Principal" class="spatial-dock rounded-[32px] p-2.5 sm:p-3 flex flex-col items-center justify-between min-h-[820px] hidden md:flex sticky top-6 shadow-xl">
+<!-- Top Brand & Nav Icons -->
+<div class="flex flex-col items-center gap-6">
+<div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-white shadow-glow-orange cursor-pointer hover:scale-105 transition-transform" title="Studio Suite Hub">
+<i class="fa-solid fa-bolt-lightning text-lg"></i>
+</div>
+<nav class="flex flex-col items-center gap-3">
+<!-- Active CRM Leads Tab -->
+<button class="w-11 h-11 rounded-2xl bg-orange-500 text-white flex items-center justify-center shadow-md shadow-orange-500/30 transition relative" title="CRM Leads &amp; Funil" type="button">
+<i class="fa-solid fa-filter text-base"></i>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-slate-900 text-[9px] font-bold text-white rounded-full flex items-center justify-center border border-white">18</span>
+</button>
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Forms Hub &amp; Templates" type="button">
+<i class="fa-regular fa-clipboard text-base"></i>
+</button>
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Projetos &amp; Entregas" type="button">
+<i class="fa-solid fa-person-running text-base"></i>
+</button>
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Métricas &amp; Conversão" type="button">
+<i class="fa-solid fa-chart-pie text-base"></i>
+</button>
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Diretoria &amp; Squads" type="button">
+<i class="fa-solid fa-user-group text-base"></i>
+</button>
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Configurações &amp; Segurança" type="button">
+<i class="fa-solid fa-gear text-base"></i>
+</button>
+</nav>
+</div>
+<!-- Bottom Controls -->
+<div class="flex flex-col items-center gap-2 pt-4 border-t border-slate-300/40 w-full">
+<button class="w-9 h-9 rounded-full bg-white text-amber-500 shadow-sm flex items-center justify-center" title="Tema Claro Ativo" type="button">
+<i class="fa-solid fa-sun text-sm"></i>
+</button>
+<button class="w-9 h-9 rounded-full text-slate-500 hover:text-slate-800 flex items-center justify-center transition" title="Alternar para Modo Noite" type="button">
+<i class="fa-solid fa-moon text-xs"></i>
+</button>
+</div>
+</aside>
+<!-- END: Left Vertical Floating Navigation Dock -->
+<!-- BEGIN: Central Glassmorphism Workspace Canvas -->
+<div class="spatial-glass-panel rounded-[36px] w-full p-4 sm:p-7 md:p-8 flex flex-col gap-6 backdrop-blur-3xl shadow-2xl overflow-hidden">
+<!-- BEGIN: Header & Global Controls -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2">
+<!-- Executive Greeting & Subhead -->
+<div>
+<div class="flex items-center gap-2.5">
+<h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Bom dia, Hicaro Duarte</h1>
+<span class="text-2xl">👋</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-orange-600 bg-orange-100/80 px-2.5 py-0.5 rounded-full border border-orange-200/60 ml-1">Diretoria Executiva</span>
+</div>
+<p class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Pipeline Comercial &amp; Envio de Briefings Inteligentes com autenticação por PIN seguro</p>
+</div>
+<!-- Integrated Search & Quick Actions -->
+<div class="flex items-center gap-3">
+<div class="relative min-w-[260px] sm:min-w-[300px]">
+<i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+<input class="w-full bg-white/75 focus:bg-white text-slate-800 placeholder-slate-400 text-xs sm:text-sm pl-10 pr-10 py-2.5 rounded-full border border-white/80 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 outline-none transition shadow-sm" placeholder="Buscar leads, clientes, PINs..." type="text"/>
+<span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">⌘K</span>
+</div>
+<button class="px-4 py-2.5 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-glow-orange transition active:scale-[0.98]" type="button">
+<i class="fa-solid fa-plus text-xs"></i>
+<span>+ Novo Lead / Deal</span>
+</button>
+<button aria-label="Notificações" class="w-10 h-10 rounded-full bg-white/75 hover:bg-white text-slate-600 hover:text-orange-500 flex items-center justify-center border border-white transition shadow-sm relative" type="button">
+<i class="fa-regular fa-bell text-sm"></i>
+<span class="w-2 h-2 rounded-full bg-orange-500 absolute top-2 right-2.5 ring-2 ring-white"></span>
+</button>
+</div>
+</div>
+<!-- END: Header & Global Controls -->
+<!-- BEGIN: 4 High-Level Metric Tiles (Preserved Data) -->
+<section aria-label="Métricas do Funil" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<!-- Metric 1: Pipeline Total -->
+<div class="spatial-card-subtle rounded-3xl p-5 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Pipeline Total</span>
+<div class="w-7 h-7 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs">
+<i class="fa-solid fa-coins"></i>
+</div>
+</div>
+<!-- Sparkline simulation in orange tone -->
+<div class="my-3 flex items-end justify-between h-10 gap-1.5 px-1">
+<div class="w-2 bg-orange-300/40 rounded-full h-[35%]"></div>
+<div class="w-2 bg-orange-300/60 rounded-full h-[55%]"></div>
+<div class="w-2 bg-orange-400/80 rounded-full h-[85%]"></div>
+<div class="w-2 bg-orange-500 rounded-full h-[65%]"></div>
+<div class="w-2 bg-orange-400/70 rounded-full h-[45%]"></div>
+<div class="w-2 bg-orange-500 rounded-full h-[95%]"></div>
+<div class="w-2 bg-orange-600 rounded-full h-[75%]"></div>
+<div class="w-2 bg-orange-400/60 rounded-full h-[60%]"></div>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="text-2xl font-bold text-slate-900 tracking-tight">R$ 840.000</span>
+<span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">+14.8% vs. mês ant.</span>
+</div>
+</div>
+<!-- Metric 2: Deals Ativos -->
+<div class="spatial-card-subtle rounded-3xl p-5 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Deals Ativos</span>
+<div class="w-7 h-7 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xs">
+<i class="fa-solid fa-briefcase"></i>
+</div>
+</div>
+<div class="my-3 flex items-center justify-center h-10">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+<span class="text-xs font-medium text-slate-600">6 novos deals nesta semana</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div>
+<span class="text-2xl font-bold text-slate-900 tracking-tight">18 Deals</span>
+<span class="text-xs font-medium text-slate-500 ml-1">no funil</span>
+</div>
+<span class="text-xs font-medium text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/50">Fluxo Contínuo</span>
+</div>
+</div>
+<!-- Metric 3: Taxa de Resposta Forms -->
+<div class="spatial-card-subtle rounded-3xl p-5 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Taxa de Resposta Forms</span>
+<div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">
+<i class="fa-solid fa-circle-check"></i>
+</div>
+</div>
+<div class="my-2 flex items-center justify-center">
+<div class="relative w-14 h-14 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<path class="text-slate-200" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-emerald-500" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="94.2, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute text-xs font-bold text-slate-800">94.2%</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="text-xs font-semibold text-slate-700">Autenticação por PIN</span>
+<span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+6.8% conv.</span>
+</div>
+</div>
+<!-- Metric 4: Tempo Médio de Conversão -->
+<div class="spatial-card-subtle rounded-3xl p-5 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Tempo Médio de Conversão</span>
+<div class="w-7 h-7 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center text-xs">
+<i class="fa-solid fa-stopwatch"></i>
+</div>
+</div>
+<div class="my-3 flex items-end justify-center gap-2 h-10">
+<div class="w-1.5 bg-sky-300 rounded-full h-[40%]"></div>
+<div class="w-1.5 bg-sky-500 rounded-full h-[75%]"></div>
+<div class="w-1.5 bg-sky-400 rounded-full h-[60%]"></div>
+<div class="w-1.5 bg-sky-600 rounded-full h-[90%]"></div>
+<div class="w-1.5 bg-sky-400 rounded-full h-[55%]"></div>
+<div class="w-1.5 bg-sky-500 rounded-full h-[80%]"></div>
+</div>
+<div class="flex items-baseline justify-between">
+<div>
+<span class="text-2xl font-bold text-slate-900 tracking-tight">6.4 dias</span>
+<span class="text-xs font-medium text-slate-500 ml-1">médios</span>
+</div>
+<span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-semibold">-2.1 dias</span>
+</div>
+</div>
+</section>
+<!-- END: 4 High-Level Metric Tiles -->
+<!-- BEGIN: Core CRM Layout Split (Funnel Pipeline + Executive Director Sidebar) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left/Central: 3 Vital Funnel Columns (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-2 h-5 bg-orange-500 rounded-full"></span>
+<h2 class="text-base font-bold text-slate-900 tracking-tight">Funil de Vendas &amp; Briefings Automatizados</h2>
+<span class="text-xs text-slate-400">• Arraste os cards para avançar os estágios</span>
+</div>
+<div class="flex items-center gap-1.5 bg-white/70 p-1 rounded-full border border-white text-xs font-medium text-slate-600 shadow-sm">
+<button class="px-3 py-1 rounded-full bg-white text-slate-800 shadow-sm flex items-center gap-1 font-semibold" type="button">
+<i class="fa-solid fa-arrow-down-short-wide text-[10px]"></i> Prioridade / Valor
+</button>
+<button class="px-3 py-1 rounded-full text-slate-500 hover:text-slate-800 transition flex items-center gap-1" type="button">
+<i class="fa-regular fa-eye text-[10px]"></i> Compactar
+</button>
+</div>
+</div>
+<!-- 3 Columns Pipeline Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- ================= COLUNA 1: 1. Descoberta & Lead ================= -->
+<div class="spatial-card-subtle rounded-3xl p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between pb-2 border-b border-slate-200/60">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+<h3 class="text-xs font-bold text-slate-800">1. Descoberta &amp; Lead</h3>
+<span class="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">3</span>
+</div>
+<span class="text-xs font-semibold text-slate-500 font-mono">R$ 142k</span>
+</div>
+<!-- Card 1 -->
+<div class="bg-white/90 border border-white p-3.5 rounded-2xl shadow-sm hover:shadow-md transition group flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-md bg-amber-50 text-amber-700 border border-amber-200/60">Inbound Google</span>
+<span class="text-xs font-extrabold text-slate-900 font-mono">R$ 48k</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition">Vanguard Health Clinic</h4>
+<p class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1">
+<i class="fa-regular fa-user text-[10px]"></i> Dra. Juliana Mendes • Diretora
+</p>
+</div>
+<button class="w-full mt-1 py-1.5 px-3 rounded-xl bg-orange-50 hover:bg-orange-500 text-orange-600 hover:text-white font-semibold text-[11px] flex items-center justify-center gap-1.5 transition shadow-sm" type="button">
+<i class="fa-regular fa-paper-plane text-[10px]"></i>
+<span>Disparar Form com PIN</span>
+</button>
+</div>
+<!-- Card 2 -->
+<div class="bg-white/90 border border-white p-3.5 rounded-2xl shadow-sm hover:shadow-md transition group flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-md bg-purple-50 text-purple-700 border border-purple-200/60">Parceiro</span>
+<span class="text-xs font-extrabold text-slate-900 font-mono">R$ 64k</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition">Aura Wellness Hub</h4>
+<p class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1">
+<i class="fa-regular fa-user text-[10px]"></i> Rodrigo Salles • Sócio
+</p>
+</div>
+<button class="w-full mt-1 py-1.5 px-3 rounded-xl bg-orange-50 hover:bg-orange-500 text-orange-600 hover:text-white font-semibold text-[11px] flex items-center justify-center gap-1.5 transition shadow-sm" type="button">
+<i class="fa-regular fa-paper-plane text-[10px]"></i>
+<span>Disparar Form com PIN</span>
+</button>
+</div>
+<!-- Card 3 -->
+<div class="bg-white/90 border border-white p-3.5 rounded-2xl shadow-sm hover:shadow-md transition group flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-md bg-blue-50 text-blue-700 border border-blue-200/60">LinkedIn Outbound</span>
+<span class="text-xs font-extrabold text-slate-900 font-mono">R$ 30k</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition">FisioCore Reabilitação</h4>
+<p class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1">
+<i class="fa-regular fa-user text-[10px]"></i> Camila Barreto • COO
+</p>
+</div>
+<button class="w-full mt-1 py-1.5 px-3 rounded-xl bg-orange-50 hover:bg-orange-500 text-orange-600 hover:text-white font-semibold text-[11px] flex items-center justify-center gap-1.5 transition shadow-sm" type="button">
+<i class="fa-regular fa-paper-plane text-[10px]"></i>
+<span>Disparar Form com PIN</span>
+</button>
+</div>
+</div>
+<!-- ================= COLUNA 2: 2. Formulário Enviado ================= -->
+<div class="spatial-card-subtle rounded-3xl p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between pb-2 border-b border-slate-200/60">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+<h3 class="text-xs font-bold text-slate-800">2. Formulário Enviado</h3>
+<span class="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">3</span>
+</div>
+<span class="text-xs font-semibold text-slate-500 font-mono">R$ 195k</span>
+</div>
+<!-- Card 1: Lumina Pilates -->
+<div class="bg-white/95 border-2 border-orange-400/40 p-3.5 rounded-2xl shadow-sm hover:shadow-md transition flex flex-col gap-2.5 relative">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-md bg-orange-100 text-orange-700 border border-orange-200">Sessão Ativa</span>
+<span class="text-xs font-extrabold text-slate-900 font-mono">R$ 75k</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900">Lumina Pilates Studio</h4>
+<p class="text-[11px] text-slate-500 mt-0.5">3 Unidades SP • PIN: <span class="font-mono text-slate-800 font-semibold">489-021</span></p>
+</div>
+<!-- Progress Bar -->
+<div class="space-y-1">
+<div class="flex items-center justify-between text-[10px]">
+<span class="font-bold text-orange-600 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 75% Preenchido
+</span>
+<span class="text-slate-400">Há 12 min</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+<div class="bg-gradient-to-r from-orange-500 to-amber-400 h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<!-- Action Buttons: WhatsApp / Email -->
+<div class="grid grid-cols-2 gap-1.5 pt-1">
+<button class="py-1 px-2 rounded-xl bg-slate-100 hover:bg-emerald-500 hover:text-white text-slate-700 text-[10px] font-semibold flex items-center justify-center gap-1 transition shadow-sm" type="button">
+<i class="fa-brands fa-whatsapp text-emerald-600 group-hover:text-white"></i> WhatsApp
+</button>
+<button class="py-1 px-2 rounded-xl bg-slate-100 hover:bg-orange-500 hover:text-white text-slate-700 text-[10px] font-semibold flex items-center justify-center gap-1 transition shadow-sm" type="button">
+<i class="fa-regular fa-envelope text-orange-500 group-hover:text-white"></i> E-mail
+</button>
+</div>
+</div>
+<!-- Card 2: Movimento Integrado -->
+<div class="bg-white/90 border border-white p-3.5 rounded-2xl shadow-sm hover:shadow-md transition flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-md bg-slate-100 text-slate-600">Recovery Clínico</span>
+<span class="text-xs font-extrabold text-slate-900 font-mono">R$ 55k</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900">Movimento Integrado</h4>
+<p class="text-[11px] text-slate-500 mt-0.5">PIN: <span class="font-mono text-slate-800 font-semibold">883-104</span></p>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between text-[10px]">
+<span class="text-slate-600 font-medium">40% Preenchido</span>
+<span class="text-amber-600 font-medium">Parado há 1 dia</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+<div class="bg-amber-400 h-1.5 rounded-full" style="width: 40%"></div>
+</div>
+</div>
+<button class="w-full py-1.5 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-semibold flex items-center justify-center gap-1 transition" type="button">
+<i class="fa-solid fa-bell text-[10px] text-amber-500"></i> Notificar Retomada
+</button>
+</div>
+<!-- Card 3: Corp Events SP -->
+<div class="bg-white/90 border border-white p-3.5 rounded-2xl shadow-sm hover:shadow-md transition flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-md bg-amber-50 text-amber-700">Summit RH</span>
+<span class="text-xs font-extrabold text-slate-900 font-mono">R$ 65k</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900">Corp Events 2025</h4>
+<p class="text-[11px] text-slate-500 mt-0.5">PIN: <span class="font-mono text-slate-800 font-semibold">112-909</span></p>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between text-[10px]">
+<span class="text-slate-500">Aberto pelo cliente</span>
+<span class="text-sky-600 font-medium">15%</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+<div class="bg-sky-400 h-1.5 rounded-full" style="width: 15%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= COLUNA 3: 3. Briefing Recebido / Em Análise ================= -->
+<div class="spatial-card-subtle rounded-3xl p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between pb-2 border-b border-slate-200/60">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+<h3 class="text-xs font-bold text-slate-800">3. Briefing Recebido</h3>
+<span class="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">3</span>
+</div>
+<span class="text-xs font-semibold text-slate-500 font-mono">R$ 210k</span>
+</div>
+<!-- Card 1: 100% Preenchido com IA Score -->
+<div class="bg-white/95 border-2 border-emerald-500/40 p-3.5 rounded-2xl shadow-sm hover:shadow-md transition flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 text-[9px] font-bold rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center gap-1">
+<i class="fa-solid fa-check text-[9px]"></i> 100% Preenchido
+</span>
+<span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-orange-100 text-orange-700 font-mono">Score: 98/100</span>
+</div>
+<div>
+<div class="flex items-center justify-between">
+<h4 class="text-xs font-bold text-slate-900">Boutique Gym Moema</h4>
+<span class="text-xs font-extrabold text-slate-900 font-mono">R$ 90k</span>
+</div>
+<p class="text-[10px] text-slate-400 mt-0.5">14 Anexos (Plantas CAD, Identidade)</p>
+</div>
+<div class="p-2 rounded-xl bg-orange-50/60 border border-orange-100 text-[10px] text-slate-700 flex items-start gap-1.5 leading-snug">
+<i class="fa-solid fa-wand-magic-sparkles text-orange-500 mt-0.5 text-[10px]"></i>
+<span>IA: "Abertura em 60 dias. Foco em experiência acústica."</span>
+</div>
+<div class="flex flex-col gap-1.5 pt-1">
+<button class="w-full py-1.5 px-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[11px] flex items-center justify-center gap-1.5 transition shadow-sm" type="button">
+<i class="fa-regular fa-eye text-[10px]"></i>
+<span>Abrir Briefing Completo</span>
+</button>
+<button class="w-full py-1.5 px-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold text-[11px] flex items-center justify-center gap-1.5 shadow-glow-orange transition" type="button">
+<i class="fa-solid fa-arrow-right-arrow-left text-[10px]"></i>
+<span>Transformar em Projeto</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white/90 border border-white p-3.5 rounded-2xl shadow-sm hover:shadow-md transition flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 text-[9px] font-bold rounded-md bg-emerald-50 text-emerald-700">100% Concluído</span>
+<span class="px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-slate-100 text-slate-700 font-mono">Score: 84/100</span>
+</div>
+<div>
+<div class="flex items-center justify-between">
+<h4 class="text-xs font-bold text-slate-900">Espaço Pilates &amp; Postura</h4>
+<span class="text-xs font-extrabold text-slate-900 font-mono">R$ 52k</span>
+</div>
+<p class="text-[10px] text-slate-400 mt-0.5">Revisão por: Lucas Amaral</p>
+</div>
+<button class="w-full py-1.5 px-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold text-[10px] flex items-center justify-center gap-1 transition" type="button">
+<i class="fa-regular fa-file-lines text-[10px] text-orange-500"></i> Ver Respostas Validadas
+</button>
+</div>
+<!-- Card 3 -->
+<div class="bg-white/90 border border-white p-3.5 rounded-2xl shadow-sm hover:shadow-md transition flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 text-[9px] font-bold rounded-md bg-emerald-50 text-emerald-700">100% Concluído</span>
+<span class="px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-slate-100 text-slate-700 font-mono">Score: 91/100</span>
+</div>
+<div>
+<div class="flex items-center justify-between">
+<h4 class="text-xs font-bold text-slate-900">Studio Regenera</h4>
+<span class="text-xs font-extrabold text-slate-900 font-mono">R$ 68k</span>
+</div>
+<p class="text-[10px] text-slate-400 mt-0.5">Pronto para minuta de contrato</p>
+</div>
+<button class="w-full py-1.5 px-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[11px] flex items-center justify-center gap-1.5 transition shadow-sm" type="button">
+<i class="fa-regular fa-eye text-[10px]"></i>
+<span>Abrir Briefing Completo</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Section: Executive Sidebar with Hicaro Duarte Profile & Calendar (4 cols) -->
+<aside aria-label="Perfil Executivo e Agendamentos" class="lg:col-span-4 flex flex-col gap-5">
+<!-- User Profile Card (Hicaro Duarte / HD) -->
+<div class="spatial-card-subtle rounded-3xl p-5 bg-gradient-to-b from-slate-900/90 to-slate-900/95 text-white border-white/20 shadow-xl">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-full bg-gradient-to-tr from-orange-400 to-amber-300 flex items-center justify-center text-slate-900 font-extrabold text-sm shadow-md">
+                HD
+              </div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-sm font-bold text-white">Hicaro Duarte</span>
+<i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+</div>
+<span class="text-[11px] text-slate-400">@hicaro.dir</span>
+</div>
+</div>
+<button aria-label="Configurações do Perfil" class="text-slate-400 hover:text-white transition" type="button">
+<i class="fa-solid fa-ellipsis"></i>
+</button>
+</div>
+<!-- Profile Executive Stats Bar -->
+<div class="grid grid-cols-3 gap-2 pt-3 border-t border-slate-700/60 text-center">
+<div>
+<span class="text-base font-bold text-white tracking-tight">48</span>
+<p class="text-[10px] uppercase font-semibold text-slate-400">Estúdios</p>
+</div>
+<div class="border-x border-slate-700/60">
+<span class="text-base font-bold text-white tracking-tight">98.5%</span>
+<p class="text-[10px] uppercase font-semibold text-slate-400">Retenção</p>
+</div>
+<div>
+<span class="text-base font-bold text-white tracking-tight">32</span>
+<p class="text-[10px] uppercase font-semibold text-slate-400">Sprints</p>
+</div>
+</div>
+</div>
+<!-- Spatial Interactive Calendar Widget -->
+<div class="spatial-card-subtle rounded-3xl p-5">
+<div class="flex items-center justify-between mb-4">
+<span class="text-sm font-bold text-slate-900">Maio 2025</span>
+<div class="flex items-center gap-1 text-slate-500">
+<button aria-label="Mês anterior" class="w-6 h-6 rounded-full hover:bg-slate-100 flex items-center justify-center transition" type="button">
+<i class="fa-solid fa-chevron-left text-[10px]"></i>
+</button>
+<button aria-label="Próximo mês" class="w-6 h-6 rounded-full hover:bg-slate-100 flex items-center justify-center transition" type="button">
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</button>
+</div>
+</div>
+<!-- Calendar Days of Week -->
+<div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-400 mb-2">
+<span>Dom</span>
+<span>Seg</span>
+<span>Ter</span>
+<span>Qua</span>
+<span>Qui</span>
+<span>Sex</span>
+<span>Sáb</span>
+</div>
+<!-- Calendar Number Grid -->
+<div class="grid grid-cols-7 gap-y-2 text-center text-xs font-medium text-slate-700">
+<span class="text-slate-300">27</span>
+<span class="text-slate-300">28</span>
+<span class="text-slate-300">29</span>
+<span class="text-slate-300">30</span>
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+<span>7</span>
+<span>8</span>
+<span>9</span>
+<span>10</span>
+<span>11</span>
+<span>12</span>
+<span>13</span>
+<span>14</span>
+<span>15</span>
+<span class="w-6 h-6 mx-auto rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-sm">16</span>
+<span>17</span>
+<span>18</span>
+<span>19</span>
+<span>20</span>
+<span class="w-6 h-6 mx-auto rounded-full bg-orange-500 text-white font-bold flex items-center justify-center shadow-md shadow-orange-500/30">21</span>
+<span>22</span>
+<span class="w-6 h-6 mx-auto rounded-full bg-rose-500 text-white flex items-center justify-center shadow-sm">23</span>
+<span>24</span>
+<span>25</span>
+<span>26</span>
+<span>27</span>
+<span>28</span>
+<span>29</span>
+<span>30</span>
+<span>31</span>
+</div>
+</div>
+<!-- Scheduled Briefing Reviews & Client Kickoffs List -->
+<div class="spatial-card-subtle rounded-3xl p-5 flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-slate-900">Agendamentos &amp; Kickoffs</span>
+<a class="text-xs font-semibold text-slate-500 hover:text-orange-600 transition" href="#">Ver tudo</a>
+</div>
+<div class="flex flex-col gap-2.5">
+<!-- Item 1 -->
+<div class="bg-white/80 border border-white p-3 rounded-2xl flex items-center justify-between hover:bg-white transition group shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center text-xs shrink-0">
+<i class="fa-solid fa-person-running"></i>
+</div>
+<div>
+<span class="text-[9px] font-bold uppercase tracking-wider text-orange-600 bg-orange-50 px-1.5 py-0.5 rounded">Studio Pilates</span>
+<h5 class="text-xs font-bold text-slate-900 mt-0.5 group-hover:text-orange-600 transition">Alinhamento Lumina Reformer</h5>
+<p class="text-[10px] text-slate-400">14:30 Hoje • Sala 04</p>
+</div>
+</div>
+<button aria-label="Detalhes da reunião" class="text-slate-400 hover:text-slate-700" type="button">
+<i class="fa-solid fa-ellipsis-vertical"></i>
+</button>
+</div>
+<!-- Item 2 -->
+<div class="bg-white/80 border border-white p-3 rounded-2xl flex items-center justify-between hover:bg-white transition group shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs shrink-0">
+<i class="fa-solid fa-user-doctor"></i>
+</div>
+<div>
+<span class="text-[9px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">Physio Care</span>
+<h5 class="text-xs font-bold text-slate-900 mt-0.5 group-hover:text-emerald-600 transition">Aprovação Protocolo Apex</h5>
+<p class="text-[10px] text-slate-400">16:00 Hoje • Remoto</p>
+</div>
+</div>
+<button aria-label="Detalhes da reunião" class="text-slate-400 hover:text-slate-700" type="button">
+<i class="fa-solid fa-ellipsis-vertical"></i>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: Right Section -->
+</div>
+<!-- END: Core CRM Layout Split -->
+<!-- ==================== FORMS LIBRARY & INTAKE TOOLS (FOOTER / LOWER DOCK) ==================== -->
+<section class="spatial-card-subtle rounded-3xl p-6 flex flex-col gap-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200/60 gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-white shadow-glow-orange shrink-0">
+<i class="fa-regular fa-clipboard text-base"></i>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Biblioteca de Formulários &amp; Ferramentas de Captação</h3>
+<p class="text-xs text-slate-500">Modelos de briefing inteligente com autenticação por PIN seguro, branching dinâmico e integração com CRM</p>
+</div>
+</div>
+<!-- PIN on Demand & New Template Actions -->
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200/80 text-slate-800 text-xs font-semibold flex items-center gap-1.5 shadow-sm transition active:scale-[0.98]" id="btn-pin-generator" type="button">
+<i class="fa-solid fa-key text-orange-500 text-xs"></i>
+<span id="pin-text">Gerar PIN Sob Demanda</span>
+</button>
+<button class="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition active:scale-[0.98]" type="button">
+<i class="fa-solid fa-plus text-xs"></i>
+<span>Novo Template</span>
+</button>
+</div>
+</div>
+<!-- 4 Active Forms Cards matching SCREEN_2 pattern -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+<!-- Form 1: Pilates -->
+<div class="bg-white/90 border border-white p-4 rounded-2xl flex flex-col justify-between group hover:shadow-md transition">
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<span class="px-2 py-0.5 text-[9px] font-bold rounded-md bg-orange-100 text-orange-700">Ativo • v2.4</span>
+<span class="text-[11px] font-semibold text-emerald-600">96.4% conv.</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900">Briefing Studio Pilates</h4>
+<p class="text-[11px] text-slate-500 mt-1">24 campos com upload de plantas e cálculos de metragem por reformer.</p>
+</div>
+<div class="mt-4 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
+<span class="font-mono text-slate-400 text-[10px]">pin.studio/pilates</span>
+<button class="text-orange-600 hover:text-orange-700 font-semibold flex items-center gap-1 copy-btn" data-link="pin.studio/pilates" type="button">
+<span>Copiar Link</span>
+<i class="fa-regular fa-copy text-[10px]"></i>
+</button>
+</div>
+</div>
+<!-- Form 2: Fisioterapia (Highlighted Orange Theme like Card 2 in Reference) -->
+<div class="rounded-2xl p-4 flex flex-col justify-between bg-gradient-to-br from-orange-500 to-amber-500 text-white shadow-glow-orange group hover:shadow-lg transition">
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<span class="px-2 py-0.5 text-[9px] font-bold rounded-md bg-white/20 backdrop-blur-sm text-white">Ativo • v3.1</span>
+<span class="text-[11px] font-semibold text-white">92.1% conv.</span>
+</div>
+<h4 class="text-xs font-bold text-white">Fisioterapia &amp; Recovery</h4>
+<p class="text-[11px] text-orange-100 mt-1">Estrutura clínica, especialidades, equipamentos e metas de convênios.</p>
+</div>
+<div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-[11px]">
+<span class="font-mono text-orange-100 text-[10px]">pin.studio/fisio</span>
+<button class="text-white hover:underline font-semibold flex items-center gap-1 copy-btn" data-link="pin.studio/fisio" type="button">
+<span>Copiar Link</span>
+<i class="fa-regular fa-copy text-[10px]"></i>
+</button>
+</div>
+</div>
+<!-- Form 3: Eventos Corporativos -->
+<div class="bg-white/90 border border-white p-4 rounded-2xl flex flex-col justify-between group hover:shadow-md transition">
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<span class="px-2 py-0.5 text-[9px] font-bold rounded-md bg-orange-100 text-orange-700">Ativo • v1.8</span>
+<span class="text-[11px] font-semibold text-emerald-600">89.0% conv.</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900">Eventos Corporativos</h4>
+<p class="text-[11px] text-slate-500 mt-1">Workshops, ativações de saúde in-company e cronograma de palestrantes.</p>
+</div>
+<div class="mt-4 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
+<span class="font-mono text-slate-400 text-[10px]">pin.studio/events</span>
+<button class="text-orange-600 hover:text-orange-700 font-semibold flex items-center gap-1 copy-btn" data-link="pin.studio/events" type="button">
+<span>Copiar Link</span>
+<i class="fa-regular fa-copy text-[10px]"></i>
+</button>
+</div>
+</div>
+<!-- Form 4: Onboarding Rápido -->
+<div class="bg-white/90 border border-white p-4 rounded-2xl flex flex-col justify-between group hover:shadow-md transition">
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<span class="px-2 py-0.5 text-[9px] font-bold rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200/60">Express (3 min)</span>
+<span class="text-[11px] font-semibold text-emerald-600">98.7% conv.</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900">Onboarding Rápido</h4>
+<p class="text-[11px] text-slate-500 mt-1">Coleta relâmpago de dados fiscais, contratos e responsáveis de projeto.</p>
+</div>
+<div class="mt-4 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
+<span class="font-mono text-slate-400 text-[10px]">pin.studio/express</span>
+<button class="text-orange-600 hover:text-orange-700 font-semibold flex items-center gap-1 copy-btn" data-link="pin.studio/express" type="button">
+<span>Copiar Link</span>
+<i class="fa-regular fa-copy text-[10px]"></i>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- END: Central Glassmorphism Workspace Canvas -->
+</main>
+<!-- END: Master Spatial Glass Workspace Container -->
+<!-- BEGIN: Minimal VisionOS Status Bar Indicator -->
+<footer class="mt-6 mb-2 text-center text-xs font-medium text-slate-500/80 z-10 flex items-center gap-3">
+<span>Studio Suite Spatial v2.4</span>
+<span>•</span>
+<span>Conectado ao Cloud Engine</span>
+<span>•</span>
+<span class="inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Latência: 14ms
+</span>
+</footer>
+<!-- END: Minimal VisionOS Status Bar Indicator -->
+<!-- Client Micro-Interactions -->
+<script>
+    // PIN generator interactive feedback
+    const pinBtn = document.getElementById('btn-pin-generator');
+    const pinText = document.getElementById('pin-text');
+    if (pinBtn && pinText) {
+      pinBtn.addEventListener('click', () => {
+        const randomPin = Math.floor(100 + Math.random() * 900) + '-' + Math.floor(100 + Math.random() * 900);
+        pinText.innerText = 'PIN Gerado: ' + randomPin;
+        setTimeout(() => {
+          pinText.innerText = 'Gerar PIN Sob Demanda';
+        }, 2500);
+      });
+    }
+
+    // Copy link buttons feedback
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const originalHtml = this.innerHTML;
+        this.innerHTML = '<span>Copiado! ✓</span>';
+        setTimeout(() => {
+          this.innerHTML = originalHtml;
+        }, 1500);
+      });
+    });
+  </script>
+</body></html>

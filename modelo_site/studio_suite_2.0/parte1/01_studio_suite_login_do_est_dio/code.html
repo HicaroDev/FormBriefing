@@ -1,0 +1,600 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Studio Suite 2.0 — Login | Hícaro Duarte</title>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#8c7164",
+            "on-tertiary-container": "#003934",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "card-highlight-end": "#FBBF24",
+            "on-primary-fixed": "#341100",
+            "surface-canvas-mid": "#F5EFEB",
+            "on-primary-fixed-variant": "#783200",
+            "surface-container": "#e6eeff",
+            "on-secondary-container": "#586377",
+            "secondary-fixed-dim": "#bcc7de",
+            "on-primary-container": "#582200",
+            "text-body": "#475569",
+            "primary-fixed-dim": "#ffb690",
+            "on-secondary-fixed": "#111c2d",
+            "surface-container-highest": "#d5e3fc",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "brand-primary-text": "#C2410C",
+            "outline-variant": "#e0c0b1",
+            "status-info": "#0284C7",
+            "surface": "#f8f9ff",
+            "text-support": "#64748B",
+            "secondary-fixed": "#d8e3fb",
+            "focus-indigo": "#4F46E5",
+            "surface-container-low": "#eff4ff",
+            "surface-canvas-start": "#FBF8F3",
+            "secondary": "#545f73",
+            "surface-bright": "#f8f9ff",
+            "surface-container-high": "#dce9ff",
+            "primary-fixed": "#ffdbca",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "text-placeholder": "#94A3B8",
+            "inverse-surface": "#233144",
+            "text-title": "#0F172A",
+            "surface-dim": "#ccdbf3",
+            "surface-tint": "#9d4300",
+            "on-secondary-fixed-variant": "#3c475a",
+            "status-urgent": "#EF4444",
+            "surface-canvas-end": "#ECE4DB",
+            "on-background": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#005049",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-container": "#37ab9e",
+            "on-surface-variant": "#584237",
+            "on-error": "#ffffff",
+            "background": "#f8f9ff",
+            "inverse-primary": "#ffb690",
+            "primary": "#9d4300",
+            "surface-variant": "#d5e3fc",
+            "border-divider": "#E2E8F0",
+            "brand-gradient-end": "#E65100",
+            "on-surface": "#0d1c2e",
+            "secondary-container": "#d5e0f8",
+            "status-success": "#10B981",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#89f5e7",
+            "tertiary": "#006a61",
+            "on-tertiary-fixed": "#00201d",
+            "primary-container": "#f97316",
+            "brand-primary-hover": "#EA580C",
+            "status-warning": "#F59E0B"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "1.5rem",
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1.25rem",
+            "gutter": "1.25rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "caption-kpi-label": [
+              "Plus Jakarta Sans"
+            ],
+            "title-section": [
+              "Plus Jakarta Sans"
+            ],
+            "code-pin": [
+              "JetBrains Mono"
+            ],
+            "body-strong": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-screen": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-screen-mobile": [
+              "Plus Jakarta Sans"
+            ],
+            "body-default": [
+              "Plus Jakarta Sans"
+            ],
+            "label-field": [
+              "Plus Jakarta Sans"
+            ],
+            "display-kpi-mobile": [
+              "Plus Jakarta Sans"
+            ],
+            "caption-badge": [
+              "Plus Jakarta Sans"
+            ],
+            "code-token": [
+              "JetBrains Mono"
+            ],
+            "title-card": [
+              "Plus Jakarta Sans"
+            ],
+            "display-kpi": [
+              "Plus Jakarta Sans"
+            ]
+          },
+          "fontSize": {
+            "caption-kpi-label": [
+              "12px",
+              {
+                "lineHeight": "16px",
+                "letterSpacing": "0.05em",
+                "fontWeight": "700"
+              }
+            ],
+            "title-section": [
+              "16px",
+              {
+                "lineHeight": "22px",
+                "fontWeight": "600"
+              }
+            ],
+            "code-pin": [
+              "24px",
+              {
+                "lineHeight": "32px",
+                "letterSpacing": "0.1em",
+                "fontWeight": "600"
+              }
+            ],
+            "body-strong": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "600"
+              }
+            ],
+            "headline-screen": [
+              "28px",
+              {
+                "lineHeight": "36px",
+                "letterSpacing": "-0.015em",
+                "fontWeight": "700"
+              }
+            ],
+            "headline-screen-mobile": [
+              "22px",
+              {
+                "lineHeight": "28px",
+                "letterSpacing": "-0.01em",
+                "fontWeight": "700"
+              }
+            ],
+            "body-default": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "400"
+              }
+            ],
+            "label-field": [
+              "14px",
+              {
+                "lineHeight": "18px",
+                "fontWeight": "600"
+              }
+            ],
+            "display-kpi-mobile": [
+              "30px",
+              {
+                "lineHeight": "36px",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "700"
+              }
+            ],
+            "caption-badge": [
+              "12px",
+              {
+                "lineHeight": "16px",
+                "letterSpacing": "0.01em",
+                "fontWeight": "600"
+              }
+            ],
+            "code-token": [
+              "13px",
+              {
+                "lineHeight": "18px",
+                "fontWeight": "500"
+              }
+            ],
+            "title-card": [
+              "18px",
+              {
+                "lineHeight": "24px",
+                "letterSpacing": "-0.01em",
+                "fontWeight": "600"
+              }
+            ],
+            "display-kpi": [
+              "36px",
+              {
+                "lineHeight": "44px",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "700"
+              }
+            ]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    /* Warm Glassmorphism & Micro-elevations */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.80);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.07), 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+      border-radius: 20px;
+    }
+    
+    .glass-metric {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 12px 28px -10px rgba(230, 81, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+      border-radius: 16px;
+    }
+
+    .glass-input {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .glass-input:focus {
+      outline: none;
+      border-color: #4F46E5;
+      box-shadow: 0 0 0 2px #4F46E5, 0 0 0 3px rgba(79, 70, 229, 0.15);
+      background: #FFFFFF;
+    }
+
+    .btn-primary-gradient {
+      background: linear-gradient(135deg, #F97316 0%, #E65100 100%);
+      box-shadow: 0 8px 20px -4px rgba(249, 115, 22, 0.35);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-primary-gradient:hover {
+      background: #EA580C;
+      box-shadow: 0 10px 24px -4px rgba(234, 88, 12, 0.45);
+    }
+
+    .btn-primary-gradient:active {
+      transform: scale(0.98);
+    }
+
+    .btn-glass-secondary {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #E2E8F0;
+      transition: all 0.2s ease;
+    }
+
+    .btn-glass-secondary:hover {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-glass-secondary:active {
+      transform: scale(0.98);
+    }
+
+    /* Ambient Warm Spheres */
+    .ambient-sphere-orange {
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, rgba(249, 115, 22, 0) 70%);
+    }
+
+    .ambient-sphere-sand {
+      background: radial-gradient(circle, rgba(236, 228, 219, 0.6) 0%, rgba(236, 228, 219, 0) 75%);
+    }
+  </style>
+</head>
+<!-- Shell Visibility Rule: Login screen suppresses BottomNavBar and SideNav automatically -->
+<body class="min-h-screen w-full relative overflow-x-hidden selection:bg-primary-container selection:text-white" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);">
+<!-- Ambient Light Backing -->
+<div class="pointer-events-none fixed -top-40 -left-20 w-[600px] h-[600px] ambient-sphere-orange blur-3xl z-0"></div>
+<div class="pointer-events-none fixed -bottom-32 -right-32 w-[700px] h-[700px] ambient-sphere-sand blur-2xl z-0"></div>
+<!-- Main Canvas Container: 1440px desktop base -->
+<main class="relative z-10 w-full min-h-screen max-w-[1440px] mx-auto px-6 py-8 md:px-12 md:py-10 flex flex-col justify-between">
+<!-- Top Identity Header Bar -->
+<header class="w-full flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-container to-brand-gradient-end flex items-center justify-center text-white shadow-sm ring-1 ring-white/60">
+<span class="font-headline-screen text-body-strong tracking-tighter">HD</span>
+</div>
+<div>
+<span class="font-body-strong text-body-strong text-text-title tracking-tight block">Studio Suite 2.0</span>
+<span class="font-caption-badge text-caption-badge text-text-support block">Hícaro Duarte Atelier</span>
+</div>
+</div>
+<!-- Live Atelier Status Chip -->
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-md border border-white/80 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-status-success animate-pulse"></span>
+<span class="font-code-token text-code-token text-text-body">OP-CORE · V2.1 ONLINE</span>
+</div>
+</header>
+<!-- Two-Column Master Layout (55% / 45%) -->
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto py-8">
+<!-- LEFT COLUMN: Brand Curation & High-Precision Narrative (55% -> 7 Cols) -->
+<section class="lg:col-span-7 flex flex-col justify-center pr-0 lg:pr-8 space-y-8">
+<!-- Atelier Monogram & Badge -->
+<div class="space-y-4">
+<div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-container/10 border border-primary-container/20">
+<span class="material-symbols-outlined text-brand-primary-text" style="font-size: 16px;">verified</span>
+<span class="font-caption-badge text-caption-badge text-brand-primary-text uppercase tracking-wider">Ambiente Executivo Operacional</span>
+</div>
+<div class="flex items-baseline gap-4">
+<h1 class="font-headline-screen text-headline-screen md:text-[40px] md:leading-[48px] text-text-title font-extrabold tracking-tight">
+              Curadoria <font color="rgba(0, 0, 0, 0)">Hicaro Alves</font></h1>
+</div>
+<p class="font-body-default text-body-default md:text-title-section md:leading-6 text-text-body max-w-xl font-normal">
+            Design &amp; Branding de alta precisão para estúdios de pilates, fisioterapia, bem-estar e eventos autorais. Gestão centralizada de briefings, identidades conceituais e prazos cirúrgicos.
+          </p>
+</div>
+<!-- 3 Micro-Metrics Translucent Glass Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+<!-- Metric 1 -->
+<div class="glass-metric p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase">Pipeline</span>
+<span class="material-symbols-outlined text-primary-container" style="font-size: 18px;">tactic</span>
+</div>
+<div>
+<div class="font-display-kpi text-[26px] leading-8 text-text-title font-bold">12</div>
+<div class="font-caption-badge text-caption-badge text-text-body mt-0.5">projetos ativos</div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="glass-metric p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase">Briefings Hub</span>
+<span class="material-symbols-outlined text-status-success" style="font-size: 18px;">assignment_turned_in</span>
+</div>
+<div>
+<div class="font-display-kpi text-[26px] leading-8 text-text-title font-bold">94%</div>
+<div class="font-caption-badge text-caption-badge text-text-body mt-0.5">briefings respondidos</div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="glass-metric p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase">Speed Run</span>
+<span class="material-symbols-outlined text-card-highlight-end" style="font-size: 18px;">bolt</span>
+</div>
+<div>
+<div class="font-body-strong text-body-strong text-text-title font-bold leading-snug">Lumina Movement</div>
+<div class="font-caption-badge text-caption-badge text-brand-primary-text mt-0.5">entregue em 21 dias</div>
+</div>
+</div>
+</div>
+<!-- Signature Editorial Showcase Banner -->
+<div class="glass-card p-5 border border-white/90 flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-surface-canvas-mid ring-1 ring-black/5">
+<img class="w-full h-full object-cover" data-alt="A minimalist architectural pilates studio with natural white travertine floors, curved birch wood reformers, and dramatic floor-to-ceiling sunbeams entering from a warm linen curtain. The scene is photographed with soft focus and an editorial light-mode luxury magazine aesthetic, featuring terracotta accent bowls and warm morning illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGdmTMifTOZJDANDuLR153SQ9qIuSHlJkjnP0AoO_lQcrNVZjobYepPltOgmAhOqqqSJL5H9gRq12ZxGDo7XDNqUffD-hxKjKcamNWj-newSlGJounBuTuRgxv68G_m--4zfWYt6OtHVKtA0nUqB8HUlLhmJAF58jk1BRRpkrR3RZ5Da_u5b1fpS2uGW3F0JtBBS5zbWnMc70nwu4OvPBMCzirZw6NWUAjMDRJkKD1iP1v4ACdVaEv">
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-primary-container/10 text-brand-primary-text">Caso Recente</span>
+<span class="font-code-token text-[11px] text-text-support">#PLT-2026-08</span>
+</div>
+<h4 class="font-title-section text-title-section text-text-title font-semibold truncate mt-0.5">Rebranding Lumina Movement Clinic</h4>
+<p class="font-body-default text-[13px] text-text-body truncate">Direção de arte completa, manual de tom de voz e portal do paciente.</p>
+</div>
+<span class="material-symbols-outlined text-text-support flex-shrink-0">arrow_forward</span>
+</div>
+</section>
+<!-- RIGHT COLUMN: Centered 420px Glass Authentication Module (45% -> 5 Cols) -->
+<section class="lg:col-span-5 flex flex-col items-center justify-center">
+<div class="w-full max-w-[420px] glass-card p-8 relative">
+<!-- Top Card Brand Stamp -->
+<div class="flex flex-col items-center text-center mb-6">
+<div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary-container via-card-highlight-end to-brand-gradient-end p-0.5 shadow-md mb-3">
+<div class="w-full h-full bg-white/95 rounded-[14px] flex items-center justify-center backdrop-blur-sm">
+<span class="font-headline-screen text-title-card text-brand-primary-text font-black tracking-tight">HD</span>
+</div>
+</div>
+<h2 class="font-title-card text-headline-screen-mobile text-text-title font-bold tracking-tight">
+              Entrar no Studio Suite
+            </h2>
+<p class="font-body-default text-body-default text-text-body mt-1">
+              Acesso exclusivo ao núcleo operacional do estúdio
+            </p>
+</div>
+<!-- Login Form -->
+<form class="space-y-4" onsubmit="event.preventDefault(); validateForm();">
+<!-- Email Input -->
+<div class="space-y-1.5 text-left">
+<label class="font-label-field text-label-field text-text-title flex items-center justify-between" for="email-field">
+<span class="">E-mail Corporativo</span>
+<span class="font-code-token text-[11px] text-text-support">@hicaroduarte.com</span>
+</label>
+<div class="relative">
+<input class="glass-input w-full h-11 px-3.5 text-text-title font-body-default text-body-default placeholder:text-text-placeholder focus:bg-white transition-all" id="email-field" placeholder="hicaro@hicaroduarte.com" required="" type="email" value="curadoria@hicaroduarte.com">
+<div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-text-placeholder">
+<span class="material-symbols-outlined" style="font-size: 18px;">mail</span>
+</div>
+</div>
+</div>
+<!-- Password Input with Toggle Visibility -->
+<div class="space-y-1.5 text-left">
+<div class="flex items-center justify-between">
+<label class="font-label-field text-label-field text-text-title" for="password-field">
+                  Senha
+                </label>
+<a class="font-body-strong text-[12px] text-brand-primary-text hover:text-brand-primary-hover transition-colors" href="#recuperar-senha">
+                  Esqueci minha senha
+                </a>
+</div>
+<div class="relative">
+<input class="glass-input w-full h-11 px-3.5 pr-10 text-text-title font-body-default text-body-default placeholder:text-text-placeholder focus:bg-white transition-all" id="password-field" placeholder="••••••••••••" required="" type="password" value="Studio2026MasterKey">
+<button aria-label="Alternar visibilidade de senha" class="absolute inset-y-0 right-0 pr-3 flex items-center text-text-support hover:text-text-title focus:outline-none" id="toggle-password-btn" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined" id="eye-icon" style="font-size: 20px;">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me Checkbox -->
+<div class="flex items-center justify-between pt-1">
+<label class="flex items-center gap-2.5 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-focus-indigo border-border-divider transition" type="checkbox">
+<span class="font-body-default text-[13px] text-text-body">
+                  Manter conectado neste dispositivo
+                </span>
+</label>
+</div>
+<!-- Primary Gradient CTA -->
+<button class="btn-primary-gradient w-full h-11 rounded-xl text-white font-body-strong text-body-strong font-semibold flex items-center justify-center gap-2 mt-2" type="submit">
+<span class="">Entrar</span>
+<span class="material-symbols-outlined" style="font-size: 18px;">login</span>
+</button>
+<!-- Divider -->
+<div class="relative flex items-center justify-center my-4">
+<div class="border-t border-border-divider w-full"></div>
+<span class="bg-white/90 px-3 text-caption-badge font-caption-badge text-text-support uppercase tracking-widest relative z-10 rounded-full">
+                ou
+              </span>
+</div>
+<!-- Secondary SSO Button -->
+<button class="btn-glass-secondary w-full h-11 rounded-xl text-text-title font-body-strong text-body-strong flex items-center justify-center gap-2.5" type="button">
+<svg class="w-4 h-4" viewBox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.14z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.27 21.36 7.35 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.27 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+</svg>
+<span class="">Entrar com Google Workspace</span>
+</button>
+</form>
+<!-- Security Badge Footer -->
+<div class="mt-6 pt-4 border-t border-border-divider/60 flex items-center justify-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[rgba(13,148,136,0.10)] border border-[rgba(13,148,136,0.20)]">
+<span class="material-symbols-outlined text-[#0F766E]" style="font-size: 15px;">lock</span>
+<span class="font-caption-badge text-[11px] text-[#0F766E]">Conexão criptografada de ponta a ponta</span>
+</span>
+</div>
+</div>
+<!-- Feedback & Error State Preview Miniature Chip (Specified in Prompt) -->
+<div class="mt-5 w-full max-w-[420px] flex items-center justify-between px-4 py-2.5 rounded-xl bg-white/60 border border-white/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-status-urgent"></span>
+<div class="text-left">
+<span class="font-caption-badge text-[11px] text-text-title block font-semibold">Simulador de Credenciais</span>
+<span class="font-code-token text-[11px] text-text-support">Alterne para ver estado de erro</span>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-status-urgent/10 text-status-urgent hover:bg-status-urgent/20 transition-colors" onclick="triggerErrorSimulation()" type="button">
+            Testar Falha
+          </button>
+</div>
+<!-- Simulated Error Banner (Hidden by default, shown via toggle) -->
+<div class="hidden mt-3 w-full max-w-[420px] p-3 rounded-xl bg-status-urgent/10 border border-status-urgent/30 backdrop-blur-sm animate-fade-in" id="error-banner">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-status-urgent mt-0.5" style="font-size: 18px;">error</span>
+<div class="flex-1 text-left">
+<p class="font-body-strong text-[12px] text-status-urgent">Credenciais incorretas</p>
+<p class="font-body-default text-[11px] text-text-body">Verifique seu e-mail do estúdio ou utilize o link de recuperação de acesso.</p>
+</div>
+<button class="text-text-support hover:text-text-title" onclick="dismissError()">
+<span class="material-symbols-outlined" style="font-size: 16px;">close</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Atelier Footer Disclaimer -->
+<footer class="w-full pt-4 flex flex-col sm:flex-row items-center justify-between text-text-support text-[12px] font-body-default">
+<div class="">
+        © 2026 Studio Hícaro Duarte. Todos os direitos reservados.
+      </div>
+<div class="flex items-center gap-6 mt-2 sm:mt-0 font-code-token">
+<span class="">SISTEMA INTERNO PRIVADO</span>
+<span class="w-1 h-1 rounded-full bg-text-support"></span>
+<span class="">BR-SP · 1440PX BASE</span>
+</div>
+</footer>
+</main>
+<!-- Interactive Logic for Password Toggle & Error Demonstration -->
+<script>
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('password-field');
+      const eyeIcon = document.getElementById('eye-icon');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.textContent = 'visibility_off';
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.textContent = 'visibility';
+      }
+    }
+
+    function triggerErrorSimulation() {
+      const banner = document.getElementById('error-banner');
+      const passField = document.getElementById('password-field');
+      
+      banner.classList.remove('hidden');
+      passField.classList.add('border-status-urgent', 'ring-2', 'ring-status-urgent/20');
+      
+      // Auto pulse on button
+      setTimeout(() => {
+        passField.classList.remove('border-status-urgent', 'ring-2', 'ring-status-urgent/20');
+      }, 4000);
+    }
+
+    function dismissError() {
+      document.getElementById('error-banner').classList.add('hidden');
+    }
+
+    function validateForm() {
+      const btn = event.submitter || document.querySelector('button[type="submit"]');
+      const origContent = btn.innerHTML;
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin" style="font-size: 18px;">progress_activity</span><span>Autenticando...</span>`;
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px;">check</span><span>Acesso Autorizado</span>`;
+        btn.classList.remove('btn-primary-gradient');
+        btn.classList.add('bg-status-success', 'text-white');
+        
+        setTimeout(() => {
+          btn.innerHTML = origContent;
+          btn.classList.remove('bg-status-success', 'text-white');
+          btn.classList.add('btn-primary-gradient');
+          btn.disabled = false;
+        }, 1800);
+      }, 900);
+    }
+  </script>
+
+
+</body></html>

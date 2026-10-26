@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Movement · Portal do Cliente</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#dce9ff",
+            "on-secondary-fixed-variant": "#3c475a",
+            "on-tertiary-fixed": "#00201d",
+            "brand-primary-hover": "#EA580C",
+            "on-secondary-container": "#586377",
+            "outline-variant": "#e0c0b1",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#ffb690",
+            "primary-container": "#f97316",
+            "text-placeholder": "#94A3B8",
+            "surface-canvas-end": "#ECE4DB",
+            "tertiary": "#006a61",
+            "on-tertiary-fixed-variant": "#005049",
+            "brand-primary-text": "#C2410C",
+            "text-title": "#0F172A",
+            "background": "#f8f9ff",
+            "on-error": "#ffffff",
+            "secondary-container": "#d5e0f8",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "inverse-primary": "#ffb690",
+            "status-urgent": "#EF4444",
+            "on-primary": "#ffffff",
+            "focus-indigo": "#4F46E5",
+            "status-warning": "#F59E0B",
+            "outline": "#8c7164",
+            "surface-dim": "#ccdbf3",
+            "secondary": "#545f73",
+            "surface": "#f8f9ff",
+            "on-primary-fixed": "#341100",
+            "surface-container-low": "#eff4ff",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-variant": "#d5e3fc",
+            "primary": "#9d4300",
+            "status-success": "#10B981",
+            "tertiary-fixed": "#89f5e7",
+            "brand-gradient-end": "#E65100",
+            "border-divider": "#E2E8F0",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#f8f9ff",
+            "text-body": "#475569",
+            "surface-container": "#e6eeff",
+            "surface-canvas-start": "#FBF8F3",
+            "text-support": "#64748B",
+            "status-info": "#0284C7",
+            "card-highlight-end": "#FBBF24",
+            "inverse-surface": "#233144",
+            "on-secondary-fixed": "#111c2d",
+            "surface-container-highest": "#d5e3fc",
+            "surface-tint": "#9d4300",
+            "on-background": "#0d1c2e",
+            "on-primary-fixed-variant": "#783200",
+            "tertiary-container": "#37ab9e",
+            "primary-fixed": "#ffdbca",
+            "on-primary-container": "#582200",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#d8e3fb",
+            "on-surface-variant": "#584237",
+            "on-tertiary-container": "#003934",
+            "secondary-fixed-dim": "#bcc7de",
+            "surface-canvas-mid": "#F5EFEB",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-surface": "#0d1c2e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "gutter": "1.25rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "margin": "2rem",
+            "space-xl": "1.5rem",
+            "space-lg": "1.25rem",
+            "space-xs": "0.25rem",
+            "margin-mobile": "1.25rem"
+          },
+          "fontFamily": {
+            "caption-badge": ["Plus Jakarta Sans"],
+            "display-kpi": ["Plus Jakarta Sans"],
+            "headline-screen-mobile": ["Plus Jakarta Sans"],
+            "code-token": ["JetBrains Mono"],
+            "title-card": ["Plus Jakarta Sans"],
+            "headline-screen": ["Plus Jakarta Sans"],
+            "display-kpi-mobile": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "caption-kpi-label": ["Plus Jakarta Sans"],
+            "code-pin": ["JetBrains Mono"],
+            "title-section": ["Plus Jakarta Sans"],
+            "body-strong": ["Plus Jakarta Sans"],
+            "label-field": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.06), 0 10px 25px -5px rgba(0, 0, 0, 0.03);
+    }
+    .glass-card-hover {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-hover:hover {
+      box-shadow: 0 24px 48px -12px rgba(230, 81, 0, 0.12), 0 12px 28px -6px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
+    .brand-btn-gradient {
+      background: linear-gradient(135deg, #F97316 0%, #E65100 100%);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-surface-canvas-start via-surface-canvas-mid to-surface-canvas-end text-text-title font-body-default antialiased selection:bg-primary-container selection:text-white">
+<!-- Ambient Light Orbs -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-fixed-dim/25 blur-3xl"></div>
+<div class="absolute top-1/3 -right-40 w-[30rem] h-[30rem] rounded-full bg-card-highlight-end/15 blur-[120px]"></div>
+<div class="absolute bottom-10 left-1/4 w-80 h-80 rounded-full bg-surface-container-high/40 blur-3xl"></div>
+</div>
+<div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
+<!-- Top Client Exclusive Bar (Sem dock administrativo) -->
+<header class="glass-panel rounded-2xl px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-4 w-full md:w-auto">
+<!-- Lumina Monogram & Identity -->
+<div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-on-surface to-slate-800 text-white flex items-center justify-center font-title-card font-bold shadow-md tracking-wider">
+          LM
+        </div>
+<div>
+<div class="flex items-center gap-2">
+<h1 class="font-title-card text-title-card text-text-title font-bold tracking-tight">Lumina Movement</h1>
+<span class="text-xs font-mono px-2 py-0.5 rounded bg-surface-container text-text-support font-code-token">#PLT-2026-08</span>
+</div>
+<p class="font-body-default text-xs text-text-support flex items-center gap-1.5 mt-0.5">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-status-success"></span>
+            Studio Suite · Curadoria Hícaro Duarte
+          </p>
+</div>
+</div>
+<!-- Center Status Badge & PIN Reference -->
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-caption-badge font-caption-badge bg-primary-container/10 text-brand-primary-text border border-primary-container/20">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+          Em Criação &amp; Design
+        </span>
+<div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/80 border border-border-divider text-xs text-text-support font-code-token">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Acesso PIN Seguro</span>
+</div>
+</div>
+<!-- Action: Talk to Curator -->
+<div class="flex items-center gap-3 w-full md:w-auto justify-end">
+<a class="flex items-center gap-2 px-4 py-2 rounded-xl text-caption-badge font-body-strong bg-surface-container-lowest/90 text-text-title border border-border-divider hover:bg-white transition-all shadow-sm active:scale-[0.98]" href="#contato-curador">
+<span class="material-symbols-outlined text-primary-container text-[18px]">forum</span>
+          Falar com Hícaro
+        </a>
+</div>
+</header>
+<!-- Project Timeline Progress Strip -->
+<section class="glass-panel rounded-2xl p-6">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-border-divider/70">
+<div>
+<span class="font-caption-kpi-label text-caption-kpi-label uppercase text-brand-primary-text tracking-wider">Acompanhamento Executivo</span>
+<h2 class="font-headline-screen text-headline-screen text-text-title mt-0.5">Lumina Movement · Identidade + Plataforma Digital</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right">
+<span class="text-xs text-text-support block font-body-default">Previsão de Conclusão</span>
+<span class="font-body-strong text-text-title text-sm">15 de Dezembro, 2026</span>
+</div>
+<div class="h-8 w-px bg-border-divider"></div>
+<div class="text-right">
+<span class="text-xs text-text-support block font-body-default">Progresso Geral</span>
+<span class="font-display-kpi text-2xl text-primary-container font-extrabold leading-none">45%</span>
+</div>
+</div>
+</div>
+<!-- 6 Stages Stepper Bar -->
+<div class="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+<!-- Fase 1: Briefing aprovado -->
+<div class="p-3 rounded-xl bg-surface-container-lowest/60 border border-emerald-200/80 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold text-status-success flex items-center gap-1 font-caption-badge">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span> 1. Briefing
+            </span>
+<span class="text-[10px] text-text-support">18 out</span>
+</div>
+<p class="text-xs font-semibold text-text-title mt-2 truncate">Briefing Aprovado</p>
+<div class="w-full bg-emerald-100 h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-status-success h-full w-full rounded-full"></div>
+</div>
+</div>
+<!-- Fase 2: Imersão & conceito -->
+<div class="p-3 rounded-xl bg-surface-container-lowest/60 border border-emerald-200/80 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold text-status-success flex items-center gap-1 font-caption-badge">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span> 2. Imersão
+            </span>
+<span class="text-[10px] text-text-support">21 out</span>
+</div>
+<p class="text-xs font-semibold text-text-title mt-2 truncate">Conceito Validado</p>
+<div class="w-full bg-emerald-100 h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-status-success h-full w-full rounded-full"></div>
+</div>
+</div>
+<!-- Fase 3: Criação (Ativo) -->
+<div class="p-3 rounded-xl bg-white/95 border-2 border-primary-container shadow-md flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-2 -bottom-2 w-10 h-10 bg-primary-container/10 rounded-full blur-md"></div>
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold text-brand-primary-text flex items-center gap-1 font-caption-badge">
+<span class="material-symbols-outlined text-[14px]">brush</span> 3. Criação
+            </span>
+<span class="text-[10px] font-semibold text-primary-container bg-primary-container/10 px-1.5 py-0.5 rounded">Ativo</span>
+</div>
+<p class="text-xs font-bold text-text-title mt-2 truncate">Design &amp; Sistemas</p>
+<div class="w-full bg-primary-fixed-dim/40 h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="brand-btn-gradient h-full w-[70%] rounded-full"></div>
+</div>
+</div>
+<!-- Fase 4: Revisão do cliente -->
+<div class="p-3 rounded-xl bg-surface-container-lowest/40 border border-border-divider/70 flex flex-col justify-between opacity-80">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-medium text-text-support font-caption-badge">4. Revisão</span>
+<span class="text-[10px] text-text-support">Etapa atual</span>
+</div>
+<p class="text-xs font-medium text-text-body mt-2 truncate">Validação Entregas</p>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-2"></div>
+</div>
+<!-- Fase 5: Ajustes finais -->
+<div class="p-3 rounded-xl bg-surface-container-lowest/40 border border-border-divider/70 flex flex-col justify-between opacity-60">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-medium text-text-support font-caption-badge">5. Ajustes</span>
+<span class="text-[10px] text-text-support">Nov 2026</span>
+</div>
+<p class="text-xs font-medium text-text-body mt-2 truncate">Refinamentos Finais</p>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-2"></div>
+</div>
+<!-- Fase 6: Entrega final -->
+<div class="p-3 rounded-xl bg-surface-container-lowest/40 border border-border-divider/70 flex flex-col justify-between opacity-60">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-medium text-text-support font-caption-badge">6. Entrega</span>
+<span class="text-[10px] text-text-support">15 dez</span>
+</div>
+<p class="text-xs font-medium text-text-body mt-2 truncate">Deploy &amp; Assets</p>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-2"></div>
+</div>
+</div>
+</section>
+<!-- Main 2-Column Responsive Workspace -->
+<main class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Coluna Principal (Esquerda ~65% -> 8 de 12 colunas) -->
+<section class="lg:col-span-8 flex flex-col gap-6">
+<!-- 1. Aguardando sua revisão e aprovação (Card Destaque) -->
+<div class="glass-panel rounded-2xl p-6 sm:p-7 border-l-4 border-l-primary-container">
+<div class="flex items-center justify-between mb-5">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-xl">pending_actions</span>
+<h3 class="font-title-card text-title-card text-text-title font-bold">Aguardando sua revisão e aprovação</h3>
+</div>
+<p class="font-body-default text-text-support text-xs mt-1">Materiais recém-concluídos pela curadoria prontos para seu feedback ou aval executivo.</p>
+</div>
+<span class="px-2.5 py-1 rounded-full text-caption-badge font-caption-badge bg-primary-container/15 text-brand-primary-text border border-primary-container/20">
+              2 itens pendentes
+            </span>
+</div>
+<!-- Entregáveis Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Card 1: Sistema Tipográfico & Símbolo Lumina -->
+<div class="glass-panel glass-card-hover rounded-xl p-5 border border-white flex flex-col justify-between bg-white/80">
+<div>
+<!-- Mockup Preview Img -->
+<div class="relative w-full h-44 rounded-lg overflow-hidden bg-slate-900 mb-4 group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A refined architectural design studio presentation featuring bespoke typography specimen sheets, minimalist serif logo variations, and a warm ceramic sculpture on a natural linen desk bathed in golden afternoon sunlight with subtle terracotta highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv_rSJEiF551mXwiD11R7iOS9YqiugOk2pMbH7HEzAsDSX0BGlFiMzrL4jih4tAxu_O4WfT3pHT1hr5vNHRY-63tkMupc30yCekjhoi22KCeUt0N2TS_QEltwh6u7PmS4enIpp9alUre3RP1II-hmoUgSWiaPJWDrmFCsbt0j21mo9hl1QCG3enbt07sQ8lAS2-ZWhznezzGGNvbQphnLXdZpK2g7l32KISs0E0PhAVsDJE3UGk9Kh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">
+<span class="text-white text-xs font-code-token font-medium flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-sm">visibility</span> Apresentação v1.2 (PDF HD)
+                    </span>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-text-support mb-1.5">
+<span class="font-code-token">Fase 3 · Identidade</span>
+<span class="text-status-warning font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning"></span> Aguardando Aval
+                  </span>
+</div>
+<h4 class="font-title-card text-base font-bold text-text-title mb-1">Sistema Tipográfico &amp; Símbolo Lumina</h4>
+<p class="font-body-default text-xs text-text-body leading-relaxed mb-4">
+                  Construção geométrica do monograma 'L', escala harmônica editorial e guias de legibilidade para o aplicativo móvel.
+                </p>
+</div>
+<!-- Action buttons -->
+<div class="flex flex-col gap-2 pt-3 border-t border-border-divider/60">
+<button class="w-full h-10 rounded-xl bg-status-success text-white font-body-strong text-xs flex items-center justify-center gap-1.5 hover:bg-emerald-600 transition-colors shadow-sm active:scale-[0.98]" onclick="handleApprove(this, 'Sistema Tipográfico &amp; Símbolo Lumina')">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                  Aprovar Entregável
+                </button>
+<div class="grid grid-cols-2 gap-2">
+<button class="h-9 rounded-xl bg-surface-container-lowest border border-border-divider text-text-title font-body-strong text-xs flex items-center justify-center gap-1 hover:bg-surface-container-low transition-colors" onclick="openNoteDialog('Sistema Tipográfico &amp; Símbolo Lumina')">
+<span class="material-symbols-outlined text-sm">edit_note</span>
+                    Pedir Ajuste
+                  </button>
+<a class="h-9 rounded-xl bg-surface-container-lowest border border-border-divider text-text-title font-body-strong text-xs flex items-center justify-center gap-1 hover:bg-surface-container-low transition-colors" href="#preview">
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+                    Abrir Deck
+                  </a>
+</div>
+</div>
+</div>
+<!-- Card 2: Protótipo Funcional · Agenda do Aluno -->
+<div class="glass-panel glass-card-hover rounded-xl p-5 border border-white flex flex-col justify-between bg-white/80">
+<div>
+<!-- Mockup Preview Img -->
+<div class="relative w-full h-44 rounded-lg overflow-hidden bg-slate-900 mb-4 group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A clean UX and UI mobile screen design for an exclusive pilates boutique studio showing daily booking schedules and instructor profiles, displayed on a floating glass device mock over a warm beige porcelain tabletop under soft daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyr8cTf8Jm3cQkyiuvDzFsZNcAN8ecupHretx3leC3bPbJqzDuXisH8vZrn77g2ZMfR8_DAGkDt7cESnq1tdWnjZaQXfqPu8zRcTkSeHggbXiqEvwwdpfpLt_jHiDqA8lMCHgJjiyPfDihYxWOuaaAan7ISja9J_PW8yjr4y6TbKloqGyvVqPLnjH8AyMCP19tbXfCOZA2AKPJUZCoN6NNIKMYqWE0j1LJgeecnTNdMADUGyGZsrBY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">
+<span class="text-white text-xs font-code-token font-medium flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-sm">touch_app</span> Interativo Figma
+                    </span>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-text-support mb-1.5">
+<span class="font-code-token">Fase 3 · Plataforma</span>
+<span class="text-status-info font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-info"></span> Pronto p/ Navegar
+                  </span>
+</div>
+<h4 class="font-title-card text-base font-bold text-text-title mb-1">Protótipo Funcional · Agenda do Aluno</h4>
+<p class="font-body-default text-xs text-text-body leading-relaxed mb-4">
+                  Fluxo ponta a ponta do check-in no studio, cancelamento inteligente e visualização de grade horária por instrutor.
+                </p>
+</div>
+<!-- Action buttons -->
+<div class="flex flex-col gap-2 pt-3 border-t border-border-divider/60">
+<a class="w-full h-10 rounded-xl brand-btn-gradient text-white font-body-strong text-xs flex items-center justify-center gap-1.5 hover:bg-brand-primary-hover transition-all shadow-sm active:scale-[0.98]" href="#prototipo" target="_blank">
+<span class="material-symbols-outlined text-base">play_circle</span>
+                  Interagir no Protótipo
+                </a>
+<div class="grid grid-cols-2 gap-2">
+<button class="h-9 rounded-xl bg-surface-container-lowest border border-emerald-300 text-status-success font-body-strong text-xs flex items-center justify-center gap-1 hover:bg-emerald-50 transition-colors" onclick="handleApprove(this, 'Protótipo Funcional · Agenda do Aluno')">
+<span class="material-symbols-outlined text-sm">check</span>
+                    Aprovar Fluxo
+                  </button>
+<button class="h-9 rounded-xl bg-surface-container-lowest border border-border-divider text-text-title font-body-strong text-xs flex items-center justify-center gap-1 hover:bg-surface-container-low transition-colors" onclick="openNoteDialog('Protótipo Funcional · Agenda do Aluno')">
+<span class="material-symbols-outlined text-sm">add_comment</span>
+                    Anotações
+                  </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. Entregas Aprovadas Anteriormente (Histórico Colapsável) -->
+<div class="glass-panel rounded-2xl p-6">
+<details class="group" open="">
+<summary class="list-none flex items-center justify-between cursor-pointer select-none">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-status-success text-2xl" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<div>
+<h3 class="font-title-card text-title-card text-text-title font-bold">Entregas Aprovadas Anteriormente</h3>
+<p class="font-body-default text-xs text-text-support">2 entregáveis finalizados e assinados pelo cliente</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-support transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="mt-5 space-y-3 pt-3 border-t border-border-divider/60">
+<!-- Item 1 Aprovado -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest/70 border border-border-divider/70 flex items-center justify-between gap-4 hover:bg-white transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-50 text-status-success flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">palette</span>
+</div>
+<div>
+<h5 class="text-sm font-body-strong text-text-title">Moodboard Arquitetônico &amp; Direção Sensorial</h5>
+<p class="text-xs text-text-support">Validado por Camila Lumina em 21 out 2026 · Versão 1.0 Final</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[11px] font-caption-badge bg-emerald-100 text-status-success">Aprovado 100%</span>
+<button class="p-2 text-text-support hover:text-text-title rounded-lg hover:bg-surface-container-low" title="Ver arquivo">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</div>
+</div>
+<!-- Item 2 Aprovado -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest/70 border border-border-divider/70 flex items-center justify-between gap-4 hover:bg-white transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-50 text-status-success flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">dataset</span>
+</div>
+<div>
+<h5 class="text-sm font-body-strong text-text-title">Paleta Cromática Primária &amp; Acabamentos</h5>
+<p class="text-xs text-text-support">Validado por Camila Lumina em 18 out 2026 · Guia de Cores</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[11px] font-caption-badge bg-emerald-100 text-status-success">Aprovado 100%</span>
+<button class="p-2 text-text-support hover:text-text-title rounded-lg hover:bg-surface-container-low" title="Ver arquivo">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</div>
+</div>
+</div>
+</details>
+</div>
+<!-- 3. Arquivos & Assets para Download -->
+<div class="glass-panel rounded-2xl p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary-container text-2xl">folder_zip</span>
+<div>
+<h3 class="font-title-card text-title-card text-text-title font-bold">Arquivos &amp; Assets para Download</h3>
+<p class="font-body-default text-xs text-text-support">Manuais provisórios, plantas e tipografias autorizadas para sua equipe.</p>
+</div>
+</div>
+<button class="text-xs font-body-strong text-brand-primary-text hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">download_for_offline</span> Baixar Pacote Completo (.ZIP)
+            </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+<!-- Asset 1 -->
+<div class="p-3.5 rounded-xl bg-white/70 border border-border-divider flex flex-col justify-between hover:bg-white transition-all">
+<div class="flex items-start justify-between">
+<span class="material-symbols-outlined text-primary-container text-2xl">picture_as_pdf</span>
+<span class="font-code-token text-[11px] text-text-support">14.2 MB</span>
+</div>
+<div class="mt-3">
+<h5 class="text-xs font-body-strong text-text-title truncate">Manual de Marca Provisório</h5>
+<p class="text-[11px] text-text-support">PDF v0.8 · Diretrizes</p>
+</div>
+<button class="mt-3 w-full py-1.5 rounded-lg bg-surface-container text-xs font-body-strong text-text-title hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">file_download</span> Baixar
+              </button>
+</div>
+<!-- Asset 2 -->
+<div class="p-3.5 rounded-xl bg-white/70 border border-border-divider flex flex-col justify-between hover:bg-white transition-all">
+<div class="flex items-start justify-between">
+<span class="material-symbols-outlined text-primary-container text-2xl">architecture</span>
+<span class="font-code-token text-[11px] text-text-support">38.5 MB</span>
+</div>
+<div class="mt-3">
+<h5 class="text-xs font-body-strong text-text-title truncate">Plantas de Sinalização Studio</h5>
+<p class="text-[11px] text-text-support">DWG / PDF Vetorial</p>
+</div>
+<button class="mt-3 w-full py-1.5 rounded-lg bg-surface-container text-xs font-body-strong text-text-title hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">file_download</span> Baixar
+              </button>
+</div>
+<!-- Asset 3 -->
+<div class="p-3.5 rounded-xl bg-white/70 border border-border-divider flex flex-col justify-between hover:bg-white transition-all">
+<div class="flex items-start justify-between">
+<span class="material-symbols-outlined text-primary-container text-2xl">font_download</span>
+<span class="font-code-token text-[11px] text-text-support">4.1 MB</span>
+</div>
+<div class="mt-3">
+<h5 class="text-xs font-body-strong text-text-title truncate">Pacote de Fontes Licenciadas</h5>
+<p class="text-[11px] text-text-support">OTF / WOFF2 Web</p>
+</div>
+<button class="mt-3 w-full py-1.5 rounded-lg bg-surface-container text-xs font-body-strong text-text-title hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">file_download</span> Baixar
+              </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Coluna Lateral (Direita ~35% -> 4 de 12 colunas) -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<!-- Card: Próxima Reunião Marcada -->
+<div class="glass-panel rounded-2xl p-6 relative overflow-hidden">
+<div class="flex items-center gap-2 mb-3">
+<span class="w-2.5 h-2.5 rounded-full bg-status-success animate-ping"></span>
+<span class="font-caption-kpi-label text-caption-kpi-label uppercase text-brand-primary-text">Próxima Reunião</span>
+</div>
+<h3 class="font-title-card text-lg font-bold text-text-title">Alinhamento de Identidade Visual</h3>
+<div class="mt-4 p-3.5 rounded-xl bg-surface-container-lowest/80 border border-border-divider flex flex-col gap-2">
+<div class="flex items-center gap-2 text-xs text-text-body font-body-default">
+<span class="material-symbols-outlined text-primary-container text-base">calendar_today</span>
+<span class="font-body-strong">28 de Outubro, 2026</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-text-body font-body-default">
+<span class="material-symbols-outlined text-primary-container text-base">schedule</span>
+<span>14:30 às 15:30 (Horário de Brasília)</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-text-body font-body-default">
+<span class="material-symbols-outlined text-primary-container text-base">video_camera_front</span>
+<span class="font-code-token text-[11px] text-text-title">Google Meet (Link na confirmação)</span>
+</div>
+</div>
+<a class="mt-4 w-full h-11 rounded-xl bg-surface-container-lowest border border-border-divider text-text-title font-body-strong text-xs flex items-center justify-center gap-2 hover:bg-white transition-all shadow-sm active:scale-[0.98]" href="https://calendar.google.com" target="_blank">
+<span class="material-symbols-outlined text-primary-container text-lg">event</span>
+            Adicionar ao Google Agenda
+          </a>
+</div>
+<!-- Card: Escopo Contratado (4 Pilares) -->
+<div class="glass-panel rounded-2xl p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-text-title text-xl">verified_user</span>
+<h3 class="font-title-card text-base font-bold text-text-title">Escopo Contratado</h3>
+</div>
+<span class="text-[11px] font-mono text-text-support font-code-token">Contrato #441</span>
+</div>
+<p class="font-body-default text-xs text-text-support mb-4">
+            Resumo transparente dos pilares firmados para o lançamento do estúdio Lumina Movement.
+          </p>
+<div class="space-y-3">
+<!-- Pilar 1 -->
+<div class="p-3 rounded-xl bg-white/60 border border-border-divider/60 flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-emerald-100 text-status-success flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h5 class="text-xs font-body-strong text-text-title">1. Branding &amp; Identidade Espacial</h5>
+<p class="text-[11px] text-text-support leading-tight mt-0.5">Logo, tipografia, paleta e sinalização tátil de ambientes.</p>
+</div>
+</div>
+<!-- Pilar 2 -->
+<div class="p-3 rounded-xl bg-white/60 border border-border-divider/60 flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-fixed-dim/50 text-brand-primary-text flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-sm">sync</span>
+</div>
+<div>
+<h5 class="text-xs font-body-strong text-text-title">2. Aplicativo de Alunos &amp; Web App</h5>
+<p class="text-[11px] text-text-support leading-tight mt-0.5">Interface iOS/Android e agendamento de sessões.</p>
+</div>
+</div>
+<!-- Pilar 3 -->
+<div class="p-3 rounded-xl bg-white/60 border border-border-divider/60 flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-surface-container-high text-text-support flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-sm">hourglass_empty</span>
+</div>
+<div>
+<h5 class="text-xs font-body-strong text-text-title">3. Sistema de Sinalização Física</h5>
+<p class="text-[11px] text-text-support leading-tight mt-0.5">Wayfinding do espaço físico e detalhes em latão.</p>
+</div>
+</div>
+<!-- Pilar 4 -->
+<div class="p-3 rounded-xl bg-white/60 border border-border-divider/60 flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-surface-container-high text-text-support flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-sm">hourglass_empty</span>
+</div>
+<div>
+<h5 class="text-xs font-body-strong text-text-title">4. Brand Guidelines &amp; Launch Kit</h5>
+<p class="text-[11px] text-text-support leading-tight mt-0.5">Manual completo, templates para redes e enxoval institucional.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Card: Contato Direto com Curador Hícaro Duarte -->
+<div class="glass-panel rounded-2xl p-6 border-t-2 border-t-primary-container" id="contato-curador">
+<div class="flex items-center gap-3.5 mb-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-full overflow-hidden ring-2 ring-white shadow-md bg-slate-800">
+<img class="w-full h-full object-cover" data-alt="An executive portrait of Hícaro Duarte, creative director and architect of high-end branding atelier, dressed in a minimal dark charcoal merino wool turtleneck against warm textured linen studio background with warm soft illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzK0VBbrrLQSIwPn4LyjLDCC0T3nuboTG9m8G5zNVh4xl5nHXQY4c-ecunlcDSLMy-0nPdg1GRNmt2RadoXnC1xPHCUZY1EPBIIsd8O0sMF1GvKQaWf8GE96kHmONzV-ldM4uP3NT2wAEgh9z-ZRYoFthxGiJB2NF3x1W_b0Nk4WV2LnuMYB2uZnMVPNLXaIGS7Koxed2uyWTJLsXwsdP_AxmGiO2Q1Szi7R62lzD4rHqXhKKCA8h7"/>
+</div>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-status-success border-2 border-white" title="Online no estúdio"></span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h4 class="font-title-card text-sm font-bold text-text-title">Hícaro Duarte</h4>
+<span class="material-symbols-outlined text-primary-container text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="text-xs text-text-support font-body-default">Curador &amp; Diretor Criativo</p>
+<span class="text-[11px] text-status-success font-caption-badge flex items-center gap-1 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span> Online no estúdio
+              </span>
+</div>
+</div>
+<p class="font-body-default text-xs text-text-body leading-relaxed mb-4">
+            Canal de comunicação direta para esclarecimentos rápidos, ajustes conceituais ou dúvidas técnicas do projeto.
+          </p>
+<a class="w-full h-11 rounded-xl brand-btn-gradient text-white font-body-strong text-xs flex items-center justify-center gap-2 hover:bg-brand-primary-hover transition-all shadow-md active:scale-[0.98]" href="https://wa.me/5511999999999?text=Ol%C3%A1%20H%C3%ADcaro,%20gostaria%20de%20conversar%20sobre%20o%20projeto%20Lumina%20Movement" target="_blank">
+<span class="material-symbols-outlined text-base">chat</span>
+            Chamar no WhatsApp Direto
+          </a>
+</div>
+</aside>
+</main>
+<!-- Client Footer Note (Sem dados administrativos confidenciais) -->
+<footer class="mt-4 mb-8 text-center text-xs text-text-support">
+<p class="font-body-default">
+        Portal de Acompanhamento Exclusivo Lumina Movement · Desenvolvido por <strong class="text-text-title">Studio Suite 2.0</strong> · Todos os direitos reservados 2026.
+      </p>
+</footer>
+</div>
+<!-- Diálogo Modal para Solicitar Ajustes (Anotações) -->
+<div class="fixed inset-0 z-50 hidden bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4" id="noteModal">
+<div class="glass-panel bg-white/95 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-white">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">edit_note</span>
+<h4 class="font-title-card text-base font-bold text-text-title">Solicitar Ajuste ou Anotação</h4>
+</div>
+<button class="text-text-support hover:text-text-title" onclick="closeNoteDialog()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<p class="text-xs text-text-support mb-3 font-code-token" id="modalItemTitle">Item selecionado: [Carregando]</p>
+<div class="space-y-3">
+<div>
+<label class="block text-xs font-label-field text-text-title mb-1">Descreva o que gostaria de aprimorar:</label>
+<textarea class="w-full rounded-xl border border-border-divider p-3 text-xs text-text-title focus:ring-2 focus:ring-focus-indigo focus:border-focus-indigo" id="noteInput" placeholder="Ex: Adoramos o símbolo, mas gostaríamos de testar um peso tipográfico ligeiramente mais sutil nos subtítulos do app..." rows="4"></textarea>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2">
+<button class="px-4 py-2 rounded-xl bg-surface-container-lowest border border-border-divider text-text-body font-body-strong text-xs hover:bg-surface-container-low" onclick="closeNoteDialog()">
+            Cancelar
+          </button>
+<button class="px-4 py-2 rounded-xl brand-btn-gradient text-white font-body-strong text-xs hover:bg-brand-primary-hover shadow-sm" onclick="submitNote()">
+            Enviar para o Estúdio
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Notification Feedback -->
+<div class="fixed bottom-6 right-6 z-50 hidden glass-panel bg-white/95 border border-emerald-300 rounded-xl px-4 py-3 shadow-xl flex items-center gap-3" id="feedbackToast">
+<span class="material-symbols-outlined text-status-success text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs font-body-strong text-text-title" id="toastMessage">Entregável aprovado com sucesso!</span>
+</div>
+<script>
+    let activeItem = '';
+
+    function openNoteDialog(itemName) {
+      activeItem = itemName;
+      document.getElementById('modalItemTitle').innerText = 'Item selecionado: ' + itemName;
+      document.getElementById('noteInput').value = '';
+      document.getElementById('noteModal').classList.remove('hidden');
+    }
+
+    function closeNoteDialog() {
+      document.getElementById('noteModal').classList.add('hidden');
+    }
+
+    function submitNote() {
+      const text = document.getElementById('noteInput').value.trim();
+      if(!text) {
+        alert('Por favor, escreva uma breve descrição da sua anotação.');
+        return;
+      }
+      closeNoteDialog();
+      showToast('Anotação sobre "' + activeItem + '" enviada para a equipe de Hícaro.');
+    }
+
+    function handleApprove(buttonElement, itemName) {
+      buttonElement.disabled = true;
+      buttonElement.classList.remove('bg-status-success', 'hover:bg-emerald-600');
+      buttonElement.classList.add('bg-emerald-100', 'text-status-success', 'border', 'border-emerald-300');
+      buttonElement.innerHTML = '<span class="material-symbols-outlined text-base" style="font-variation-settings: \'FILL\' 1;">check</span> Aprovado pelo Cliente';
+      showToast('Entregável "' + itemName + '" devidamente aprovado!');
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('feedbackToast');
+      document.getElementById('toastMessage').innerText = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+  </script>
+</body></html>

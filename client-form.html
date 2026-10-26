@@ -3,7 +3,7 @@
 <html class="h-full bg-background text-on-surface" lang="pt-BR"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Briefing de Descoberta &amp; Alinhamento Estratégico | StudioIntake</title>
+<title>Briefing de Descoberta &amp; Alinhamento Estratégico | Studio Suite 2.0</title>
 <!-- Google Fonts: Inter & Plus Jakarta Sans -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -19,53 +19,53 @@
       theme: {
         extend: {
           "colors": {
-            "inverse-on-surface": "#edf0ff",
-            "secondary-fixed-dim": "#bdc7db",
+            "inverse-on-surface": "#fff4ea",
+            "secondary-fixed-dim": "#c2aa8b",
             "surface-container-lowest": "#ffffff",
-            "on-tertiary-container": "#ffd2be",
-            "inverse-primary": "#c3c0ff",
-            "on-surface-variant": "#464555",
-            "tertiary-fixed-dim": "#ffb695",
-            "tertiary-fixed": "#ffdbcc",
-            "surface-variant": "#dce2f7",
+            "on-tertiary-container": "#00201d",
+            "inverse-primary": "#ffb690",
+            "on-surface-variant": "#584237",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "tertiary-fixed": "#89f5e7",
+            "surface-variant": "#f3e4d6",
             "on-error-container": "#93000a",
-            "on-surface": "#141b2b",
-            "primary": "#3525cd",
+            "on-surface": "#0d1c2e",
+            "primary": "#c2410c",
             "error": "#ba1a1a",
-            "background": "#f9f9ff",
+            "background": "#FBF8F3",
             "on-secondary": "#ffffff",
-            "on-primary-fixed": "#0f0069",
-            "secondary": "#555f70",
-            "outline-variant": "#c7c4d8",
-            "on-tertiary-fixed": "#351000",
+            "on-primary-fixed": "#341100",
+            "secondary": "#78716c",
+            "outline-variant": "#e0c0b1",
+            "on-tertiary-fixed": "#00201d",
             "inverse-surface": "#293040",
-            "surface-tint": "#4d44e3",
-            "primary-container": "#4f46e5",
+            "surface-tint": "#9d4300",
+            "primary-container": "#f97316",
             "error-container": "#ffdad6",
-            "outline": "#777587",
-            "tertiary": "#7e3000",
-            "secondary-container": "#d6e0f4",
-            "surface-container-highest": "#dce2f7",
-            "on-primary-fixed-variant": "#3323cc",
-            "on-background": "#141b2b",
-            "surface-container-low": "#f1f3ff",
+            "outline": "#8c7164",
+            "tertiary": "#006a61",
+            "secondary-container": "#f7f2ea",
+            "surface-container-highest": "#f3e4d6",
+            "on-primary-fixed-variant": "#783200",
+            "on-background": "#0d1c2e",
+            "surface-container-low": "#fdf6ee",
             "on-error": "#ffffff",
-            "on-tertiary-fixed-variant": "#7b2f00",
-            "surface-container": "#e9edff",
+            "on-tertiary-fixed-variant": "#005049",
+            "surface-container": "#faf1e6",
             "on-primary": "#ffffff",
             "on-tertiary": "#ffffff",
-            "surface-dim": "#d3daef",
-            "primary-fixed-dim": "#c3c0ff",
-            "tertiary-container": "#a44100",
-            "primary-fixed": "#e2dfff",
+            "surface-dim": "#e8dfd2",
+            "primary-fixed-dim": "#ffb690",
+            "tertiary-container": "#37ab9e",
+            "primary-fixed": "#ffdbca",
             "on-secondary-fixed-variant": "#3d4757",
-            "secondary-fixed": "#d9e3f7",
+            "secondary-fixed": "#eee4d5",
             "on-secondary-container": "#596374",
-            "on-primary-container": "#dad7ff",
+            "on-primary-container": "#ffffff",
             "on-secondary-fixed": "#121c2a",
-            "surface-bright": "#f9f9ff",
-            "surface-container-high": "#e1e8fd",
-            "surface": "#f9f9ff"
+            "surface-bright": "#fffaf5",
+            "surface-container-high": "#f7ebe0",
+            "surface": "#fcfaf7"
           },
           "borderRadius": {
             "DEFAULT": "0.25rem",
@@ -126,22 +126,28 @@
     }
     .focus-ring:focus {
       outline: none;
-      border-color: #4f46e5;
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+      border-color: #f97316;
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+    }
+    .glass-surface {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.07), 0 10px 25px -5px rgba(0, 0, 0, 0.04);
     }
   </style>
 </head>
-<body class="min-h-screen bg-background text-on-surface font-body-md text-body-md antialiased pb-32">
+<body class="min-h-screen text-on-surface font-body-md text-body-md antialiased pb-32" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);">
 <!-- TOP APP BAR (Shared Components JSON execution) -->
-<header class="bg-surface-container-lowest border-b border-outline-variant shadow-sm sticky top-0 z-40">
+<header class="glass-surface border-b border-outline-variant sticky top-0 z-40">
 <div class="flex justify-between items-center w-full px-space-lg max-w-5xl mx-auto h-16">
 <!-- Brand & Product Anchor -->
 <div class="flex items-center space-x-3">
 <div class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-headline-sm text-headline-sm font-bold shadow-sm">
-          S
+          HD
         </div>
 <div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">StudioIntake</span>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">Studio Suite 2.0</span>
 <span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Lumina Movement Reformer Studio
           </span>

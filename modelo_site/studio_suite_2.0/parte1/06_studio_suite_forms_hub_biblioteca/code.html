@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Studio Suite 2.0 — Forms Hub</title>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#6bd8cb",
+            "status-info": "#0284C7",
+            "status-success": "#10B981",
+            "background": "#f8f9ff",
+            "on-surface-variant": "#584237",
+            "text-placeholder": "#94A3B8",
+            "on-surface": "#0d1c2e",
+            "outline-variant": "#e0c0b1",
+            "on-tertiary-fixed": "#00201d",
+            "on-tertiary": "#ffffff",
+            "surface-canvas-start": "#FBF8F3",
+            "status-warning": "#F59E0B",
+            "card-highlight-end": "#FBBF24",
+            "secondary": "#545f73",
+            "text-title": "#0F172A",
+            "text-body": "#475569",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#586377",
+            "primary": "#9d4300",
+            "text-support": "#64748B",
+            "brand-primary-text": "#C2410C",
+            "surface-bright": "#f8f9ff",
+            "on-secondary-fixed-variant": "#3c475a",
+            "status-urgent": "#EF4444",
+            "inverse-surface": "#233144",
+            "surface-canvas-mid": "#F5EFEB",
+            "primary-fixed": "#ffdbca",
+            "on-background": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#341100",
+            "on-secondary-fixed": "#111c2d",
+            "on-tertiary-fixed-variant": "#005049",
+            "surface-container-highest": "#d5e3fc",
+            "border-divider": "#E2E8F0",
+            "on-tertiary-container": "#003934",
+            "surface": "#f8f9ff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "surface-dim": "#ccdbf3",
+            "surface-canvas-end": "#ECE4DB",
+            "inverse-primary": "#ffb690",
+            "secondary-fixed": "#d8e3fb",
+            "tertiary-container": "#37ab9e",
+            "surface-container-low": "#eff4ff",
+            "surface-tint": "#9d4300",
+            "tertiary": "#006a61",
+            "focus-indigo": "#4F46E5",
+            "on-primary-container": "#582200",
+            "brand-gradient-end": "#E65100",
+            "secondary-fixed-dim": "#bcc7de",
+            "error-container": "#ffdad6",
+            "secondary-container": "#d5e0f8",
+            "surface-container-high": "#dce9ff",
+            "on-primary-fixed-variant": "#783200",
+            "primary-container": "#f97316",
+            "primary-fixed-dim": "#ffb690",
+            "brand-primary-hover": "#EA580C",
+            "surface-variant": "#d5e3fc",
+            "surface-container": "#e6eeff",
+            "outline": "#8c7164",
+            "tertiary-fixed": "#89f5e7",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "display-kpi-mobile": ["Plus Jakarta Sans", "sans-serif"],
+            "body-strong": ["Plus Jakarta Sans", "sans-serif"],
+            "caption-badge": ["Plus Jakarta Sans", "sans-serif"],
+            "display-kpi": ["Plus Jakarta Sans", "sans-serif"],
+            "title-card": ["Plus Jakarta Sans", "sans-serif"],
+            "body-default": ["Plus Jakarta Sans", "sans-serif"],
+            "code-pin": ["JetBrains Mono", "monospace"],
+            "headline-screen": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-screen-mobile": ["Plus Jakarta Sans", "sans-serif"],
+            "caption-kpi-label": ["Plus Jakarta Sans", "sans-serif"],
+            "label-field": ["Plus Jakarta Sans", "sans-serif"],
+            "title-section": ["Plus Jakarta Sans", "sans-serif"],
+            "code-token": ["JetBrains Mono", "monospace"]
+          },
+          "fontSize": {
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Warm Glassmorphism System */
+    .warm-canvas {
+      background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);
+      min-height: 100vh;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.80);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.07), 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      box-shadow: 0 24px 48px -12px rgba(230, 81, 0, 0.12), 0 12px 28px -6px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
+    .glass-dock {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.90);
+      box-shadow: 0 24px 48px -12px rgba(230, 81, 0, 0.08), 0 12px 28px -6px rgba(15, 23, 42, 0.05);
+    }
+    .btn-brand-primary {
+      background: linear-gradient(135deg, #F97316 0%, #E65100 100%);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-brand-primary:hover {
+      background: #EA580C;
+      box-shadow: 0 8px 20px -4px rgba(230, 81, 0, 0.35);
+    }
+    .btn-brand-primary:active {
+      transform: scale(0.98);
+    }
+    .btn-glass-secondary {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid #E2E8F0;
+      transition: all 0.2s ease;
+    }
+    .btn-glass-secondary:hover {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+      transform: translateY(-1px);
+    }
+    .btn-glass-secondary:active {
+      transform: scale(0.98);
+    }
+    .dashed-card {
+      border: 2px dashed rgba(249, 115, 22, 0.4);
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(16px);
+      transition: all 0.25s ease;
+    }
+    .dashed-card:hover {
+      border-color: #F97316;
+      background: rgba(255, 255, 255, 0.75);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.12);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.3);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="warm-canvas text-text-body antialiased selection:bg-primary-fixed selection:text-brand-primary-text font-body-default text-body-default min-h-screen relative flex">
+<!-- =========================================================================
+       FLOATING LEFT DOCK (STUDIO NAVIGATION: 72px, radius 24px, offset 20px)
+       Active: Forms Hub (Index 2 in Shared Components: tab_labels[1] / icon: assignment)
+  ========================================================================== -->
+<aside class="fixed left-5 top-5 bottom-5 w-[72px] glass-dock rounded-3xl flex flex-col items-center justify-between py-6 z-50">
+<!-- Top HD Atelier Monogram -->
+<div class="flex flex-col items-center gap-6">
+<div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#0F172A] to-[#1E293B] flex items-center justify-center shadow-md shadow-black/10 ring-1 ring-white/30 group cursor-pointer" title="Studio Suite 2.0 — Hícaro Duarte Atelier">
+<span class="font-headline-screen text-white font-extrabold text-[15px] tracking-tight">HD</span>
+</div>
+<!-- Main Navigation Icons -->
+<nav class="flex flex-col items-center gap-2">
+<!-- Início / Dashboard -->
+<a class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-colors duration-150 active:scale-[0.98]" href="#inicio" title="Início">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+</a>
+<!-- CRM Leads -->
+<a class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-colors duration-150 active:scale-[0.98]" href="#crm" title="CRM Leads">
+<span class="material-symbols-outlined text-[22px]">filter_alt</span>
+</a>
+<!-- Forms Hub [ACTIVE ITEM: Exact label match from Shared Components] -->
+<a class="w-11 h-11 rounded-xl bg-primary-container text-white flex items-center justify-center shadow-lg shadow-primary-container/30 transition-transform active:scale-[0.98]" href="#forms" title="Forms Hub">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">assignment</span>
+</a>
+<!-- Projetos & Delivery -->
+<a class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-colors duration-150 active:scale-[0.98]" href="#projetos" title="Projects &amp; Delivery">
+<span class="material-symbols-outlined text-[22px]">tactic</span>
+</a>
+<!-- Agenda / Cronograma -->
+<a class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-colors duration-150 active:scale-[0.98]" href="#agenda" title="Agenda &amp; Sessões">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+</a>
+<!-- Clientes / Wellness Registry -->
+<a class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-colors duration-150 active:scale-[0.98]" href="#clientes" title="Clientes &amp; Estúdios">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+</a>
+</nav>
+</div>
+<!-- Dock Footer: Settings, Theme & User Avatar -->
+<div class="flex flex-col items-center gap-3">
+<!-- Configurações -->
+<a class="w-10 h-10 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-colors duration-150" href="#configuracoes" title="Settings">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</a>
+<!-- Divider -->
+<div class="w-7 h-[1px] bg-border-divider/60 my-1"></div>
+<!-- Personal Executive User Avatar Profile -->
+<div class="relative group cursor-pointer">
+<img class="w-10 h-10 rounded-xl object-cover ring-2 ring-white/90 shadow-sm transition-transform duration-200 group-hover:scale-105" data-alt="Editorial cinematic studio portrait of Hícaro Duarte, executive creative director and brand architect, bathed in sunlit architectural natural warm linen tones with gentle contrast shadows, wearing refined dark slate attire, embodying calm tailored luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrBKrs9ft_RVihBVKTn893O3vtJjbAUkW3Zry6FimodjXPmDusFuNjIdF784XCV52xY-cGBlksprpepBfGt-rLWLqhKKqn_bJ-XJw4lEhzBGBfeqQ8kWU6moL34v0QyYNMwAWunVIUt0AS0pTeZSYAijIJoG0pj5Wt_iVw-uwVX7ELCVYQCXn4OI_i5vadnKZQsiBQKp7PfllAWCKACe3BPw95FDRvEuKSWh1PBnetnxazMM0Jf5Je"/>
+<div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-status-success rounded-full ring-2 ring-white"></div>
+</div>
+</div>
+</aside>
+<!-- =========================================================================
+       MAIN CANVAS AREA (Offset 112px to account for left floating dock)
+  ========================================================================== -->
+<main class="flex-1 ml-[104px] mr-8 my-5 min-w-0 flex flex-col gap-6">
+<!-- TOP HEADER / STUDIO SUITE 2.0 EXECUTIVE APPBUTT -->
+<header class="flex items-center justify-between pb-2">
+<!-- Screen Identity -->
+<div>
+<div class="flex items-center gap-3">
+<h1 class="font-headline-screen text-headline-screen text-text-title tracking-tight">Forms Hub</h1>
+<span class="px-2.5 py-0.5 rounded-full text-caption-badge font-caption-badge bg-primary-container/10 text-brand-primary-text border border-primary-container/20">
+            Studio Suite 2.0
+          </span>
+</div>
+<p class="font-body-default text-body-default text-text-support mt-0.5">Modelos de briefing e respostas recebidas</p>
+</div>
+<!-- Top Primary & Secondary Actions -->
+<div class="flex items-center gap-3">
+<!-- Secondary Action: Gerar PIN avulso (Frosted Glass with Key Icon) -->
+<button class="btn-glass-secondary h-11 px-4 rounded-xl flex items-center gap-2 text-text-title font-body-strong text-body-strong shadow-sm hover:border-slate-300" type="button">
+<span class="material-symbols-outlined text-[19px] text-[#0D9488]" style="font-variation-settings: 'FILL' 1;">key</span>
+<span>Gerar PIN avulso</span>
+</button>
+<!-- Primary Action: + Novo modelo (Gradient Terracotta 135deg) -->
+<button class="btn-brand-primary h-11 px-5 rounded-xl flex items-center gap-2 text-white font-body-strong text-body-strong shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px] font-bold">add</span>
+<span>+ Novo modelo</span>
+</button>
+<!-- Executive Micro Action Menu -->
+<div class="h-6 w-[1px] bg-border-divider mx-1"></div>
+<button class="btn-glass-secondary w-11 h-11 rounded-xl flex items-center justify-center text-text-body hover:text-text-title" title="Notificações" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="btn-glass-secondary w-11 h-11 rounded-xl flex items-center justify-center text-text-body hover:text-text-title" title="Preferências" type="button">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+</header>
+<!-- TABS BAR WITH COUNTERS -->
+<section class="flex items-center justify-between border-b border-border-divider/80 pb-3">
+<div class="flex items-center gap-8">
+<!-- Tab 1: Modelos (8) [ACTIVE] -->
+<button class="relative flex items-center gap-2.5 pb-2.5 font-title-section text-title-section text-brand-primary-text font-semibold" type="button">
+<span>Modelos</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-code-token font-bold bg-primary-container text-white">8</span>
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-container rounded-full"></div>
+</button>
+<!-- Tab 2: Respostas recebidas (23) -->
+<button class="relative flex items-center gap-2.5 pb-2.5 font-body-strong text-body-strong text-text-support hover:text-text-title transition-colors" type="button">
+<span>Respostas recebidas</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-code-token font-semibold bg-white/70 text-text-body border border-border-divider">23</span>
+</button>
+<!-- Tab 3: Arquivados (3) -->
+<button class="relative flex items-center gap-2.5 pb-2.5 font-body-strong text-body-strong text-text-support hover:text-text-title transition-colors" type="button">
+<span>Arquivados</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-code-token font-semibold bg-white/70 text-text-body border border-border-divider">3</span>
+</button>
+</div>
+<!-- Quick Sync Status Tag -->
+<div class="flex items-center gap-2 text-[12px] font-caption-kpi-label text-text-support">
+<span class="w-2 h-2 rounded-full bg-status-success animate-pulse"></span>
+<span class="font-medium tracking-normal text-slate-500">Sincronizado via Studio Cloud</span>
+</div>
+</section>
+<!-- =========================================================================
+         KPI ROW: 4 WARM GLASSMETRIC CARDS
+    ========================================================================== -->
+<section class="grid grid-cols-4 gap-5">
+<!-- KPI 1: Modelos ativos -->
+<div class="glass-card rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase">Modelos ativos</span>
+<div class="w-9 h-9 rounded-xl bg-primary-container/10 flex items-center justify-center text-brand-primary-text">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline justify-between">
+<div class="font-display-kpi text-display-kpi text-text-title font-bold tracking-tight">8</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-md text-[12px] font-caption-badge font-semibold bg-primary-container/10 text-brand-primary-text">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+2 este mês</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<!-- KPI 2: Respostas no mês -->
+<div class="glass-card rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase">Respostas no mês</span>
+<div class="w-9 h-9 rounded-xl bg-status-success/10 flex items-center justify-center text-status-success">
+<span class="material-symbols-outlined text-[20px]">mark_email_read</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline justify-between">
+<div class="font-display-kpi text-display-kpi text-text-title font-bold tracking-tight">23</div>
+<div class="flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[12px] font-caption-badge font-semibold bg-emerald-500/10 text-[#047857]">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+<span>+18%</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-status-success h-full rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<!-- KPI 3: Taxa de conclusão -->
+<div class="glass-card rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase">Taxa de conclusão</span>
+<div class="w-9 h-9 rounded-xl bg-status-info/10 flex items-center justify-center text-status-info">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline justify-between">
+<div class="font-display-kpi text-display-kpi text-text-title font-bold tracking-tight">91%</div>
+<span class="px-2 py-0.5 rounded-md text-[12px] font-caption-badge font-semibold bg-sky-500/10 text-status-info">
+            Tempo ágil
+          </span>
+</div>
+<div class="w-full bg-slate-100 h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-status-info h-full rounded-full" style="width: 91%"></div>
+</div>
+</div>
+<!-- KPI 4: Tempo médio de preenchimento -->
+<div class="glass-card rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase">Tempo médio</span>
+<div class="w-9 h-9 rounded-xl bg-status-warning/10 flex items-center justify-center text-status-warning">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline justify-between">
+<div class="flex items-baseline gap-1">
+<span class="font-display-kpi text-display-kpi text-text-title font-bold tracking-tight">14</span>
+<span class="font-title-section text-title-section text-text-support font-medium">min</span>
+</div>
+<span class="px-2 py-0.5 rounded-md text-[12px] font-caption-badge font-semibold bg-amber-500/10 text-[#B45309]">
+            meta &lt; 18 min
+          </span>
+</div>
+<div class="w-full bg-slate-100 h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-status-warning h-full rounded-full" style="width: 68%"></div>
+</div>
+</div>
+</section>
+<!-- =========================================================================
+         FILTER BAR: SEARCH INPUT & NICHE FILTER PILLS
+    ========================================================================== -->
+<section class="glass-card rounded-2xl p-4 flex items-center justify-between gap-4">
+<!-- Search Input Container -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-text-placeholder text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-4 bg-white/70 rounded-xl border border-border-divider text-text-title font-body-default text-body-default placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:ring-offset-1 focus:border-[#4F46E5] transition-all" placeholder="Buscar modelo por título, palavra-chave ou tag..." type="text"/>
+</div>
+<!-- Segmented Niche Filter Pills -->
+<div class="flex items-center gap-1.5 p-1 rounded-xl bg-white/60 border border-border-divider/70">
+<!-- Filter: Todos (Active) -->
+<button class="px-3.5 py-1.5 rounded-lg text-body-strong font-body-strong bg-[#0F172A] text-white shadow-xs transition-all" type="button">
+          Todos (8)
+        </button>
+<!-- Filter: Pilates -->
+<button class="px-3.5 py-1.5 rounded-lg text-body-strong font-body-strong text-text-support hover:text-text-title hover:bg-white/80 transition-all flex items-center gap-1.5" type="button">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>Pilates</span>
+</button>
+<!-- Filter: Fisioterapia -->
+<button class="px-3.5 py-1.5 rounded-lg text-body-strong font-body-strong text-text-support hover:text-text-title hover:bg-white/80 transition-all flex items-center gap-1.5" type="button">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Fisioterapia</span>
+</button>
+<!-- Filter: Bem-estar -->
+<button class="px-3.5 py-1.5 rounded-lg text-body-strong font-body-strong text-text-support hover:text-text-title hover:bg-white/80 transition-all flex items-center gap-1.5" type="button">
+<span class="w-2 h-2 rounded-full bg-status-warning"></span>
+<span>Bem-estar</span>
+</button>
+<!-- Filter: Eventos -->
+<button class="px-3.5 py-1.5 rounded-lg text-body-strong font-body-strong text-text-support hover:text-text-title hover:bg-white/80 transition-all flex items-center gap-1.5" type="button">
+<span class="w-2 h-2 rounded-full bg-purple-500"></span>
+<span>Eventos</span>
+</button>
+</div>
+<!-- Right Display Switcher -->
+<div class="flex items-center gap-1 text-text-support">
+<button class="w-9 h-9 rounded-lg bg-white/90 text-text-title flex items-center justify-center border border-border-divider shadow-xs" title="Exibição em Grid" type="button">
+<span class="material-symbols-outlined text-[19px]">grid_view</span>
+</button>
+<button class="w-9 h-9 rounded-lg text-text-support hover:text-text-title flex items-center justify-center hover:bg-white/60 transition-colors" title="Exibição em Lista" type="button">
+<span class="material-symbols-outlined text-[19px]">view_list</span>
+</button>
+</div>
+</section>
+<!-- =========================================================================
+         TEMPLATES GRID (3 COLUMNS, 6 CARDS)
+    ========================================================================== -->
+<section class="grid grid-cols-3 gap-5 pb-8">
+<!-- CARD 1: Briefing Pilates Reformer -->
+<article class="glass-card rounded-2xl p-6 flex flex-col justify-between border-t-[3px] border-t-primary-container relative group">
+<div>
+<!-- Header: Category Badge & Version -->
+<div class="flex items-center justify-between mb-3">
+<span class="px-2.5 py-0.5 rounded-full text-caption-badge font-caption-badge bg-primary-container/10 text-brand-primary-text border border-primary-container/20">
+              Pilates
+            </span>
+<div class="flex items-center gap-1 text-caption-kpi-label font-code-token text-text-support font-semibold">
+<span class="material-symbols-outlined text-[14px]">history</span>
+<span>v2.4</span>
+</div>
+</div>
+<!-- Title & Brief Description -->
+<h2 class="font-title-card text-title-card text-text-title font-bold group-hover:text-brand-primary-text transition-colors">
+            Briefing Pilates Reformer
+          </h2>
+<p class="font-body-default text-body-default text-text-support mt-1 text-[13px] leading-relaxed">
+            Identidade visual, arquitetura espacial do estúdio e perfil de alunos para aparelhos.
+          </p>
+<!-- Metrics Row: Questions & Sections -->
+<div class="grid grid-cols-2 gap-3 mt-4 py-3 border-y border-border-divider/70">
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Estrutura</div>
+<div class="text-[13px] font-body-strong font-semibold text-text-title mt-0.5">24 perguntas · 4 seções</div>
+</div>
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Conclusão</div>
+<div class="flex items-center gap-1 text-[13px] font-body-strong font-bold text-status-success mt-0.5">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+<span>94%</span>
+</div>
+</div>
+</div>
+<!-- Micro Metas: Usage & Short Link -->
+<div class="mt-3.5 space-y-2">
+<div class="flex items-center justify-between text-[12px] text-text-support font-body-default">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-text-placeholder">schedule</span>
+                Último uso: <strong class="text-text-body font-medium">Há 2 horas</strong>
+</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-[#047857] text-[11px] font-semibold">Ativo</span>
+</div>
+<!-- Short Link with JetBrains Mono -->
+<div class="flex items-center justify-between bg-white/60 p-2 rounded-xl border border-border-divider/80">
+<span class="font-code-token text-code-token text-text-title tracking-tight truncate pr-2 select-all">studiosuite.app/b/pilates</span>
+<button class="text-text-support hover:text-brand-primary-text transition-colors" title="Copiar link curto" type="button">
+<span class="material-symbols-outlined text-[17px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Actions Bar -->
+<div class="flex items-center justify-between pt-4 mt-4 border-t border-border-divider/60">
+<div class="flex items-center gap-2">
+<button class="btn-brand-primary px-3.5 py-1.5 rounded-lg text-white text-[13px] font-body-strong flex items-center gap-1.5 shadow-xs" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="btn-glass-secondary px-3 py-1.5 rounded-lg text-text-title text-[13px] font-body-strong flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Duplicar</span>
+</button>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-support hover:text-text-title hover:bg-white/80 flex items-center justify-center transition-colors" title="Mais opções" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</article>
+<!-- CARD 2: Fisioterapia & Sports Rehab -->
+<article class="glass-card rounded-2xl p-6 flex flex-col justify-between border-t-[3px] border-t-tertiary relative group">
+<div>
+<!-- Header: Category Badge & Version -->
+<div class="flex items-center justify-between mb-3">
+<span class="px-2.5 py-0.5 rounded-full text-caption-badge font-caption-badge bg-tertiary/10 text-tertiary border border-tertiary/20">
+              Fisioterapia
+            </span>
+<div class="flex items-center gap-1 text-caption-kpi-label font-code-token text-text-support font-semibold">
+<span class="material-symbols-outlined text-[14px]">history</span>
+<span>v3.1</span>
+</div>
+</div>
+<!-- Title & Brief Description -->
+<h2 class="font-title-card text-title-card text-text-title font-bold group-hover:text-tertiary transition-colors">
+            Fisioterapia &amp; Sports Rehab
+          </h2>
+<p class="font-body-default text-body-default text-text-support mt-1 text-[13px] leading-relaxed">
+            Diagnóstico de clínica ortopédica, reabilitação atlética e protocolos de confiança.
+          </p>
+<!-- Metrics Row: Questions & Sections -->
+<div class="grid grid-cols-2 gap-3 mt-4 py-3 border-y border-border-divider/70">
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Estrutura</div>
+<div class="text-[13px] font-body-strong font-semibold text-text-title mt-0.5">32 perguntas · 5 seções</div>
+</div>
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Conclusão</div>
+<div class="flex items-center gap-1 text-[13px] font-body-strong font-bold text-status-success mt-0.5">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+<span>88%</span>
+</div>
+</div>
+</div>
+<!-- Micro Metas: Usage & Short Link -->
+<div class="mt-3.5 space-y-2">
+<div class="flex items-center justify-between text-[12px] text-text-support font-body-default">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-text-placeholder">schedule</span>
+                Último uso: <strong class="text-text-body font-medium">Ontem</strong>
+</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-[#047857] text-[11px] font-semibold">Ativo</span>
+</div>
+<!-- Short Link with JetBrains Mono -->
+<div class="flex items-center justify-between bg-white/60 p-2 rounded-xl border border-border-divider/80">
+<span class="font-code-token text-code-token text-text-title tracking-tight truncate pr-2 select-all">studiosuite.app/b/physio</span>
+<button class="text-text-support hover:text-tertiary transition-colors" title="Copiar link curto" type="button">
+<span class="material-symbols-outlined text-[17px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Actions Bar -->
+<div class="flex items-center justify-between pt-4 mt-4 border-t border-border-divider/60">
+<div class="flex items-center gap-2">
+<button class="btn-brand-primary px-3.5 py-1.5 rounded-lg text-white text-[13px] font-body-strong flex items-center gap-1.5 shadow-xs" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="btn-glass-secondary px-3 py-1.5 rounded-lg text-text-title text-[13px] font-body-strong flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Duplicar</span>
+</button>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-support hover:text-text-title hover:bg-white/80 flex items-center justify-center transition-colors" title="Mais opções" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</article>
+<!-- CARD 3: Eventos Corporativos & Gala -->
+<article class="glass-card rounded-2xl p-6 flex flex-col justify-between border-t-[3px] border-t-purple-500 relative group">
+<div>
+<!-- Header: Category Badge & Version -->
+<div class="flex items-center justify-between mb-3">
+<span class="px-2.5 py-0.5 rounded-full text-caption-badge font-caption-badge bg-purple-500/10 text-purple-700 border border-purple-500/20">
+              Eventos
+            </span>
+<div class="flex items-center gap-1 text-caption-kpi-label font-code-token text-text-support font-semibold">
+<span class="material-symbols-outlined text-[14px]">history</span>
+<span>v1.9</span>
+</div>
+</div>
+<!-- Title & Brief Description -->
+<h2 class="font-title-card text-title-card text-text-title font-bold group-hover:text-purple-700 transition-colors">
+            Eventos Corporativos &amp; Gala
+          </h2>
+<p class="font-body-default text-body-default text-text-support mt-1 text-[13px] leading-relaxed">
+            Diretrizes de ambientação, cronograma VIP, experiências imersivas e dress code.
+          </p>
+<!-- Metrics Row: Questions & Sections -->
+<div class="grid grid-cols-2 gap-3 mt-4 py-3 border-y border-border-divider/70">
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Estrutura</div>
+<div class="text-[13px] font-body-strong font-semibold text-text-title mt-0.5">18 perguntas · 3 seções</div>
+</div>
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Conclusão</div>
+<div class="flex items-center gap-1 text-[13px] font-body-strong font-bold text-status-success mt-0.5">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+<span>92%</span>
+</div>
+</div>
+</div>
+<!-- Micro Metas: Usage & Short Link -->
+<div class="mt-3.5 space-y-2">
+<div class="flex items-center justify-between text-[12px] text-text-support font-body-default">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-text-placeholder">schedule</span>
+                Último uso: <strong class="text-text-body font-medium">Há 3 dias</strong>
+</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-[#047857] text-[11px] font-semibold">Ativo</span>
+</div>
+<!-- Short Link with JetBrains Mono -->
+<div class="flex items-center justify-between bg-white/60 p-2 rounded-xl border border-border-divider/80">
+<span class="font-code-token text-code-token text-text-title tracking-tight truncate pr-2 select-all">studiosuite.app/b/gala</span>
+<button class="text-text-support hover:text-purple-600 transition-colors" title="Copiar link curto" type="button">
+<span class="material-symbols-outlined text-[17px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Actions Bar -->
+<div class="flex items-center justify-between pt-4 mt-4 border-t border-border-divider/60">
+<div class="flex items-center gap-2">
+<button class="btn-brand-primary px-3.5 py-1.5 rounded-lg text-white text-[13px] font-body-strong flex items-center gap-1.5 shadow-xs" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="btn-glass-secondary px-3 py-1.5 rounded-lg text-text-title text-[13px] font-body-strong flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Duplicar</span>
+</button>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-support hover:text-text-title hover:bg-white/80 flex items-center justify-center transition-colors" title="Mais opções" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</article>
+<!-- CARD 4: Onboarding Express Wellness -->
+<article class="glass-card rounded-2xl p-6 flex flex-col justify-between border-t-[3px] border-t-status-warning relative group">
+<div>
+<!-- Header: Category Badge & Version -->
+<div class="flex items-center justify-between mb-3">
+<span class="px-2.5 py-0.5 rounded-full text-caption-badge font-caption-badge bg-status-warning/10 text-[#B45309] border border-status-warning/20">
+              Bem-estar
+            </span>
+<div class="flex items-center gap-1 text-caption-kpi-label font-code-token text-text-support font-semibold">
+<span class="material-symbols-outlined text-[14px]">history</span>
+<span>v1.2</span>
+</div>
+</div>
+<!-- Title & Brief Description -->
+<h2 class="font-title-card text-title-card text-text-title font-bold group-hover:text-status-warning transition-colors">
+            Onboarding Express Wellness
+          </h2>
+<p class="font-body-default text-body-default text-text-support mt-1 text-[13px] leading-relaxed">
+            Triagem sintética para spas, centros holísticos e retiros de imersão rápida.
+          </p>
+<!-- Metrics Row: Questions & Sections -->
+<div class="grid grid-cols-2 gap-3 mt-4 py-3 border-y border-border-divider/70">
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Estrutura</div>
+<div class="text-[13px] font-body-strong font-semibold text-text-title mt-0.5">12 perguntas · 2 seções</div>
+</div>
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Conclusão</div>
+<div class="flex items-center gap-1 text-[13px] font-body-strong font-bold text-status-success mt-0.5">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+<span>96%</span>
+</div>
+</div>
+</div>
+<!-- Micro Metas: Usage & Short Link -->
+<div class="mt-3.5 space-y-2">
+<div class="flex items-center justify-between text-[12px] text-text-support font-body-default">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-text-placeholder">schedule</span>
+                Último uso: <strong class="text-text-body font-medium">Há 5 dias</strong>
+</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-[#047857] text-[11px] font-semibold">Ativo</span>
+</div>
+<!-- Short Link with JetBrains Mono -->
+<div class="flex items-center justify-between bg-white/60 p-2 rounded-xl border border-border-divider/80">
+<span class="font-code-token text-code-token text-text-title tracking-tight truncate pr-2 select-all">studiosuite.app/b/express</span>
+<button class="text-text-support hover:text-status-warning transition-colors" title="Copiar link curto" type="button">
+<span class="material-symbols-outlined text-[17px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Actions Bar -->
+<div class="flex items-center justify-between pt-4 mt-4 border-t border-border-divider/60">
+<div class="flex items-center gap-2">
+<button class="btn-brand-primary px-3.5 py-1.5 rounded-lg text-white text-[13px] font-body-strong flex items-center gap-1.5 shadow-xs" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="btn-glass-secondary px-3 py-1.5 rounded-lg text-text-title text-[13px] font-body-strong flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Duplicar</span>
+</button>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-support hover:text-text-title hover:bg-white/80 flex items-center justify-center transition-colors" title="Mais opções" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</article>
+<!-- CARD 5: Rebranding & Posicionamento Studio -->
+<article class="glass-card rounded-2xl p-6 flex flex-col justify-between border-t-[3px] border-t-primary-container relative group">
+<div>
+<!-- Header: Category Badge & Version -->
+<div class="flex items-center justify-between mb-3">
+<span class="px-2.5 py-0.5 rounded-full text-caption-badge font-caption-badge bg-primary-container/10 text-brand-primary-text border border-primary-container/20">
+              Pilates
+            </span>
+<div class="flex items-center gap-1 text-caption-kpi-label font-code-token text-text-support font-semibold">
+<span class="material-symbols-outlined text-[14px]">history</span>
+<span>v2.0</span>
+</div>
+</div>
+<!-- Title & Brief Description -->
+<h2 class="font-title-card text-title-card text-text-title font-bold group-hover:text-brand-primary-text transition-colors">
+            Rebranding &amp; Posicionamento Studio
+          </h2>
+<p class="font-body-default text-body-default text-text-support mt-1 text-[13px] leading-relaxed">
+            Pesquisa de público-alvo, naming, narrativa premium e expansão de estúdios consolidados.
+          </p>
+<!-- Metrics Row: Questions & Sections -->
+<div class="grid grid-cols-2 gap-3 mt-4 py-3 border-y border-border-divider/70">
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Estrutura</div>
+<div class="text-[13px] font-body-strong font-semibold text-text-title mt-0.5">20 perguntas · 4 seções</div>
+</div>
+<div>
+<div class="text-[11px] font-caption-kpi-label uppercase text-text-support">Conclusão</div>
+<div class="flex items-center gap-1 text-[13px] font-body-strong font-bold text-status-success mt-0.5">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+<span>90%</span>
+</div>
+</div>
+</div>
+<!-- Micro Metas: Usage & Short Link -->
+<div class="mt-3.5 space-y-2">
+<div class="flex items-center justify-between text-[12px] text-text-support font-body-default">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-text-placeholder">schedule</span>
+                Último uso: <strong class="text-text-body font-medium">12 out</strong>
+</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-[#047857] text-[11px] font-semibold">Ativo</span>
+</div>
+<!-- Short Link with JetBrains Mono -->
+<div class="flex items-center justify-between bg-white/60 p-2 rounded-xl border border-border-divider/80">
+<span class="font-code-token text-code-token text-text-title tracking-tight truncate pr-2 select-all">studiosuite.app/b/rebrand</span>
+<button class="text-text-support hover:text-brand-primary-text transition-colors" title="Copiar link curto" type="button">
+<span class="material-symbols-outlined text-[17px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Actions Bar -->
+<div class="flex items-center justify-between pt-4 mt-4 border-t border-border-divider/60">
+<div class="flex items-center gap-2">
+<button class="btn-brand-primary px-3.5 py-1.5 rounded-lg text-white text-[13px] font-body-strong flex items-center gap-1.5 shadow-xs" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="btn-glass-secondary px-3 py-1.5 rounded-lg text-text-title text-[13px] font-body-strong flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Duplicar</span>
+</button>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-support hover:text-text-title hover:bg-white/80 flex items-center justify-center transition-colors" title="Mais opções" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</article>
+<!-- CARD 6: SPECIAL DASHED CARD "+ Criar a partir de modelo em branco" -->
+<div class="dashed-card rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer group min-h-[360px]" role="button" tabindex="0">
+<!-- Central Plus Icon Circle -->
+<div class="w-16 h-16 rounded-2xl bg-white/80 border border-primary-container/30 flex items-center justify-center text-primary-container shadow-sm group-hover:scale-110 group-hover:bg-primary-container group-hover:text-white transition-all duration-200">
+<span class="material-symbols-outlined text-[32px] font-bold">add</span>
+</div>
+<!-- Headline & Invitation Text -->
+<h3 class="font-title-card text-title-card text-text-title font-bold mt-5 group-hover:text-brand-primary-text transition-colors">
+          + Criar a partir de modelo em branco
+        </h3>
+<p class="font-body-default text-body-default text-text-support mt-2 max-w-[240px] text-[13px] leading-relaxed">
+          Configure seções personalizadas, validações de PIN criptografado e lógica condicional exclusiva.
+        </p>
+<!-- Quick Template Preset Tags -->
+<div class="flex items-center gap-2 mt-6">
+<span class="px-2.5 py-1 rounded-md text-[11px] font-caption-badge font-semibold bg-white/80 text-text-support border border-border-divider/80">
+            Intake modular
+          </span>
+<span class="px-2.5 py-1 rounded-md text-[11px] font-caption-badge font-semibold bg-white/80 text-text-support border border-border-divider/80">
+            PIN protegido
+          </span>
+</div>
+</div>
+</section>
+</main>
+<!-- Lightweight Micro-Interaction Script for Copying Links -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const copyButtons = document.querySelectorAll('button[title="Copiar link curto"]');
+      copyButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const icon = btn.querySelector('.material-symbols-outlined');
+          if (icon) {
+            const originalIcon = icon.textContent;
+            icon.textContent = 'check';
+            icon.classList.add('text-status-success');
+            setTimeout(() => {
+              icon.textContent = originalIcon;
+              icon.classList.remove('text-status-success');
+            }, 1600);
+          }
+        });
+      });
+    });
+  </script>
+</body></html>

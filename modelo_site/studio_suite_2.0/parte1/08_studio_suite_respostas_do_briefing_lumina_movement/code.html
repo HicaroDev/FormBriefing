@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Studio Suite 2.0 · Respostas do Briefing · Lumina Movement</title>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#6bd8cb",
+            "status-info": "#0284C7",
+            "status-success": "#10B981",
+            "background": "#f8f9ff",
+            "on-surface-variant": "#584237",
+            "text-placeholder": "#94A3B8",
+            "on-surface": "#0d1c2e",
+            "outline-variant": "#e0c0b1",
+            "on-tertiary-fixed": "#00201d",
+            "on-tertiary": "#ffffff",
+            "surface-canvas-start": "#FBF8F3",
+            "status-warning": "#F59E0B",
+            "card-highlight-end": "#FBBF24",
+            "secondary": "#545f73",
+            "text-title": "#0F172A",
+            "text-body": "#475569",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#586377",
+            "primary": "#9d4300",
+            "text-support": "#64748B",
+            "brand-primary-text": "#C2410C",
+            "surface-bright": "#f8f9ff",
+            "on-secondary-fixed-variant": "#3c475a",
+            "status-urgent": "#EF4444",
+            "inverse-surface": "#233144",
+            "surface-canvas-mid": "#F5EFEB",
+            "primary-fixed": "#ffdbca",
+            "on-background": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#341100",
+            "on-secondary-fixed": "#111c2d",
+            "on-tertiary-fixed-variant": "#005049",
+            "surface-container-highest": "#d5e3fc",
+            "border-divider": "#E2E8F0",
+            "on-tertiary-container": "#003934",
+            "surface": "#f8f9ff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "surface-dim": "#ccdbf3",
+            "surface-canvas-end": "#ECE4DB",
+            "inverse-primary": "#ffb690",
+            "secondary-fixed": "#d8e3fb",
+            "tertiary-container": "#37ab9e",
+            "surface-container-low": "#eff4ff",
+            "surface-tint": "#9d4300",
+            "tertiary": "#006a61",
+            "focus-indigo": "#4F46E5",
+            "on-primary-container": "#582200",
+            "brand-gradient-end": "#E65100",
+            "secondary-fixed-dim": "#bcc7de",
+            "error-container": "#ffdad6",
+            "secondary-container": "#d5e0f8",
+            "surface-container-high": "#dce9ff",
+            "on-primary-fixed-variant": "#783200",
+            "primary-container": "#f97316",
+            "primary-fixed-dim": "#ffb690",
+            "brand-primary-hover": "#EA580C",
+            "surface-variant": "#d5e3fc",
+            "surface-container": "#e6eeff",
+            "outline": "#8c7164",
+            "tertiary-fixed": "#89f5e7",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.25rem",
+            "gutter": "1.25rem",
+            "gutter-mobile": "1rem",
+            "space-xl": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "display-kpi-mobile": ["Plus Jakarta Sans"],
+            "body-strong": ["Plus Jakarta Sans"],
+            "caption-badge": ["Plus Jakarta Sans"],
+            "display-kpi": ["Plus Jakarta Sans"],
+            "title-card": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "code-pin": ["JetBrains Mono"],
+            "headline-screen": ["Plus Jakarta Sans"],
+            "headline-screen-mobile": ["Plus Jakarta Sans"],
+            "caption-kpi-label": ["Plus Jakarta Sans"],
+            "label-field": ["Plus Jakarta Sans"],
+            "title-section": ["Plus Jakarta Sans"],
+            "code-token": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Warm Glassmorphism Tokens & Ambient Glow */
+    body {
+      background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);
+      background-attachment: fixed;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #0F172A;
+    }
+
+    .glass-surface {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-top: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.06), 0 10px 25px -5px rgba(0, 0, 0, 0.03);
+    }
+
+    .glass-surface-subtle {
+      background: rgba(255, 255, 255, 0.50);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.70);
+    }
+
+    .glass-dock {
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.05), 0 10px 20px -5px rgba(230, 81, 0, 0.04);
+    }
+
+    .orange-gradient-cta {
+      background: linear-gradient(135deg, #F97316 0%, #E65100 100%);
+      box-shadow: 0 10px 25px -5px rgba(230, 81, 0, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .orange-gradient-cta:hover {
+      background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+      box-shadow: 0 14px 30px -6px rgba(230, 81, 0, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(140, 113, 100, 0.2);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-text-title antialiased selection:bg-primary selection:text-white">
+<!-- ========================================================
+       SHARED COMPONENT: SideNavBar (Studio Dock Flutuante 72px)
+       Mapped from Shared Components JSON & Style Guidance
+       ======================================================== -->
+<aside class="fixed left-5 top-5 bottom-5 w-[72px] rounded-[24px] glass-dock z-50 flex flex-col items-center justify-between py-6 transition-all">
+<!-- Top HD Monogram Mark / Brand -->
+<div class="flex flex-col items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-text-title text-white flex items-center justify-center font-display-kpi text-body-strong shadow-md border border-white/20 select-none">
+<span class="tracking-tighter">HD</span>
+</div>
+<div class="w-8 h-[1px] bg-border-divider/60"></div>
+</div>
+<!-- Main Navigation Icons -->
+<nav aria-label="Navegação do Estúdio" class="flex flex-col items-center gap-3 w-full px-2">
+<!-- Início / CRM Leads -->
+<a class="w-11 h-11 flex items-center justify-center rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/60 transition-all active:scale-[0.98] group" href="#crm" title="CRM Leads">
+<span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110" data-icon="filter_alt">filter_alt</span>
+</a>
+<!-- Forms Hub (ACTIVE TAB - Style Injected) -->
+<a class="w-11 h-11 flex items-center justify-center rounded-xl bg-primary-container text-white shadow-md shadow-primary-container/30 transition-all active:scale-[0.98]" href="#forms" title="Forms Hub">
+<span class="material-symbols-outlined text-[22px]" data-icon="assignment" data-weight="fill" style="font-variation-settings: 'FILL' 1;">assignment</span>
+</a>
+<!-- Projects & Delivery -->
+<a class="w-11 h-11 flex items-center justify-center rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/60 transition-all active:scale-[0.98] group" href="#projects" title="Projects &amp; Delivery">
+<span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110" data-icon="tactic">tactic</span>
+</a>
+<!-- Analytics -->
+<a class="w-11 h-11 flex items-center justify-center rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/60 transition-all active:scale-[0.98] group" href="#analytics" title="Analytics">
+<span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110" data-icon="monitoring">monitoring</span>
+</a>
+</nav>
+<!-- Dock Footer: Settings & Personal Avatar -->
+<div class="flex flex-col items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/60 transition-all" title="Settings" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-[1px] bg-border-divider/60"></div>
+<!-- Avatar Hícaro Duarte -->
+<div class="relative group cursor-pointer" title="Hícaro Duarte · Diretor de Criação">
+<div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden bg-surface-canvas-mid">
+<img class="w-full h-full object-cover" data-alt="Portrait photography of Hícaro Duarte, a refined creative director in a bespoke tailored linen shirt, soft natural sunlight streaming into a minimalist design studio in São Paulo, cinematic warm depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVOyJ_qVGy8LaoVW29K8tUDrbfabQgD9DA0nJ2z_2jTFIUo9gmE1WuVIsG_v5ZfFLdyTEaXH0-INCZm9mi3Lvbz-qA_Iunh9LF1pwuNltOO14Nfdzt0LofgC31LqTnF62740bps6sdcbcu3TBKUQEF_vDuE91FBQH7TzduA3aQXnYyO9oInSkELSHcmZyUVCyk9NLFXZQoO7vWJRhjNf5sdVtU1ETXXJv4f7NA34qZGSghSs1K0Z2g"/>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-status-success rounded-full ring-2 ring-white"></span>
+</div>
+</div>
+</aside>
+<!-- ========================================================
+       PRIMARY CANVAS VIEW (1440px architecture, offset 72px + margins)
+       ======================================================== -->
+<div class="pl-[112px] pr-8 py-8 min-h-screen max-w-[1440px] mx-auto flex flex-col gap-6">
+<!-- ========================================================
+         CABEÇALHO DA TELA
+         ======================================================== -->
+<header class="glass-surface rounded-[24px] px-8 py-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex flex-col gap-2.5">
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 text-text-support font-caption-badge text-caption-badge">
+<span class="hover:text-primary transition-colors cursor-pointer">Forms Hub</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Respostas Recebidas</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="font-code-token text-code-token text-text-title font-semibold tracking-wide">#BF-2026-LUM</span>
+</nav>
+<!-- Título com Monograma e Subtítulo -->
+<div class="flex items-center gap-3.5">
+<div class="w-9 h-9 rounded-xl bg-surface-canvas-mid border border-outline-variant/40 flex items-center justify-center text-primary font-bold text-title-section shadow-inner">
+            LM
+          </div>
+<div>
+<h1 class="font-headline-screen text-headline-screen tracking-tight text-text-title">
+              Lumina Movement · Respostas do Briefing
+            </h1>
+<p class="font-body-default text-body-default text-text-support mt-0.5">
+              Modelo: Briefing Pilates Reformer v2.4 · Recebido em 18 out 2026, às 16:42
+            </p>
+</div>
+</div>
+<!-- Badges de Status -->
+<div class="flex flex-wrap items-center gap-2.5 mt-1">
+<!-- 100% respondido (verde esmeralda) -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-status-success/10 text-status-success font-caption-badge text-caption-badge border border-status-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span>
+            100% respondido
+          </span>
+<!-- PIN de Segurança (Mono Teal) -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary font-code-token text-code-token font-semibold border border-tertiary/20">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock">lock</span>
+            PIN: 842-910
+          </span>
+<!-- Pilates Reformer (Laranja) -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container/15 text-brand-primary-text font-caption-badge text-caption-badge border border-primary-container/30">
+<span class="material-symbols-outlined text-[14px]" data-icon="self_improvement">self_improvement</span>
+            Pilates Reformer
+          </span>
+<span class="text-text-placeholder font-code-token text-[12px] ml-1">Ambiente de Avaliação Executiva</span>
+</div>
+</div>
+<!-- Ações no Topo Direito -->
+<div class="flex items-center gap-3 self-end md:self-center flex-wrap">
+<!-- Secundário: Exportar PDF -->
+<button class="h-11 px-4 rounded-xl glass-surface-subtle border border-border-divider hover:bg-white text-text-title font-body-strong text-body-strong flex items-center gap-2 transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+          Exportar PDF
+        </button>
+<!-- Secundário: Criar Proposta Comercial -->
+<button class="h-11 px-4 rounded-xl glass-surface-subtle border border-border-divider hover:bg-white text-text-title font-body-strong text-body-strong flex items-center gap-2 transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="description">description</span>
+          Criar Proposta Comercial
+        </button>
+<!-- Principal: Transformar em Projeto (Gradiente Laranja) -->
+<button class="h-11 px-5 rounded-xl orange-gradient-cta text-white font-body-strong text-body-strong flex items-center gap-2.5 active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="rocket_launch">rocket_launch</span>
+          Transformar em Projeto
+        </button>
+</div>
+</header>
+<!-- ========================================================
+         LAYOUT EM 2 COLUNAS (Principal 68% + Lateral 32%)
+         ======================================================== -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- ========================================================
+           COLUNA PRINCIPAL (68% -> lg:col-span-8)
+           Modo leitura sofisticado com rigor tipográfico
+           ======================================================== -->
+<main class="lg:col-span-8 flex flex-col gap-6">
+<!-- SEÇÃO 1: Responsáveis e Conceito -->
+<section class="glass-surface rounded-[20px] p-6 flex flex-col gap-5">
+<div class="flex items-center justify-between pb-3.5 border-b border-border-divider/70">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-lg bg-primary-fixed/50 text-brand-primary-text flex items-center justify-center font-bold text-caption-badge">01</span>
+<h2 class="font-title-section text-title-section text-text-title tracking-tight">
+                Responsáveis e Conceito Estratégico
+              </h2>
+</div>
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">Identificação &amp; Visão</span>
+</div>
+<div class="flex flex-col gap-5">
+<!-- Pergunta 1.1 -->
+<div class="flex flex-col gap-1.5 p-4 rounded-xl bg-surface-container-lowest/50 border border-white/60">
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">
+                NOME DA RESPONSÁVEL E CARGO
+              </span>
+<p class="font-body-strong text-title-card text-text-title flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="badge">badge</span>
+                Helena Vasconcellos · Sócia-Fundadora e Diretora Clínica
+              </p>
+<span class="text-text-support font-body-default text-caption-badge mt-0.5">
+                Contato verificado: helena@luminamovement.com.br · Registro Fisioterapia SP 48.912-F
+              </span>
+</div>
+<!-- Pergunta 1.2 -->
+<div class="flex flex-col gap-2 p-4 rounded-xl bg-surface-container-lowest/50 border border-white/60">
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">
+                OBJETIVO PRINCIPAL DO REBRANDING &amp; PLATAFORMA
+              </span>
+<blockquote class="font-body-default text-body-strong text-text-title leading-relaxed pl-3 border-l-2 border-primary-container bg-surface-canvas-start/60 py-2 pr-2 rounded-r-lg">
+                “Reposicionar o estúdio como referência em Pilates Reformer de alta precisão nos Jardins (São Paulo), integrando agendamento fluido e presença digital elegante.”
+              </blockquote>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 2: Estética e Atmosfera Visual Escolhida -->
+<section class="glass-surface rounded-[20px] p-6 flex flex-col gap-5">
+<div class="flex items-center justify-between pb-3.5 border-b border-border-divider/70">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-lg bg-primary-fixed/50 text-brand-primary-text flex items-center justify-center font-bold text-caption-badge">02</span>
+<h2 class="font-title-section text-title-section text-text-title tracking-tight">
+                Estética e Atmosfera Visual Escolhida
+              </h2>
+</div>
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">Moodboard &amp; Universo</span>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">
+              DIREÇÃO ESTÉTICA PREFERIDA
+            </span>
+<!-- Card Visual Renderizado: Sereno & Arquitetônico -->
+<div class="p-5 rounded-2xl bg-surface-container-lowest/80 border border-white shadow-sm flex flex-col gap-5">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-canvas-mid text-text-title flex items-center justify-center border border-outline-variant/30">
+<span class="material-symbols-outlined text-[22px]" data-icon="architecture">architecture</span>
+</div>
+<div>
+<h3 class="font-title-card text-title-card text-text-title">Sereno &amp; Arquitetônico</h3>
+<p class="font-caption-badge text-caption-badge text-text-support">Terracota solar, travertino bruto, luz natural e silêncio visual</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-status-success/15 text-status-success font-caption-badge text-caption-badge w-fit border border-status-success/20">
+                  Seleção Primária no Briefing
+                </span>
+</div>
+<!-- Paleta de Cores Amostrada -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+<!-- Cor 1: Travertino -->
+<div class="p-3 rounded-xl bg-white/60 border border-border-divider/60 flex flex-col gap-2">
+<div class="w-full h-12 rounded-lg shadow-inner border border-black/5" style="background-color: #E8E2D9;"></div>
+<div>
+<p class="font-body-strong text-caption-badge text-text-title">Mármore Travertino</p>
+<p class="font-code-token text-[11px] text-text-support">#E8E2D9</p>
+</div>
+</div>
+<!-- Cor 2: Carvalho -->
+<div class="p-3 rounded-xl bg-white/60 border border-border-divider/60 flex flex-col gap-2">
+<div class="w-full h-12 rounded-lg shadow-inner border border-black/5" style="background-color: #CBB59D;"></div>
+<div>
+<p class="font-body-strong text-caption-badge text-text-title">Carvalho Natural</p>
+<p class="font-code-token text-[11px] text-text-support">#CBB59D</p>
+</div>
+</div>
+<!-- Cor 3: Grafite -->
+<div class="p-3 rounded-xl bg-white/60 border border-border-divider/60 flex flex-col gap-2">
+<div class="w-full h-12 rounded-lg shadow-inner border border-black/5" style="background-color: #272B30;"></div>
+<div>
+<p class="font-body-strong text-caption-badge text-text-title">Grafite Profundo</p>
+<p class="font-code-token text-[11px] text-text-support">#272B30</p>
+</div>
+</div>
+<!-- Cor 4: Terracota -->
+<div class="p-3 rounded-xl bg-white/60 border border-border-divider/60 flex flex-col gap-2">
+<div class="w-full h-12 rounded-lg shadow-inner border border-black/5" style="background-color: #D47A5B;"></div>
+<div>
+<p class="font-body-strong text-caption-badge text-text-title">Terracota Suave</p>
+<p class="font-code-token text-[11px] text-text-support">#D47A5B</p>
+</div>
+</div>
+</div>
+<!-- Citação da Cliente -->
+<div class="p-4 rounded-xl bg-surface-canvas-mid/70 border border-outline-variant/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-[20px] text-primary shrink-0 mt-0.5" data-icon="format_quote">format_quote</span>
+<p class="font-body-default text-body-default italic text-on-surface-variant leading-relaxed">
+                  “Atmosfera serena, arquitetônica, foco no público premium dos Jardins. Queremos que o aluno sinta a precisão do movimento antes mesmo de entrar no estúdio.”
+                </p>
+</div>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 3: Público-Alvo e Posicionamento -->
+<section class="glass-surface rounded-[20px] p-6 flex flex-col gap-5">
+<div class="flex items-center justify-between pb-3.5 border-b border-border-divider/70">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-lg bg-primary-fixed/50 text-brand-primary-text flex items-center justify-center font-bold text-caption-badge">03</span>
+<h2 class="font-title-section text-title-section text-text-title tracking-tight">
+                Público-Alvo e Posicionamento
+              </h2>
+</div>
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">Demografia &amp; Persona</span>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-lowest/50 border border-white/60 flex flex-col gap-3">
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">
+              PERFIL DO ALUNO
+            </span>
+<p class="font-body-strong text-body-strong text-text-title leading-relaxed">
+              Mulheres e homens, 30 a 55 anos, praticantes de atividades conscientes, valorizam privacidade, acústica impecável e atendimento hiperpersonalizado.
+            </p>
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="px-2.5 py-1 rounded-md bg-surface-canvas-mid text-text-body font-caption-badge text-[12px] border border-border-divider">Alta Renda (AAA)</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-canvas-mid text-text-body font-caption-badge text-[12px] border border-border-divider">Saúde Preventiva &amp; Longevidade</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-canvas-mid text-text-body font-caption-badge text-[12px] border border-border-divider">Sem Apelo Fitness Constrangedor</span>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 4: Arquivos Enviados pelo Cliente (Grade de Anexos) -->
+<section class="glass-surface rounded-[20px] p-6 flex flex-col gap-5">
+<div class="flex items-center justify-between pb-3.5 border-b border-border-divider/70">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-lg bg-primary-fixed/50 text-brand-primary-text flex items-center justify-center font-bold text-caption-badge">04</span>
+<h2 class="font-title-section text-title-section text-text-title tracking-tight">
+                Arquivos Enviados pelo Cliente (Grade de Anexos)
+              </h2>
+</div>
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">3 Arquivos Recebidos</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Card Anexo 1: PDF Arquitetura -->
+<div class="p-4 rounded-xl bg-surface-container-lowest/70 border border-white hover:bg-white transition-all flex flex-col justify-between gap-3 group">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-status-urgent/10 text-status-urgent flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="overflow-hidden">
+<p class="font-body-strong text-caption-badge text-text-title truncate" title="Manual_Arquitetura_Interiores_Lumina.pdf">
+                    Manual_Arquitetura_Interiores_Lumina.pdf
+                  </p>
+<p class="font-code-token text-[11px] text-text-support mt-0.5">14.2 MB · PDF</p>
+</div>
+</div>
+<button class="w-full mt-1 py-1.5 px-3 rounded-lg bg-surface-canvas-mid hover:bg-surface-canvas-end text-text-title font-body-strong text-[12px] flex items-center justify-center gap-1.5 transition-colors border border-border-divider" type="button">
+<span class="material-symbols-outlined text-[15px]" data-icon="download">download</span>
+                Baixar Arquivo
+              </button>
+</div>
+<!-- Card Anexo 2: DWG Planta Baixa -->
+<div class="p-4 rounded-xl bg-surface-container-lowest/70 border border-white hover:bg-white transition-all flex flex-col justify-between gap-3 group">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-status-info/10 text-status-info flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" data-icon="architecture">architecture</span>
+</div>
+<div class="overflow-hidden">
+<p class="font-body-strong text-caption-badge text-text-title truncate" title="Planta_Baixa_Reformer_Jardins.dwg">
+                    Planta_Baixa_Reformer_Jardins.dwg
+                  </p>
+<p class="font-code-token text-[11px] text-text-support mt-0.5">8.5 MB · AutoCAD</p>
+</div>
+</div>
+<button class="w-full mt-1 py-1.5 px-3 rounded-lg bg-surface-canvas-mid hover:bg-surface-canvas-end text-text-title font-body-strong text-[12px] flex items-center justify-center gap-1.5 transition-colors border border-border-divider" type="button">
+<span class="material-symbols-outlined text-[15px]" data-icon="download">download</span>
+                Baixar Arquivo
+              </button>
+</div>
+<!-- Card Anexo 3: ZIP Fotos -->
+<div class="p-4 rounded-xl bg-surface-container-lowest/70 border border-white hover:bg-white transition-all flex flex-col justify-between gap-3 group">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-status-warning/10 text-status-warning flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" data-icon="folder_zip">folder_zip</span>
+</div>
+<div class="overflow-hidden">
+<p class="font-body-strong text-caption-badge text-text-title truncate" title="Fotos_Locacao_Atual.zip">
+                    Fotos_Locacao_Atual.zip
+                  </p>
+<p class="font-code-token text-[11px] text-text-support mt-0.5">45.1 MB · Compactado</p>
+</div>
+</div>
+<button class="w-full mt-1 py-1.5 px-3 rounded-lg bg-surface-canvas-mid hover:bg-surface-canvas-end text-text-title font-body-strong text-[12px] flex items-center justify-center gap-1.5 transition-colors border border-border-divider" type="button">
+<span class="material-symbols-outlined text-[15px]" data-icon="download">download</span>
+                Baixar Arquivo
+              </button>
+</div>
+</div>
+</section>
+</main>
+<!-- ========================================================
+           COLUNA LATERAL (32% -> lg:col-span-4)
+           "Resumo do Estúdio"
+           ======================================================== -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<!-- Card de Vidro: Notas da Curadoria de Hícaro Duarte -->
+<section class="glass-surface rounded-[20px] p-6 flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute -right-6 -top-6 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="edit_note">edit_note</span>
+<h3 class="font-title-card text-title-card text-text-title">Notas da Curadoria</h3>
+</div>
+<span class="text-text-support font-caption-kpi-label text-[11px] uppercase tracking-wider">Hícaro Duarte</span>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-lowest/80 border border-white shadow-sm flex flex-col gap-2.5">
+<div class="flex items-center gap-2 text-text-support font-caption-badge text-[12px]">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+              Anotações salvas em 18 out, 17:05:
+            </div>
+<p class="font-body-default text-body-default text-text-title leading-relaxed italic">
+              “Cliente tem forte senso estético e prazo rígido para inauguração em dezembro. Evitar jargões excessivos e priorizar tipografia refinada e fotografia com luz natural.”
+            </p>
+</div>
+<div class="flex items-center justify-between text-text-support font-caption-badge text-[12px] px-1">
+<span>Visibilidade: Equipe Executiva</span>
+<button class="text-primary hover:text-brand-primary-hover font-semibold transition-colors" type="button">Editar Notas</button>
+</div>
+</section>
+<!-- Card de Orçamento Informado -->
+<section class="glass-surface rounded-[20px] p-6 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">
+              Orçamento Informado
+            </span>
+<span class="material-symbols-outlined text-[18px] text-text-support" data-icon="payments">payments</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-display-kpi text-display-kpi text-text-title tracking-tight">
+              R$ 50.000 <span class="text-text-support font-normal text-[20px]">a</span> R$ 85.000
+            </span>
+<div class="mt-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-status-success/15 text-status-success font-caption-badge text-caption-badge border border-status-success/20">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+                Dentro da média Studio Suite
+              </span>
+</div>
+</div>
+</section>
+<!-- Checklist de Escopo Sugerido para a Proposta -->
+<section class="glass-surface rounded-[20px] p-6 flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-border-divider/70">
+<h3 class="font-title-card text-title-card text-text-title">Escopo Sugerido</h3>
+<span class="font-caption-badge text-caption-badge text-primary font-semibold">4 Itens Ativos</span>
+</div>
+<p class="font-body-default text-[13px] text-text-support leading-tight">
+            Baseado no diagnóstico automático das respostas do formulário:
+          </p>
+<ul class="flex flex-col gap-2.5">
+<!-- Item 1 -->
+<li class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-container-lowest/60 border border-white/80">
+<div class="w-5 h-5 rounded-md bg-primary-container text-white flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="check">check</span>
+</div>
+<span class="font-body-strong text-caption-badge text-text-title">Identidade Visual Completa &amp; Naming</span>
+</li>
+<!-- Item 2 -->
+<li class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-container-lowest/60 border border-white/80">
+<div class="w-5 h-5 rounded-md bg-primary-container text-white flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="check">check</span>
+</div>
+<span class="font-body-strong text-caption-badge text-text-title">Web Experience Reformer (Desktop &amp; Mobile)</span>
+</li>
+<!-- Item 3 -->
+<li class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-container-lowest/60 border border-white/80">
+<div class="w-5 h-5 rounded-md bg-primary-container text-white flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="check">check</span>
+</div>
+<span class="font-body-strong text-caption-badge text-text-title">Kit Social Media &amp; Launch Guidelines</span>
+</li>
+<!-- Item 4 -->
+<li class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-container-lowest/60 border border-white/80">
+<div class="w-5 h-5 rounded-md bg-primary-container text-white flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="check">check</span>
+</div>
+<span class="font-body-strong text-caption-badge text-text-title">Sinalização &amp; Manual Espacial</span>
+</li>
+</ul>
+</section>
+<!-- Card de Próximo Passo -->
+<section class="glass-surface rounded-[20px] p-6 flex flex-col gap-4 border-l-4 border-l-primary-container">
+<div class="flex items-center justify-between">
+<span class="text-text-support font-caption-kpi-label text-caption-kpi-label uppercase tracking-wider">
+              Próximo Passo
+            </span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed/60 text-brand-primary-text font-code-token text-[11px] font-semibold">
+              CRÍTICO
+            </span>
+</div>
+<div class="flex flex-col gap-1.5">
+<h4 class="font-title-card text-title-card text-text-title leading-snug">
+              Agendar Reunião de Alinhamento com Helena
+            </h4>
+<div class="flex items-center gap-2 text-text-support font-body-default text-caption-badge mt-1">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="calendar_today">calendar_today</span>
+<span>Data sugerida: <strong class="text-text-title font-semibold">23 out, às 14:00</strong></span>
+</div>
+</div>
+<button class="w-full mt-2 h-11 px-4 rounded-xl bg-text-title hover:bg-black text-white font-body-strong text-body-strong flex items-center justify-center gap-2.5 transition-all shadow-md active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed" data-icon="video_call">video_call</span>
+            Disparar convite Google Meet
+          </button>
+</section>
+</aside>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CRM · Funil de vendas — Studio Suite 2.0</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#8c7164",
+            "on-tertiary-container": "#003934",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "card-highlight-end": "#FBBF24",
+            "on-primary-fixed": "#341100",
+            "surface-canvas-mid": "#F5EFEB",
+            "on-primary-fixed-variant": "#783200",
+            "surface-container": "#e6eeff",
+            "on-secondary-container": "#586377",
+            "secondary-fixed-dim": "#bcc7de",
+            "on-primary-container": "#582200",
+            "text-body": "#475569",
+            "primary-fixed-dim": "#ffb690",
+            "on-secondary-fixed": "#111c2d",
+            "surface-container-highest": "#d5e3fc",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "brand-primary-text": "#C2410C",
+            "outline-variant": "#e0c0b1",
+            "status-info": "#0284C7",
+            "surface": "#f8f9ff",
+            "text-support": "#64748B",
+            "secondary-fixed": "#d8e3fb",
+            "focus-indigo": "#4F46E5",
+            "surface-container-low": "#eff4ff",
+            "surface-canvas-start": "#FBF8F3",
+            "secondary": "#545f73",
+            "surface-bright": "#f8f9ff",
+            "surface-container-high": "#dce9ff",
+            "primary-fixed": "#ffdbca",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "text-placeholder": "#94A3B8",
+            "inverse-surface": "#233144",
+            "text-title": "#0F172A",
+            "surface-dim": "#ccdbf3",
+            "surface-tint": "#9d4300",
+            "on-secondary-fixed-variant": "#3c475a",
+            "status-urgent": "#EF4444",
+            "surface-canvas-end": "#ECE4DB",
+            "on-background": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#005049",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-container": "#37ab9e",
+            "on-surface-variant": "#584237",
+            "on-error": "#ffffff",
+            "background": "#f8f9ff",
+            "inverse-primary": "#ffb690",
+            "primary": "#9d4300",
+            "surface-variant": "#d5e3fc",
+            "border-divider": "#E2E8F0",
+            "brand-gradient-end": "#E65100",
+            "on-surface": "#0d1c2e",
+            "secondary-container": "#d5e0f8",
+            "status-success": "#10B981",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#89f5e7",
+            "tertiary": "#006a61",
+            "on-tertiary-fixed": "#00201d",
+            "primary-container": "#f97316",
+            "brand-primary-hover": "#EA580C",
+            "status-warning": "#F59E0B"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "1.5rem",
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1.25rem",
+            "gutter": "1.25rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "caption-kpi-label": ["Plus Jakarta Sans"],
+            "title-section": ["Plus Jakarta Sans"],
+            "code-pin": ["JetBrains Mono"],
+            "body-strong": ["Plus Jakarta Sans"],
+            "headline-screen": ["Plus Jakarta Sans"],
+            "headline-screen-mobile": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "label-field": ["Plus Jakarta Sans"],
+            "display-kpi-mobile": ["Plus Jakarta Sans"],
+            "caption-badge": ["Plus Jakarta Sans"],
+            "code-token": ["JetBrains Mono"],
+            "title-card": ["Plus Jakarta Sans"],
+            "display-kpi": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Warm Glassmorphism System */
+    .bg-atelier-gradient {
+      background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);
+    }
+    
+    .glass-dock {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.08), 0 10px 25px -5px rgba(0, 0, 0, 0.03);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.95);
+      border-left: 1px solid rgba(255, 255, 255, 0.70);
+      border-right: 1px solid rgba(255, 255, 255, 0.50);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.60);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.07), 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 24px 48px -12px rgba(230, 81, 0, 0.12), 0 12px 28px -6px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .glass-dragged {
+      transform: scale(1.025) rotate(1.5deg);
+      box-shadow: 0 30px 60px -12px rgba(230, 81, 0, 0.22), 0 16px 32px -8px rgba(15, 23, 42, 0.12);
+      border: 1px solid rgba(249, 115, 22, 0.45);
+      z-index: 50;
+    }
+
+    .glass-filter-bar {
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 10px 25px -8px rgba(230, 81, 0, 0.05);
+    }
+
+    .brand-btn-primary {
+      background: linear-gradient(135deg, #F97316 0%, #E65100 100%);
+      box-shadow: 0 8px 20px -4px rgba(230, 81, 0, 0.35);
+    }
+    .brand-btn-primary:hover {
+      background: #EA580C;
+    }
+
+    /* Custom subtle scrollbar */
+    .kanban-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+    .kanban-scroll::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 9999px;
+    }
+    .kanban-scroll::-webkit-scrollbar-thumb {
+      background: rgba(140, 113, 100, 0.25);
+      border-radius: 9999px;
+    }
+    .kanban-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(230, 81, 0, 0.45);
+    }
+  </style>
+</head>
+<body class="bg-atelier-gradient min-h-screen text-text-title font-body-default antialiased overflow-x-hidden selection:bg-primary selection:text-white">
+<!-- Desktop Spatial Canvas (1440px target container) -->
+<div class="relative w-full min-h-screen flex justify-start">
+<!-- FLOATING LEFT DOCK (72px fixed, 20px screen offset, radius 24px) -->
+<aside class="fixed left-5 top-5 bottom-5 w-[72px] z-50 glass-dock rounded-[24px] flex flex-col items-center justify-between py-6 select-none transition-all duration-200">
+<!-- Top Monogram & Workspace -->
+<div class="flex flex-col items-center gap-7">
+<!-- Logo HD -->
+<div class="relative group cursor-pointer">
+<div class="w-12 h-12 rounded-2xl bg-text-title flex items-center justify-center text-white font-bold tracking-tight text-lg shadow-md transition-transform duration-200 group-hover:scale-105">
+<span class="tracking-tighter">HD</span>
+</div>
+<span class="absolute -bottom-1 -right-1 w-3 h-3 bg-primary-container border-2 border-white rounded-full"></span>
+</div>
+<!-- Navigation Stack -->
+<nav class="flex flex-col items-center gap-2">
+<!-- Início -->
+<button class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-all duration-150 active:scale-95" title="Início">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</button>
+<!-- CRM (Ativo: Quadrado Laranja com ícone branco) -->
+<button class="w-12 h-12 rounded-[14px] bg-primary-container text-white flex items-center justify-center shadow-lg shadow-primary-container/30 transition-transform duration-150 active:scale-95" title="CRM Leads">
+<span class="material-symbols-outlined" data-icon="filter_alt" data-weight="fill" style="font-variation-settings: 'FILL' 1;">filter_alt</span>
+</button>
+<!-- Forms Hub -->
+<button class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-all duration-150 active:scale-95" title="Forms Hub">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+</button>
+<!-- Projetos -->
+<button class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-all duration-150 active:scale-95" title="Projects &amp; Delivery">
+<span class="material-symbols-outlined" data-icon="tactic">tactic</span>
+</button>
+<!-- Analytics / Agenda -->
+<button class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-all duration-150 active:scale-95" title="Analytics">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+</button>
+<!-- Clientes -->
+<button class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-all duration-150 active:scale-95" title="Clientes">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</button>
+</nav>
+</div>
+<!-- Dock Footer: Settings & Personal Avatar -->
+<div class="flex flex-col items-center gap-4">
+<!-- Settings -->
+<button class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-colors" title="Settings">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="w-11 h-11 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-colors" title="Support">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<!-- Divider -->
+<div class="w-8 h-[1px] bg-slate-300/60 my-1"></div>
+<!-- Personal Avatar -->
+<div class="relative cursor-pointer group">
+<img class="w-10 h-10 rounded-full object-cover ring-2 ring-white/90 shadow-sm transition-transform group-hover:scale-105" data-alt="Close-up professional portrait of a Brazilian creative studio executive director smiling gently in a sunlit architectural studio space, soft warm natural morning lighting with beige linen textures and bespoke terracotta design details in background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMhwPSumVqTDY-nNAMGK1pGZ7SIHLx_vKQ1kPAXpLZCsp86atXnRgRZmmOnAIcLLSxvCbp4oe5lqa5wAZ7QwXoW_wzH0k6OcYW6pXgbDjRyG8f80QtdiIcOPaq5Wf2M4Nc7cBM6C5ZdPcw8qdNZVt6EHXUF7Dhf7zuifrXR7OBb5LUgmnJUeBrCh-o8n7zwQp25g3GaIo7DqY49p-E1vpkZwR-1cxWe2FjvfXCBK1VMGW_ZmVEypt7"/>
+<div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-status-success rounded-full border border-white"></div>
+</div>
+</div>
+</aside>
+<!-- PRIMARY CONTENT VIEW (1440px desktop structure with 32px canvas margins) -->
+<main class="ml-[92px] w-[calc(100%-92px)] min-h-screen px-8 py-7 flex flex-col gap-6">
+<!-- TOP IDENTITY STRIP & ACTIONS (Sem misturar com formulários, 100% CRM) -->
+<header class="flex items-center justify-between pb-1">
+<div>
+<div class="flex items-center gap-3">
+<h1 class="font-headline-screen text-headline-screen text-text-title">CRM</h1>
+<span class="font-caption-badge text-caption-badge px-2.5 py-1 rounded-full bg-primary-container/10 text-brand-primary-text border border-primary-container/20">
+              Studio Suite 2.0 · Funil Ativo
+            </span>
+</div>
+<p class="font-body-default text-body-default text-text-support mt-0.5">
+            Leads e propostas em andamento
+          </p>
+</div>
+<div class="flex items-center gap-3">
+<!-- Quick Export View Secondary CTA -->
+<button class="h-11 px-4 rounded-xl glass-filter-bar text-text-title font-body-strong text-body-strong flex items-center gap-2 hover:bg-white/90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[19px] text-text-support" data-icon="tune">tune</span>
+<span>Personalizar colunas</span>
+</button>
+<!-- Primary CTA Laranja "+ Novo lead" -->
+<button class="h-11 px-5 rounded-xl brand-btn-primary text-white font-body-strong text-body-strong flex items-center gap-2 transition-all duration-150 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+<span>+ Novo lead</span>
+</button>
+</div>
+</header>
+<!-- KPI METRICS GRID (4 CARDS) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- KPI 1: Pipeline Total -->
+<div class="glass-card rounded-[20px] p-6 relative overflow-hidden group">
+<div class="flex items-center justify-between">
+<span class="font-caption-kpi-label text-caption-kpi-label uppercase text-text-support">Pipeline total</span>
+<div class="w-8 h-8 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]" data-icon="payments">payments</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-display-kpi text-display-kpi text-text-title tracking-tight">R$ 284.000</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-xs font-semibold text-status-success">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+<span>+14.8% vs. mês anterior</span>
+</div>
+</div>
+<!-- KPI 2: Taxa de conversão -->
+<div class="glass-card rounded-[20px] p-6 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption-kpi-label text-caption-kpi-label uppercase text-text-support">Taxa de conversão</span>
+<div class="w-8 h-8 rounded-lg bg-status-success/10 flex items-center justify-center text-status-success">
+<span class="material-symbols-outlined text-[18px]" data-icon="pie_chart">pie_chart</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-display-kpi text-display-kpi text-text-title tracking-tight">32%</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-xs font-semibold text-status-success">
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_upward">arrow_upward</span>
+<span>Meta trimestral: 28%</span>
+</div>
+</div>
+<!-- KPI 3: Tempo médio até fechar -->
+<div class="glass-card rounded-[20px] p-6 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption-kpi-label text-caption-kpi-label uppercase text-text-support">Tempo médio até fechar</span>
+<div class="w-8 h-8 rounded-lg bg-status-info/10 flex items-center justify-center text-status-info">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-display-kpi text-display-kpi text-text-title tracking-tight">18 dias</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-xs font-semibold text-text-support">
+<span class="material-symbols-outlined text-[16px]" data-icon="bolt">bolt</span>
+<span>Ciclo ágil no nicho wellness</span>
+</div>
+</div>
+<!-- KPI 4: Briefings pendentes -->
+<div class="glass-card rounded-[20px] p-6 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption-kpi-label text-caption-kpi-label uppercase text-text-support">Briefings pendentes</span>
+<div class="w-8 h-8 rounded-lg bg-status-warning/10 flex items-center justify-center text-status-warning">
+<span class="material-symbols-outlined text-[18px]" data-icon="mark_email_unread">mark_email_unread</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-display-kpi text-display-kpi text-text-title tracking-tight">6 aguardando</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-primary-text">
+<span class="material-symbols-outlined text-[16px]" data-icon="notifications_active">notifications_active</span>
+<span>3 necessitam reenvio</span>
+</div>
+</div>
+</section>
+<!-- GLASS FILTER BAR -->
+<section class="glass-filter-bar rounded-[18px] p-2.5 px-4 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center flex-wrap gap-3 flex-1 min-w-[280px]">
+<!-- Quick Search -->
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-text-placeholder text-[19px]" data-icon="search">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-xl bg-white/70 border border-slate-200/80 text-xs font-body-default text-text-title placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-focus-indigo focus:border-focus-indigo transition-all" placeholder="Buscar por lead, cliente, PIN..." type="text"/>
+</div>
+<!-- Divider -->
+<div class="h-6 w-[1px] bg-slate-300/70 hidden sm:block"></div>
+<!-- Seletor de Origem -->
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-semibold text-text-support mr-1">Origem:</span>
+<div class="inline-flex p-1 bg-white/60 rounded-xl border border-slate-200/70 text-xs font-medium">
+<button class="px-2.5 py-1 rounded-lg bg-primary-container text-white font-semibold transition-all shadow-sm">Todos</button>
+<button class="px-2.5 py-1 rounded-lg text-text-body hover:text-text-title hover:bg-white/80 transition-all">Instagram</button>
+<button class="px-2.5 py-1 rounded-lg text-text-body hover:text-text-title hover:bg-white/80 transition-all">Indicação</button>
+<button class="px-2.5 py-1 rounded-lg text-text-body hover:text-text-title hover:bg-white/80 transition-all">Google</button>
+<button class="px-2.5 py-1 rounded-lg text-text-body hover:text-text-title hover:bg-white/80 transition-all">WhatsApp</button>
+</div>
+</div>
+<!-- Divider -->
+<div class="h-6 w-[1px] bg-slate-300/70 hidden lg:block"></div>
+<!-- Segmento -->
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-semibold text-text-support mr-1">Segmento:</span>
+<select class="h-9 px-3 rounded-xl bg-white/70 border border-slate-200/80 text-xs font-semibold text-text-title focus:ring-2 focus:ring-focus-indigo focus:border-focus-indigo">
+<option>Todos os segmentos</option>
+<option>Pilates</option>
+<option>Fisioterapia</option>
+<option>Bem-estar</option>
+<option>Eventos</option>
+</select>
+</div>
+</div>
+<!-- View Mode Switcher -->
+<div class="flex items-center gap-2">
+<div class="inline-flex p-1 bg-white/80 rounded-xl border border-slate-200/70">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-text-title text-white text-xs font-semibold shadow-sm" title="Modo Kanban">
+<span class="material-symbols-outlined text-[16px]" data-icon="view_kanban">view_kanban</span>
+<span>Kanban</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-text-support hover:text-text-title hover:bg-white text-xs font-semibold transition-colors" title="Modo Lista">
+<span class="material-symbols-outlined text-[16px]" data-icon="format_list_bulleted">format_list_bulleted</span>
+<span>Lista</span>
+</button>
+</div>
+</div>
+</section>
+<!-- KANBAN BOARD CONTAINER (6 COLUNAS) -->
+<section class="w-full overflow-x-auto pb-6 kanban-scroll">
+<div class="inline-flex items-start gap-5 min-w-[1360px] w-full pt-1">
+<!-- COLUNA 1: "Novo lead" (3 · R$ 55.000) -->
+<div class="w-[280px] shrink-0 flex flex-col gap-3">
+<!-- Header da Coluna -->
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+<h3 class="font-title-section text-title-section text-text-title">Novo lead</h3>
+<span class="w-5 h-5 rounded-full bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center">3</span>
+</div>
+<span class="text-xs font-bold text-text-support">R$ 55.000</span>
+</div>
+<!-- Cards Stack -->
+<div class="flex flex-col gap-3.5">
+<!-- Card 1: Aura Wellness Hub -->
+<div class="glass-card rounded-[20px] p-5 cursor-grab active:cursor-grabbing">
+<div class="flex items-start justify-between gap-2">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-700 font-semibold border border-amber-500/20">
+                    Bem-estar
+                  </span>
+<span class="text-[11px] text-text-support font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="schedule">schedule</span>
+                    há 1 dia
+                  </span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">Aura Wellness Hub</h4>
+<p class="text-xs text-text-support mt-0.5">Clara Mendez · Rebranding &amp; Identidade</p>
+</div>
+<div class="mt-3 pt-3 border-t border-slate-200/60 flex items-center justify-between">
+<span class="text-xs font-bold text-text-title">R$ 35.000</span>
+<span class="text-[11px] text-text-support flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="photo_camera">photo_camera</span>
+                    Instagram
+                  </span>
+</div>
+<div class="mt-3">
+<button class="w-full h-8 rounded-lg bg-white/80 hover:bg-primary-container hover:text-white border border-slate-200/80 text-xs font-semibold text-text-title transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="send">send</span>
+<span>Enviar briefing</span>
+</button>
+</div>
+</div>
+<!-- Card 2: BioPosture Atelier -->
+<div class="glass-card rounded-[20px] p-5 cursor-grab active:cursor-grabbing">
+<div class="flex items-start justify-between gap-2">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-800 font-semibold border border-teal-500/20">
+                    Fisioterapia
+                  </span>
+<span class="text-[11px] text-text-support font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="schedule">schedule</span>
+                    há 3 horas
+                  </span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">BioPosture Atelier</h4>
+<p class="text-xs text-text-support mt-0.5">Dr. Thiago Prado · Naming &amp; Web</p>
+</div>
+<div class="mt-3 pt-3 border-t border-slate-200/60 flex items-center justify-between">
+<span class="text-xs font-bold text-text-title">R$ 20.000</span>
+<span class="text-[11px] text-text-support flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="recommend">recommend</span>
+                    Indicação
+                  </span>
+</div>
+<div class="mt-3">
+<button class="w-full h-8 rounded-lg bg-white/80 hover:bg-primary-container hover:text-white border border-slate-200/80 text-xs font-semibold text-text-title transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="send">send</span>
+<span>Enviar briefing</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUNA 2: "Briefing enviado" (4 · R$ 98.000) -->
+<div class="w-[280px] shrink-0 flex flex-col gap-3">
+<!-- Header da Coluna -->
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<h3 class="font-title-section text-title-section text-text-title">Briefing enviado</h3>
+<span class="w-5 h-5 rounded-full bg-primary-container/20 text-brand-primary-text text-xs font-bold flex items-center justify-center">4</span>
+</div>
+<span class="text-xs font-bold text-brand-primary-text">R$ 98.000</span>
+</div>
+<!-- Cards Stack -->
+<div class="flex flex-col gap-3.5">
+<!-- Card Lumina Movement (Destaque especificado no prompt) -->
+<div class="glass-card rounded-[20px] p-5 relative border-l-2 border-l-primary-container">
+<div class="flex items-start justify-between gap-2">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-orange-500/10 text-brand-primary-text font-semibold border border-orange-500/20">
+                    Pilates reformer
+                  </span>
+<span class="text-xs font-bold text-text-title">R$ 75.000</span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">Lumina Movement</h4>
+<p class="text-xs text-text-support mt-0.5">Helena Vasconcellos</p>
+</div>
+<!-- PIN Code Box & Preenchimento -->
+<div class="mt-3 p-2.5 rounded-xl bg-white/70 border border-slate-200/80 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-[10px] uppercase font-bold tracking-wider text-text-support">Código PIN de Acesso</span>
+<span class="font-code-pin text-sm font-bold tracking-widest text-text-title bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                      842-910
+                    </span>
+</div>
+<!-- Barra de Progresso em 65% -->
+<div class="space-y-1">
+<div class="flex justify-between text-[11px] font-medium text-text-support">
+<span>Progresso do cliente</span>
+<span class="font-bold text-primary-container">65%</span>
+</div>
+<div class="w-full h-1.5 bg-slate-200/80 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary-container to-brand-primary-hover rounded-full w-[65%]"></div>
+</div>
+</div>
+</div>
+<!-- Botões Rápidos WhatsApp e E-mail -->
+<div class="mt-3 pt-2.5 flex items-center gap-2">
+<button class="flex-1 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors border border-emerald-200" title="Reenviar pelo WhatsApp">
+<span class="material-symbols-outlined text-[15px] text-emerald-600" data-icon="chat">chat</span>
+<span>WhatsApp</span>
+</button>
+<button class="flex-1 h-8 rounded-lg bg-white/80 hover:bg-slate-100 text-text-body text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors border border-slate-200" title="Reenviar por E-mail">
+<span class="material-symbols-outlined text-[15px] text-text-support" data-icon="mail">mail</span>
+<span>E-mail</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Serenità Pilates Studio -->
+<div class="glass-card rounded-[20px] p-5">
+<div class="flex items-start justify-between gap-2">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-orange-500/10 text-brand-primary-text font-semibold border border-orange-500/20">
+                    Pilates
+                  </span>
+<span class="text-xs font-bold text-text-title">R$ 23.000</span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">Serenità Pilates</h4>
+<p class="text-xs text-text-support mt-0.5">Beatriz Fontes · Estúdio Boutique</p>
+</div>
+<div class="mt-3 text-[11px] text-text-support flex items-center justify-between">
+<span>PIN: <strong class="font-code-pin font-bold text-text-title">412-880</strong></span>
+<span class="text-status-warning font-semibold">Preenchimento: 30%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUNA 3: "Briefing recebido" (2 · R$ 62.000) -->
+<div class="w-[280px] shrink-0 flex flex-col gap-3">
+<!-- Header da Coluna -->
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-status-success"></span>
+<h3 class="font-title-section text-title-section text-text-title">Briefing recebido</h3>
+<span class="w-5 h-5 rounded-full bg-status-success/20 text-emerald-800 text-xs font-bold flex items-center justify-center">2</span>
+</div>
+<span class="text-xs font-bold text-text-title">R$ 62.000</span>
+</div>
+<!-- Cards Stack -->
+<div class="flex flex-col gap-3.5">
+<!-- Card Physio Care Apex (especificado no prompt) -->
+<div class="glass-card rounded-[20px] p-5 border-l-2 border-l-status-success">
+<div class="flex items-start justify-between gap-2">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 font-semibold border border-emerald-500/30 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    100% preenchido
+                  </span>
+<span class="text-xs font-bold text-text-title">R$ 42.000</span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">Physio Care Apex</h4>
+<p class="text-xs text-text-support mt-0.5">Dr. Marcelo Castro · Fisioterapia Esportiva</p>
+</div>
+<div class="mt-3 text-xs text-text-support flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px] text-status-success" data-icon="task_alt">task_alt</span>
+<span>14 respostas detalhadas</span>
+</div>
+<!-- Botões "Ver respostas" e "Criar proposta" -->
+<div class="mt-4 flex flex-col gap-2">
+<button class="w-full h-8 rounded-lg bg-white/80 hover:bg-white text-text-title text-xs font-semibold border border-slate-200 flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px]" data-icon="visibility">visibility</span>
+<span>Ver respostas</span>
+</button>
+<button class="w-full h-8 rounded-lg brand-btn-primary text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]">
+<span class="material-symbols-outlined text-[15px]" data-icon="post_add">post_add</span>
+<span>Criar proposta</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Alma Terapias Integradas -->
+<div class="glass-card rounded-[20px] p-5">
+<div class="flex items-start justify-between gap-2">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 font-semibold border border-emerald-500/30">
+                    100% preenchido
+                  </span>
+<span class="text-xs font-bold text-text-title">R$ 20.000</span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">Alma Terapias</h4>
+<p class="text-xs text-text-support mt-0.5">Camila Torres · Identidade &amp; Sinalização</p>
+</div>
+<div class="mt-3 pt-2">
+<button class="w-full h-8 rounded-lg bg-white/80 hover:bg-white text-text-title text-xs font-semibold border border-slate-200 flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px]" data-icon="visibility">visibility</span>
+<span>Ver respostas</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUNA 4: "Proposta enviada" (2 · R$ 85.000) -->
+<!-- DETALHE DE INTERAÇÃO: Card sendo suavemente arrastado entre colunas com elevação, sombra alaranjada e rotação 1.5deg -->
+<div class="w-[280px] shrink-0 flex flex-col gap-3 relative">
+<!-- Header da Coluna -->
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-status-info"></span>
+<h3 class="font-title-section text-title-section text-text-title">Proposta enviada</h3>
+<span class="w-5 h-5 rounded-full bg-status-info/20 text-sky-800 text-xs font-bold flex items-center justify-center">2</span>
+</div>
+<span class="text-xs font-bold text-text-title">R$ 85.000</span>
+</div>
+<!-- Cards Stack -->
+<div class="flex flex-col gap-3.5">
+<!-- Card Gala Summit 2026 (SENDO ARRASTADO: interatividade visual demonstrada) -->
+<div class="glass-card glass-dragged rounded-[20px] p-5 cursor-grabbing relative">
+<!-- Drag handle visual indicator -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-primary-container text-white text-[10px] font-bold tracking-wide uppercase shadow-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="drag_indicator">drag_indicator</span>
+                  Arrastando proposta
+                </div>
+<div class="flex items-start justify-between gap-2 mt-1">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-700 font-semibold border border-purple-500/20">
+                    Eventos
+                  </span>
+<span class="text-xs font-bold text-text-title">R$ 60.000</span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">Gala Summit 2026</h4>
+<p class="text-xs text-text-support mt-0.5">Mariana e Rodrigo · Experiência Imersiva</p>
+</div>
+<div class="mt-3 p-2 rounded-xl bg-sky-50/70 border border-sky-200/60 flex items-center justify-between text-xs">
+<span class="font-semibold text-sky-800 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="description">description</span>
+                    Proposta v1.2
+                  </span>
+<span class="text-[11px] text-sky-600 font-medium">Aberta 3x hoje</span>
+</div>
+<div class="mt-3">
+<button class="w-full h-8 rounded-lg bg-text-title hover:bg-slate-800 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[15px] text-amber-400" data-icon="visibility">visibility</span>
+<span>Acompanhar leitura</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Espaço Equilíbrio Wellness -->
+<div class="glass-card rounded-[20px] p-5 opacity-90">
+<div class="flex items-start justify-between gap-2">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-700 font-semibold border border-amber-500/20">
+                    Bem-estar
+                  </span>
+<span class="text-xs font-bold text-text-title">R$ 25.000</span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">Espaço Equilíbrio</h4>
+<p class="text-xs text-text-support mt-0.5">Lauro Duarte · Proposta v1.0</p>
+</div>
+<div class="mt-3">
+<button class="w-full h-8 rounded-lg bg-white/80 hover:bg-white text-text-title text-xs font-semibold border border-slate-200 flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px]" data-icon="analytics">analytics</span>
+<span>Acompanhar leitura</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUNA 5: "Fechado" (5 · R$ 180.000, verde #10B981) -->
+<div class="w-[280px] shrink-0 flex flex-col gap-3">
+<!-- Header da Coluna -->
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-status-success"></span>
+<h3 class="font-title-section text-title-section text-text-title">Fechado</h3>
+<span class="w-5 h-5 rounded-full bg-status-success text-white text-xs font-bold flex items-center justify-center">5</span>
+</div>
+<span class="text-xs font-bold text-status-success">R$ 180.000</span>
+</div>
+<!-- Cards Stack -->
+<div class="flex flex-col gap-3.5">
+<!-- Card 1 Fechado: Destaque "Transformar em projeto" -->
+<div class="glass-card rounded-[20px] p-5 border-t-2 border-t-status-success bg-white/85">
+<div class="flex items-start justify-between gap-2">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 font-semibold border border-emerald-500/20">
+                    Pilates Boutique
+                  </span>
+<span class="text-xs font-bold text-status-success">R$ 55.000</span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">Vila Santé Pilates</h4>
+<p class="text-xs text-text-support mt-0.5">Patrícia Novaes · Contrato assinado</p>
+</div>
+<div class="mt-3 py-1 px-2.5 rounded-lg bg-emerald-50 border border-emerald-200/60 text-[11px] text-emerald-800 font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-emerald-600" data-icon="verified">verified</span>
+<span>Sinal de 50% liquidado em 14/03</span>
+</div>
+<!-- Botão em Destaque "Transformar em projeto" -->
+<div class="mt-4">
+<button class="w-full h-9 rounded-xl bg-status-success hover:bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[17px]" data-icon="tactic">tactic</span>
+<span>Transformar em projeto</span>
+</button>
+</div>
+</div>
+<!-- Card 2 Fechado: Studio Kinesia -->
+<div class="glass-card rounded-[20px] p-5">
+<div class="flex items-start justify-between gap-2">
+<span class="font-caption-badge text-[11px] px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-800 font-semibold border border-teal-500/20">
+                    Fisioterapia
+                  </span>
+<span class="text-xs font-bold text-status-success">R$ 48.000</span>
+</div>
+<div class="mt-3">
+<h4 class="font-title-card text-[15px] font-bold text-text-title">Studio Kinesia</h4>
+<p class="text-xs text-text-support mt-0.5">Eduardo Matos · Em transição para onboarding</p>
+</div>
+<div class="mt-3">
+<button class="w-full h-8 rounded-lg bg-white/80 hover:bg-slate-100 text-text-title text-xs font-semibold border border-slate-200 flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px]" data-icon="arrow_forward">arrow_forward</span>
+<span>Ver no Projetos</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUNA 6: "Perdido" (recolhida/sutil em cinza) -->
+<div class="w-[180px] shrink-0 flex flex-col gap-3 opacity-75 hover:opacity-100 transition-opacity">
+<!-- Header da Coluna Recolhida -->
+<div class="flex items-center justify-between px-2 py-1 rounded-xl bg-slate-200/50">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span>
+<span class="text-xs font-semibold text-text-support">Perdido</span>
+<span class="text-[10px] font-bold bg-slate-300 text-slate-700 px-1.5 rounded-full">2</span>
+</div>
+<button class="text-text-support hover:text-text-title" title="Expandir coluna">
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<!-- Mini card sutil em cinza -->
+<div class="p-3.5 rounded-2xl bg-white/40 border border-slate-200/50 flex flex-col gap-1.5">
+<span class="text-[11px] font-bold text-slate-500 line-through">Core Physio Hub</span>
+<span class="text-[10px] text-text-support">Sem fit orçamentário</span>
+<span class="text-[10px] font-semibold text-slate-400">R$ 18.000</span>
+</div>
+<div class="p-3.5 rounded-2xl bg-white/40 border border-slate-200/50 flex flex-col gap-1.5">
+<span class="text-[11px] font-bold text-slate-500 line-through">Solar Pilates</span>
+<span class="text-[10px] text-text-support">Prazo incompatível</span>
+<span class="text-[10px] font-semibold text-slate-400">R$ 22.000</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Atmospheric ripple on drag demonstration
+      const draggedCard = document.querySelector('.glass-dragged');
+      if (draggedCard) {
+        draggedCard.addEventListener('mouseenter', () => {
+          draggedCard.style.transform = 'scale(1.035) rotate(2deg)';
+        });
+        draggedCard.addEventListener('mouseleave', () => {
+          draggedCard.style.transform = 'scale(1.025) rotate(1.5deg)';
+        });
+      }
+    });
+  </script>
+</body></html>

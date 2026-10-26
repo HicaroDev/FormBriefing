@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Studio Suite 2.0 - Projects &amp; Delivery Spatial Hub</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons for UI symbols -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Tailwind Configuration matching Screen 2 Glassmorphism theme -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            body: ['"Inter"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#f97316',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              sky: '#0284c7'
+            }
+          },
+          boxShadow: {
+            'glass': '0 20px 50px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.04)',
+            'glass-subtle': '0 8px 30px rgba(0, 0, 0, 0.05)',
+            'glow-orange': '0 10px 25px -5px rgba(249, 115, 22, 0.35)',
+            'glow-emerald': '0 10px 25px -5px rgba(16, 185, 129, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Warm architectural gradient background from Studio Suite Spatial */
+    body {
+      background-color: #d1cdc7;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(245, 235, 225, 0.85) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(230, 215, 200, 0.75) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(215, 205, 195, 0.9) 0%, transparent 60%),
+        linear-gradient(135deg, #e7e2dc 0%, #cfc8bf 50%, #b8af9f 100%);
+      min-height: 100vh;
+      color: #1e293b;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Spatial Frosted Glass Surfaces */
+    .spatial-glass-panel {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12),
+                  0 0 0 1px rgba(255, 255, 255, 0.7) inset,
+                  0 8px 24px -4px rgba(0, 0, 0, 0.04);
+    }
+
+    .spatial-card-subtle {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 25px -5px rgba(20, 20, 30, 0.05),
+                  0 0 0 1px rgba(255, 255, 255, 0.85) inset;
+    }
+
+    .spatial-card-nested {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 16px -2px rgba(20, 20, 35, 0.04),
+                  0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+    }
+
+    .spatial-dock {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1),
+                  0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+    }
+
+    /* VisionOS Floating Browser Top Pill Bar */
+    .spatial-browser-bar {
+      background: rgba(45, 52, 65, 0.5);
+      backdrop-filter: blur(30px) saturate(190%);
+      -webkit-backdrop-filter: blur(30px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.22);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+
+    /* Smooth customized scrollbar */
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.16);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(249, 115, 22, 0.5);
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-5 md:p-7 flex flex-col items-center justify-start min-h-screen relative font-sans selection:bg-orange-500 selection:text-white">
+<!-- Ambient Background Spatial Lights -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0" data-purpose="ambient-lighting">
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-amber-200/45 rounded-full blur-3xl"></div>
+<div class="absolute top-1/4 -right-20 w-[460px] h-[460px] bg-orange-200/35 rounded-full blur-[110px]"></div>
+<div class="absolute -bottom-20 left-1/3 w-[520px] h-[520px] bg-sky-100/45 rounded-full blur-[130px]"></div>
+</div>
+<!-- VisionOS Top Floating Control Bar -->
+<header class="w-full max-w-[1560px] mb-4 z-20 flex justify-center">
+<div class="spatial-browser-bar text-white px-5 py-2 rounded-full flex items-center justify-between w-full max-w-4xl text-xs sm:text-sm font-medium tracking-wide">
+<!-- Window / Browser Controls -->
+<div class="flex items-center gap-2 text-slate-300">
+<button aria-label="Visualização em grade" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" type="button">
+<i class="fa-regular fa-clone text-xs"></i>
+</button>
+<button aria-label="Voltar" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" type="button">
+<i class="fa-solid fa-chevron-left text-[10px]"></i>
+</button>
+<button aria-label="Avançar" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-slate-400" type="button">
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</button>
+<button aria-label="Tipografia" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 hidden sm:flex items-center justify-center transition" type="button">
+<span class="text-[11px] font-semibold">aA</span>
+</button>
+</div>
+<!-- Domain / URL Pill Badge -->
+<div class="flex items-center gap-2 bg-black/30 px-4 py-1.5 rounded-full border border-white/15 text-slate-200">
+<span class="w-2 h-2 rounded-full bg-emerald-400 shadow-sm animate-pulse"></span>
+<span class="text-xs tracking-wider font-mono">studiosuite.app/projects-delivery</span>
+<button aria-label="Atualizar dados" class="ml-1 text-slate-400 hover:text-white transition" type="button">
+<i class="fa-solid fa-arrow-rotate-right text-[10px]"></i>
+</button>
+</div>
+<!-- Quick Action Utilities -->
+<div class="flex items-center gap-2 text-slate-300">
+<button aria-label="Exportar Relatório" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 flex items-center gap-1.5 text-xs transition" title="Exportar Relatório">
+<i class="fa-solid fa-arrow-up-from-bracket text-[10px]"></i>
+<span class="hidden md:inline text-[11px]">Exportar</span>
+</button>
+<button aria-label="Nova Tarefa" class="w-7 h-7 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-md shadow-orange-500/30 transition" title="Nova Tarefa / Sprint">
+<i class="fa-solid fa-plus text-xs"></i>
+</button>
+<button aria-label="Abas abertas" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" type="button">
+<i class="fa-regular fa-square text-xs"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- Master Spatial Glass Workspace Container -->
+<main class="w-full max-w-[1560px] flex items-start gap-4 sm:gap-5 z-10 relative">
+<!-- Left Vertical Floating Navigation Dock (Exact Screen 2 layout with Orange Active Pill) -->
+<aside aria-label="Navegação Principal" class="spatial-dock rounded-[32px] p-2.5 flex flex-col items-center justify-between min-h-[780px] hidden md:flex sticky top-5 shadow-xl shrink-0">
+<!-- Top Brand Mark -->
+<div class="flex flex-col items-center gap-5">
+<div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-white shadow-glow-orange cursor-pointer hover:scale-105 transition-transform" title="Studio Suite Hub">
+<i class="fa-solid fa-bolt-lightning text-lg"></i>
+</div>
+<!-- Navigation Icons -->
+<nav class="flex flex-col items-center gap-3">
+<!-- Hub Executivo -->
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Hub Executivo" type="button">
+<i class="fa-solid fa-grip-vertical text-base"></i>
+</button>
+<!-- CRM Leads -->
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="CRM Leads" type="button">
+<i class="fa-regular fa-clipboard text-base"></i>
+</button>
+<!-- Forms Hub -->
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Forms Hub" type="button">
+<i class="fa-solid fa-file-lines text-base"></i>
+</button>
+<!-- ACTIVE: Projects & Delivery (Orange Pill) -->
+<button class="w-11 h-11 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 text-white flex items-center justify-center shadow-md shadow-orange-500/35 transition hover:scale-105" title="Projects &amp; Delivery (Ativo)" type="button">
+<i class="fa-solid fa-person-running text-base"></i>
+</button>
+<!-- Calendário & Sprints -->
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Calendário &amp; Entregas" type="button">
+<i class="fa-regular fa-calendar-days text-base"></i>
+</button>
+<!-- Analytics & Métricas SLA -->
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Analytics &amp; SLA" type="button">
+<i class="fa-solid fa-chart-pie text-base"></i>
+</button>
+<!-- Squads Ativos -->
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Squads &amp; Capacidade" type="button">
+<i class="fa-solid fa-user-group text-base"></i>
+</button>
+<!-- Configurações -->
+<button class="w-11 h-11 rounded-2xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center justify-center transition" title="Configurações Operacionais" type="button">
+<i class="fa-solid fa-gear text-base"></i>
+</button>
+</nav>
+</div>
+<!-- Bottom System Controls -->
+<div class="flex flex-col items-center gap-2 pt-4 border-t border-slate-300/40 w-full">
+<button class="w-9 h-9 rounded-full bg-white text-amber-500 shadow-sm flex items-center justify-center hover:scale-105 transition" title="Tema Claro Ativo" type="button">
+<i class="fa-solid fa-sun text-sm"></i>
+</button>
+<button class="w-9 h-9 rounded-full text-slate-500 hover:text-slate-800 flex items-center justify-center transition" title="Alternar para Modo Noite" type="button">
+<i class="fa-solid fa-moon text-xs"></i>
+</button>
+</div>
+</aside>
+<!-- Central Glassmorphism Dashboard Canvas -->
+<div class="spatial-glass-panel rounded-[36px] flex-1 p-5 sm:p-7 flex flex-col gap-5 backdrop-blur-3xl shadow-2xl overflow-hidden min-w-0">
+<!-- Header, Views Switcher, Profile & Global Search -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2 border-b border-white/60">
+<!-- Executive Greeting & Section Title -->
+<div>
+<div class="flex items-center gap-3">
+<h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Projetos &amp; Delivery</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-orange-100/90 text-orange-700 text-xs font-bold border border-orange-200/80 shadow-xs flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+SLA Ativo
+</span>
+</div>
+<p class="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">Visão executiva em tempo real dos sprints, squads e rastreabilidade total do briefing</p>
+</div>
+<!-- Interactive Views Switcher & Search Bar -->
+<div class="flex flex-wrap items-center gap-3">
+<!-- Sub-Navigation Views Pills -->
+<div class="flex items-center bg-white/70 backdrop-blur-md p-1 rounded-full border border-white/80 shadow-sm text-xs font-semibold">
+<button class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-sm flex items-center gap-1.5 transition">
+<i class="fa-solid fa-table-columns text-[11px]"></i>
+<span>Quadro Kanban</span>
+</button>
+<button class="px-3 py-1.5 rounded-full text-slate-600 hover:text-slate-900 flex items-center gap-1.5 transition">
+<i class="fa-solid fa-chart-gantt text-[11px]"></i>
+<span>Linha do Tempo / Gantt</span>
+</button>
+<button class="px-3 py-1.5 rounded-full text-slate-600 hover:text-slate-900 flex items-center gap-1.5 transition hidden sm:flex">
+<i class="fa-solid fa-users-viewfinder text-[11px]"></i>
+<span>Matriz de Capacidade</span>
+</button>
+</div>
+<!-- Search Input -->
+<div class="relative min-w-[200px] sm:min-w-[240px]">
+<i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+<input class="w-full bg-white/70 focus:bg-white text-slate-800 placeholder-slate-400 text-xs pl-9 pr-3 py-2 rounded-full border border-white/80 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 outline-none transition shadow-sm" placeholder="Buscar brief, squad..." type="text"/>
+</div>
+<!-- Executive Profile Mini-Card: Hicaro Duarte -->
+<div class="flex items-center gap-2.5 pl-2 border-l border-white/60">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-orange-400 to-amber-300 flex items-center justify-center text-slate-900 font-extrabold text-xs shadow-md border-2 border-white cursor-pointer hover:scale-105 transition" title="Diretor Responsável: Hicaro Duarte">
+HD
+</div>
+<div class="hidden xl:flex flex-col">
+<span class="text-xs font-bold text-slate-900 leading-tight">Hicaro Duarte</span>
+<span class="text-[10px] text-slate-500 font-medium">@hicaro.dir</span>
+</div>
+<button aria-label="Notificações" class="w-8 h-8 rounded-full bg-white/75 hover:bg-white text-slate-600 hover:text-orange-500 flex items-center justify-center border border-white transition shadow-sm relative ml-1" type="button">
+<i class="fa-regular fa-bell text-xs"></i>
+<span class="w-2 h-2 rounded-full bg-orange-500 absolute top-1.5 right-1.5 ring-2 ring-white"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- High-Level Metric Tiles Row (Exact values & Screen 2 Aesthetics) -->
+<section aria-label="Métricas Principais de Desempenho" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5">
+<!-- Metric 1: Projetos em Produção -->
+<div class="spatial-card-subtle rounded-3xl p-4 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Projetos em Produção</span>
+<div class="w-7 h-7 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+</div>
+<!-- Wave bar sparklines -->
+<div class="my-2.5 flex items-end justify-between h-9 gap-1 px-1">
+<div class="w-2 bg-orange-300/40 rounded-full h-[35%]"></div>
+<div class="w-2 bg-orange-300/60 rounded-full h-[60%]"></div>
+<div class="w-2 bg-orange-400/80 rounded-full h-[85%]"></div>
+<div class="w-2 bg-orange-500 rounded-full h-[65%]"></div>
+<div class="w-2 bg-orange-400/70 rounded-full h-[50%]"></div>
+<div class="w-2 bg-orange-500 rounded-full h-[100%]"></div>
+<div class="w-2 bg-orange-600 rounded-full h-[75%]"></div>
+<div class="w-2 bg-orange-400/60 rounded-full h-[55%]"></div>
+</div>
+<div class="flex items-baseline justify-between">
+<div>
+<span class="text-xl font-extrabold text-slate-900 tracking-tight">14 Ativos</span>
+<span class="text-[11px] font-medium text-slate-500 ml-1">em pipeline</span>
+</div>
+<span class="text-[11px] font-semibold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full border border-orange-100">9 Squads</span>
+</div>
+</div>
+<!-- Metric 2: Entregas no Prazo -->
+<div class="spatial-card-subtle rounded-3xl p-4 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Entregas no Prazo</span>
+<div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">
+<i class="fa-solid fa-circle-check"></i>
+</div>
+</div>
+<!-- SVG Pulse wave -->
+<div class="my-2 flex items-center justify-center h-9">
+<svg class="w-full h-8 text-emerald-500" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 200 40">
+<path d="M0,20 L40,20 L50,12 L60,30 L72,6 L84,34 L94,18 L104,22 L114,20 L200,20"></path>
+</svg>
+</div>
+<div class="flex items-baseline justify-between">
+<div>
+<span class="text-xl font-extrabold text-slate-900 tracking-tight">98.5%</span>
+</div>
+<span class="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">+1.2% este mês</span>
+</div>
+</div>
+<!-- Metric 3: SLA Médio por Fase -->
+<div class="spatial-card-subtle rounded-3xl p-4 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">SLA Médio por Fase</span>
+<div class="w-7 h-7 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-xs">
+<i class="fa-solid fa-stopwatch"></i>
+</div>
+</div>
+<!-- Simulated speedometer / metric display -->
+<div class="my-2 flex items-center justify-center h-9 gap-1.5">
+<div class="w-1.5 bg-rose-200 rounded-full h-[45%]"></div>
+<div class="w-1.5 bg-rose-300 rounded-full h-[65%]"></div>
+<div class="w-1.5 bg-rose-400 rounded-full h-[85%]"></div>
+<div class="w-1.5 bg-rose-500 rounded-full h-[95%]"></div>
+<div class="w-1.5 bg-rose-400 rounded-full h-[60%]"></div>
+<div class="w-1.5 bg-rose-300 rounded-full h-[40%]"></div>
+</div>
+<div class="flex items-baseline justify-between">
+<div>
+<span class="text-xl font-extrabold text-slate-900 tracking-tight">3.4 dias</span>
+</div>
+<span class="text-[11px] font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">Meta: &lt; 4.0d</span>
+</div>
+</div>
+<!-- Metric 4: Carga de Equipe -->
+<div class="spatial-card-subtle rounded-3xl p-4 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Carga de Equipe</span>
+<div class="w-7 h-7 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center text-xs">
+<i class="fa-solid fa-gauge-high"></i>
+</div>
+</div>
+<!-- Progress Bar Strip -->
+<div class="my-2.5 space-y-1">
+<div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+<div class="bg-gradient-to-r from-amber-500 to-orange-500 h-full rounded-full" style="width: 82%;"></div>
+</div>
+<div class="flex justify-between text-[10px] text-slate-400 font-mono">
+<span>0%</span>
+<span>Capacidade Ideal 85%</span>
+<span>100%</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div>
+<span class="text-xl font-extrabold text-slate-900 tracking-tight">82%</span>
+</div>
+<span class="text-[11px] font-medium text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">Equilibrado</span>
+</div>
+</div>
+</section>
+<!-- Filter Sub-Bar & Active Squad Status Indicators -->
+<div class="flex flex-wrap items-center justify-between gap-3 bg-white/50 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/70 text-xs">
+<div class="flex items-center gap-2">
+<span class="text-slate-400 font-semibold text-[11px] uppercase tracking-wider">Visualização:</span>
+<div class="flex items-center bg-white/70 p-0.5 rounded-lg border border-white">
+<button class="px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-xs font-semibold">Fase de Execução</button>
+<button class="px-2.5 py-1 rounded-md text-slate-500 hover:text-slate-900">Cliente / Briefing de Origem</button>
+</div>
+</div>
+<!-- Active Squad Pill Chips -->
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-slate-400 font-semibold text-[11px] uppercase tracking-wider hidden sm:inline">Squads:</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60 font-medium text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Nexus (UX) <b class="ml-0.5">6</b>
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200/60 font-medium text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Forge (Dev) <b class="ml-0.5">5</b>
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200/60 font-medium text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Vetting (QA) <b class="ml-0.5">3</b>
+</span>
+<button class="w-6 h-6 rounded-lg bg-white/80 hover:bg-white text-slate-600 flex items-center justify-center transition border border-white shadow-xs ml-1" title="Configurar Filtros">
+<i class="fa-solid fa-sliders text-[10px]"></i>
+</button>
+</div>
+</div>
+<!-- Main Workspace Split: Fluid Kanban Flow (Left) + Contextual Inspection Drawer (Right) -->
+<div class="flex-1 flex gap-4 min-h-0 overflow-hidden items-start">
+<!-- KANBAN BOARD CONTAINER -->
+<div class="flex-1 overflow-x-auto overflow-y-hidden custom-scrollbar pb-2">
+<div class="inline-flex gap-4 h-[590px] items-start">
+<!-- COLUMN 1: Backlog & Kickoff -->
+<div class="w-[290px] flex-shrink-0 flex flex-col h-full spatial-card-subtle rounded-3xl p-3 border border-white/80">
+<!-- Col Header -->
+<div class="px-2 py-1.5 flex items-center justify-between border-b border-slate-200/60 mb-2.5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+<span class="text-xs font-bold text-slate-900">Backlog &amp; Kickoff</span>
+<span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-white/80 text-slate-600 border border-white shadow-xs">3</span>
+</div>
+<button class="text-slate-400 hover:text-slate-700 text-xs">
+<i class="fa-solid fa-ellipsis"></i>
+</button>
+</div>
+<!-- Col Cards Scroll -->
+<div class="space-y-3 overflow-y-auto flex-1 pr-1 custom-scrollbar">
+<!-- Card 1.1: Lumina Movement (Selected / Highlighted) -->
+<div class="spatial-card-nested rounded-2xl p-3.5 border-2 border-orange-400/70 shadow-glow-orange cursor-pointer transition hover:scale-[1.01] group relative" onclick="openProcessDrawer('PLT-2024-08')">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-orange-700 border border-orange-200">
+#PLT-2024-08 Lumina
+</span>
+<span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">Aprovado CRM</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition leading-snug">
+Kickoff &amp; Arquitetura de Marca: Experiência Omnichannel
+</h4>
+<p class="mt-1 text-[11px] text-slate-500 font-body line-clamp-2 leading-relaxed">
+Escopo: Naming de estúdio, design tokens, integrações clínicas de agendamento e portal de fidelidade.
+</p>
+<div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between text-xs">
+<div class="flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-[9px]">
+DR
+</div>
+<span class="text-[11px] text-slate-600 font-medium">Diego Ramos</span>
+</div>
+<div class="flex items-center gap-1 text-[10px] text-slate-400 font-mono">
+<i class="fa-regular fa-calendar text-[10px]"></i>
+24 Out
+</div>
+</div>
+</div>
+<!-- Card 1.2: Solaris AI -->
+<div class="spatial-card-nested rounded-2xl p-3.5 hover:border-orange-300 shadow-sm transition hover:scale-[1.01] cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+#BRIEF-902 Solaris
+</span>
+<span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">Validado</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition leading-snug">
+Mapeamento de Requisitos e Sincronização de Dados
+</h4>
+<p class="mt-1 text-[11px] text-slate-500 font-body line-clamp-2 leading-relaxed">
+Alinhamento com diretoria técnica: migração de base legada para AWS multi-tenant e dashboard executivo.
+</p>
+<div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between text-xs">
+<div class="flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-[9px]">
+MC
+</div>
+<span class="text-[11px] text-slate-600 font-medium">Marina Costa</span>
+</div>
+<div class="flex items-center gap-1 text-[10px] text-slate-400 font-mono">
+<i class="fa-regular fa-calendar text-[10px]"></i>
+26 Out
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUMN 2: Em Criação & Design -->
+<div class="w-[290px] flex-shrink-0 flex flex-col h-full spatial-card-subtle rounded-3xl p-3 border border-white/80">
+<div class="px-2 py-1.5 flex items-center justify-between border-b border-slate-200/60 mb-2.5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
+<span class="text-xs font-bold text-slate-900">Em Criação &amp; Design</span>
+<span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-orange-100 text-orange-700 border border-orange-200 shadow-xs">4</span>
+</div>
+<button class="text-slate-400 hover:text-slate-700 text-xs">
+<i class="fa-solid fa-ellipsis"></i>
+</button>
+</div>
+<div class="space-y-3 overflow-y-auto flex-1 pr-1 custom-scrollbar">
+<!-- Card 2.1: Vesper Health -->
+<div class="spatial-card-nested rounded-2xl p-3.5 hover:border-orange-300 shadow-sm transition hover:scale-[1.01] cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-50 text-orange-700 border border-orange-200">
+#PLT-2024-02 Vesper
+</span>
+<span class="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-rose-50 text-rose-600 border border-rose-100">Alta Prioridade</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition leading-snug">
+Design System &amp; Componentes de Telemedicina
+</h4>
+<!-- Subtasks Progress -->
+<div class="mt-2.5 space-y-1">
+<div class="flex justify-between text-[10px] font-medium text-slate-500">
+<span>Entregáveis de Design</span>
+<span class="font-bold text-orange-600">8/12 Concluídos</span>
+</div>
+<div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full" style="width: 66%;"></div>
+</div>
+</div>
+<!-- Tags -->
+<div class="mt-2.5 flex flex-wrap gap-1">
+<span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-medium">Identidade Visual</span>
+<span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-medium">Wireframes v2</span>
+</div>
+<div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between">
+<div class="flex -space-x-1">
+<div class="w-5 h-5 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] ring-2 ring-white font-bold">AL</div>
+<div class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[9px] ring-2 ring-white font-bold">PR</div>
+</div>
+<span class="text-[10px] text-amber-600 font-semibold flex items-center gap-1">
+<i class="fa-solid fa-clock text-[9px]"></i> 2 dias restantes
+</span>
+</div>
+</div>
+<!-- Card 2.2: Apex Capital -->
+<div class="spatial-card-nested rounded-2xl p-3.5 hover:border-orange-300 shadow-sm transition hover:scale-[1.01] cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+#BRIEF-881 Apex
+</span>
+<span class="px-1.5 py-0.5 rounded-full text-[9px] font-medium bg-slate-100 text-slate-600">Normal</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition leading-snug">
+UX Copywriting &amp; Telas de Onboarding KYC
+</h4>
+<div class="mt-2.5 space-y-1">
+<div class="flex justify-between text-[10px] font-medium text-slate-500">
+<span>Etapas Concluídas</span>
+<span class="text-emerald-600 font-bold">10/10 Entregues</span>
+</div>
+<div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between">
+<div class="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[9px] font-bold">JS</div>
+<span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+<i class="fa-solid fa-check text-[9px]"></i> Pronto para Review
+</span>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUMN 3: Validação & Review -->
+<div class="w-[290px] flex-shrink-0 flex flex-col h-full spatial-card-subtle rounded-3xl p-3 border border-white/80">
+<div class="px-2 py-1.5 flex items-center justify-between border-b border-slate-200/60 mb-2.5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+<span class="text-xs font-bold text-slate-900">Validação &amp; Review</span>
+<span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-white/80 text-slate-600 border border-white shadow-xs">3</span>
+</div>
+<button class="text-slate-400 hover:text-slate-700 text-xs">
+<i class="fa-solid fa-ellipsis"></i>
+</button>
+</div>
+<div class="space-y-3 overflow-y-auto flex-1 pr-1 custom-scrollbar">
+<!-- Card 3.1: Aura Studio -->
+<div class="spatial-card-nested rounded-2xl p-3.5 hover:border-orange-300 shadow-sm transition hover:scale-[1.01] cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+#PLT-2024-05 Aura
+</span>
+<span class="flex items-center gap-1 text-[9px] font-bold bg-amber-100/70 text-amber-800 px-1.5 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span> Portal Aberto
+</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition leading-snug">
+Protótipo Interativo Figma (v3.2) - Jornada de Reserva
+</h4>
+<div class="mt-2.5 p-2 rounded-xl bg-slate-50 border border-slate-200/60 text-[11px] flex items-center justify-between">
+<span class="text-slate-500">Feedback Pendente:</span>
+<span class="font-bold text-amber-700">VP Marketing</span>
+</div>
+<div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between text-[10px]">
+<span class="text-slate-400 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Enviado há 18h</span>
+<span class="text-orange-600 font-bold hover:underline">Link Ativo ↗</span>
+</div>
+</div>
+<!-- Card 3.2: Kronos Logistics -->
+<div class="spatial-card-nested rounded-2xl p-3.5 hover:border-orange-300 shadow-sm transition hover:scale-[1.01] cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+#BRIEF-772 Kronos
+</span>
+<span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Aprovado 2/3</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition leading-snug">
+Auditoria de Acessibilidade &amp; Contratos de Dados
+</h4>
+<div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between text-[10px]">
+<span class="text-slate-400">Resp: Roberta Sales</span>
+<span class="text-emerald-600 font-semibold">Reunião hoje 16:30</span>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUMN 4: Desenvolvimento & APIs -->
+<div class="w-[290px] flex-shrink-0 flex flex-col h-full spatial-card-subtle rounded-3xl p-3 border border-white/80">
+<div class="px-2 py-1.5 flex items-center justify-between border-b border-slate-200/60 mb-2.5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
+<span class="text-xs font-bold text-slate-900">Desenvolvimento &amp; APIs</span>
+<span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-white/80 text-slate-600 border border-white shadow-xs">3</span>
+</div>
+<button class="text-slate-400 hover:text-slate-700 text-xs">
+<i class="fa-solid fa-ellipsis"></i>
+</button>
+</div>
+<div class="space-y-3 overflow-y-auto flex-1 pr-1 custom-scrollbar">
+<!-- Card 4.1: Kinetic Club Mariana Tek & Stripe -->
+<div class="spatial-card-nested rounded-2xl p-3.5 hover:border-orange-300 shadow-sm transition hover:scale-[1.01] cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-50 text-sky-700 border border-sky-200">
+#PLT-2024-03 Kinetic
+</span>
+<span class="text-[9px] font-bold bg-indigo-50 text-indigo-700 px-1.5 py-0.5 rounded-full">Sprint #4</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition leading-snug">
+Checklist Técnico: Mariana Tek API &amp; Gateway Stripe
+</h4>
+<!-- Checklist Items -->
+<div class="mt-2.5 space-y-1.5 text-[11px]">
+<div class="flex items-center gap-1.5 text-slate-700">
+<i class="fa-solid fa-square-check text-emerald-500 text-xs"></i>
+<span>Webhook de Checkout &amp; Assinatura</span>
+</div>
+<div class="flex items-center gap-1.5 text-slate-700">
+<i class="fa-solid fa-square-check text-emerald-500 text-xs"></i>
+<span>Sync de Grade de Aulas (Mariana Tek)</span>
+</div>
+<div class="flex items-center gap-1.5 text-slate-400">
+<i class="fa-regular fa-square text-xs"></i>
+<span>Integração Cliniko</span>
+</div>
+</div>
+<div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between text-[10px]">
+<span class="text-slate-500 font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Squad Forge
+</span>
+<span class="font-mono text-slate-400">v1.4.0-rc2</span>
+</div>
+</div>
+<!-- Card 4.2: NeuroPure AWS -->
+<div class="spatial-card-nested rounded-2xl p-3.5 hover:border-orange-300 shadow-sm transition hover:scale-[1.01] cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">#BRIEF-650 NeuroPure</span>
+<span class="text-[9px] font-medium bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded-full">Dev Ops</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition leading-snug">
+Pipeline CI/CD e Infraestrutura AWS Edge
+</h4>
+<div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between text-[10px]">
+<span class="text-slate-400">Lead: Gustavo Lima</span>
+<span class="text-emerald-600 font-semibold">92% Cobertura</span>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUMN 5: Concluído & Handover -->
+<div class="w-[290px] flex-shrink-0 flex flex-col h-full spatial-card-subtle rounded-3xl p-3 border border-white/80">
+<div class="px-2 py-1.5 flex items-center justify-between border-b border-slate-200/60 mb-2.5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+<span class="text-xs font-bold text-slate-900">Concluído &amp; Handover</span>
+<span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-xs">2</span>
+</div>
+<button class="text-slate-400 hover:text-slate-700 text-xs">
+<i class="fa-solid fa-ellipsis"></i>
+</button>
+</div>
+<div class="space-y-3 overflow-y-auto flex-1 pr-1 custom-scrollbar">
+<!-- Card 5.1: Elysium Club -->
+<div class="spatial-card-nested rounded-2xl p-3.5 hover:border-emerald-300 shadow-sm transition hover:scale-[1.01] cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+#PLT-2024-01 Elysium
+</span>
+<i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
+</div>
+<h4 class="text-xs font-bold text-slate-900 group-hover:text-emerald-600 transition leading-snug">
+Handover Completo: Design Tokens &amp; Repositório
+</h4>
+<p class="mt-1 text-[11px] text-slate-500 font-body line-clamp-2 leading-relaxed">
+Auditoria de escopo finalizada com 100% de conformidade com o briefing do CRM. Termo assinado.
+</p>
+<div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between text-[10px]">
+<span class="text-slate-400">Doc: Notion + GitHub</span>
+<span class="text-emerald-700 font-bold bg-emerald-100/70 px-2 py-0.5 rounded-full">Auditoria OK</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CONTEXTUAL INSPECTION DRAWER (Screen 2 High-End Glass Style) -->
+<aside class="w-[360px] lg:w-[380px] shrink-0 spatial-card-subtle rounded-3xl p-5 border border-white flex flex-col h-[590px] shadow-xl overflow-hidden" id="processDrawer">
+<!-- Drawer Header -->
+<div class="pb-3 border-b border-slate-200/60 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-100 text-orange-700 border border-orange-200">
+#PLT-2024-08
+</span>
+<h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Lumina Movement</h3>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-500 flex items-center justify-center transition border border-white shadow-xs" title="Expandir">
+<i class="fa-solid fa-up-right-and-down-left-from-center text-[10px]"></i>
+</button>
+<button class="w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-500 flex items-center justify-center transition border border-white shadow-xs" onclick="closeProcessDrawer()" title="Fechar">
+<i class="fa-solid fa-xmark text-xs"></i>
+</button>
+</div>
+</div>
+<!-- Drawer Body Scrollable Content -->
+<div class="py-3 space-y-4 overflow-y-auto flex-1 pr-1 custom-scrollbar text-xs font-body">
+<!-- Origin Briefing Anchor Card (From CRM) -->
+<div class="spatial-card-nested rounded-2xl p-3.5 border border-white">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5 text-orange-600 font-bold text-xs">
+<i class="fa-solid fa-clipboard-check text-xs"></i>
+<span>Briefing Original no CRM</span>
+</div>
+<span class="text-[10px] text-slate-400 font-mono">18 Out 2024</span>
+</div>
+<div class="text-[12px] font-bold text-slate-900">Formulário de Entrada: 'Expansão Studio Boutique'</div>
+<p class="text-[11px] text-slate-600 mt-1 italic leading-relaxed">
+"Precisamos de uma plataforma unificada que integre agendamento rápido de aulas via Mariana Tek e gestão de prontuários com Cliniko sem fricção para o cliente final."
+</p>
+<div class="mt-2.5 pt-2 border-t border-slate-200/60 flex items-center justify-between text-[10px]">
+<span class="text-slate-500">Resp: Camilla Prado (Fundadora)</span>
+<a class="font-bold text-orange-600 hover:text-orange-700" href="#">Ver formulário ↗</a>
+</div>
+</div>
+<!-- Operational Phase & Squad Tag Info -->
+<div class="grid grid-cols-2 gap-2.5">
+<div class="bg-white/70 p-2.5 rounded-xl border border-white">
+<span class="text-[9px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Fase Operacional</span>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-orange-100 text-orange-700 text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span> Backlog &amp; Kickoff
+</div>
+</div>
+<div class="bg-white/70 p-2.5 rounded-xl border border-white">
+<span class="text-[9px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Squad Responsável</span>
+<div class="text-[11px] font-bold text-slate-900 mt-0.5">Nexus + Forge</div>
+</div>
+</div>
+<!-- Scope Protection & Anti-Scope Creep Warning Box -->
+<div class="p-3 rounded-2xl border border-emerald-300/80 bg-emerald-50/70 flex items-start gap-2.5">
+<div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+<i class="fa-solid fa-shield-halved text-xs"></i>
+</div>
+<div>
+<span class="text-[11px] font-bold text-emerald-950 block">Travamento de Escopo Ativo</span>
+<p class="text-[10px] text-emerald-800 mt-0.5 leading-relaxed">
+Qualquer novo pedido de funcionalidade fora dos 4 pilares do briefing exigirá emissão de aditivo via CRM.
+</p>
+</div>
+</div>
+<!-- Execution Timeline / Phase Log -->
+<div>
+<div class="flex items-center justify-between mb-2.5">
+<span class="text-[11px] font-bold text-slate-900 uppercase tracking-wider">Histórico de Execução</span>
+<span class="text-[10px] text-slate-400 font-mono">3 de 7 marcos</span>
+</div>
+<div class="space-y-3 relative before:absolute before:inset-0 before:left-2.5 before:w-0.5 before:bg-slate-200/80">
+<!-- Milestone 1 -->
+<div class="relative flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0 z-10 text-[9px] shadow-sm">
+<i class="fa-solid fa-check"></i>
+</div>
+<div>
+<div class="text-[11px] font-bold text-slate-900">Briefing Validado &amp; Aprovado</div>
+<div class="text-[10px] text-slate-400">CRM Leads • 18 Out, 14:20</div>
+</div>
+</div>
+<!-- Milestone 2 -->
+<div class="relative flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0 z-10 text-[9px] shadow-sm">
+<i class="fa-solid fa-check"></i>
+</div>
+<div>
+<div class="text-[11px] font-bold text-slate-900">Squad Alocado &amp; Sprint Planejado</div>
+<div class="text-[10px] text-slate-400">Capacidade: 2 Designers + 1 Tech Lead</div>
+</div>
+</div>
+<!-- Milestone 3 (Current Active) -->
+<div class="relative flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-full bg-gradient-to-tr from-orange-500 to-amber-500 text-white flex items-center justify-center shrink-0 z-10 text-[9px] shadow-glow-orange ring-2 ring-orange-200">
+<i class="fa-solid fa-play"></i>
+</div>
+<div>
+<div class="text-[11px] font-bold text-orange-600">Kickoff Técnico com Cliente</div>
+<div class="text-[10px] text-slate-500">Agendado para 24 Out, 10:00 • Google Meet</div>
+</div>
+</div>
+<!-- Milestone 4 (Upcoming) -->
+<div class="relative flex items-start gap-2.5 opacity-55">
+<div class="w-5 h-5 rounded-full bg-slate-200 text-slate-400 flex items-center justify-center shrink-0 z-10 text-[8px]">
+<i class="fa-solid fa-circle"></i>
+</div>
+<div>
+<div class="text-[11px] font-medium text-slate-800">Entrega da V1 do Protótipo de Fluxo</div>
+<div class="text-[10px] text-slate-400">Previsão: 31 Out</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer: Quick Transition Action (Vibrant Orange Button) -->
+<div class="pt-3 border-t border-slate-200/60 bg-transparent flex items-center gap-2">
+<button class="w-full py-2.5 px-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-2xl font-bold text-xs shadow-glow-orange transition duration-150 flex items-center justify-center gap-2 cursor-pointer active:scale-95">
+<span>Mover para 'Em Criação &amp; Design'</span>
+<i class="fa-solid fa-arrow-right text-[11px]"></i>
+</button>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Minimal VisionOS Status Bar Indicator -->
+<footer class="mt-4 mb-2 text-center text-xs font-medium text-slate-500/80 z-10 flex items-center justify-center gap-3">
+<span>Studio Suite Spatial v2.4</span>
+<span>•</span>
+<span>Projects &amp; Delivery Engine</span>
+<span>•</span>
+<span class="inline-flex items-center gap-1.5 font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Latência: 12ms
+</span>
+</footer>
+<script>
+    function openProcessDrawer(id) {
+      const drawer = document.getElementById('processDrawer');
+      drawer.classList.remove('hidden');
+    }
+
+    function closeProcessDrawer() {
+      const drawer = document.getElementById('processDrawer');
+      drawer.classList.add('hidden');
+    }
+  </script>
+</body></html>

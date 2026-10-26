@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="h-full" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Forms Hub — Biblioteca de Modelos | Studio Suite 2.0</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-tint": "#9d4300",
+            "outline-variant": "#e0c0b1",
+            "primary-fixed-dim": "#ffb690",
+            "primary-container": "#f97316",
+            "surface-container-highest": "#f3e4d6",
+            "tertiary-container": "#37ab9e",
+            "surface-bright": "#fffaf5",
+            "surface-container-high": "#f7ebe0",
+            "secondary": "#78716c",
+            "surface-container-low": "#fdf6ee",
+            "surface": "#fcfaf7",
+            "background": "#FBF8F3",
+            "on-surface": "#0d1c2e",
+            "outline": "#8c7164",
+            "tertiary": "#006a61",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "secondary-fixed": "#eee4d5",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#ffdbca",
+            "on-primary": "#ffffff",
+            "surface-dim": "#e8dfd2",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "surface-container": "#faf1e6",
+            "on-background": "#0d1c2e",
+            "on-primary-container": "#ffffff",
+            "secondary-container": "#f7f2ea",
+            "primary": "#c2410c",
+            "on-surface-variant": "#584237",
+            "surface-variant": "#f3e4d6"
+          },
+          "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          "spacing": { "gutter": "1.5rem", "space-md": "1rem", "margin-mobile": "1.25rem", "space-xs": "0.25rem", "margin": "3rem", "space-sm": "0.5rem", "gutter-mobile": "1rem", "space-xl": "2.5rem", "space-lg": "1.5rem" },
+          "fontFamily": {
+            "headline-xl": ["Plus Jakarta Sans"], "body-md": ["Inter"], "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"], "headline-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"], "label-sm": ["Inter"], "label-lg": ["Inter"], "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "headline-xl": ["40px", {"lineHeight": "48px", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+            "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+            "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+            "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; line-height: 1; }
+    .glass-surface {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.07), 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+    }
+  </style>
+</head>
+<body class="text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);">
+<header class="glass-surface border-b border-outline-variant sticky top-0 z-30 w-full">
+<div class="flex justify-between items-center w-full px-space-lg max-w-7xl mx-auto h-16">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-sm text-headline-sm font-extrabold shadow-sm">HD</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-extrabold tracking-tight">Studio Suite 2.0</span>
+</div>
+<nav class="hidden md:flex items-center gap-6 text-label-md font-label-md">
+<a class="text-on-surface-variant hover:text-primary pb-1 transition-colors duration-150" href="index.html">Dashboard</a>
+<a class="border-b-2 border-primary text-primary pb-1 font-semibold transition-colors duration-150" href="forms-hub.html">Forms Hub</a>
+</nav>
+<a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-base">arrow_back</span> Voltar
+</a>
+</div>
+</header>
+<main class="flex-1 max-w-7xl w-full mx-auto p-space-lg">
+<div class="pb-6 border-b border-outline-variant/70 mb-6">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Forms Hub — Biblioteca de Modelos</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Todos os templates de briefing disponíveis para disparo, por vertical.</p>
+</div>
+<div id="templates-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+</main>
+<script type="module">
+import { getTemplates } from './store.js';
+
+const VERTICAL_META = {
+  pilates: { nome: 'Pilates & Bem-Estar', icon: 'spa', cor: 'text-primary' },
+  physio: { nome: 'Fisioterapia & Reabilitação', icon: 'medical_services', cor: 'text-primary-container' },
+  fisio_pilates: { nome: 'Fisio & Pilates', icon: 'medical_services', cor: 'text-primary-container' },
+  events: { nome: 'Eventos', icon: 'celebration', cor: 'text-tertiary' },
+  universal: { nome: 'Universal / Corporativo', icon: 'business_center', cor: 'text-secondary' }
+};
+
+function templateLabel(tpl) {
+  const titulo = tpl.titulo;
+  if (typeof titulo === 'string') return titulo;
+  if (titulo && typeof titulo === 'object') return titulo.pt || titulo.it || titulo.en || tpl.id;
+  return tpl.id;
+}
+
+function render() {
+  const grid = document.getElementById('templates-grid');
+  const templates = getTemplates();
+  if (templates.length === 0) {
+    grid.innerHTML = `<p class="text-sm text-on-surface-variant col-span-full">Nenhum modelo cadastrado ainda.</p>`;
+    return;
+  }
+  grid.innerHTML = templates.map(tpl => {
+    const meta = VERTICAL_META[tpl.vertical] || { nome: tpl.vertical || 'Geral', icon: 'description', cor: 'text-secondary' };
+    const numSecoes = (tpl.secoes || []).length;
+    const numCampos = (tpl.secoes || []).reduce((acc, s) => acc + (s.campos || []).length, 0);
+    return `
+      <div class="glass-surface rounded-2xl border border-outline-variant p-5 flex flex-col gap-3 hover:border-primary/40 transition-colors">
+        <div class="flex items-center justify-between">
+          <span class="inline-flex items-center gap-1.5 text-xs font-semibold ${meta.cor}">
+            <span class="material-symbols-outlined text-base">${meta.icon}</span> ${meta.nome}
+          </span>
+          <span class="text-[11px] text-outline font-mono">v${tpl.versao || 1}</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-snug">${templateLabel(tpl)}</h3>
+        <div class="flex items-center gap-3 text-[11px] text-on-surface-variant pt-2 border-t border-outline-variant/50">
+          <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">view_agenda</span> ${numSecoes} seções</span>
+          <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">list_alt</span> ${numCampos} campos</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', render);
+</script>
+</body></html>

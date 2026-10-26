@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Acesso por PIN · Lumina Movement · Hícaro Duarte Studio Suite</title>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#dce9ff",
+            "on-secondary-fixed-variant": "#3c475a",
+            "on-tertiary-fixed": "#00201d",
+            "brand-primary-hover": "#EA580C",
+            "on-secondary-container": "#586377",
+            "outline-variant": "#e0c0b1",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#ffb690",
+            "primary-container": "#f97316",
+            "text-placeholder": "#94A3B8",
+            "surface-canvas-end": "#ECE4DB",
+            "tertiary": "#006a61",
+            "on-tertiary-fixed-variant": "#005049",
+            "brand-primary-text": "#C2410C",
+            "text-title": "#0F172A",
+            "background": "#f8f9ff",
+            "on-error": "#ffffff",
+            "secondary-container": "#d5e0f8",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "inverse-primary": "#ffb690",
+            "status-urgent": "#EF4444",
+            "on-primary": "#ffffff",
+            "focus-indigo": "#4F46E5",
+            "status-warning": "#F59E0B",
+            "outline": "#8c7164",
+            "surface-dim": "#ccdbf3",
+            "secondary": "#545f73",
+            "surface": "#f8f9ff",
+            "on-primary-fixed": "#341100",
+            "surface-container-low": "#eff4ff",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-variant": "#d5e3fc",
+            "primary": "#9d4300",
+            "status-success": "#10B981",
+            "tertiary-fixed": "#89f5e7",
+            "brand-gradient-end": "#E65100",
+            "border-divider": "#E2E8F0",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#f8f9ff",
+            "text-body": "#475569",
+            "surface-container": "#e6eeff",
+            "surface-canvas-start": "#FBF8F3",
+            "text-support": "#64748B",
+            "status-info": "#0284C7",
+            "card-highlight-end": "#FBBF24",
+            "inverse-surface": "#233144",
+            "on-secondary-fixed": "#111c2d",
+            "surface-container-highest": "#d5e3fc",
+            "surface-tint": "#9d4300",
+            "on-background": "#0d1c2e",
+            "on-primary-fixed-variant": "#783200",
+            "tertiary-container": "#37ab9e",
+            "primary-fixed": "#ffdbca",
+            "on-primary-container": "#582200",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#d8e3fb",
+            "on-surface-variant": "#584237",
+            "on-tertiary-container": "#003934",
+            "secondary-fixed-dim": "#bcc7de",
+            "surface-canvas-mid": "#F5EFEB",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-surface": "#0d1c2e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "gutter": "1.25rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "margin": "2rem",
+            "space-xl": "1.5rem",
+            "space-lg": "1.25rem",
+            "space-xs": "0.25rem",
+            "margin-mobile": "1.25rem"
+          },
+          "fontFamily": {
+            "caption-badge": ["Plus Jakarta Sans"],
+            "display-kpi": ["Plus Jakarta Sans"],
+            "headline-screen-mobile": ["Plus Jakarta Sans"],
+            "code-token": ["JetBrains Mono"],
+            "title-card": ["Plus Jakarta Sans"],
+            "headline-screen": ["Plus Jakarta Sans"],
+            "display-kpi-mobile": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "caption-kpi-label": ["Plus Jakarta Sans"],
+            "code-pin": ["JetBrains Mono"],
+            "title-section": ["Plus Jakarta Sans"],
+            "body-strong": ["Plus Jakarta Sans"],
+            "label-field": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Warm Glassmorphism & Custom Light Glows */
+    .bg-warm-canvas {
+      background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);
+    }
+
+    .glass-card-client {
+      background-color: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 45px -15px rgba(230, 81, 0, 0.08), 0 10px 25px -5px rgba(15, 23, 42, 0.04);
+    }
+
+    .glass-input-box {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid #E2E8F0;
+      transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-input-box:focus {
+      outline: none;
+      border-color: #4F46E5;
+      box-shadow: 0 0 0 2px #4F46E5, 0 10px 15px -3px rgba(79, 70, 229, 0.1);
+      background: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .primary-btn-gradient {
+      background: linear-gradient(135deg, #F97316 0%, #E65100 100%);
+      box-shadow: 0 12px 24px -6px rgba(230, 81, 0, 0.35);
+      transition: all 180ms ease-out;
+    }
+
+    .primary-btn-gradient:hover {
+      background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+      box-shadow: 0 16px 30px -8px rgba(230, 81, 0, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .primary-btn-gradient:active {
+      transform: scale(0.98);
+    }
+
+    /* Ambient Decorative Warm Glow Blurs */
+    .glow-orb-orange {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, rgba(251, 191, 36, 0.05) 50%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .glow-orb-terracotta {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(230, 81, 0, 0.09) 0%, rgba(13, 148, 136, 0.04) 60%, transparent 80%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    /* Remove number spinner buttons */
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col justify-between bg-warm-canvas text-on-surface antialiased relative overflow-x-hidden selection:bg-primary selection:text-on-primary">
+<!-- Ambient Organic Sunlit Lighting Layers -->
+<div class="glow-orb-orange -top-24 -left-20"></div>
+<div class="glow-orb-terracotta -bottom-32 -right-24"></div>
+<!-- Top Minimalist Header (Client-Facing Safe Shell) -->
+<header class="w-full px-6 md:px-12 pt-6 pb-4 flex items-center justify-between relative z-20">
+<!-- Brand Anchor: Monogram + Studio Suite Identity -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-text-title to-secondary flex items-center justify-center shadow-sm border border-white/60">
+<span class="font-title-card text-title-card text-white font-bold tracking-tight">HD</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-section text-title-section text-text-title font-bold leading-tight tracking-tight">Hícaro Duarte · Studio Suite</span>
+<span class="font-caption-badge text-caption-badge text-text-support font-medium">Boutique Brand &amp; Experience Atelier</span>
+</div>
+</div>
+<!-- Security Verified Micro Badge -->
+<div class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md border border-white/90 shadow-sm">
+<span class="material-symbols-outlined text-tertiary text-[18px]" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-caption-badge text-caption-badge text-tertiary font-bold tracking-normal">Ambiente Criptografado &amp; Verificado</span>
+</div>
+</header>
+<!-- Main Focal Content Canvas (Task-Focused / Linear Access) -->
+<main class="flex-1 flex flex-col items-center justify-center px-4 py-8 relative z-20 w-full max-w-7xl mx-auto">
+<!-- Central Glassmorphic PIN Verification Card (Width: 520px) -->
+<div class="w-full max-w-[520px] rounded-[24px] glass-card-client p-6 sm:p-10 relative">
+<!-- Subtle Teal Lock Shield with Soft Glow -->
+<div class="flex justify-center mb-6">
+<div class="relative">
+<div class="absolute inset-0 rounded-2xl bg-tertiary-container/30 blur-md"></div>
+<div class="relative w-14 h-14 rounded-2xl bg-white/90 border border-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-tertiary text-[28px]" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+</div>
+</div>
+<!-- Header Copy & Instructions -->
+<div class="text-center space-y-2 mb-8">
+<h1 class="font-headline-screen text-headline-screen text-text-title font-bold tracking-tight">
+          Acesse o seu Briefing Exclusivo
+        </h1>
+<p class="font-body-default text-body-default text-text-body max-w-md mx-auto leading-relaxed">
+          Digite o código de 6 dígitos que o Hícaro enviou por WhatsApp ou e-mail para abrir o formulário personalizado da <span class="font-body-strong text-body-strong text-text-title font-semibold">Lumina Movement</span>.
+        </p>
+</div>
+<!-- 6-Digit PIN Inputs: 3 Digits + Separator Bar + 3 Digits -->
+<form class="space-y-7" id="pin-auth-form" onsubmit="event.preventDefault();">
+<div class="flex items-center justify-center gap-2 sm:gap-3">
+<!-- Group 1: First 3 Digits (Pre-filled sample visual state: 8, 4, 2) -->
+<div class="flex items-center gap-2 sm:gap-2.5">
+<input aria-label="Dígito 1 do PIN" class="pin-digit w-11 h-14 sm:w-12 sm:h-16 rounded-xl glass-input-box text-center font-code-pin text-code-pin font-bold text-text-title shadow-sm" inputmode="numeric" maxlength="1" required="" type="text" value="8"/>
+<input aria-label="Dígito 2 do PIN" class="pin-digit w-11 h-14 sm:w-12 sm:h-16 rounded-xl glass-input-box text-center font-code-pin text-code-pin font-bold text-text-title shadow-sm" inputmode="numeric" maxlength="1" required="" type="text" value="4"/>
+<input aria-label="Dígito 3 do PIN" class="pin-digit w-11 h-14 sm:w-12 sm:h-16 rounded-xl glass-input-box text-center font-code-pin text-code-pin font-bold text-text-title shadow-sm ring-2 ring-focus-indigo border-focus-indigo" inputmode="numeric" maxlength="1" required="" type="text" value="2"/>
+</div>
+<!-- Refined Visual Divider Dash -->
+<div class="w-3 sm:w-4 h-0.5 bg-text-placeholder/60 rounded-full mx-0.5"></div>
+<!-- Group 2: Next 3 Digits (Pre-filled sample visual state: 9, 1, 0) -->
+<div class="flex items-center gap-2 sm:gap-2.5">
+<input aria-label="Dígito 4 do PIN" class="pin-digit w-11 h-14 sm:w-12 sm:h-16 rounded-xl glass-input-box text-center font-code-pin text-code-pin font-bold text-text-title shadow-sm" inputmode="numeric" maxlength="1" required="" type="text" value="9"/>
+<input aria-label="Dígito 5 do PIN" class="pin-digit w-11 h-14 sm:w-12 sm:h-16 rounded-xl glass-input-box text-center font-code-pin text-code-pin font-bold text-text-title shadow-sm" inputmode="numeric" maxlength="1" required="" type="text" value="1"/>
+<input aria-label="Dígito 6 do PIN" class="pin-digit w-11 h-14 sm:w-12 sm:h-16 rounded-xl glass-input-box text-center font-code-pin text-code-pin font-bold text-text-title shadow-sm" inputmode="numeric" maxlength="1" required="" type="text" value="0"/>
+</div>
+</div>
+<!-- Primary Action CTA Button: Height 48px, Terracotta Gradient -->
+<button class="w-full h-12 rounded-xl primary-btn-gradient text-white font-title-section text-title-section font-semibold flex items-center justify-center gap-2 shadow-lg cursor-pointer" type="submit">
+<span>Acessar Formulário</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Card Footer Auxiliary WhatsApp Support Link -->
+<div class="mt-7 pt-5 border-t border-border-divider/50 text-center">
+<a class="inline-flex items-center gap-1.5 font-body-default text-body-default text-text-support hover:text-brand-primary-text font-medium transition-colors" href="#whatsapp-support">
+<span>Não recebeu o código ou expirou?</span>
+<span class="text-brand-primary-text font-semibold underline underline-offset-4 flex items-center gap-1">
+            Falar com Hícaro no WhatsApp
+            <span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+</span>
+</a>
+</div>
+</div>
+<!-- Below-Card Contextual States & Feedback Modules (520px aligned) -->
+<div class="w-full max-w-[520px] mt-6 space-y-3">
+<!-- State 1: Soft Warning / PIN Error Simulation Alert -->
+<div class="w-full px-4 py-3 rounded-2xl bg-white/75 backdrop-blur-md border border-status-urgent/30 shadow-sm flex items-start gap-3">
+<div class="w-7 h-7 rounded-lg bg-status-urgent/10 text-status-urgent flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]" data-icon="error" data-weight="fill" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<div class="flex-1">
+<p class="font-body-default text-body-default text-text-title">
+<span class="font-body-strong text-body-strong font-semibold text-status-urgent">Código incorreto.</span> Você tem mais 2 tentativas antes do bloqueio temporário de segurança.
+          </p>
+</div>
+<button aria-label="Fechar aviso" class="text-text-support hover:text-text-title transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- State 2: Status & Real-time Auto-save Guarantee Badge -->
+<div class="w-full px-4 py-3 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm flex items-center justify-between text-text-support">
+<div class="flex items-center gap-2.5">
+<span class="flex h-2.5 w-2.5 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-success opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-status-success"></span>
+</span>
+<p class="font-body-default text-body-default text-text-body">
+            Código válido por mais <span class="font-body-strong text-body-strong text-text-title font-semibold">14 dias</span> · Rascunhos são salvos automaticamente.
+          </p>
+</div>
+<div class="hidden sm:flex items-center gap-1 font-code-token text-code-token text-tertiary bg-tertiary/10 px-2.5 py-1 rounded-full font-medium">
+<span class="material-symbols-outlined text-[14px]" data-icon="cloud_done">cloud_done</span>
+<span>Autosave ON</span>
+</div>
+</div>
+</div>
+<!-- Client Confidentiality Note -->
+<div class="mt-8 text-center max-w-sm">
+<p class="font-caption-badge text-caption-badge text-text-support/80">
+        Acesso restrito para diretoria e stakeholders da Lumina Movement. Sessão criptografada ponta a ponta com token TLS 1.3.
+      </p>
+</div>
+</main>
+<!-- Ambient Minimal Bottom Bar -->
+<footer class="w-full px-6 py-4 flex flex-col sm:flex-row items-center justify-between text-text-support text-caption-badge font-caption-badge relative z-20 border-t border-border-divider/20">
+<div class="flex items-center gap-2">
+<span class="font-body-strong text-body-strong text-text-title font-semibold">Studio Suite 2.0</span>
+<span>·</span>
+<span>Módulo Cliente · Brief Intake</span>
+</div>
+<div class="flex items-center gap-4 mt-2 sm:mt-0">
+<a class="hover:text-text-title transition-colors" href="#privacy">Termos &amp; Privacidade</a>
+<span>·</span>
+<a class="hover:text-text-title transition-colors" href="#support">Central de Suporte</a>
+<span>·</span>
+<span class="text-tertiary flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+        Servidores Operacionais
+      </span>
+</div>
+</footer>
+<!-- Vanilla Interaction Logic for PIN Auto-Tab & Clean Focus -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const pinInputs = Array.from(document.querySelectorAll('.pin-digit'));
+
+      pinInputs.forEach((input, index) => {
+        // Auto-focus next input on keyup
+        input.addEventListener('input', (e) => {
+          const val = e.target.value.replace(/\D/g, '');
+          e.target.value = val ? val[0] : '';
+          
+          if (e.target.value && index < pinInputs.length - 1) {
+            pinInputs[index + 1].focus();
+            pinInputs[index + 1].select();
+          }
+        });
+
+        // Backspace behavior
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !input.value && index > 0) {
+            pinInputs[index - 1].focus();
+            pinInputs[index - 1].select();
+          }
+        });
+
+        // Paste support for full 6-digit PIN
+        input.addEventListener('paste', (e) => {
+          e.preventDefault();
+          const pastedData = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+          if (pastedData) {
+            const digits = pastedData.slice(0, 6).split('');
+            digits.forEach((digit, i) => {
+              if (pinInputs[i]) {
+                pinInputs[i].value = digit;
+              }
+            });
+            const nextTarget = Math.min(digits.length, pinInputs.length - 1);
+            pinInputs[nextTarget].focus();
+          }
+        });
+      });
+    });
+  </script>
+</body></html>

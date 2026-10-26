@@ -1409,31 +1409,130 @@ function templateLabel(tpl) {
 }
 
 function openNewBriefModalForClient(clientId) {
+  openSendBriefingModal(clientId);
+}
+
+// ============================================================================
+// MODAL: ENVIAR BRIEFING COM CÓDIGO DE ACESSO (Studio Suite 2.0)
+// ============================================================================
+let activeSendModalClientId = null;
+
+function defaultTemplateIdForVertical(vertical) {
+  if (vertical === 'pilates') return 'tpl-pilates-v1';
+  if (vertical === 'physio') return 'tpl-physio-v1';
+  if (vertical === 'fisio_pilates') return 'tpl-fisio-pilates-v1';
+  if (vertical === 'events') return 'tpl-events-v1';
+  return 'tpl-universal-v1';
+}
+
+export function setupSendBriefingModal() {
+  if (document.getElementById('modal-send-briefing')) return;
+
+  const modalHtml = `
+    <div id="modal-send-briefing" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md hidden">
+      <div class="relative w-full max-w-[560px] rounded-3xl bg-surface-container-lowest border border-outline-variant shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+        <header class="px-7 pt-7 pb-4 flex items-start justify-between border-b border-outline-variant/60">
+          <div class="space-y-1">
+            <div class="inline-flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-primary">Disparo de Onboarding</span>
+            </div>
+            <h2 class="text-xl font-headline-sm text-on-surface font-bold tracking-tight">Enviar Briefing de Descoberta</h2>
+            <p class="text-sm text-on-surface-variant" id="send-modal-client-line">Lead: —</p>
+          </div>
+          <button id="btn-close-send-modal" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
+            <span class="material-symbols-outlined text-xl">close</span>
+          </button>
+        </header>
+
+        <div class="px-7 py-5 space-y-4 max-h-[65vh] overflow-y-auto">
+          <section>
+            <label class="font-label-md text-label-md text-on-surface font-semibold block mb-1">Modelo do Briefing</label>
+            <select id="send-modal-template" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md font-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"></select>
+          </section>
+
+          <section class="bg-surface-container-low/70 rounded-2xl p-4 border border-outline-variant/60 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-2 text-sm font-semibold text-on-surface"><span class="material-symbols-outlined text-lg text-tertiary">lock</span> Acesso Seguro do Cliente</span>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-semibold"><span class="material-symbols-outlined text-[13px]">verified_user</span> Código Único</span>
+            </div>
+            <div class="flex items-center justify-between bg-surface-container-lowest rounded-xl p-3 border border-outline-variant/60">
+              <div>
+                <span class="text-[10px] uppercase text-on-surface-variant tracking-wider block">Código de Identificação</span>
+                <div class="font-mono text-2xl text-on-surface tracking-widest font-semibold" id="send-modal-code">CLI-0000</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-label-md text-label-md text-on-surface font-semibold">Mensagem para WhatsApp</span>
+              <span class="text-xs text-on-surface-variant">Prévia</span>
+            </div>
+            <pre id="send-modal-preview" class="text-xs whitespace-pre-wrap leading-relaxed bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-3 font-sans text-on-surface"></pre>
+          </section>
+        </div>
+
+        <footer class="px-7 py-4 bg-surface-container-low/50 border-t border-outline-variant/60 flex items-center justify-between gap-3">
+          <button id="btn-send-modal-copy" class="h-11 px-4 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container text-on-surface text-sm font-semibold flex items-center gap-2 transition-colors active:scale-[0.98]" type="button">
+            <span class="material-symbols-outlined text-lg">content_copy</span> Copiar Link &amp; Código
+          </button>
+          <button id="btn-send-modal-whatsapp" class="flex-1 h-11 px-6 rounded-xl bg-gradient-to-r from-primary-container to-primary text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-[0.98]" type="button">
+            <span class="material-symbols-outlined text-lg">chat</span> Enviar pelo WhatsApp
+          </button>
+        </footer>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+  document.getElementById('btn-close-send-modal').addEventListener('click', closeSendBriefingModal);
+  document.getElementById('send-modal-template').addEventListener('change', renderSendModalPreview);
+  document.getElementById('btn-send-modal-copy').addEventListener('click', () => confirmSendBriefing('copy'));
+  document.getElementById('btn-send-modal-whatsapp').addEventListener('click', () => confirmSendBriefing('whatsapp'));
+}
+
+export function openSendBriefingModal(clientId) {
+  setupSendBriefingModal();
   const client = getClientById(clientId);
   if (!client) return;
+  activeSendModalClientId = clientId;
 
-  let defaultTemplateId = 'tpl-universal-v1';
-  if (client.vertical === 'pilates') defaultTemplateId = 'tpl-pilates-v1';
-  else if (client.vertical === 'physio') defaultTemplateId = 'tpl-physio-v1';
-  else if (client.vertical === 'fisio_pilates') defaultTemplateId = 'tpl-fisio-pilates-v1';
-  else if (client.vertical === 'events') defaultTemplateId = 'tpl-events-v1';
+  document.getElementById('send-modal-client-line').textContent = `Lead: ${client.empresa} · ${client.nome_responsavel}`;
+  document.getElementById('send-modal-code').textContent = client.codigo_unico;
 
   const templates = getTemplates();
-  const defaultIdx = templates.findIndex(tpl => tpl.id === defaultTemplateId);
-  const listText = templates.map((tpl, i) => `${i + 1}. ${templateLabel(tpl)}${tpl.id === defaultTemplateId ? ' (sugerido)' : ''}`).join('\n');
-  const choice = prompt(`Disparar novo briefing para ${client.empresa}:\n\nEscolha o template (digite o número):\n${listText}`, String(defaultIdx + 1));
-  if (!choice) return;
-  const chosenIdx = parseInt(choice, 10) - 1;
-  const templateId = (templates[chosenIdx] ? templates[chosenIdx].id : defaultTemplateId);
-  const chosenTemplate = templates[chosenIdx] || templates[defaultIdx];
+  const defaultId = defaultTemplateIdForVertical(client.vertical);
+  const select = document.getElementById('send-modal-template');
+  select.innerHTML = templates.map(tpl =>
+    `<option value="${tpl.id}" ${tpl.id === defaultId ? 'selected' : ''}>${templateLabel(tpl)}${tpl.id === defaultId ? ' (sugerido)' : ''}</option>`
+  ).join('');
 
-  const stage = prompt(`Nome da etapa deste briefing:`, chosenTemplate ? templateLabel(chosenTemplate) : 'Fase 2: Identidade & Direção de Arte');
-  if (!stage) return;
+  renderSendModalPreview();
+  document.getElementById('modal-send-briefing').classList.remove('hidden');
+}
+
+function renderSendModalPreview() {
+  const client = getClientById(activeSendModalClientId);
+  if (!client) return;
+  const preview = document.getElementById('send-modal-preview');
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+  preview.textContent = `Olá, ${client.nome_responsavel}! Tudo bem? 👋\n\nAqui é da equipe de criação do Studio Suite. Para darmos o próximo passo com excelência no projeto da *${client.empresa}*, preparamos o seu briefing exclusivo:\n\n🔗 Acesse pelo link direto:\n${origin}/portal.html?code=${client.codigo_unico} (gerado ao confirmar o envio)\n\n🔑 Seu Código de Identificação: ${client.codigo_unico}\n\nO preenchimento leva cerca de 7 minutos e salva suas respostas automaticamente a cada passo. Qualquer dúvida, estamos à disposição!`;
+}
+
+function confirmSendBriefing(action) {
+  const client = getClientById(activeSendModalClientId);
+  if (!client) return;
+  const select = document.getElementById('send-modal-template');
+  const templateId = select.value;
+  const templates = getTemplates();
+  const chosenTemplate = templates.find(tpl => tpl.id === templateId);
 
   const newInstance = createBriefingInstance({
     cliente_id: client.id,
     template_id: templateId,
-    etapa_nome: stage,
+    etapa_nome: chosenTemplate ? templateLabel(chosenTemplate) : 'Fase 2: Identidade & Direção de Arte',
     urgencia: 'normal',
     budget: 'A definir'
   });
@@ -1444,9 +1543,27 @@ function openNewBriefModalForClient(clientId) {
   renderMetrics();
   renderTable();
   selectBrief(newInstance.id);
+  closeSendBriefingModal();
 
-  shareWhatsApp(client.id, newInstance.id);
-  showToast(`🚀 Novo briefing criado! Link do portal e código ${client.codigo_unico} prontos.`);
+  const msg = generateWhatsAppMessage(client.id, newInstance.id);
+  if (action === 'whatsapp') {
+    const phoneDigits = (client.whatsapp || '').replace(/\D/g, '');
+    if (phoneDigits) {
+      window.open(`https://wa.me/${phoneDigits}?text=${encodeURIComponent(msg)}`, '_blank');
+    } else {
+      navigator.clipboard.writeText(msg).catch(() => {});
+      showToast('📋 WhatsApp do cliente não informado — mensagem copiada para você colar manualmente.');
+      return;
+    }
+  } else {
+    navigator.clipboard.writeText(msg).catch(() => {});
+  }
+  showToast(`🚀 Briefing enviado! Link do portal e código ${client.codigo_unico} prontos.`);
+}
+
+function closeSendBriefingModal() {
+  const modal = document.getElementById('modal-send-briefing');
+  if (modal) modal.classList.add('hidden');
 }
 
 function closeModal() {

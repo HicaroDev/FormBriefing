@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Briefing Enviado · Studio Suite</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#dce9ff",
+            "on-secondary-fixed-variant": "#3c475a",
+            "on-tertiary-fixed": "#00201d",
+            "brand-primary-hover": "#EA580C",
+            "on-secondary-container": "#586377",
+            "outline-variant": "#e0c0b1",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#ffb690",
+            "primary-container": "#f97316",
+            "text-placeholder": "#94A3B8",
+            "surface-canvas-end": "#ECE4DB",
+            "tertiary": "#006a61",
+            "on-tertiary-fixed-variant": "#005049",
+            "brand-primary-text": "#C2410C",
+            "text-title": "#0F172A",
+            "background": "#f8f9ff",
+            "on-error": "#ffffff",
+            "secondary-container": "#d5e0f8",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "inverse-primary": "#ffb690",
+            "status-urgent": "#EF4444",
+            "on-primary": "#ffffff",
+            "focus-indigo": "#4F46E5",
+            "status-warning": "#F59E0B",
+            "outline": "#8c7164",
+            "surface-dim": "#ccdbf3",
+            "secondary": "#545f73",
+            "surface": "#f8f9ff",
+            "on-primary-fixed": "#341100",
+            "surface-container-low": "#eff4ff",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-variant": "#d5e3fc",
+            "primary": "#9d4300",
+            "status-success": "#10B981",
+            "tertiary-fixed": "#89f5e7",
+            "brand-gradient-end": "#E65100",
+            "border-divider": "#E2E8F0",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#f8f9ff",
+            "text-body": "#475569",
+            "surface-container": "#e6eeff",
+            "surface-canvas-start": "#FBF8F3",
+            "text-support": "#64748B",
+            "status-info": "#0284C7",
+            "card-highlight-end": "#FBBF24",
+            "inverse-surface": "#233144",
+            "on-secondary-fixed": "#111c2d",
+            "surface-container-highest": "#d5e3fc",
+            "surface-tint": "#9d4300",
+            "on-background": "#0d1c2e",
+            "on-primary-fixed-variant": "#783200",
+            "tertiary-container": "#37ab9e",
+            "primary-fixed": "#ffdbca",
+            "on-primary-container": "#582200",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#d8e3fb",
+            "on-surface-variant": "#584237",
+            "on-tertiary-container": "#003934",
+            "secondary-fixed-dim": "#bcc7de",
+            "surface-canvas-mid": "#F5EFEB",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-surface": "#0d1c2e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "gutter": "1.25rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "margin": "2rem",
+            "space-xl": "1.5rem",
+            "space-lg": "1.25rem",
+            "space-xs": "0.25rem",
+            "margin-mobile": "1.25rem"
+          },
+          "fontFamily": {
+            "caption-badge": ["Plus Jakarta Sans"],
+            "display-kpi": ["Plus Jakarta Sans"],
+            "headline-screen-mobile": ["Plus Jakarta Sans"],
+            "code-token": ["JetBrains Mono"],
+            "title-card": ["Plus Jakarta Sans"],
+            "headline-screen": ["Plus Jakarta Sans"],
+            "display-kpi-mobile": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "caption-kpi-label": ["Plus Jakarta Sans"],
+            "code-pin": ["JetBrains Mono"],
+            "title-section": ["Plus Jakarta Sans"],
+            "body-strong": ["Plus Jakarta Sans"],
+            "label-field": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Warm Glassmorphism & Atelier Light Modeling Tokens */
+    .bg-atelier-radial {
+      background: radial-gradient(circle at 18% 12%, rgba(249, 115, 22, 0.08) 0%, transparent 45%),
+                  radial-gradient(circle at 85% 80%, rgba(251, 191, 36, 0.07) 0%, transparent 50%),
+                  linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);
+    }
+
+    .glass-canvas-card {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(255, 255, 255, 0.95);
+      border-left: 1px solid rgba(255, 255, 255, 0.85);
+      border-right: 1px solid rgba(255, 255, 255, 0.55);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 24px 48px -15px rgba(230, 81, 0, 0.08), 0 12px 30px -5px rgba(15, 23, 42, 0.04);
+    }
+
+    .glass-subcard {
+      background: rgba(255, 255, 255, 0.60);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.02);
+    }
+
+    .success-glow-pill {
+      box-shadow: 0 0 28px -2px rgba(16, 185, 129, 0.35), 0 8px 16px -4px rgba(16, 185, 129, 0.25);
+    }
+
+    .atelier-btn-primary {
+      background: linear-gradient(135deg, #F97316 0%, #E65100 100%);
+      box-shadow: 0 8px 20px -4px rgba(230, 81, 0, 0.32), 0 2px 6px 0 rgba(0, 0, 0, 0.05);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .atelier-btn-primary:hover {
+      background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+      box-shadow: 0 10px 24px -3px rgba(230, 81, 0, 0.42);
+      transform: translateY(-1px);
+    }
+    .atelier-btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .atelier-btn-secondary {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid #E2E8F0;
+      transition: all 0.18s ease-out;
+    }
+    .atelier-btn-secondary:hover {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+      box-shadow: 0 6px 16px -2px rgba(15, 23, 42, 0.06);
+      transform: translateY(-1px);
+    }
+    .atelier-btn-secondary:active {
+      transform: scale(0.98);
+    }
+
+    /* Pulse dot effect */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.15); }
+    }
+    .status-pulse-dot {
+      animation: subtlePulse 2.4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-atelier-radial text-on-surface antialiased flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Minimalist Client Bar (Dock lateral suprimido intencionalmente conforme arquitetura cliente) -->
+<header class="w-full pt-6 pb-4 px-6 md:px-12 flex items-center justify-between max-w-6xl mx-auto z-10">
+<!-- Brand Atelier Signature -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-container to-brand-gradient-end flex items-center justify-center text-on-primary font-bold text-base shadow-sm">
+        HD
+      </div>
+<div class="flex flex-col">
+<span class="font-title-section text-title-section text-text-title tracking-tight flex items-center gap-1.5">
+          Hícaro Duarte
+          <span class="text-xs text-text-support font-normal">/</span>
+<span class="text-xs text-text-support font-body-default">Studio Suite</span>
+</span>
+<span class="text-[11px] font-caption-badge text-text-support">Bespoke Brand &amp; Physical Atelier</span>
+</div>
+</div>
+<!-- Live Protocol Status Pill -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md border border-border-divider/80 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-status-success status-pulse-dot"></span>
+<span class="font-caption-badge text-caption-badge text-text-title tracking-tight">Briefing Protocolado</span>
+</div>
+</header>
+<!-- Main Canvas Container -->
+<main class="w-full flex-1 flex items-center justify-center px-4 py-8 md:py-12 z-10">
+<div class="w-full max-w-[640px] glass-canvas-card rounded-[28px] p-6 sm:p-9 relative overflow-hidden transition-all duration-300">
+<!-- Top Decorative Ambient Glow inside Card -->
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-72 h-36 bg-gradient-to-b from-status-success/15 via-primary-container/10 to-transparent blur-3xl pointer-events-none"></div>
+<!-- Hero Confirmation Header -->
+<div class="text-center flex flex-col items-center pt-2">
+<!-- Glowing Checkmark Emblem -->
+<div class="relative mb-5 flex items-center justify-center">
+<div class="w-20 h-20 rounded-full bg-gradient-to-tr from-status-success to-emerald-400 text-white flex items-center justify-center success-glow-pill border-2 border-white/60">
+<span class="material-symbols-outlined text-[42px] leading-none" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1, 'wght' 600;">check</span>
+</div>
+<div class="absolute inset-0 rounded-full border border-status-success/30 scale-125 animate-ping opacity-20 pointer-events-none"></div>
+</div>
+<!-- High-Impact Title -->
+<h1 class="font-headline-screen text-headline-screen text-text-title tracking-tight mb-3">
+          Briefing enviado com sucesso!
+        </h1>
+<!-- Personalized Warm Welcoming Message -->
+<p class="font-body-default text-body-default text-text-body max-w-[510px] leading-relaxed mb-6">
+          Obrigado, <span class="font-body-strong text-text-title">Helena</span>! Suas respostas para a <span class="font-body-strong text-text-title">Lumina Movement</span> foram recebidas com sucesso. O Hícaro vai analisar pessoalmente todas as informações estratégicas e retorna em até <span class="font-body-strong text-brand-primary-text">2 dias úteis</span>.
+        </p>
+</div>
+<!-- Resumo Metadados do Envio (Sub-card com Glass & Borda Fina) -->
+<section class="glass-subcard rounded-2xl p-4 sm:p-5 mb-7 border border-white/80">
+<div class="flex items-center justify-between pb-3 mb-3 border-b border-border-divider/60">
+<span class="font-caption-kpi-label text-caption-kpi-label uppercase text-text-support">Metadados de Protocolo</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/60 text-emerald-700 text-xs font-semibold">
+<span class="material-symbols-outlined text-xs" data-icon="verified">verified</span>
+            Autenticado
+          </span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<!-- Protocolo -->
+<div class="flex flex-col">
+<span class="text-xs text-text-support font-medium mb-1">Protocolo Único</span>
+<span class="font-code-pin text-[15px] font-semibold text-text-title tracking-normal select-all">#BF-2026-LUM</span>
+</div>
+<!-- Data e Hora -->
+<div class="flex flex-col">
+<span class="text-xs text-text-support font-medium mb-1">Data de Envio</span>
+<span class="font-body-strong text-body-strong text-text-title flex items-center gap-1">
+              18 out 2026, 16:42
+            </span>
+</div>
+<!-- Escopo & Completude -->
+<div class="flex flex-col">
+<span class="text-xs text-text-support font-medium mb-1">Modelo Selecionado</span>
+<div class="flex items-center gap-1.5">
+<span class="font-body-strong text-body-strong text-text-title truncate" title="Pilates Reformer v2.4">Reformer v2.4</span>
+<span class="px-1.5 py-0.5 rounded text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/50">100%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Linha do Tempo Visual: "O que acontece agora" -->
+<section class="mb-8">
+<div class="flex items-center justify-between mb-4 px-1">
+<h2 class="font-title-section text-title-section text-text-title flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-primary-text text-xl" data-icon="route">route</span>
+            O que acontece agora
+          </h2>
+<span class="text-xs text-text-support font-medium">Etapas Estratégicas</span>
+</div>
+<!-- Vertical Milestone Track -->
+<div class="relative pl-6 sm:pl-7 space-y-6 before:absolute before:left-[11px] sm:before:left-[13px] before:top-3 before:bottom-3 before:w-[2px] before:bg-gradient-to-b before:from-status-success before:via-border-divider before:to-border-divider/40">
+<!-- Step 1: Ativo / Em análise -->
+<div class="relative group">
+<!-- Icon Node -->
+<div class="absolute -left-[24px] sm:-left-[26px] top-0 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white shadow-sm flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]" data-icon="hourglass_top" data-weight="fill" style="font-variation-settings: 'FILL' 1;">hourglass_top</span>
+</div>
+<div class="bg-white/80 rounded-xl p-3.5 border border-emerald-200/70 shadow-sm transition hover:bg-white">
+<div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+<span class="font-body-strong text-body-strong text-text-title">1. Análise &amp; Diagnóstico do Briefing</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-caption-badge bg-emerald-100/80 text-emerald-800 font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                  Ativo · Em análise pelo Hícaro
+                </span>
+</div>
+<p class="text-xs text-text-body font-body-default">
+                Mapeamento das referências estéticas, ergonomia do estúdio Lumina e objetivos de faturamento.
+              </p>
+</div>
+</div>
+<!-- Step 2: Reunião Executiva -->
+<div class="relative group">
+<!-- Icon Node -->
+<div class="absolute -left-[24px] sm:-left-[26px] top-0 w-6 h-6 rounded-full bg-white border-2 border-slate-300 shadow-sm flex items-center justify-center text-text-support">
+<span class="material-symbols-outlined text-[13px]" data-icon="calendar_month">calendar_month</span>
+</div>
+<div class="bg-white/50 rounded-xl p-3.5 border border-slate-200/70 hover:bg-white/70 transition">
+<div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+<span class="font-body-strong text-body-strong text-text-title">2. Reunião Executiva de Alinhamento</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-caption-badge bg-slate-100 text-slate-700 font-medium">
+                  Sugerido: 23 out 2026
+                </span>
+</div>
+<p class="text-xs text-text-body font-body-default">
+                Sessão de 45 minutos via Google Meet para calibrar o tom visual e validação do escopo físico-digital.
+              </p>
+</div>
+</div>
+<!-- Step 3: Apresentação da Proposta -->
+<div class="relative group">
+<!-- Icon Node -->
+<div class="absolute -left-[24px] sm:-left-[26px] top-0 w-6 h-6 rounded-full bg-white border-2 border-slate-300 shadow-sm flex items-center justify-center text-text-support">
+<span class="material-symbols-outlined text-[13px]" data-icon="palette">palette</span>
+</div>
+<div class="bg-white/50 rounded-xl p-3.5 border border-slate-200/70 hover:bg-white/70 transition">
+<div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+<span class="font-body-strong text-body-strong text-text-title">3. Apresentação da Proposta Comercial &amp; Escopo</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-caption-badge bg-slate-100 text-slate-700 font-medium">
+                  Prazo: 26 out 2026
+                </span>
+</div>
+<p class="text-xs text-text-body font-body-default">
+                Entrega do cronograma mestre de implantação, investimentos de design e arquitetura do atelier.
+              </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Ações no Rodapé do Card -->
+<footer class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+<!-- Botão Secundário de Vidro: Baixar PDF -->
+<button class="atelier-btn-secondary h-12 px-5 rounded-xl font-body-strong text-body-strong text-text-title flex items-center justify-center gap-2 flex-1 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-xl text-text-support" data-icon="download">download</span>
+<span>Baixar cópia das respostas (PDF)</span>
+</button>
+<!-- Botão Principal Terracotta Laranja: WhatsApp direto -->
+<a class="atelier-btn-primary h-12 px-6 rounded-xl font-body-strong text-body-strong text-white flex items-center justify-center gap-2 flex-1 text-center cursor-pointer no-underline" href="https://wa.me/5511999999999?text=Ol%C3%A1%20H%C3%ADcaro!%20Acabei%20de%20enviar%20o%20briefing%20do%20Studio%20Lumina%20Movement%20(Protocolo%20%23BF-2026-LUM)." rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-xl text-white" data-icon="chat">chat</span>
+<span>Falar com o Hícaro no WhatsApp</span>
+</a>
+</footer>
+<!-- Bottom Micro Assurance -->
+<div class="mt-5 pt-4 border-t border-border-divider/50 flex items-center justify-between text-xs text-text-support">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-status-success" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span>Conexão Segura SSL 256-bit</span>
+</div>
+<span>Atelier Hícaro Duarte © 2026</span>
+</div>
+</div>
+</main>
+<!-- Clean Minimalist Footer Signature -->
+<footer class="w-full py-5 px-6 text-center z-10">
+<p class="text-xs text-text-support font-body-default">
+      Precisa alterar alguma informação no briefing? Escreva diretamente para <a class="text-text-title underline hover:text-brand-primary-text font-medium transition-colors" href="mailto:contato@hicaroduarte.design">contato@hicaroduarte.design</a>
+</p>
+</footer>
+</body></html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Studio Suite 2.0 — Executive Dashboard</title>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus Jakarta Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Verbatim Tailwind Config Injection -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#8c7164",
+            "on-tertiary-container": "#003934",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "card-highlight-end": "#FBBF24",
+            "on-primary-fixed": "#341100",
+            "surface-canvas-mid": "#F5EFEB",
+            "on-primary-fixed-variant": "#783200",
+            "surface-container": "#e6eeff",
+            "on-secondary-container": "#586377",
+            "secondary-fixed-dim": "#bcc7de",
+            "on-primary-container": "#582200",
+            "text-body": "#475569",
+            "primary-fixed-dim": "#ffb690",
+            "on-secondary-fixed": "#111c2d",
+            "surface-container-highest": "#d5e3fc",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "brand-primary-text": "#C2410C",
+            "outline-variant": "#e0c0b1",
+            "status-info": "#0284C7",
+            "surface": "#f8f9ff",
+            "text-support": "#64748B",
+            "secondary-fixed": "#d8e3fb",
+            "focus-indigo": "#4F46E5",
+            "surface-container-low": "#eff4ff",
+            "surface-canvas-start": "#FBF8F3",
+            "secondary": "#545f73",
+            "surface-bright": "#f8f9ff",
+            "surface-container-high": "#dce9ff",
+            "primary-fixed": "#ffdbca",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "text-placeholder": "#94A3B8",
+            "inverse-surface": "#233144",
+            "text-title": "#0F172A",
+            "surface-dim": "#ccdbf3",
+            "surface-tint": "#9d4300",
+            "on-secondary-fixed-variant": "#3c475a",
+            "status-urgent": "#EF4444",
+            "surface-canvas-end": "#ECE4DB",
+            "on-background": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#005049",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-container": "#37ab9e",
+            "on-surface-variant": "#584237",
+            "on-error": "#ffffff",
+            "background": "#f8f9ff",
+            "inverse-primary": "#ffb690",
+            "primary": "#9d4300",
+            "surface-variant": "#d5e3fc",
+            "border-divider": "#E2E8F0",
+            "brand-gradient-end": "#E65100",
+            "on-surface": "#0d1c2e",
+            "secondary-container": "#d5e0f8",
+            "status-success": "#10B981",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#89f5e7",
+            "tertiary": "#006a61",
+            "on-tertiary-fixed": "#00201d",
+            "primary-container": "#f97316",
+            "brand-primary-hover": "#EA580C",
+            "status-warning": "#F59E0B"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "1.5rem",
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1.25rem",
+            "gutter": "1.25rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "caption-kpi-label": ["Plus Jakarta Sans"],
+            "title-section": ["Plus Jakarta Sans"],
+            "code-pin": ["JetBrains Mono"],
+            "body-strong": ["Plus Jakarta Sans"],
+            "headline-screen": ["Plus Jakarta Sans"],
+            "headline-screen-mobile": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "label-field": ["Plus Jakarta Sans"],
+            "display-kpi-mobile": ["Plus Jakarta Sans"],
+            "caption-badge": ["Plus Jakarta Sans"],
+            "code-token": ["JetBrains Mono"],
+            "title-card": ["Plus Jakarta Sans"],
+            "display-kpi": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    
+    /* Warm Glassmorphism & Atelier Light Modeling */
+    .glass-dock {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.08), 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.95);
+      border-left: 1px solid rgba(255, 255, 255, 0.80);
+      border-right: 1px solid rgba(255, 255, 255, 0.60);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.50);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.07), 0 10px 25px -5px rgba(0, 0, 0, 0.035);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      box-shadow: 0 24px 48px -12px rgba(230, 81, 0, 0.12), 0 12px 28px -6px rgba(0, 0, 0, 0.05);
+    }
+    .dark-executive-card {
+      background: #1E293B;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.35);
+    }
+    .warm-canvas-bg {
+      background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);
+    }
+    .primary-cta-gradient {
+      background: linear-gradient(135deg, #F97316 0%, #E65100 100%);
+    }
+  </style>
+</head>
+<body class="warm-canvas-bg min-h-screen text-text-body font-body-default text-body-default antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- Desktop Fixed Floating Glass Dock (72px, radius 24px, 20px offset) -->
+<aside class="fixed left-5 top-5 bottom-5 w-[72px] rounded-[24px] glass-dock z-50 flex flex-col items-center justify-between py-6 select-none">
+<!-- Top HD Monogram Studio Mark -->
+<div class="flex flex-col items-center gap-6 w-full">
+<div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-text-title to-inverse-surface flex items-center justify-center shadow-md border border-white/20 text-surface-container-lowest font-headline-screen text-body-strong tracking-tighter">
+<span class="">HD</span>
+</div>
+<!-- Nav Cluster -->
+<nav aria-label="Navegação Lateral" class="flex flex-col items-center gap-2.5 w-full px-2">
+<!-- Início (Active State) -->
+<a class="w-12 h-12 rounded-[14px] bg-primary-container text-white flex items-center justify-center shadow-sm shadow-primary/30 transition-transform active:scale-[0.96]" href="#inicio" title="Início">
+<span class="material-symbols-outlined text-[22px] fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</a>
+<!-- CRM -->
+<a class="w-12 h-12 rounded-[14px] text-text-support hover:text-text-title hover:bg-white/60 flex items-center justify-center transition-all duration-150 active:scale-[0.96]" href="#crm" title="CRM Leads">
+<span class="material-symbols-outlined text-[22px]">filter_alt</span>
+</a>
+<!-- Forms Hub -->
+<a class="w-12 h-12 rounded-[14px] text-text-support hover:text-text-title hover:bg-white/60 flex items-center justify-center transition-all duration-150 active:scale-[0.96]" href="#forms" title="Forms Hub">
+<span class="material-symbols-outlined text-[22px]">assignment</span>
+</a>
+<!-- Projetos -->
+<a class="w-12 h-12 rounded-[14px] text-text-support hover:text-text-title hover:bg-white/60 flex items-center justify-center transition-all duration-150 active:scale-[0.96]" href="#projetos" title="Projetos &amp; Delivery">
+<span class="material-symbols-outlined text-[22px]">tactic</span>
+</a>
+<!-- Agenda -->
+<a class="w-12 h-12 rounded-[14px] text-text-support hover:text-text-title hover:bg-white/60 flex items-center justify-center transition-all duration-150 active:scale-[0.96]" href="#agenda" title="Agenda &amp; Sessões">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+</a>
+<!-- Clientes -->
+<a class="w-12 h-12 rounded-[14px] text-text-support hover:text-text-title hover:bg-white/60 flex items-center justify-center transition-all duration-150 active:scale-[0.96]" href="#clientes" title="Clientes Ativos">
+<span class="material-symbols-outlined text-[22px]">group</span>
+</a>
+<!-- Configurações -->
+<a class="w-12 h-12 rounded-[14px] text-text-support hover:text-text-title hover:bg-white/60 flex items-center justify-center transition-all duration-150 active:scale-[0.96]" href="#configuracoes" title="Configurações">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+</a>
+</nav>
+</div>
+<!-- Dock Footer: Theme Switch & Avatar -->
+<div class="flex flex-col items-center gap-4 w-full pt-4 border-t border-border-divider/60">
+<!-- Theme Switch Icon -->
+<button aria-label="Alternar Tema" class="w-10 h-10 rounded-xl text-text-support hover:text-text-title hover:bg-white/60 flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">light_mode</span>
+</button>
+<!-- Hícaro Duarte Miniature Avatar Profile -->
+<div class="relative group cursor-pointer" title="Hícaro Duarte · Diretor Criativo">
+<div class="w-10 h-10 rounded-full ring-2 ring-white/90 overflow-hidden shadow-sm bg-surface-canvas-mid">
+<img class="w-full h-full object-cover" data-alt="Bespoke studio portrait of executive creative director in a tailored charcoal linen collar against a warm sunlit architectural interior of porcelain and warm terracotta tones. High-end editorial aesthetic with natural soft morning studio key light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNYHsLkVDTAaHR7dy1tw4ZkARwYC0RGq8LmEnQcDSPvZLjypbKCD72DBmf2-0Cja9m1wHHtTuQZi0N6YVmQa-oAakCr_tvL_m7F_Tu05i6Ng2qz4-5MqVvQiTLURRpWBNFBXbqdLgc5zyyEB3lSr0Obbp5rOOYoWtYi0QOmNUVG2BmreOlvOS-cf1LG_mw5XNNEnTkPEcScikibkztkauaR54VVLfdAkfMIlYNi9apW5RphB4Lw-zt">
+</div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-status-success ring-2 ring-white"></span>
+</div>
+</div>
+</aside>
+<!-- Primary Canvas Container (1440px viewport aligned, offset 112px from left) -->
+<main class="pl-[108px] pr-8 py-7 max-w-[1440px] mx-auto min-h-screen flex flex-col gap-6">
+<!-- Top Identity & Actions Header -->
+<header class="flex items-center justify-between w-full pb-2">
+<!-- Title & Live Subtitle -->
+<div class="flex flex-col">
+<h1 class="font-headline-screen text-headline-screen text-text-title tracking-tight">Bom dia, Hícaro</h1>
+<p class="font-body-default text-body-default text-text-support mt-0.5 flex items-center gap-2">
+<span class="">Resumo do estúdio hoje, 22 out 2026</span>
+<span class="inline-block w-1 h-1 rounded-full bg-text-placeholder"></span>
+<span class="text-caption-badge font-caption-badge text-status-success bg-status-success/10 px-2 py-0.5 rounded-full">Operações 100% online</span>
+</p>
+</div>
+<!-- Search, Notifications, Actions Cluster -->
+<div class="flex items-center gap-3">
+<!-- Global Search Bar -->
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-text-placeholder text-[18px]">search</span>
+<input class="w-full h-11 pl-10 pr-4 text-body-default font-body-default rounded-xl bg-white/70 border border-border-divider placeholder:text-text-placeholder text-text-title focus:outline-none focus:ring-2 focus:ring-focus-indigo focus:border-focus-indigo transition-all shadow-sm" placeholder="Buscar briefings, marcas, clientes..." type="text">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 font-code-token text-[11px] text-text-placeholder bg-surface-canvas-mid px-1.5 py-0.5 rounded border border-border-divider/80">⌘K</span>
+</div>
+<!-- Notification Bell -->
+<button aria-label="Notificações" class="relative w-11 h-11 rounded-xl bg-white/75 border border-border-divider flex items-center justify-center text-text-title hover:bg-white hover:border-slate-300 transition-all shadow-sm active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary-container ring-2 ring-white"></span>
+</button>
+<!-- Quick Intake / New Brief Primary Action -->
+<button class="h-11 px-4 rounded-xl primary-cta-gradient text-white font-body-strong text-body-strong flex items-center gap-2 shadow-md shadow-brand-gradient-end/20 hover:brightness-105 active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="">Novo Briefing</span>
+</button>
+</div>
+</header>
+<!-- SECTION 1: 4 KPIs no topo com padrão estrito -->
+<section aria-label="Indicadores-Chave de Desempenho" class="grid grid-cols-4 gap-5">
+<!-- KPI 1: Pipeline em Aberto -->
+<article class="glass-card rounded-[20px] p-6 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase tracking-wider">PIPELINE EM ABERTO</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-display-kpi text-display-kpi text-text-title tracking-tight">R$ 284.000</span>
+<span class="inline-flex items-center gap-1 font-caption-badge text-caption-badge text-status-success bg-status-success/10 px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[13px] font-bold">trending_up</span>
+            +18% no tri
+          </span>
+</div>
+<div class="w-full bg-border-divider/50 h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 72%;"></div>
+</div>
+</article>
+<!-- KPI 2: Briefings Aguardando Resposta -->
+<article class="glass-card rounded-[20px] p-6 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase tracking-wider">BRIEFINGS AGUARDANDO RESPOSTA</span>
+<div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-status-warning">
+<span class="material-symbols-outlined text-[18px]">hourglass_top</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-display-kpi text-display-kpi text-text-title tracking-tight">6</span>
+<span class="inline-flex items-center gap-1 font-caption-badge text-caption-badge text-amber-800 bg-amber-100/80 px-2.5 py-1 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning animate-pulse"></span>
+            2 prioritários
+          </span>
+</div>
+<div class="flex items-center gap-1.5 text-[11px] text-text-support mt-4 font-body-default">
+<span class="material-symbols-outlined text-[14px] text-status-warning">schedule</span>
+<span class="">Tempo médio de espera: 2.1 dias</span>
+</div>
+</article>
+<!-- KPI 3: Projetos em Produção -->
+<article class="glass-card rounded-[20px] p-6 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase tracking-wider">PROJETOS EM PRODUÇÃO</span>
+<div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-status-info">
+<span class="material-symbols-outlined text-[18px]">draw</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-display-kpi text-display-kpi text-text-title tracking-tight">9</span>
+<span class="inline-flex items-center gap-1 font-caption-badge text-caption-badge text-status-info bg-status-info/10 px-2.5 py-1 rounded-full">
+            3 em validação
+          </span>
+</div>
+<div class="flex items-center gap-1.5 text-[11px] text-text-support mt-4 font-body-default">
+<span class="material-symbols-outlined text-[14px] text-status-info">verified</span>
+<span class="">Todos dentro do cronograma sprint</span>
+</div>
+</article>
+<!-- KPI 4: Entregas no Prazo -->
+<article class="glass-card rounded-[20px] p-6 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-caption-kpi-label text-caption-kpi-label text-text-support uppercase tracking-wider">ENTREGAS NO PRAZO</span>
+<div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-status-success">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-display-kpi text-display-kpi text-text-title tracking-tight">96%</span>
+<span class="inline-flex items-center gap-1 font-caption-badge text-caption-badge text-status-success bg-status-success/10 px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[13px] font-bold">arrow_upward</span>
+            +1.5% SLA
+          </span>
+</div>
+<div class="flex items-center gap-1.5 text-[11px] text-text-support mt-4 font-body-default">
+<span class="material-symbols-outlined text-[14px] text-status-success">grade</span>
+<span class="">Meta trimestral estúdio: 94%</span>
+</div>
+</article>
+</section>
+<!-- SECTION 2 & 3: Main Split (Chart Left + Studio Overview Right) -->
+<div class="grid grid-cols-12 gap-5 items-start">
+<!-- LEFT: Gráfico Principal de Receita Fechada por Mês (8 cols) -->
+<section class="col-span-8 glass-card rounded-[20px] p-6 flex flex-col justify-between h-full">
+<!-- Chart Header & Toggle Controls -->
+<div class="flex items-center justify-between border-b border-border-divider/50 pb-5">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-caption-kpi-label text-caption-kpi-label uppercase text-brand-primary-text tracking-wider">Performance Financeira</span>
+<span class="w-1 h-1 rounded-full bg-text-placeholder"></span>
+<span class="font-code-token text-[12px] text-text-support">Ano Fiscal 2026</span>
+</div>
+<h2 class="font-title-card text-title-card text-text-title mt-1">Receita fechada por mês</h2>
+</div>
+<!-- Highlight Metric & Period Selector -->
+<div class="flex items-center gap-4">
+<div class="text-right">
+<span class="text-[11px] font-body-default text-text-support uppercase block">Acumulado Jan–Out</span>
+<span class="font-headline-screen text-[20px] text-text-title leading-tight font-bold">R$ 342.500</span>
+</div>
+<!-- Segmented Control Button Pill -->
+<div class="inline-flex p-1 bg-surface-canvas-mid rounded-xl border border-border-divider">
+<button class="px-3 py-1 text-[13px] font-body-strong rounded-lg bg-white text-text-title shadow-sm transition-all" type="button">Mensal</button>
+<button class="px-3 py-1 text-[13px] font-body-default text-text-support hover:text-text-title rounded-lg transition-all" type="button">Trimestral</button>
+</div>
+</div>
+</div>
+<!-- SVG High-Fidelity Area & Smooth Curve Graph -->
+<div class="relative w-full pt-6 pb-2">
+<!-- Background Grid lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-30 pt-6 pb-9">
+<div class="border-b border-dashed border-outline-variant w-full"></div>
+<div class="border-b border-dashed border-outline-variant w-full"></div>
+<div class="border-b border-dashed border-outline-variant w-full"></div>
+<div class="border-b border-dashed border-outline-variant w-full"></div>
+</div>
+<svg class="w-full h-56 overflow-visible" preserveAspectRatio="none" viewBox="0 0 760 220">
+<defs>
+<linearGradient id="terracottaAreaGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#F97316" stop-opacity="0.38"></stop>
+<stop offset="60%" stop-color="#F97316" stop-opacity="0.10"></stop>
+<stop offset="100%" stop-color="#F97316" stop-opacity="0.0"></stop>
+</linearGradient>
+<filter height="200%" id="pointGlow" width="200%" x="-50%" y="-50%">
+<feDropShadow dx="0" dy="2" flood-color="#E65100" flood-opacity="0.35" stdDeviation="3"></feDropShadow>
+</filter>
+</defs>
+<!-- Closed Area Fill -->
+<path d="M 30,175 
+                     C 90,165 140,140 190,135 
+                     C 240,130 280,110 330,100 
+                     C 380,90 420,115 470,85 
+                     C 520,55 570,75 620,45 
+                     C 670,25 710,35 730,22 
+                     L 730,210 L 30,210 Z" fill="url(#terracottaAreaGradient)"></path>
+<!-- Smooth Terracotta Curve Stroke -->
+<path d="M 30,175 
+                     C 90,165 140,140 190,135 
+                     C 240,130 280,110 330,100 
+                     C 380,90 420,115 470,85 
+                     C 520,55 570,75 620,45 
+                     C 670,25 710,35 730,22" fill="none" stroke="#F97316" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path>
+<!-- Data Point Markers -->
+<circle cx="30" cy="175" fill="#FFFFFF" r="4.5" stroke="#F97316" stroke-width="2.5"></circle>
+<circle cx="110" cy="155" fill="#FFFFFF" r="4" stroke="#F97316" stroke-width="2"></circle>
+<circle cx="190" cy="135" fill="#FFFFFF" r="4.5" stroke="#F97316" stroke-width="2.5"></circle>
+<circle cx="260" cy="118" fill="#FFFFFF" r="4" stroke="#F97316" stroke-width="2"></circle>
+<circle cx="330" cy="100" fill="#FFFFFF" r="4.5" stroke="#F97316" stroke-width="2.5"></circle>
+<circle cx="400" cy="102" fill="#FFFFFF" r="4" stroke="#F97316" stroke-width="2"></circle>
+<circle cx="470" cy="85" fill="#FFFFFF" r="4.5" stroke="#F97316" stroke-width="2.5"></circle>
+<circle cx="550" cy="65" fill="#FFFFFF" r="4" stroke="#F97316" stroke-width="2"></circle>
+<circle cx="620" cy="45" fill="#FFFFFF" r="5" stroke="#E65100" stroke-width="3"></circle>
+<!-- Active Oct Node with Glow Tooltip Indicator -->
+<circle cx="730" cy="22" fill="#F97316" filter="url(#pointGlow)" r="6" stroke="#FFFFFF" stroke-width="3"></circle>
+</svg>
+<!-- Interactive Floating Pill for Current Month -->
+<div class="absolute right-4 top-1 -translate-y-2 bg-text-title text-white text-[11px] font-code-token px-2.5 py-1 rounded-md shadow-lg flex items-center gap-1.5 pointer-events-none">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span class="">Out 26: R$ 54.800</span>
+</div>
+<!-- Month Labels -->
+<div class="flex justify-between text-[12px] font-caption-kpi-label text-text-support px-4 pt-3 border-t border-border-divider/40">
+<span class="">JAN</span>
+<span class="">FEV</span>
+<span class="">MAR</span>
+<span class="">ABR</span>
+<span class="">MAI</span>
+<span class="">JUN</span>
+<span class="">JUL</span>
+<span class="">AGO</span>
+<span class="">SET</span>
+<span class="text-primary font-bold">OUT</span>
+</div>
+</div>
+<!-- Footnote / Target Insight -->
+<div class="flex items-center justify-between pt-3 mt-1 border-t border-border-divider/40 text-[12px] text-text-support">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-status-success">insights</span>
+<span class="">Taxa de conversão de briefs em contratos fechados: <strong class="text-text-title">41.8%</strong></span>
+</div>
+<span class="font-body-default text-brand-primary-text hover:underline cursor-pointer flex items-center gap-1">
+            Ver demonstrativo contábil
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</span>
+</div>
+</section>
+<!-- RIGHT: Executive Card, Calendar & Next Appointments (4 cols) -->
+<section class="col-span-4 flex flex-col gap-5">
+<!-- Card Escuro de Perfil #1E293B -->
+<article class="dark-executive-card rounded-[20px] p-5 text-white flex flex-col justify-between relative overflow-hidden">
+<!-- Subtle Glow in background -->
+<div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-primary-container/15 blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="flex items-center gap-3.5">
+<div class="relative w-12 h-12 rounded-xl overflow-hidden ring-2 ring-white/20 bg-slate-800">
+<img class="w-full h-full object-cover" data-alt="Refined candid headshot of a Brazilian design executive wearing an Italian black polo in a sunlit architectural studio with linen textured curtains and warm terracotta ceramics. Focused, confident and serene atelier atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv22uwuv5fJ8XPWXkeqV1WQjAp1b0bQe4fEUe8Sbdk3qh6Mwd4xqR8tqGmXCh9p6KLY4ai9CzQlYds1JDih3djv6XCVSMPh9bpXr5zEYkDDt1sFxJOQXQCY1ROXSLmyOx3FHGdQxDQ22iBBxm22IP5F34k3rEY2WSaGXXFXPQKU5YuoeImNLYptuspJ33KPpGYfzujKHFNHQlXD5IdNBkNKBhet4iQMVXBrodPZwdD0HySbcmWbKDF">
+</div>
+<div>
+<h3 class="font-title-section text-title-section text-white font-semibold">Hícaro Alves</h3>
+<p class="text-[12px] text-slate-300 font-body-default">Diretor Criativo &amp; Fundador</p>
+</div>
+</div>
+<span class="font-code-token text-[11px] px-2 py-0.5 rounded bg-white/10 text-slate-200 border border-white/15">SÓCIO</span>
+</div>
+<!-- Studio Operational Status Pill -->
+<div class="mt-4 pt-3.5 border-t border-slate-700/70 flex items-center justify-between text-[12px] relative z-10">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-status-success"></span>
+</span>
+<span class="text-slate-200 font-body-strong">Estúdio Operando</span>
+</div>
+<div class="flex items-center gap-1.5 font-code-token text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/20">
+<span class="material-symbols-outlined text-[13px]">speed</span>
+              Capacidade 85%
+            </div>
+</div>
+</article>
+<!-- Mini Calendário de Outubro 2026 Elegante em Vidro -->
+<article class="glass-card rounded-[20px] p-5">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_month</span>
+<h3 class="font-title-section text-title-section text-text-title font-semibold">Outubro 2026</h3>
+</div>
+<div class="flex items-center gap-1 text-text-support">
+<button aria-label="Mês Anterior" class="w-6 h-6 rounded flex items-center justify-center hover:bg-white/80" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button aria-label="Próximo Mês" class="w-6 h-6 rounded flex items-center justify-center hover:bg-white/80" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="grid grid-cols-7 gap-1 text-center font-caption-kpi-label text-[11px] text-text-support pb-1">
+<span class="">D</span><span class="">S</span><span class="">T</span><span class="">Q</span><span class="">Q</span><span class="">S</span><span class="">S</span>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center font-body-default text-[12px]">
+<!-- Week 1 -->
+<span class="text-text-placeholder py-1">28</span>
+<span class="text-text-placeholder py-1">29</span>
+<span class="text-text-placeholder py-1">30</span>
+<span class="py-1 text-text-title">1</span>
+<span class="py-1 text-text-title">2</span>
+<span class="py-1 text-text-title">3</span>
+<span class="py-1 text-text-title">4</span>
+<!-- Week 2 -->
+<span class="py-1 text-text-title">5</span>
+<span class="py-1 text-text-title relative">
+              6
+              <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-status-success"></span>
+</span>
+<span class="py-1 text-text-title">7</span>
+<span class="py-1 text-text-title">8</span>
+<span class="py-1 text-text-title relative">
+              9
+              <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary-container"></span>
+</span>
+<span class="py-1 text-text-title">10</span>
+<span class="py-1 text-text-title">11</span>
+<!-- Week 3 -->
+<span class="py-1 text-text-title">12</span>
+<span class="py-1 text-text-title">13</span>
+<span class="py-1 text-text-title relative">
+              14
+              <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-status-success"></span>
+</span>
+<span class="py-1 text-text-title">15</span>
+<span class="py-1 text-text-title">16</span>
+<span class="py-1 text-text-title">17</span>
+<span class="py-1 text-text-title">18</span>
+<!-- Week 4 (Today: 22nd Highlighted) -->
+<span class="py-1 text-text-title">19</span>
+<span class="py-1 text-text-title">20</span>
+<span class="py-1 text-text-title relative">
+              21
+              <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary-container"></span>
+</span>
+<span class="py-1 rounded-lg bg-primary-container text-white font-bold relative shadow-sm">
+              22
+              <span class="absolute -top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-white"></span>
+</span>
+<span class="py-1 text-text-title">23</span>
+<span class="py-1 text-text-title relative">
+              24
+              <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-status-success"></span>
+</span>
+<span class="py-1 text-text-title">25</span>
+<!-- Week 5 -->
+<span class="py-1 text-text-title">26</span>
+<span class="py-1 text-text-title">27</span>
+<span class="py-1 text-text-title">28</span>
+<span class="py-1 text-text-title relative">
+              29
+              <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary-container"></span>
+</span>
+<span class="py-1 text-text-title">30</span>
+<span class="py-1 text-text-title">31</span>
+<span class="text-text-placeholder py-1">1</span>
+</div>
+<!-- Calendar Dot Legend -->
+<div class="flex items-center justify-end gap-3 pt-3 mt-2 border-t border-border-divider/50 text-[11px] text-text-support">
+<span class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+              Apresentações
+            </span>
+<span class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+              Entregas
+            </span>
+</div>
+</article>
+<!-- Lista "Próximos compromissos" -->
+<article class="glass-card rounded-[20px] p-5">
+<div class="flex items-center justify-between mb-3.5">
+<h3 class="font-title-section text-title-section text-text-title font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary-container">event_upcoming</span>
+              Próximos compromissos
+            </h3>
+<span class="font-caption-badge text-[11px] text-text-support">Hoje</span>
+</div>
+<div class="space-y-3">
+<!-- Event 1 -->
+<div class="p-3 rounded-xl bg-white/70 border border-border-divider flex items-center justify-between hover:bg-white transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-amber-50 text-brand-primary-text flex items-center justify-center font-code-token font-bold text-[12px] border border-amber-200/60">
+                  14h
+                </div>
+<div>
+<h4 class="font-body-strong text-body-strong text-text-title">Alinhamento Lumina Movement</h4>
+<p class="text-[12px] text-text-support font-body-default flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px]">videocam</span>
+                    Google Meet · Review de Brand Assets
+                  </p>
+</div>
+</div>
+<button aria-label="Entrar na reunião" class="w-8 h-8 rounded-lg bg-surface-canvas-mid hover:bg-surface-container-low text-text-title flex items-center justify-center transition-colors" title="Entrar na reunião" type="button">
+<span class="material-symbols-outlined text-[16px]">north_east</span>
+</button>
+</div>
+<!-- Event 2 -->
+<div class="p-3 rounded-xl bg-white/70 border border-border-divider flex items-center justify-between hover:bg-white transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-orange-50 text-brand-primary-text flex items-center justify-center font-code-token font-bold text-[12px] border border-orange-200/60">
+                  16:30
+                </div>
+<div>
+<h4 class="font-body-strong text-body-strong text-text-title">Apresentação Aura Wellness</h4>
+<p class="text-[12px] text-text-support font-body-default flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px]">domain</span>
+                    Presencial · Entrega Identidade Visual
+                  </p>
+</div>
+</div>
+<button aria-label="Ver detalhes da reunião" class="w-8 h-8 rounded-lg bg-surface-canvas-mid hover:bg-surface-container-low text-text-title flex items-center justify-center transition-colors" title="Ver detalhes da reunião" type="button">
+<span class="material-symbols-outlined text-[16px]">north_east</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+</div>
+<!-- SECTION 4: Faixa inferior "Precisa da sua atenção" (3 Cards de Ação) -->
+<section aria-label="Ações Pendentes Críticas" class="mt-1">
+<div class="flex items-center justify-between mb-3.5">
+<div class="flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-status-warning animate-pulse"></span>
+<h2 class="font-title-card text-title-card text-text-title">Precisa da sua atenção</h2>
+<span class="font-caption-badge text-caption-badge text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full">3 itens requerem ação</span>
+</div>
+<button class="text-[12px] font-body-strong text-text-support hover:text-text-title transition-colors" type="button">
+          Marcar todos como lidos
+        </button>
+</div>
+<div class="grid grid-cols-3 gap-5">
+<!-- Card 1: Briefing Lumina Movement -->
+<article class="glass-card rounded-[20px] p-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center gap-1.5 font-caption-badge text-caption-badge text-amber-900 bg-amber-100 px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] text-status-warning">warning</span>
+                Atenção
+              </span>
+<span class="font-code-token text-[11px] text-text-support">ID #BF-204</span>
+</div>
+<h3 class="font-title-section text-title-section text-text-title mt-2">Briefing Lumina Movement</h3>
+<p class="font-body-default text-[13px] text-text-support mt-1 leading-snug">
+              Parado há 3 dias. Cliente iniciou o preenchimento mas não enviou as respostas das seções de tom de voz.
+            </p>
+</div>
+<div class="mt-5 pt-3.5 border-t border-border-divider/50 flex items-center justify-between">
+<span class="text-[11px] text-text-support font-code-token">Expira em 48h</span>
+<button class="h-9 px-3.5 rounded-xl bg-white border border-border-divider text-text-title hover:bg-surface-canvas-start font-body-strong text-[13px] flex items-center gap-2 shadow-sm transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">chat</span>
+              Reenviar PIN por WhatsApp
+            </button>
+</div>
+</article>
+<!-- Card 2: Proposta Gala Summit -->
+<article class="glass-card rounded-[20px] p-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center gap-1.5 font-caption-badge text-caption-badge text-rose-900 bg-rose-100 px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] text-status-urgent">schedule</span>
+                Follow-up
+              </span>
+<span class="font-code-token text-[11px] text-text-support">ID #PP-882</span>
+</div>
+<h3 class="font-title-section text-title-section text-text-title mt-2">Proposta Gala Summit</h3>
+<p class="font-body-default text-[13px] text-text-support mt-1 leading-snug">
+              Sem resposta há 4 dias após envio da proposta comercial completa com escopo de branding e ambientação.
+            </p>
+</div>
+<div class="mt-5 pt-3.5 border-t border-border-divider/50 flex items-center justify-between">
+<span class="text-[11px] text-text-title font-code-token font-semibold">R$ 68.000</span>
+<button class="h-9 px-3.5 rounded-xl bg-white border border-border-divider text-text-title hover:bg-surface-canvas-start font-body-strong text-[13px] flex items-center gap-2 shadow-sm transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">mail</span>
+              Cobrar feedback
+            </button>
+</div>
+</article>
+<!-- Card 3: Aprovação pendente Physio Care Apex -->
+<article class="glass-card rounded-[20px] p-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center gap-1.5 font-caption-badge text-caption-badge text-status-info bg-status-info/10 px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">checklist</span>
+                Aprovação
+              </span>
+<span class="font-code-token text-[11px] text-text-support">ID #DL-109</span>
+</div>
+<h3 class="font-title-section text-title-section text-text-title mt-2">Aprovação pendente Physio Care Apex</h3>
+<p class="font-body-default text-[13px] text-text-support mt-1 leading-snug">
+              Guia de estilo e embalagens finais submetidos para aprovação de diretoria. Validação técnica de tipografia aguardada.
+            </p>
+</div>
+<div class="mt-5 pt-3.5 border-t border-border-divider/50 flex items-center justify-between">
+<span class="text-[11px] text-text-support font-code-token">Prazo: Hoje, 18h</span>
+<button class="h-9 px-3.5 rounded-xl primary-cta-gradient text-white hover:brightness-105 font-body-strong text-[13px] flex items-center gap-2 shadow-sm shadow-brand-gradient-end/20 transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+              Revisar entregáveis
+            </button>
+</div>
+</article>
+</div>
+</section>
+</main>
+
+
+</body></html>

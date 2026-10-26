@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Studio Suite 2.0 — Enviar Briefing com PIN</title>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus Jakarta Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#6bd8cb",
+            "status-info": "#0284C7",
+            "status-success": "#10B981",
+            "background": "#f8f9ff",
+            "on-surface-variant": "#584237",
+            "text-placeholder": "#94A3B8",
+            "on-surface": "#0d1c2e",
+            "outline-variant": "#e0c0b1",
+            "on-tertiary-fixed": "#00201d",
+            "on-tertiary": "#ffffff",
+            "surface-canvas-start": "#FBF8F3",
+            "status-warning": "#F59E0B",
+            "card-highlight-end": "#FBBF24",
+            "secondary": "#545f73",
+            "text-title": "#0F172A",
+            "text-body": "#475569",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#586377",
+            "primary": "#9d4300",
+            "text-support": "#64748B",
+            "brand-primary-text": "#C2410C",
+            "surface-bright": "#f8f9ff",
+            "on-secondary-fixed-variant": "#3c475a",
+            "status-urgent": "#EF4444",
+            "inverse-surface": "#233144",
+            "surface-canvas-mid": "#F5EFEB",
+            "primary-fixed": "#ffdbca",
+            "on-background": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#341100",
+            "on-secondary-fixed": "#111c2d",
+            "on-tertiary-fixed-variant": "#005049",
+            "surface-container-highest": "#d5e3fc",
+            "border-divider": "#E2E8F0",
+            "on-tertiary-container": "#003934",
+            "surface": "#f8f9ff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "surface-dim": "#ccdbf3",
+            "surface-canvas-end": "#ECE4DB",
+            "inverse-primary": "#ffb690",
+            "secondary-fixed": "#d8e3fb",
+            "tertiary-container": "#37ab9e",
+            "surface-container-low": "#eff4ff",
+            "surface-tint": "#9d4300",
+            "tertiary": "#006a61",
+            "focus-indigo": "#4F46E5",
+            "on-primary-container": "#582200",
+            "brand-gradient-end": "#E65100",
+            "secondary-fixed-dim": "#bcc7de",
+            "error-container": "#ffdad6",
+            "secondary-container": "#d5e0f8",
+            "surface-container-high": "#dce9ff",
+            "on-primary-fixed-variant": "#783200",
+            "primary-container": "#f97316",
+            "primary-fixed-dim": "#ffb690",
+            "brand-primary-hover": "#EA580C",
+            "surface-variant": "#d5e3fc",
+            "surface-container": "#e6eeff",
+            "outline": "#8c7164",
+            "tertiary-fixed": "#89f5e7",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.25rem",
+            "gutter": "1.25rem",
+            "gutter-mobile": "1rem",
+            "space-xl": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "display-kpi-mobile": ["Plus Jakarta Sans"],
+            "body-strong": ["Plus Jakarta Sans"],
+            "caption-badge": ["Plus Jakarta Sans"],
+            "display-kpi": ["Plus Jakarta Sans"],
+            "title-card": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "code-pin": ["JetBrains Mono"],
+            "headline-screen": ["Plus Jakarta Sans"],
+            "headline-screen-mobile": ["Plus Jakarta Sans"],
+            "caption-kpi-label": ["Plus Jakarta Sans"],
+            "label-field": ["Plus Jakarta Sans"],
+            "title-section": ["Plus Jakarta Sans"],
+            "code-token": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Warm Glassmorphism & Atelier Ambience */
+    .bg-atelier-gradient {
+      background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);
+    }
+    .modal-glass {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      box-shadow: 0 25px 50px -12px rgba(230, 81, 0, 0.15), 0 12px 30px -6px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      outline: 1px solid rgba(226, 232, 240, 0.6);
+    }
+    .subcard-glass {
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.03);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.4);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-atelier-gradient text-on-surface min-h-screen overflow-hidden selection:bg-primary-container selection:text-white">
+<!-- ========================================================================= -->
+<!-- BACKGROUND SIMULATION: CRM CANVAS (STUDIO SUITE 2.0 WORKSPACE ATELIER)   -->
+<!-- ========================================================================= -->
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none flex">
+<!-- Simulated Left Floating Dock (72px) -->
+<aside class="w-[72px] m-5 h-[calc(100vh-40px)] rounded-[24px] bg-white/75 backdrop-blur-md border border-white/80 shadow-lg flex flex-col items-center py-6 justify-between opacity-50">
+<div class="flex flex-col items-center gap-7">
+<div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm tracking-tight shadow">
+          HD
+        </div>
+<div class="flex flex-col gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-white flex items-center justify-center shadow">
+<span class="material-symbols-outlined text-[20px]" data-icon="filter_alt">filter_alt</span>
+</div>
+<div class="w-10 h-10 rounded-xl flex items-center justify-center text-text-support">
+<span class="material-symbols-outlined text-[20px]" data-icon="assignment">assignment</span>
+</div>
+<div class="w-10 h-10 rounded-xl flex items-center justify-center text-text-support">
+<span class="material-symbols-outlined text-[20px]" data-icon="tactic">tactic</span>
+</div>
+<div class="w-10 h-10 rounded-xl flex items-center justify-center text-text-support">
+<span class="material-symbols-outlined text-[20px]" data-icon="monitoring">monitoring</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4 items-center">
+<span class="material-symbols-outlined text-[20px] text-text-support" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-slate-200 border border-white"></div>
+</div>
+</aside>
+<!-- Simulated CRM Canvas Background -->
+<main class="flex-1 p-8 opacity-40 filter blur-[2px] overflow-hidden">
+<!-- CRM Header -->
+<header class="flex items-center justify-between pb-6 border-b border-border-divider">
+<div>
+<span class="text-caption-badge font-caption-badge text-brand-primary-text uppercase tracking-wider">Pipeline Executivo</span>
+<h1 class="text-headline-screen font-headline-screen text-text-title">CRM Leads &amp; Descobertas</h1>
+</div>
+<div class="flex gap-3">
+<div class="h-10 px-4 bg-white rounded-xl border border-border-divider flex items-center gap-2 text-text-support text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="tune">tune</span> Filtros
+          </div>
+<div class="h-10 px-4 bg-primary-container text-white rounded-xl flex items-center gap-2 text-sm font-semibold">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Novo Lead
+          </div>
+</div>
+</header>
+<!-- CRM Columns / Kanban mock -->
+<div class="grid grid-cols-4 gap-5 mt-6">
+<div class="bg-white/60 p-4 rounded-2xl border border-white flex flex-col gap-3">
+<span class="font-title-section text-title-section text-text-title">Inbound Qualificado (4)</span>
+<div class="p-4 bg-white/90 rounded-xl shadow-sm border border-slate-100 flex flex-col gap-2">
+<span class="text-xs font-semibold text-primary">Lumina Movement</span>
+<span class="text-xs text-text-support">Helena Vasconcellos · Pilates &amp; Wellness</span>
+</div>
+</div>
+<div class="bg-white/60 p-4 rounded-2xl border border-white flex flex-col gap-3">
+<span class="font-title-section text-title-section text-text-title">Briefing Enviado (3)</span>
+<div class="p-4 bg-white/90 rounded-xl shadow-sm border border-slate-100">
+<span class="text-xs font-semibold text-text-title">Aura Fisio &amp; Yoga</span>
+</div>
+</div>
+<div class="bg-white/60 p-4 rounded-2xl border border-white flex flex-col gap-3">
+<span class="font-title-section text-title-section text-text-title">Em Diagnóstico (2)</span>
+</div>
+<div class="bg-white/60 p-4 rounded-2xl border border-white flex flex-col gap-3">
+<span class="font-title-section text-title-section text-text-title">Proposta Fechada (5)</span>
+</div>
+</div>
+</main>
+</div>
+<!-- ========================================================================= -->
+<!-- MODAL BACKDROP (OVERLAY ESCURECIDO COM BACKDROP-BLUR 12px)                 -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-[12px] flex items-center justify-center p-4">
+<!-- ========================================================================= -->
+<!-- MODAL CENTRAL DE VIDRO QUENTE (560px de largura)                          -->
+<!-- ========================================================================= -->
+<div class="relative w-full max-w-[560px] rounded-[24px] modal-glass flex flex-col overflow-hidden text-on-surface transform transition-all duration-200">
+<!-- Top Rim Light line accent -->
+<div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent opacity-80"></div>
+<!-- CABEÇALHO DO MODAL -->
+<header class="px-7 pt-7 pb-4 flex items-start justify-between relative border-b border-border-divider/50">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="text-caption-badge font-caption-badge uppercase tracking-wider text-primary">Disparo de Onboarding</span>
+</div>
+<h2 class="text-headline-screen-mobile font-headline-screen-mobile text-text-title font-bold tracking-tight">
+            Enviar Briefing de Descoberta
+          </h2>
+<p class="text-body-default font-body-default text-text-body flex items-center gap-1.5">
+<span class="font-semibold text-text-title">Lead: Lumina Movement</span>
+<span class="text-text-placeholder">·</span>
+<span>Helena Vasconcellos</span>
+</p>
+</div>
+<!-- Botão de Fechar (X) Discreto -->
+<button aria-label="Fechar modal" class="w-8 h-8 rounded-full flex items-center justify-center text-text-support hover:text-text-title hover:bg-slate-100 transition-colors duration-150 -mr-1 -mt-1 active:scale-[0.96]" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</header>
+<!-- INDICADOR DE 3 PASSOS NO TOPO -->
+<div class="px-7 py-3.5 bg-surface-container-low/60 border-b border-border-divider/60">
+<nav aria-label="Progresso do Envio" class="flex items-center justify-between">
+<!-- Passo 1: Modelo (Concluído) -->
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-status-success/15 text-status-success flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px] font-bold" data-icon="check">check</span>
+</div>
+<span class="text-caption-badge font-caption-badge text-text-title font-semibold">1. Modelo</span>
+</div>
+<div class="flex-1 h-[2px] mx-3 bg-status-success/30 rounded-full"></div>
+<!-- Passo 2: Configurar Acesso & PIN (Concluído) -->
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-status-success/15 text-status-success flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px] font-bold" data-icon="check">check</span>
+</div>
+<span class="text-caption-badge font-caption-badge text-text-title font-semibold">2. Acesso &amp; PIN</span>
+</div>
+<div class="flex-1 h-[2px] mx-3 bg-primary-container/40 rounded-full"></div>
+<!-- Passo 3: Disparo & Mensagem [ATIVO] -->
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container text-white flex items-center justify-center shadow-sm">
+<span class="text-[11px] font-bold">3</span>
+</div>
+<span class="text-caption-badge font-caption-badge text-brand-primary-text font-bold">Disparo &amp; Mensagem</span>
+</div>
+</nav>
+</div>
+<!-- CORPO DO MODAL (CONTEÚDO DETALHADO DAS ETAPAS) -->
+<div class="px-7 py-5 space-y-4 max-h-[calc(86vh-170px)] overflow-y-auto custom-scrollbar">
+<!-- 1. MODELO SELECIONADO: Card compacto em vidro -->
+<section aria-labelledby="selected-template-heading">
+<div class="subcard-glass rounded-xl p-3 px-3.5 flex items-center justify-between border border-white">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="assignment">assignment</span>
+</div>
+<div>
+<p class="text-body-strong font-body-strong text-text-title leading-snug" id="selected-template-heading">
+                  Briefing Pilates Reformer v2.4
+                </p>
+<p class="text-caption-kpi-label font-caption-kpi-label text-text-support text-[11px]">
+                  24 perguntas · ~14 min de preenchimento
+                </p>
+</div>
+</div>
+<button class="text-caption-badge font-caption-badge text-primary hover:text-brand-primary-hover px-2.5 py-1.5 rounded-lg hover:bg-primary-fixed/30 transition-colors" type="button">
+              Trocar modelo
+            </button>
+</div>
+</section>
+<!-- 2. CONFIGURAÇÃO DE ACESSO COM PIN -->
+<section class="subcard-glass rounded-2xl p-4 border border-white space-y-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary" data-icon="lock">lock</span>
+<span class="text-label-field font-label-field text-text-title">Acesso Seguro do Cliente</span>
+</div>
+<!-- Badge PIN Criptografado -->
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-status-success/10 text-status-success text-caption-badge font-caption-badge">
+<span class="material-symbols-outlined text-[13px]" data-icon="verified_user">verified_user</span>
+              PIN Criptografado
+            </span>
+</div>
+<!-- PIN Display em JetBrains Mono grande -->
+<div class="flex items-center justify-between bg-white/90 rounded-xl p-3 border border-border-divider/70">
+<div>
+<span class="text-[11px] font-caption-kpi-label uppercase text-text-support tracking-wider block">Código PIN Pessoal</span>
+<div class="text-code-pin font-code-pin text-text-title tracking-widest font-semibold flex items-center gap-2">
+<span>842</span>
+<span class="text-primary-container">·</span>
+<span>910</span>
+</div>
+</div>
+<button class="h-9 px-3 rounded-lg border border-border-divider hover:bg-slate-50 flex items-center gap-1.5 text-text-body hover:text-text-title transition-colors text-caption-badge font-caption-badge active:scale-95" title="Gerar outro PIN" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="autorenew">autorenew</span>
+              Gerar outro PIN
+            </button>
+</div>
+<!-- Validade & Checkbox em linha dupla -->
+<div class="space-y-2.5 pt-1">
+<div class="flex items-center justify-between text-body-default font-body-default">
+<span class="text-text-support text-xs font-medium">Expiração do link:</span>
+<!-- Chips selecionáveis -->
+<div aria-label="Validade do PIN" class="flex items-center gap-1.5" role="radiogroup">
+<button aria-checked="false" class="px-2.5 py-1 text-xs rounded-lg text-text-body hover:bg-white/80 transition-colors" role="radio" type="button">
+                  7 dias
+                </button>
+<button aria-checked="true" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-text-title text-white shadow-sm transition-colors" role="radio" type="button">
+                  15 dias
+                </button>
+<button aria-checked="false" class="px-2.5 py-1 text-xs rounded-lg text-text-body hover:bg-white/80 transition-colors" role="radio" type="button">
+                  30 dias
+                </button>
+</div>
+</div>
+<!-- Checkbox Marcado -->
+<label class="flex items-center gap-2.5 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded border-border-divider text-focus-indigo focus:ring-focus-indigo/20 focus:ring-offset-0 cursor-pointer" type="checkbox"/>
+<span class="text-xs text-text-body font-body-default">
+                Permitir salvar rascunho e continuar depois
+              </span>
+</label>
+</div>
+</section>
+<!-- 3. CANAIS DE DISPARO (ABAS + PRÉ-VISUALIZAÇÃO DA MENSAGEM) -->
+<section class="space-y-2.5">
+<div class="flex items-center justify-between">
+<span class="text-label-field font-label-field text-text-title">Canal &amp; Conteúdo do Envio</span>
+<span class="text-xs text-text-support">WhatsApp API Oficial</span>
+</div>
+<!-- Abas de Disparo -->
+<div class="flex p-1 bg-surface-container/60 rounded-xl border border-border-divider/50">
+<!-- [WhatsApp - Selecionada] -->
+<button class="flex-1 py-1.5 px-3 rounded-lg bg-white shadow-xs text-xs font-semibold text-text-title flex items-center justify-center gap-1.5 border border-border-divider/40" type="button">
+<span class="material-symbols-outlined text-[16px] text-status-success" data-icon="chat">chat</span>
+              WhatsApp
+            </button>
+<!-- E-mail -->
+<button class="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium text-text-support hover:text-text-title flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="mail">mail</span>
+              E-mail
+            </button>
+<!-- Copiar Link Curto -->
+<button class="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium text-text-support hover:text-text-title flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="link">link</span>
+              Copiar Link Curto
+            </button>
+</div>
+<!-- Caixa de Pré-visualização da Mensagem Pré-Formatada -->
+<div class="bg-white/80 rounded-xl p-3.5 border border-border-divider/80 relative space-y-2">
+<div class="flex items-center justify-between text-[11px] text-text-support border-b border-border-divider/50 pb-1.5">
+<span class="flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[14px] text-status-success" data-icon="send">send</span>
+                Destino: +55 (11) 98842-9102 · Helena Vasconcellos
+              </span>
+<span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Prévia</span>
+</div>
+<!-- Texto Pré-formatado -->
+<div class="text-[12px] font-body-default text-text-title whitespace-pre-line leading-relaxed font-normal bg-surface-canvas-start/40 p-2.5 rounded-lg border border-border-divider/40 font-mono text-opacity-90">Oi Helena! Aqui é o Hícaro do Studio Suite. Para iniciarmos o processo criativo da Lumina Movement com máxima precisão, preparei este briefing interativo exclusivo:
+
+🔗 Link: studiosuite.app/b/lumina
+🔑 PIN de Acesso: 842 910
+
+Você pode preencher no seu tempo e salvar rascunhos. Qualquer dúvida, estou à disposição!</div>
+</div>
+</section>
+</div>
+<!-- RODAPÉ DO MODAL -->
+<footer class="px-7 py-4 bg-surface-container-low/40 border-t border-border-divider/60 flex items-center justify-between gap-3">
+<!-- Botão Secundário -->
+<button class="h-11 px-4 rounded-xl border border-border-divider bg-white/90 hover:bg-white text-text-title text-body-strong font-body-strong flex items-center gap-2 hover:border-slate-300 transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-support" data-icon="content_copy">content_copy</span>
+          Copiar Link &amp; PIN
+        </button>
+<!-- Botão Principal Largo Gradiente Laranja -->
+<button class="flex-1 h-11 px-6 rounded-xl bg-gradient-to-r from-primary-container to-brand-gradient-end hover:from-brand-primary-hover hover:to-primary text-white text-body-strong font-body-strong flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="chat">chat</span>
+<span>Enviar pelo WhatsApp</span>
+<span class="material-symbols-outlined text-[16px] -mr-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</footer>
+</div>
+<!-- ========================================================================= -->
+<!-- TOAST DE CONFIRMAÇÃO DE FEEDBACK (CANTO INFERIOR DIREITO)                  -->
+<!-- ========================================================================= -->
+<div class="fixed bottom-6 right-6 z-60 animate-bounce-subtle">
+<div class="bg-slate-900/90 text-white backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-white/10 flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-status-success/20 text-status-success flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]" data-icon="bolt">bolt</span>
+</div>
+<p class="text-xs font-medium text-slate-100">
+          Briefing pronto para disparo com 1 clique
+        </p>
+<button aria-label="Dispensar aviso" class="text-slate-400 hover:text-white transition-colors ml-1" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Inline Script for Micro-interactions -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle and button hover/active feedback
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          // Micro ripple or scale effect
+          this.classList.add('opacity-90');
+          setTimeout(() => this.classList.remove('opacity-90'), 150);
+        });
+      });
+    });
+  </script>
+</body></html>

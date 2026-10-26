@@ -3,7 +3,7 @@
 <html class="light" lang="pt-BR"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>StudioIntake — Painel de Controle Operacional</title>
+<title>Studio Suite 2.0 — Painel de Controle Operacional</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
@@ -16,53 +16,53 @@
       theme: {
         extend: {
           "colors": {
-            "surface-tint": "#4d44e3",
+            "surface-tint": "#9d4300",
             "on-secondary-fixed-variant": "#3d4757",
             "on-secondary-fixed": "#121c2a",
-            "inverse-on-surface": "#edf0ff",
+            "inverse-on-surface": "#fff4ea",
             "on-secondary-container": "#596374",
-            "outline-variant": "#c7c4d8",
-            "primary-fixed-dim": "#c3c0ff",
-            "primary-container": "#4f46e5",
-            "surface-container-highest": "#dce2f7",
+            "outline-variant": "#e0c0b1",
+            "primary-fixed-dim": "#ffb690",
+            "primary-container": "#f97316",
+            "surface-container-highest": "#f3e4d6",
             "on-tertiary": "#ffffff",
-            "tertiary-container": "#a44100",
+            "tertiary-container": "#37ab9e",
             "on-error-container": "#93000a",
-            "inverse-primary": "#c3c0ff",
-            "on-tertiary-container": "#ffd2be",
-            "surface-bright": "#f9f9ff",
-            "surface-container-high": "#e1e8fd",
-            "secondary": "#555f70",
-            "surface-container-low": "#f1f3ff",
-            "tertiary-fixed": "#ffdbcc",
-            "surface": "#f9f9ff",
-            "background": "#f9f9ff",
-            "on-surface": "#141b2b",
-            "outline": "#777587",
-            "tertiary": "#7e3000",
+            "inverse-primary": "#ffb690",
+            "on-tertiary-container": "#00201d",
+            "surface-bright": "#fffaf5",
+            "surface-container-high": "#f7ebe0",
+            "secondary": "#78716c",
+            "surface-container-low": "#fdf6ee",
+            "tertiary-fixed": "#89f5e7",
+            "surface": "#fcfaf7",
+            "background": "#FBF8F3",
+            "on-surface": "#0d1c2e",
+            "outline": "#8c7164",
+            "tertiary": "#006a61",
             "error": "#ba1a1a",
             "on-secondary": "#ffffff",
-            "on-tertiary-fixed": "#351000",
+            "on-tertiary-fixed": "#00201d",
             "inverse-surface": "#293040",
-            "secondary-fixed": "#d9e3f7",
-            "on-primary-fixed": "#0f0069",
+            "secondary-fixed": "#eee4d5",
+            "on-primary-fixed": "#341100",
             "error-container": "#ffdad6",
-            "primary-fixed": "#e2dfff",
+            "primary-fixed": "#ffdbca",
             "on-primary": "#ffffff",
-            "surface-dim": "#d3daef",
+            "surface-dim": "#e8dfd2",
             "surface-container-lowest": "#ffffff",
-            "on-primary-fixed-variant": "#3323cc",
+            "on-primary-fixed-variant": "#783200",
             "on-error": "#ffffff",
-            "surface-container": "#e9edff",
-            "tertiary-fixed-dim": "#ffb695",
-            "secondary-fixed-dim": "#bdc7db",
-            "on-background": "#141b2b",
-            "on-primary-container": "#dad7ff",
-            "secondary-container": "#d6e0f4",
-            "primary": "#3525cd",
-            "on-surface-variant": "#464555",
-            "surface-variant": "#dce2f7",
-            "on-tertiary-fixed-variant": "#7b2f00"
+            "surface-container": "#faf1e6",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "secondary-fixed-dim": "#c2aa8b",
+            "on-background": "#0d1c2e",
+            "on-primary-container": "#ffffff",
+            "secondary-container": "#f7f2ea",
+            "primary": "#c2410c",
+            "on-surface-variant": "#584237",
+            "surface-variant": "#f3e4d6",
+            "on-tertiary-fixed-variant": "#005049"
           },
           "borderRadius": {
             "DEFAULT": "0.25rem",
@@ -123,20 +123,26 @@
       height: 5px;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
-      background: #c7c4d8;
+      background: #e0c0b1;
       border-radius: 9999px;
+    }
+    .glass-surface {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.07), 0 10px 25px -5px rgba(0, 0, 0, 0.04);
     }
   </style>
 </head>
-<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary-container selection:text-on-primary">
+<body class="text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary-container selection:text-on-primary" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);">
 <!-- TOP NAV BAR (Shared Component Execution) -->
-<header class="bg-surface-container-lowest border-b border-outline-variant shadow-sm z-30 sticky top-0 w-full">
+<header class="glass-surface border-b border-outline-variant z-30 sticky top-0 w-full">
 <div class="flex justify-between items-center w-full px-space-lg max-w-7xl mx-auto h-16">
 <!-- Left: Logo & Search -->
 <div class="flex items-center gap-6">
 <div class="flex items-center gap-2">
-<span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-sm text-headline-sm font-extrabold shadow-sm">SI</span>
-<span class="font-headline-sm text-headline-sm text-on-surface font-extrabold tracking-tight">StudioIntake</span>
+<span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-sm text-headline-sm font-extrabold shadow-sm">HD</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-extrabold tracking-tight">Studio Suite 2.0</span>
 </div>
 <div class="relative hidden lg:block w-72">
 <span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-lg pointer-events-none">search</span>
@@ -178,16 +184,16 @@
 <!-- BODY CONTENT WRAPPER -->
 <div class="flex-1 flex max-w-7xl w-full mx-auto">
 <!-- SIDE NAV BAR (Shared Component Execution) -->
-<aside class="hidden md:flex flex-col justify-between w-64 border-r border-outline-variant bg-surface-container-lowest h-[calc(100vh-4rem)] sticky top-16 p-space-md shrink-0">
+<aside class="hidden md:flex flex-col justify-between w-64 border-r border-outline-variant glass-surface h-[calc(100vh-4rem)] sticky top-16 p-space-md shrink-0">
 <div class="space-y-6">
 <!-- Agency Monogram Header -->
 <div class="flex items-center gap-3 px-space-xs pb-3 border-b border-outline-variant">
 <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center font-headline-sm text-headline-sm text-primary font-bold">
-            AT
+            HD
           </div>
 <div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-on-surface leading-tight font-bold">Atelier Intake</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Enterprise Client Briefings</span>
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight font-bold">Hícaro Duarte Atelier</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Studio Suite 2.0 · Enterprise Client Briefings</span>
 </div>
 </div>
 <!-- Tab Links (Control Panel Active) -->
@@ -199,6 +205,14 @@
 <a id="nav-clients-crm" class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface rounded-lg font-label-md text-label-md px-space-md py-space-sm transition-colors duration-150 cursor-pointer">
 <span class="material-symbols-outlined text-lg">group</span>
             Carteira de Clientes (CRM)
+          </a>
+<a href="crm.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface rounded-lg font-label-md text-label-md px-space-md py-space-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-lg">view_kanban</span>
+            Funil de Vendas (Kanban)
+          </a>
+<a href="forms-hub.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface rounded-lg font-label-md text-label-md px-space-md py-space-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-lg">dynamic_form</span>
+            Forms Hub (Biblioteca)
           </a>
 <div>
 <button id="nav-forms-toggle" type="button" class="w-full flex items-center justify-between gap-3 text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface rounded-lg font-label-md text-label-md px-space-md py-space-sm transition-colors duration-150">
@@ -243,6 +257,24 @@
 </div>
 <!-- Footer Side Links -->
 <div class="pt-4 border-t border-outline-variant space-y-1">
+<span class="block px-space-md pb-1 font-label-sm text-label-sm text-outline uppercase tracking-wider">Pré-visualizações</span>
+<a href="form-builder.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface rounded-lg font-label-md text-label-md px-space-md py-space-sm transition-colors duration-150 text-[12px]">
+<span class="material-symbols-outlined text-base">design_services</span>
+          Editor de Modelo
+        </a>
+<a href="projects.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface rounded-lg font-label-md text-label-md px-space-md py-space-sm transition-colors duration-150 text-[12px]">
+<span class="material-symbols-outlined text-base">account_tree</span>
+          Gestão de Projetos
+        </a>
+<a href="project-detail.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface rounded-lg font-label-md text-label-md px-space-md py-space-sm transition-colors duration-150 text-[12px]">
+<span class="material-symbols-outlined text-base">timeline</span>
+          Evolução do Projeto
+        </a>
+<a href="client-tracking.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface rounded-lg font-label-md text-label-md px-space-md py-space-sm transition-colors duration-150 text-[12px]">
+<span class="material-symbols-outlined text-base">visibility</span>
+          Acompanhamento (Cliente)
+        </a>
+<div class="pt-2 mt-1 border-t border-outline-variant"></div>
 <a id="nav-settings" class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface rounded-lg font-label-md text-label-md px-space-md py-space-sm transition-colors duration-150 cursor-pointer">
 <span class="material-symbols-outlined text-lg">settings</span>
           Settings
@@ -379,7 +411,7 @@
 <!-- MAIN CONTENT SPLIT: Interactive Table + Inspector Drawer -->
 <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
 <!-- TABLE CONTAINER (8 cols on XL) -->
-<div class="xl:col-span-8 bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-xs overflow-hidden">
+<div class="xl:col-span-8 glass-surface rounded-2xl border border-outline-variant overflow-hidden">
 <!-- Table Controls & Tabs -->
 <div class="p-4 sm:p-5 border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-4">
 <div>
@@ -646,7 +678,7 @@
 </div>
 </div>
 <!-- RIGHT PANEL / SNAPSHOT INSPECTOR (4 cols on XL) -->
-<aside class="xl:col-span-4 bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-xs flex flex-col gap-4">
+<aside class="xl:col-span-4 glass-surface rounded-2xl border border-outline-variant p-5 flex flex-col gap-4">
 <div class="flex items-center justify-between pb-3 border-b border-outline-variant/70">
 <div class="flex items-center gap-2">
 <span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Briefing Estratégico | Studio Suite 2.0 • Hicaro Duarte</title>
+<!-- Google Fonts: Inter & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: "#fff7ed",
+              100: "#ffedd5",
+              200: "#fed7aa",
+              300: "#fdba74",
+              400: "#fb923c",
+              500: "#f97316",
+              600: "#ea580c",
+              700: "#c2410c",
+            },
+            warm: {
+              50: "#fcfaf7",
+              100: "#f7f2ea",
+              200: "#eee4d5",
+              300: "#dfcfb8",
+              400: "#c2aa8b",
+              800: "#2d261e",
+              900: "#1d1813"
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          boxShadow: {
+            'spatial': '0 30px 70px -15px rgba(180, 120, 70, 0.12), 0 10px 25px -8px rgba(0,0,0,0.04), inset 0 1px 1px 0 rgba(255,255,255,0.85)',
+            'spatial-subtle': '0 12px 32px -8px rgba(160, 100, 50, 0.08), 0 4px 12px -2px rgba(0,0,0,0.03), inset 0 1px 0 0 rgba(255,255,255,0.7)',
+            'spatial-card': '0 8px 24px -6px rgba(140, 80, 30, 0.06), 0 2px 6px 0 rgba(0,0,0,0.02), inset 0 1px 0 0 rgba(255,255,255,0.9)',
+            'floating-dock': '0 20px 40px -10px rgba(100, 60, 20, 0.15), inset 0 1px 1px 0 rgba(255,255,255,0.8)',
+            'glow-orange': '0 0 35px -5px rgba(249, 115, 22, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Warm Spatial Glass Aesthetics */
+    .glass-canvas {
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .glass-card-nested {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+    }
+    .glass-dock {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(25px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    /* Input Styling */
+    .spatial-input {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(215, 205, 190, 0.6);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .spatial-input:focus {
+      background: rgba(255, 255, 255, 0.98);
+      border-color: #f97316;
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+      outline: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#f4eee2] text-warm-900 font-sans selection:bg-brand-500 selection:text-white relative overflow-x-hidden p-3 sm:p-6 lg:p-8">
+<!-- Spatial Background Ambient Glows -->
+<div class="fixed top-[-10%] right-[-5%] w-[680px] h-[680px] rounded-full bg-gradient-to-br from-amber-300/35 via-orange-300/25 to-transparent blur-[120px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-15%] left-[-10%] w-[720px] h-[720px] rounded-full bg-gradient-to-tr from-orange-400/20 via-amber-200/30 to-transparent blur-[140px] pointer-events-none -z-10"></div>
+<div class="fixed top-1/2 left-1/3 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-rose-200/20 via-orange-100/30 to-transparent blur-[130px] pointer-events-none -z-10"></div>
+<!-- MAIN WRAPPER: FLOATING VERTICAL DOCK + EXPANDED VISION CONTAINER -->
+<div class="max-w-[1380px] mx-auto flex gap-4 lg:gap-6 items-start relative">
+<!-- FLOATING SPATIAL LEFT DOCK (Screen 2 / Screen 4 Signature) -->
+<aside class="hidden md:flex flex-col items-center justify-between py-6 px-3 w-16 glass-dock rounded-[28px] shadow-floating-dock sticky top-8 z-40 border border-white/80 h-[88vh]">
+<!-- Brand Pill Icon -->
+<div class="flex flex-col items-center gap-5">
+<a class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-600 via-orange-500 to-amber-400 text-white flex items-center justify-center font-display font-bold text-lg shadow-glow-orange group transition-transform hover:scale-105" href="#">
+          S
+        </a>
+<div class="w-7 h-[1px] bg-warm-300/60 my-1"></div>
+<!-- Navigation Pill Buttons -->
+<nav class="flex flex-col items-center space-y-3">
+<button class="w-10 h-10 rounded-2xl text-warm-800/60 hover:text-warm-900 hover:bg-white/60 transition-all flex items-center justify-center" title="Dashboard">
+<span class="material-symbols-outlined text-[21px]">dashboard</span>
+</button>
+<button class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-500 to-orange-400 text-white shadow-md shadow-brand-500/25 flex items-center justify-center transition-all scale-105" title="Pilates Brief (Ativo)">
+<span class="material-symbols-outlined text-[21px]" style="font-variation-settings: 'FILL' 1;">assignment</span>
+</button>
+<button class="w-10 h-10 rounded-2xl text-warm-800/60 hover:text-warm-900 hover:bg-white/60 transition-all flex items-center justify-center" title="Physio Studio">
+<span class="material-symbols-outlined text-[21px]">spa</span>
+</button>
+<button class="w-10 h-10 rounded-2xl text-warm-800/60 hover:text-warm-900 hover:bg-white/60 transition-all flex items-center justify-center" title="Projetos &amp; Eventos">
+<span class="material-symbols-outlined text-[21px]">calendar_month</span>
+</button>
+<button class="w-10 h-10 rounded-2xl text-warm-800/60 hover:text-warm-900 hover:bg-white/60 transition-all flex items-center justify-center" title="Arquivos &amp; Ativos">
+<span class="material-symbols-outlined text-[21px]">folder_open</span>
+</button>
+</nav>
+</div>
+<!-- Bottom Dock Actions & Curador Avatar -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-10 h-10 rounded-2xl text-warm-800/60 hover:text-warm-900 hover:bg-white/60 transition-all flex items-center justify-center" title="Suporte Hicaro Duarte">
+<span class="material-symbols-outlined text-[21px]">chat_bubble_outline</span>
+</button>
+<button class="w-10 h-10 rounded-2xl text-warm-800/60 hover:text-warm-900 hover:bg-white/60 transition-all flex items-center justify-center" title="Alternar Modo de Luz">
+<span class="material-symbols-outlined text-[20px]">light_mode</span>
+</button>
+<div class="w-7 h-[1px] bg-warm-300/60 my-1"></div>
+<div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-warm-200 to-warm-100 border border-white/80 p-0.5 shadow-sm" title="Curadoria: Hicaro Duarte">
+<div class="w-full h-full rounded-[14px] bg-warm-900 text-amber-300 flex items-center justify-center text-xs font-bold tracking-tight font-display">
+            HD
+          </div>
+</div>
+</div>
+</aside>
+<!-- FLOATING FROSTED GLASS WINDOW CONTAINER (rounded-[32px]) -->
+<div class="flex-1 min-w-0 glass-canvas rounded-[32px] shadow-spatial border border-white/70 overflow-hidden relative pb-32">
+<!-- TOP VISIONOS STATUS BAR -->
+<header class="px-5 sm:px-8 py-3.5 border-b border-white/60 bg-white/40 backdrop-blur-md flex flex-wrap items-center justify-between gap-3">
+<!-- Window Traffic Dots & URL Pill -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 mr-1">
+<span class="w-3 h-3 rounded-full bg-rose-400/80 border border-rose-500/40 shadow-xs"></span>
+<span class="w-3 h-3 rounded-full bg-amber-400/80 border border-amber-500/40 shadow-xs"></span>
+<span class="w-3 h-3 rounded-full bg-emerald-400/80 border border-emerald-500/40 shadow-xs"></span>
+</div>
+<!-- VisionOS Center URL Pill -->
+<div class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/70 border border-white/90 shadow-sm text-xs text-warm-800/80 font-medium">
+<span class="material-symbols-outlined text-[15px] text-brand-600">lock</span>
+<span class="font-mono text-[11px] text-warm-900">studiosuite.app/briefing/lumina-movement-reformer</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5"></span>
+</div>
+</div>
+<!-- Trailing Session Badge with Hicaro Duarte Signature -->
+<div class="flex items-center gap-2.5">
+<button class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/60 hover:bg-white/90 border border-white/80 text-xs font-medium text-warm-800 transition-all shadow-xs" title="Exportar Documento">
+<span class="material-symbols-outlined text-[16px] text-warm-700">ios_share</span>
+<span>Exportar</span>
+</button>
+<!-- Studio Suite Signature Pill -->
+<div class="flex items-center gap-2 pl-2 pr-3 py-1 rounded-full bg-white/75 border border-white/90 shadow-xs">
+<div class="w-6 h-6 rounded-full bg-gradient-to-tr from-brand-600 to-amber-500 flex items-center justify-center text-white text-[10px] font-bold">
+              HD
+            </div>
+<div class="flex flex-col text-left">
+<span class="text-[11px] font-semibold text-warm-900 leading-tight">Studio Suite 2.0</span>
+<span class="text-[10px] text-brand-700/80 font-medium">Curadoria Hicaro Duarte</span>
+</div>
+</div>
+</div>
+</header>
+<!-- TOP BANNER & REAL-TIME PROGRESS CONTEXT -->
+<section class="px-5 sm:px-8 py-5 border-b border-white/50 bg-gradient-to-r from-orange-50/40 via-white/30 to-amber-50/40">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<!-- Title & PIN Status -->
+<div>
+<div class="flex flex-wrap items-center gap-2 mb-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-brand-100/90 text-brand-800 border border-brand-200 shadow-xs">
+<span class="material-symbols-outlined text-[13px] text-brand-600" style="font-variation-settings: 'FILL' 1;">verified</span>
+                Formulário Seguro Ativo
+              </span>
+<span class="text-warm-400 text-xs">•</span>
+<span class="text-xs text-warm-700 font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Salvamento automático ativo há 1 min
+              </span>
+<span class="text-warm-400 text-xs">•</span>
+<span class="text-xs text-warm-600 font-mono bg-white/60 px-2 py-0.5 rounded-md border border-white/80">
+                Sessão Criptografada por PIN #842-910
+              </span>
+</div>
+<h1 class="font-display font-extrabold text-2xl sm:text-3xl text-warm-900 tracking-tight">
+              Briefing de Descoberta &amp; Alinhamento Estratégico
+            </h1>
+</div>
+<!-- Multi-Step Progress Indicator Pill -->
+<div class="glass-pill px-4 py-3 rounded-2xl shadow-spatial-subtle border border-white/80 min-w-[320px]">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs font-bold text-brand-700 font-display flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+                Etapa 1 de 4 • 25% Concluído
+              </span>
+<span class="text-[11px] font-medium text-warm-700/80">~8 min restantes</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-warm-200/80 h-2 rounded-full overflow-hidden p-0.5 border border-white/70">
+<div class="bg-gradient-to-r from-brand-500 via-orange-500 to-amber-400 h-full rounded-full transition-all duration-700 shadow-sm" style="width: 25%;"></div>
+</div>
+<!-- Steps -->
+<div class="mt-2 flex justify-between text-[11px] font-medium text-warm-600">
+<span class="text-brand-700 font-bold">1. Responsáveis</span>
+<span class="text-warm-400">|</span>
+<span>2. Escopo</span>
+<span class="text-warm-400">|</span>
+<span>3. Estética</span>
+<span class="text-warm-400">|</span>
+<span>4. Envio</span>
+</div>
+</div>
+</div>
+</section>
+<!-- CONTENT CANVAS INTERIOR -->
+<main class="p-5 sm:p-8 space-y-7 max-w-5xl mx-auto">
+<!-- CLIENT WELCOME HEADER CARD -->
+<div class="glass-card rounded-2xl p-5 sm:p-6 shadow-spatial-card border border-white/80 flex items-start sm:items-center justify-between gap-4 relative overflow-hidden">
+<div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-gradient-to-br from-amber-300/25 to-brand-400/20 blur-xl pointer-events-none"></div>
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-500 to-amber-400 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-500/20">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">spa</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-0.5">
+<h2 class="font-display font-bold text-base sm:text-lg text-warm-900">
+                  Bem-vindo ao intake estratégico, equipe Lumina
+                </h2>
+<span class="hidden sm:inline-flex px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+                  PIN Verificado
+                </span>
+</div>
+<p class="text-xs sm:text-sm text-warm-700 leading-relaxed max-w-2xl">
+                Este documento estabelece as bases criativas e escopo para o <strong class="text-warm-900 font-semibold">Studio Suite 2.0</strong>. Suas diretrizes orientarão a arquitetura de agendamentos, identidade estética e experiência sensorial.
+              </p>
+</div>
+</div>
+<div class="hidden lg:flex flex-col items-end flex-shrink-0">
+<span class="text-[11px] text-warm-500 uppercase tracking-wider font-semibold">Workspace</span>
+<span class="text-xs font-bold text-warm-800">Lumina Reformer Studio</span>
+</div>
+</div>
+<!-- SECTION 01: Identificação e Responsáveis do Projeto -->
+<section class="glass-card rounded-[26px] p-6 sm:p-7 shadow-spatial-card border border-white/80 space-y-5">
+<div class="flex items-center justify-between border-b border-warm-200/60 pb-4">
+<div class="flex items-center gap-3">
+<span class="w-7 h-7 rounded-xl bg-gradient-to-tr from-brand-500 to-amber-400 text-white text-xs font-display font-bold flex items-center justify-center shadow-xs">01</span>
+<div>
+<h3 class="font-display font-bold text-lg text-warm-900">Identificação e Responsáveis do Projeto</h3>
+<p class="text-xs text-warm-600">Dados principais para comunicação direta durante os sprints de design.</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50/90 px-3 py-1 rounded-full border border-emerald-200 shadow-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Pré-preenchido
+            </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Nome do Responsável -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="resp_name">
+                Nome do Responsável <span class="text-brand-600">*</span>
+</label>
+<div class="relative">
+<input class="w-full spatial-input rounded-xl px-4 py-2.5 text-sm text-warm-900 font-medium" id="resp_name" type="text" value="Helena Vasconcellos Ramos"/>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[19px] text-warm-400">badge</span>
+</div>
+<p class="text-[11px] text-warm-500">Líder executiva com aprovação final de projeto.</p>
+</div>
+<!-- Cargo -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="resp_role">
+                Cargo / Papel no Estúdio <span class="text-brand-600">*</span>
+</label>
+<div class="relative">
+<input class="w-full spatial-input rounded-xl px-4 py-2.5 text-sm text-warm-900 font-medium" id="resp_role" type="text" value="Diretora Criativa &amp; Co-Fundadora"/>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[19px] text-warm-400">work</span>
+</div>
+<p class="text-[11px] text-warm-500">Define as diretrizes de experiência dos alunos.</p>
+</div>
+<!-- WhatsApp -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="resp_phone">
+                WhatsApp / Contato Corporativo <span class="text-brand-600">*</span>
+</label>
+<div class="relative">
+<input class="w-full spatial-input rounded-xl px-4 py-2.5 text-sm text-warm-900 font-medium font-mono" id="resp_phone" type="tel" value="+55 11 98452-9011"/>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[19px] text-warm-400">call</span>
+</div>
+<p class="text-[11px] text-warm-500">Canal prioritário para notificações de protótipos e entregas.</p>
+</div>
+<!-- Janela para Alinhamentos com Hicaro Duarte -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="contact_time">
+                Melhor Janela para Alinhamentos com Hicaro Duarte
+              </label>
+<div class="relative">
+<select class="w-full spatial-input rounded-xl px-4 py-2.5 text-sm text-warm-900 font-medium appearance-none cursor-pointer" id="contact_time">
+<option value="morning">Manhã (09h00 às 11h30 BRT)</option>
+<option selected="" value="afternoon">Tarde (14h às 17h BRT)</option>
+<option value="late">Fim de tarde (17h00 às 19h00 BRT)</option>
+<option value="asynch">Assíncrono via Notion &amp; Loom</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[19px] text-warm-400 pointer-events-none">expand_more</span>
+</div>
+<p class="text-[11px] text-warm-500">Sincronização ajustada ao cronograma de aulas do estúdio.</p>
+</div>
+</div>
+</section>
+<!-- SECTION 02: Objetivos e Escopo Principal do Projeto -->
+<section class="glass-card rounded-[26px] p-6 sm:p-7 shadow-spatial-card border border-white/80 space-y-5">
+<div class="flex items-center justify-between border-b border-warm-200/60 pb-4">
+<div class="flex items-center gap-3">
+<span class="w-7 h-7 rounded-xl bg-gradient-to-tr from-brand-500 to-amber-400 text-white text-xs font-display font-bold flex items-center justify-center shadow-xs">02</span>
+<div>
+<h3 class="font-display font-bold text-lg text-warm-900">Objetivos e Escopo Principal do Projeto</h3>
+<p class="text-xs text-warm-600">Selecione todas as frentes contratadas e detalhe a visão central.</p>
+</div>
+</div>
+<span class="text-xs font-medium text-warm-600 bg-white/70 px-3 py-1 rounded-full border border-white/90">
+              Múltipla seleção
+            </span>
+</div>
+<!-- Scope Bento Selection Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Option 1 (Selected) -->
+<label class="glass-card-nested relative flex items-start p-4 rounded-2xl border-2 border-brand-500/80 bg-gradient-to-br from-orange-50/70 to-amber-50/50 cursor-pointer transition-all hover:shadow-spatial-subtle">
+<input checked="" class="mt-1 h-4 w-4 rounded border-brand-400 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+<div class="ml-3.5 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-display font-bold text-warm-900 text-sm">Identidade Visual Completa</span>
+<span class="material-symbols-outlined text-brand-600 text-[20px]" style="font-variation-settings: 'FILL' 1;">palette</span>
+</div>
+<p class="text-xs text-warm-700 mt-1 leading-relaxed">
+                  Manual de marca, tipografia personalizada, monogramas de maquinário, paleta sensorial e patterns de uniformes.
+                </p>
+</div>
+</label>
+<!-- Option 2 (Selected) -->
+<label class="glass-card-nested relative flex items-start p-4 rounded-2xl border-2 border-brand-500/80 bg-gradient-to-br from-orange-50/70 to-amber-50/50 cursor-pointer transition-all hover:shadow-spatial-subtle">
+<input checked="" class="mt-1 h-4 w-4 rounded border-brand-400 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+<div class="ml-3.5 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-display font-bold text-warm-900 text-sm">Web Design &amp; Plataforma</span>
+<span class="material-symbols-outlined text-brand-600 text-[20px]" style="font-variation-settings: 'FILL' 1;">devices</span>
+</div>
+<p class="text-xs text-warm-700 mt-1 leading-relaxed">
+                  Portal responsivo integrado à engine de agendamento de aulas reformer, compra de créditos e área do aluno.
+                </p>
+</div>
+</label>
+<!-- Option 3 (Unchecked) -->
+<label class="glass-card-nested relative flex items-start p-4 rounded-2xl border border-warm-200/80 bg-white/60 hover:bg-white/90 cursor-pointer transition-all">
+<input class="mt-1 h-4 w-4 rounded border-warm-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+<div class="ml-3.5 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-display font-bold text-warm-800 text-sm">Estratégia de Conteúdo &amp; Redes</span>
+<span class="material-symbols-outlined text-warm-400 text-[20px]">share</span>
+</div>
+<p class="text-xs text-warm-600 mt-1 leading-relaxed">
+                  Direção de fotografia editorial, templates para Instagram Stories/Reels e tom de voz institucional.
+                </p>
+</div>
+</label>
+<!-- Option 4 (Unchecked/Ambientação) -->
+<label class="glass-card-nested relative flex items-start p-4 rounded-2xl border border-warm-200/80 bg-white/60 hover:bg-white/90 cursor-pointer transition-all">
+<input class="mt-1 h-4 w-4 rounded border-warm-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+<div class="ml-3.5 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-display font-bold text-warm-800 text-sm">Ambientação Física do Estúdio</span>
+<span class="material-symbols-outlined text-warm-400 text-[20px]">domain</span>
+</div>
+<p class="text-xs text-warm-600 mt-1 leading-relaxed">
+                  Sinalização arquitetônica, letreiros em relevo, aroma-branding e embalagens para a linha botânica interna.
+                </p>
+</div>
+</label>
+</div>
+<!-- Markdown Vision Textarea -->
+<div class="space-y-2 pt-2">
+<div class="flex items-center justify-between">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="vision_text">
+                Descreva a visão central e o principal problema que quer solucionar <span class="text-brand-600">*</span>
+</label>
+<span class="text-[11px] font-mono text-warm-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">markdown</span> Markdown habilitado
+              </span>
+</div>
+<textarea class="w-full spatial-input rounded-2xl p-4 text-sm text-warm-900 leading-relaxed font-normal resize-y min-h-[130px]" id="vision_text" rows="5">O Lumina Movement nasce para ser o contraponto calmo e sofisticado aos estúdios de ginástica ruidosos. Nosso foco é o Pilates Reformer clássico com metodologia contemporânea e reabilitação postural. O principal gargalo atual é a falta de identidade proprietária que comunique luxo silencioso (quiet luxury) e a dependência de aplicativos genéricos que degradam a experiência do cliente no agendamento.</textarea>
+<div class="flex items-center gap-2 text-xs text-warm-600 px-1">
+<span class="material-symbols-outlined text-[16px] text-brand-600">lightbulb</span>
+<span>Dica do Atelier: Cite marcas de referência internacional (ex: Heartcore London, Forme Studios).</span>
+</div>
+</div>
+</section>
+<!-- SECTION 03: Público-Alvo, Posicionamento e Estética -->
+<section class="glass-card rounded-[26px] p-6 sm:p-7 shadow-spatial-card border border-white/80 space-y-6">
+<div class="flex items-center justify-between border-b border-warm-200/60 pb-4">
+<div class="flex items-center gap-3">
+<span class="w-7 h-7 rounded-xl bg-gradient-to-tr from-brand-500 to-amber-400 text-white text-xs font-display font-bold flex items-center justify-center shadow-xs">03</span>
+<div>
+<h3 class="font-display font-bold text-lg text-warm-900">Público-Alvo, Posicionamento e Estética</h3>
+<p class="text-xs text-warm-600">Diretrizes de atmosfera sensorial, paleta e demografia prioritária.</p>
+</div>
+</div>
+<span class="text-xs font-medium text-warm-600 bg-white/70 px-3 py-1 rounded-full border border-white/90">
+              Atmosfera &amp; Persona
+            </span>
+</div>
+<!-- Sensory Atmosphere Cards -->
+<div class="space-y-3">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider">
+              Direção de Tom Visual &amp; Atmosfera Sensorial
+            </label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Card 1: Sereno & Arquitetônico (Active Selected) -->
+<div class="relative rounded-2xl p-4.5 border-2 border-brand-500 bg-gradient-to-b from-white/90 to-brand-50/40 shadow-spatial-subtle cursor-pointer transition-all">
+<div class="flex items-center justify-between mb-2">
+<span class="font-display font-bold text-sm text-brand-900">Sereno &amp; Arquitetônico</span>
+<div class="w-5 h-5 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs shadow-xs font-bold">
+                    ✓
+                  </div>
+</div>
+<p class="text-xs text-warm-700 mb-3.5 leading-relaxed">
+                  Linhas limpas, concreto aparente, iluminação difusa, tipografia serifada contemporânea e quiet luxury.
+                </p>
+<div class="flex items-center gap-2 pt-2 border-t border-brand-200/60">
+<span class="w-6 h-6 rounded-full bg-[#E8E6E1] border border-white shadow-xs" title="Calcário"></span>
+<span class="w-6 h-6 rounded-full bg-[#D4CDC3] border border-white shadow-xs" title="Travertino"></span>
+<span class="w-6 h-6 rounded-full bg-[#2A2B2A] border border-white shadow-xs" title="Carvão"></span>
+<span class="text-[10px] text-warm-500 ml-1 font-mono">Paleta 01</span>
+</div>
+</div>
+<!-- Card 2: Terroso & Minimalista -->
+<div class="relative rounded-2xl p-4.5 border border-warm-200/80 bg-white/60 hover:bg-white/90 transition-all cursor-pointer">
+<div class="flex items-center justify-between mb-2">
+<span class="font-display font-bold text-sm text-warm-800">Terroso &amp; Minimalista</span>
+<div class="w-4 h-4 rounded-full border border-warm-300"></div>
+</div>
+<p class="text-xs text-warm-600 mb-3.5 leading-relaxed">
+                  Fibras naturais, linho crú, madeiras claras (carvalho), cerâmica artesanal e proximidade botânica.
+                </p>
+<div class="flex items-center gap-2 pt-2 border-t border-warm-200/60">
+<span class="w-6 h-6 rounded-full bg-[#D7C4B7] border border-white shadow-xs" title="Argila"></span>
+<span class="w-6 h-6 rounded-full bg-[#9E8B7D] border border-white shadow-xs" title="Canyon"></span>
+<span class="w-6 h-6 rounded-full bg-[#52443C] border border-white shadow-xs" title="Noz"></span>
+<span class="text-[10px] text-warm-400 ml-1 font-mono">Paleta 02</span>
+</div>
+</div>
+<!-- Card 3: Alta Energia -->
+<div class="relative rounded-2xl p-4.5 border border-warm-200/80 bg-white/60 hover:bg-white/90 transition-all cursor-pointer">
+<div class="flex items-center justify-between mb-2">
+<span class="font-display font-bold text-sm text-warm-800">Alta Energia &amp; Vitalidade</span>
+<div class="w-4 h-4 rounded-full border border-warm-300"></div>
+</div>
+<p class="text-xs text-warm-600 mb-3.5 leading-relaxed">
+                  Contrastes dinâmicos, iluminação neon sutil, foco em performance atlética moderna e ritmos acelerados.
+                </p>
+<div class="flex items-center gap-2 pt-2 border-t border-warm-200/60">
+<span class="w-6 h-6 rounded-full bg-[#1A1D20] border border-white shadow-xs" title="Ônix"></span>
+<span class="w-6 h-6 rounded-full bg-[#4F46E5] border border-white shadow-xs" title="Indigo"></span>
+<span class="w-6 h-6 rounded-full bg-[#F3F4F6] border border-white shadow-xs" title="Gelo"></span>
+<span class="text-[10px] text-warm-400 ml-1 font-mono">Paleta 03</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Demographics & Target Inputs -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
+<!-- Faixa Etária -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="target_age">
+                Faixa Etária Predominante
+              </label>
+<div class="relative">
+<select class="w-full spatial-input rounded-xl px-4 py-2.5 text-sm text-warm-900 font-medium appearance-none cursor-pointer" id="target_age">
+<option value="20-30">20 a 30 anos (Jovens Profissionais)</option>
+<option selected="" value="28-48">28 a 48 anos (Executivos &amp; Empreendedores)</option>
+<option value="45+">45+ anos (Longevidade Ativa &amp; Saúde)</option>
+<option value="all">Mista / Multigeracional</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[19px] text-warm-400 pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Tíquete Médio Previsto -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="ticket_value">
+                Tíquete Médio Mensal Previsto
+              </label>
+<div class="relative">
+<span class="absolute left-4 top-2.5 text-xs text-warm-500 font-bold">R$</span>
+<input class="w-full spatial-input rounded-xl pl-11 pr-4 py-2.5 text-sm text-warm-900 font-medium" id="ticket_value" type="text" value="850,00 a 1.400,00"/>
+</div>
+</div>
+<!-- Perfil comportamental -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="lifestyle_profile">
+                Perfil de Comportamento
+              </label>
+<input class="w-full spatial-input rounded-xl px-4 py-2.5 text-sm text-warm-900 font-medium" id="lifestyle_profile" type="text" value="Buscam privacidade, postura e bem-estar holístico"/>
+</div>
+</div>
+</section>
+<!-- SECTION 04: Prazos, Expectativas e Envio de Materiais -->
+<section class="glass-card rounded-[26px] p-6 sm:p-7 shadow-spatial-card border border-white/80 space-y-6">
+<div class="flex items-center justify-between border-b border-warm-200/60 pb-4">
+<div class="flex items-center gap-3">
+<span class="w-7 h-7 rounded-xl bg-gradient-to-tr from-brand-500 to-amber-400 text-white text-xs font-display font-bold flex items-center justify-center shadow-xs">04</span>
+<div>
+<h3 class="font-display font-bold text-lg text-warm-900">Prazos, Expectativas e Envio de Materiais</h3>
+<p class="text-xs text-warm-600">Marcos temporais e upload de plantas baixas ou moodboards preliminares.</p>
+</div>
+</div>
+<span class="text-xs font-medium text-warm-600 bg-white/70 px-3 py-1 rounded-full border border-white/90">
+              Arquivos e Orçamento
+            </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Date Picker: Data Desejada de Lançamento -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="launch_date">
+                Data Desejada de Inauguração / Soft Opening <span class="text-brand-600">*</span>
+</label>
+<div class="relative">
+<input class="w-full spatial-input rounded-xl px-4 py-2.5 text-sm text-warm-900 font-medium" id="launch_date" type="date" value="2025-05-15"/>
+</div>
+<p class="text-[11px] text-warm-500">Estimamos 6 a 8 semanas para ciclo completo de branding e front-end.</p>
+</div>
+<!-- Faixa Orçamentária -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider" for="budget_range">
+                Faixa Orçamentária Alocada para a Agência
+              </label>
+<div class="relative">
+<select class="w-full spatial-input rounded-xl px-4 py-2.5 text-sm text-warm-900 font-medium appearance-none cursor-pointer" id="budget_range">
+<option value="tier1">R$ 35.000 a R$ 50.000 (Essencial)</option>
+<option selected="" value="tier2">R$ 50.000 a R$ 85.000 (Plataforma Completa + Espaço)</option>
+<option value="tier3">R$ 85.000 a R$ 130.000+ (Atelier 360 Full Retainer)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[19px] text-warm-400 pointer-events-none">expand_more</span>
+</div>
+<p class="text-[11px] text-warm-500">Permite dimensionar a profundidade das customizações de front-end.</p>
+</div>
+</div>
+<!-- Frosted Drag & Drop Upload Zone -->
+<div class="space-y-2 pt-2">
+<label class="block text-xs font-semibold text-warm-800 uppercase tracking-wider">
+              Arquivos da Marca, Planta Baixa e Moodboards
+            </label>
+<div class="border-2 border-dashed border-warm-300/80 hover:border-brand-500 rounded-2xl p-7 bg-white/40 hover:bg-white/70 text-center transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-white to-amber-50 text-brand-600 mx-auto flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-sm border border-white">
+<span class="material-symbols-outlined text-[26px]">cloud_upload</span>
+</div>
+<h4 class="font-display font-semibold text-sm text-warm-900 mb-1">
+                Arraste e solte seus arquivos aqui ou <span class="text-brand-600 underline">clique para selecionar</span>
+</h4>
+<p class="text-xs text-warm-500 max-w-md mx-auto mb-4">
+                Suporta PDF, AI, PSD, DWG (planta baixa), ZIP ou imagens em alta resolução até 150MB por arquivo.
+              </p>
+<!-- Attached files pill cards -->
+<div class="flex flex-wrap gap-2.5 justify-center">
+<!-- File 1: DWG PDF -->
+<div class="glass-pill flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs text-warm-800 shadow-xs border border-white/90">
+<span class="material-symbols-outlined text-[17px] text-rose-500">picture_as_pdf</span>
+<span class="font-medium font-mono text-[11px]">Planta_Baixa_Lumina_Jardins_v2.dwg.pdf</span>
+<span class="text-[10px] text-warm-400">(14.2 MB)</span>
+<button class="text-warm-400 hover:text-rose-600 ml-1 p-0.5 rounded transition-colors" title="Remover" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- File 2: Moodboard -->
+<div class="glass-pill flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs text-warm-800 shadow-xs border border-white/90">
+<span class="material-symbols-outlined text-[17px] text-brand-600">image</span>
+<span class="font-medium font-mono text-[11px]">Moodboard_Conceito_Somatico.png</span>
+<span class="text-[10px] text-warm-400">(8.7 MB)</span>
+<button class="text-warm-400 hover:text-rose-600 ml-1 p-0.5 rounded transition-colors" title="Remover" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PRIVACY FOOTNOTE -->
+<div class="flex flex-col sm:flex-row items-center justify-between text-xs text-warm-600 px-3 py-1 gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">verified_user</span>
+<span>Conexão criptografada TLS 1.3 • Seus dados estratégicos são de propriedade exclusiva do Lumina Movement.</span>
+</div>
+<div class="flex items-center gap-4 text-warm-700">
+<a class="hover:text-brand-600 underline" href="#termos">Termos de Sigilo (NDA)</a>
+<a class="hover:text-brand-600 underline" href="#ajuda">Falar com Hicaro Duarte</a>
+</div>
+</div>
+</main>
+<!-- BOTTOM FLOATING FROSTED DOCK ACTION BAR (Screen 2 / Screen 4 Signature) -->
+<footer class="absolute bottom-4 left-4 right-4 sm:left-8 sm:right-8 z-30">
+<div class="glass-dock rounded-2xl sm:rounded-3xl p-3.5 sm:px-6 sm:py-3.5 shadow-floating-dock border border-white/90 flex flex-col sm:flex-row items-center justify-between gap-3">
+<!-- Status feedback -->
+<div class="flex items-center gap-3">
+<div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+<div>
+<span class="text-xs font-bold text-warm-900 block leading-tight">
+                Rascunho seguro e sincronizado com a equipe de Hicaro Duarte
+              </span>
+<span class="text-[11px] text-warm-600">
+                Sessão #842-910 atualizada em tempo real via WebSockets
+              </span>
+</div>
+</div>
+<!-- Buttons group -->
+<div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+<!-- Salvar Rascunho -->
+<button class="px-4 py-2.5 rounded-xl bg-white/70 hover:bg-white text-warm-800 font-semibold text-xs border border-white/90 transition-all shadow-xs flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px] text-warm-600">save</span>
+<span>Salvar Rascunho</span>
+</button>
+<!-- Concluir e Enviar em Vibrant Gradient Orange -->
+<button class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 via-orange-500 to-amber-500 hover:from-brand-700 hover:to-orange-600 text-white font-semibold text-xs tracking-wide shadow-glow-orange hover:shadow-lg transition-all duration-200 flex items-center gap-2 group" onclick="handleSpatialSubmit()" type="button">
+<span>Concluir e Enviar Briefing ao Estúdio</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</footer>
+</div>
+</div>
+<!-- Micro-interaction submit simulation -->
+<script>
+    function handleSpatialSubmit() {
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">sync</span> <span>Transmitindo Briefing Seguro...</span>`;
+      btn.classList.add('opacity-85', 'pointer-events-none');
+      
+      setTimeout(() => {
+        btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check_circle</span> <span>Briefing Recebido com Sucesso!</span>`;
+        btn.classList.remove('opacity-85');
+        btn.classList.add('from-emerald-600', 'to-teal-600');
+        
+        // Floating spatial toast
+        const toast = document.createElement('div');
+        toast.className = 'fixed top-6 right-6 z-50 glass-pill px-5 py-3.5 rounded-2xl shadow-floating-dock border border-white flex items-center gap-3 animate-bounce';
+        toast.innerHTML = `
+          <div class="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold text-sm">✓</div>
+          <div>
+            <div class="text-xs font-bold text-warm-900">Briefing entregue a Hicaro Duarte</div>
+            <div class="text-[11px] text-warm-600">Protocolo de curadoria Studio Suite: #BRF-2025-901</div>
+          </div>
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4500);
+      }, 1200);
+    }
+  </script>
+</body></html>

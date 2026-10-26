@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Movement · Identidade + Plataforma | Studio Suite 2.0</title>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus Jakarta Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#8c7164",
+            "on-tertiary-container": "#003934",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "card-highlight-end": "#FBBF24",
+            "on-primary-fixed": "#341100",
+            "surface-canvas-mid": "#F5EFEB",
+            "on-primary-fixed-variant": "#783200",
+            "surface-container": "#e6eeff",
+            "on-secondary-container": "#586377",
+            "secondary-fixed-dim": "#bcc7de",
+            "on-primary-container": "#582200",
+            "text-body": "#475569",
+            "primary-fixed-dim": "#ffb690",
+            "on-secondary-fixed": "#111c2d",
+            "surface-container-highest": "#d5e3fc",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "brand-primary-text": "#C2410C",
+            "outline-variant": "#e0c0b1",
+            "status-info": "#0284C7",
+            "surface": "#f8f9ff",
+            "text-support": "#64748B",
+            "secondary-fixed": "#d8e3fb",
+            "focus-indigo": "#4F46E5",
+            "surface-container-low": "#eff4ff",
+            "surface-canvas-start": "#FBF8F3",
+            "secondary": "#545f73",
+            "surface-bright": "#f8f9ff",
+            "surface-container-high": "#dce9ff",
+            "primary-fixed": "#ffdbca",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "text-placeholder": "#94A3B8",
+            "inverse-surface": "#233144",
+            "text-title": "#0F172A",
+            "surface-dim": "#ccdbf3",
+            "surface-tint": "#9d4300",
+            "on-secondary-fixed-variant": "#3c475a",
+            "status-urgent": "#EF4444",
+            "surface-canvas-end": "#ECE4DB",
+            "on-background": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#005049",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-container": "#37ab9e",
+            "on-surface-variant": "#584237",
+            "on-error": "#ffffff",
+            "background": "#f8f9ff",
+            "inverse-primary": "#ffb690",
+            "primary": "#9d4300",
+            "surface-variant": "#d5e3fc",
+            "border-divider": "#E2E8F0",
+            "brand-gradient-end": "#E65100",
+            "on-surface": "#0d1c2e",
+            "secondary-container": "#d5e0f8",
+            "status-success": "#10B981",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#89f5e7",
+            "tertiary": "#006a61",
+            "on-tertiary-fixed": "#00201d",
+            "primary-container": "#f97316",
+            "brand-primary-hover": "#EA580C",
+            "status-warning": "#F59E0B"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "1.5rem",
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1.25rem",
+            "gutter": "1.25rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "caption-kpi-label": ["Plus Jakarta Sans"],
+            "title-section": ["Plus Jakarta Sans"],
+            "code-pin": ["JetBrains Mono"],
+            "body-strong": ["Plus Jakarta Sans"],
+            "headline-screen": ["Plus Jakarta Sans"],
+            "headline-screen-mobile": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "label-field": ["Plus Jakarta Sans"],
+            "display-kpi-mobile": ["Plus Jakarta Sans"],
+            "caption-badge": ["Plus Jakarta Sans"],
+            "code-token": ["JetBrains Mono"],
+            "title-card": ["Plus Jakarta Sans"],
+            "display-kpi": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Warm Glassmorphism Tokens */
+    .warm-glass-dock {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.08), 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .warm-glass-card {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.90);
+      border-left: 1px solid rgba(255, 255, 255, 0.80);
+      border-right: 1px solid rgba(255, 255, 255, 0.50);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.50);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.06), 0 10px 25px -5px rgba(0, 0, 0, 0.03);
+    }
+
+    .warm-glass-card-interactive {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .warm-glass-card-interactive:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 48px -12px rgba(230, 81, 0, 0.12), 0 12px 28px -6px rgba(0, 0, 0, 0.05);
+    }
+
+    .teal-scope-card {
+      background: linear-gradient(145deg, rgba(13, 148, 136, 0.08) 0%, rgba(15, 118, 110, 0.03) 100%);
+      border: 1px solid rgba(13, 148, 136, 0.22);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 40px -15px rgba(13, 148, 136, 0.08);
+    }
+
+    .orange-gradient-cta {
+      background: linear-gradient(135deg, #F97316 0%, #E65100 100%);
+      box-shadow: 0 8px 20px -4px rgba(230, 81, 0, 0.35);
+    }
+    .orange-gradient-cta:hover {
+      background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+    }
+
+    .pulsing-dot {
+      box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+      animation: pulse-ring 2s infinite cubic-bezier(0.66, 0, 0, 1);
+    }
+    @keyframes pulse-ring {
+      to {
+        box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen text-text-title font-body-default text-body-default antialiased selection:bg-primary-container selection:text-white" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);">
+<!-- Desktop Floating Dock (Left: 72px width, 20px offset, 24px radius, Warm Glass) -->
+<aside class="fixed left-5 top-5 bottom-5 w-[72px] warm-glass-dock rounded-[24px] z-50 flex flex-col items-center justify-between py-6">
+<!-- Top HD Atelier Monogram Logo -->
+<div class="flex flex-col items-center gap-6">
+<div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-text-title to-[#1E293B] flex items-center justify-center text-white font-headline-screen font-extrabold tracking-tight shadow-md border border-white/20 select-none">
+<span class="text-[17px] tracking-tighter">HD</span>
+</div>
+<!-- Icon Stack -->
+<nav aria-label="Studio Suite Workspace" class="flex flex-col items-center gap-3 w-full px-2">
+<!-- Início -->
+<button class="w-12 h-12 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-all duration-150" title="CRM Leads" type="button">
+<span class="material-symbols-outlined text-[22px]">filter_alt</span>
+</button>
+<!-- Forms Hub -->
+<button class="w-12 h-12 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-all duration-150" title="Forms Hub" type="button">
+<span class="material-symbols-outlined text-[22px]">assignment</span>
+</button>
+<!-- Projetos (Active Anchor: Orange square with white icon) -->
+<button class="w-12 h-12 rounded-2xl bg-primary-container text-white flex items-center justify-center shadow-lg shadow-primary-container/30 transition-transform duration-150 active:scale-95" title="Projects &amp; Delivery" type="button">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">tactic</span>
+</button>
+<!-- Analytics -->
+<button class="w-12 h-12 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-all duration-150" title="Analytics" type="button">
+<span class="material-symbols-outlined text-[22px]">monitoring</span>
+</button>
+</nav>
+</div>
+<!-- Dock Footer: Theme Switch & Avatar -->
+<div class="flex flex-col items-center gap-4">
+<button class="w-10 h-10 rounded-xl flex items-center justify-center text-text-support hover:text-text-title hover:bg-white/60 transition-colors" title="Settings" type="button">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full border-2 border-white/80 p-0.5 bg-surface-canvas-mid shadow-sm overflow-hidden" title="Executive User Avatar Profile">
+<img class="w-full h-full rounded-full object-cover" data-alt="Close up photographic portrait of an executive Brazilian creative director, sharp lighting, studio environment with architectural ceramics in background, warm tones and refined demeanor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHl1hR8FFOEwVvrJV31I3mshEAl07FCSzBAlj4hUL6SMK0c57ojfxQftxy5AhKkybhkoiM60OPVKjzjpG7rXfw5_9fhw1vbbREFdht99cctcPO3Sk4KmjfJF4pSSiUkcpALOeUZvJ9xpArHJneMgLv6FroFhxta6tEXiiC32LhTzIbVazUWo357Q-ll9J5nG9aPt2iWF9m7ek2T1brCyFObFRUrduw1XWjtMAh4HVhBIBr3YaDMM6l"/>
+</div>
+</div>
+</aside>
+<!-- Main Canvas Container (Desktop 1440px architecture with 72px left dock offset + 32px padding) -->
+<main class="ml-[112px] mr-8 my-6 min-h-[calc(100vh-48px)] flex flex-col gap-6">
+<!-- Top Identity & Project Header Card -->
+<header class="warm-glass-card rounded-[24px] p-6">
+<!-- Breadcrumb & Top Bar Row -->
+<div class="flex items-center justify-between pb-4 mb-4 border-b border-border-divider/50">
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 font-caption-badge text-caption-badge text-text-support">
+<span class="hover:text-text-title cursor-pointer transition-colors">Projetos &amp; Delivery</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-text-title font-semibold">Lumina Movement</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-brand-primary-text font-semibold">Evolução</span>
+</nav>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white/90 text-text-support font-code-token text-code-token">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+            Sync Estúdio HD 2.1
+          </span>
+<button class="w-9 h-9 rounded-xl flex items-center justify-center warm-glass-dock text-text-title hover:bg-white transition-all active:scale-95" title="Mais opções" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Main Headline + Actions Row -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<!-- Title & Metadata -->
+<div class="space-y-2">
+<div class="flex flex-wrap items-center gap-3">
+<h1 class="font-headline-screen text-headline-screen text-text-title tracking-tight">
+              Lumina Movement · Identidade + Plataforma
+            </h1>
+<span class="px-2.5 py-1 rounded-lg bg-surface-canvas-mid border border-border-divider font-code-token text-code-token text-text-title font-semibold tracking-wide">
+              #PLT-2026-08
+            </span>
+</div>
+<div class="flex flex-wrap items-center gap-3 text-text-support text-body-strong font-body-strong">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-container/15 text-tertiary font-caption-badge text-caption-badge font-semibold">
+<span class="material-symbols-outlined text-[14px]">self_improvement</span>
+              Pilates reformer
+            </span>
+<span class="text-border-divider">•</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container/15 text-brand-primary-text font-caption-badge text-caption-badge font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+              Fase: Criação &amp; Design
+            </span>
+<span class="text-border-divider">•</span>
+<div class="inline-flex items-center gap-1.5 text-text-body font-caption-badge text-caption-badge">
+<span class="material-symbols-outlined text-[16px] text-text-support">event</span>
+              Prazo final: <strong class="text-text-title">15 dez 2026</strong>
+</div>
+</div>
+</div>
+<!-- Gauge & Action CTAs -->
+<div class="flex items-center gap-5">
+<!-- Circular Progress Widget -->
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/60 border border-white/80 shadow-sm">
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-12 h-12 -rotate-90 transform" viewbox="0 0 48 48">
+<circle cx="24" cy="24" fill="none" r="19" stroke="#E2E8F0" stroke-width="4"></circle>
+<circle cx="24" cy="24" fill="none" r="19" stroke="#F97316" stroke-dasharray="119.38" stroke-dashoffset="65.65" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="absolute font-caption-badge text-[12px] font-bold text-text-title">45%</span>
+</div>
+<div>
+<p class="font-caption-kpi-label text-caption-kpi-label uppercase text-text-support tracking-wider">Status Geral</p>
+<p class="font-title-section text-title-section text-text-title font-semibold">Concluído</p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-3">
+<button class="h-11 px-4 rounded-xl bg-white/80 border border-border-divider text-text-title font-body-strong text-body-strong flex items-center gap-2 hover:bg-white hover:border-[#CBD5E1] transition-all active:scale-[0.98] shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">share</span>
+              Compartilhar com cliente
+            </button>
+<button class="h-11 px-5 rounded-xl orange-gradient-cta text-white font-body-strong text-body-strong flex items-center gap-2 transition-all active:scale-[0.98]" type="button">
+<span>Avançar fase</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Horizontal Connected Evolution Stepper (6 Fases do Método do Estúdio) -->
+<section class="warm-glass-card rounded-[22px] p-5">
+<div class="flex items-center justify-between mb-3 px-1">
+<h2 class="font-caption-kpi-label text-caption-kpi-label uppercase tracking-widest text-text-support">Linha de Evolução Contínua do Projeto</h2>
+<span class="font-caption-badge text-caption-badge text-brand-primary-text font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+          Metodologia HD Atelier
+        </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-6 gap-3 relative">
+<!-- 1. Briefing aprovado (Concluído) -->
+<div class="p-3.5 rounded-xl bg-status-success/10 border border-status-success/30 flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-center justify-between mb-2">
+<span class="w-6 h-6 rounded-full bg-status-success text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</span>
+<span class="font-code-token text-[11px] text-status-success font-semibold">18 out</span>
+</div>
+<div>
+<h3 class="font-title-section text-[14px] text-text-title font-bold">1. Briefing aprovado</h3>
+<p class="font-caption-badge text-[12px] text-status-success mt-0.5">Concluído</p>
+</div>
+</div>
+<!-- 2. Imersão & conceito (Concluído) -->
+<div class="p-3.5 rounded-xl bg-status-success/10 border border-status-success/30 flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-center justify-between mb-2">
+<span class="w-6 h-6 rounded-full bg-status-success text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</span>
+<span class="font-code-token text-[11px] text-status-success font-semibold">21 out</span>
+</div>
+<div>
+<h3 class="font-title-section text-[14px] text-text-title font-bold">2. Imersão &amp; conceito</h3>
+<p class="font-caption-badge text-[12px] text-status-success mt-0.5">Concluído</p>
+</div>
+</div>
+<!-- 3. Criação (Fase Atual Ativa) -->
+<div class="p-3.5 rounded-xl bg-white border-2 border-primary-container shadow-md shadow-primary-container/10 flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between mb-2">
+<span class="w-6 h-6 rounded-full bg-primary-container text-white flex items-center justify-center pulsing-dot">
+<span class="material-symbols-outlined text-[14px]">brush</span>
+</span>
+<span class="font-caption-badge text-[11px] font-bold uppercase tracking-wider text-primary-container">Ativo</span>
+</div>
+<div>
+<h3 class="font-title-section text-[14px] text-text-title font-bold">3. Criação</h3>
+<p class="font-caption-badge text-[12px] text-brand-primary-text font-semibold mt-0.5">Fase atual em design</p>
+</div>
+</div>
+<!-- 4. Revisão do cliente (Futura) -->
+<div class="p-3.5 rounded-xl bg-white/40 border border-border-divider/70 flex flex-col justify-between opacity-80">
+<div class="flex items-center justify-between mb-2">
+<span class="w-6 h-6 rounded-full bg-surface-canvas-mid text-text-support flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+</span>
+<span class="font-code-token text-[11px] text-text-placeholder">Fase 4</span>
+</div>
+<div>
+<h3 class="font-title-section text-[14px] text-text-support font-semibold">4. Revisão do cliente</h3>
+<p class="font-caption-badge text-[12px] text-text-placeholder mt-0.5">Aguardando entrega</p>
+</div>
+</div>
+<!-- 5. Ajustes finais (Futura) -->
+<div class="p-3.5 rounded-xl bg-white/40 border border-border-divider/70 flex flex-col justify-between opacity-70">
+<div class="flex items-center justify-between mb-2">
+<span class="w-6 h-6 rounded-full bg-surface-canvas-mid text-text-support flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+</span>
+<span class="font-code-token text-[11px] text-text-placeholder">Fase 5</span>
+</div>
+<div>
+<h3 class="font-title-section text-[14px] text-text-support font-semibold">5. Ajustes finais</h3>
+<p class="font-caption-badge text-[12px] text-text-placeholder mt-0.5">Planejado</p>
+</div>
+</div>
+<!-- 6. Entregue (Futura) -->
+<div class="p-3.5 rounded-xl bg-white/40 border border-border-divider/70 flex flex-col justify-between opacity-60">
+<div class="flex items-center justify-between mb-2">
+<span class="w-6 h-6 rounded-full bg-surface-canvas-mid text-text-support flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+</span>
+<span class="font-code-token text-[11px] text-text-placeholder">Final</span>
+</div>
+<div>
+<h3 class="font-title-section text-[14px] text-text-support font-semibold">6. Entregue</h3>
+<p class="font-caption-badge text-[12px] text-text-placeholder mt-0.5">Dezembro 2026</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Two-Column Main Content View (2/3 Left, 1/3 Right) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Column (8 / 12) -->
+<section class="lg:col-span-8 flex flex-col gap-6">
+<!-- Navigation Tabs for Phase Details -->
+<div class="warm-glass-card rounded-[20px] p-2 flex items-center gap-1.5 border border-white/80">
+<button class="px-5 py-2.5 rounded-xl bg-white font-title-section text-title-section text-text-title font-semibold shadow-sm border border-border-divider/50 flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">checklist</span>
+            Marcos da Fase
+          </button>
+<button class="px-5 py-2.5 rounded-xl font-title-section text-title-section text-text-support hover:text-text-title hover:bg-white/50 transition-colors flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">folder_special</span>
+            Entregáveis &amp; Assets
+            <span class="px-2 py-0.5 rounded-full bg-surface-canvas-mid text-text-body font-code-token text-[11px]">4</span>
+</button>
+<button class="px-5 py-2.5 rounded-xl font-title-section text-title-section text-text-support hover:text-text-title hover:bg-white/50 transition-colors flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">attachment</span>
+            Arquivos de Origem
+          </button>
+<button class="px-5 py-2.5 rounded-xl font-title-section text-title-section text-text-support hover:text-text-title hover:bg-white/50 transition-colors flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+            Histórico
+          </button>
+</div>
+<!-- Active Section: Marcos da Fase (Checklist Estruturado) -->
+<div class="warm-glass-card rounded-[24px] p-6">
+<div class="flex items-center justify-between mb-5">
+<div>
+<h2 class="font-title-card text-title-card text-text-title font-bold">Checklist Estruturado da Fase</h2>
+<p class="font-body-default text-body-default text-text-support mt-0.5">Itens obrigatórios antes do avanço para Revisão do Cliente</p>
+</div>
+<button class="px-3.5 py-1.5 rounded-xl bg-white/80 border border-border-divider text-text-body font-body-strong text-body-strong flex items-center gap-1.5 hover:bg-white transition-all text-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+              Novo marco
+            </button>
+</div>
+<div class="space-y-3">
+<!-- Item 1: OK -->
+<div class="p-4 rounded-2xl bg-white/60 border border-border-divider flex items-center justify-between group hover:bg-white/90 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-7 h-7 rounded-lg bg-status-success/15 border border-status-success/30 text-status-success flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] font-bold">check</span>
+</div>
+<div>
+<h3 class="font-body-strong text-body-strong text-text-title flex items-center gap-2">
+                    Moodboard arquitetônico aprovado
+                    <span class="px-2 py-0.5 rounded-full bg-status-success/10 text-status-success font-caption-badge text-[11px] font-semibold">Aprovado pelo cliente</span>
+</h3>
+<p class="font-body-default text-[13px] text-text-support mt-0.5">Definição textural: mármore travertino, carvalho natural e metal quente.</p>
+</div>
+</div>
+<span class="font-code-token text-code-token text-text-support">19 Out</span>
+</div>
+<!-- Item 2: OK -->
+<div class="p-4 rounded-2xl bg-white/60 border border-border-divider flex items-center justify-between group hover:bg-white/90 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-7 h-7 rounded-lg bg-status-success/15 border border-status-success/30 text-status-success flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] font-bold">check</span>
+</div>
+<div>
+<h3 class="font-body-strong text-body-strong text-text-title flex items-center gap-2">
+                    Paleta e tipografia primária
+                    <span class="px-2 py-0.5 rounded-full bg-status-success/10 text-status-success font-caption-badge text-[11px] font-semibold">Fechado</span>
+</h3>
+<p class="font-body-default text-[13px] text-text-support mt-0.5">Curadoria de sans serif editorial e mono para marcação de precisão biomecânica.</p>
+</div>
+</div>
+<span class="font-code-token text-code-token text-text-support">21 Out</span>
+</div>
+<!-- Item 3: Em andamento, responsável Hícaro -->
+<div class="p-4 rounded-2xl bg-white/80 border-2 border-primary-container/40 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-7 h-7 rounded-lg bg-primary-container/15 border border-primary-container/40 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">pending</span>
+</div>
+<div>
+<h3 class="font-body-strong text-body-strong text-text-title flex items-center gap-2">
+                    Sistema de grid de embalagens
+                    <span class="px-2.5 py-0.5 rounded-full bg-primary-container/10 text-brand-primary-text font-caption-badge text-[11px] font-bold">Em andamento</span>
+</h3>
+<p class="font-body-default text-[13px] text-text-support mt-0.5">Padronização de etiquetas para grip socks e linha de aromatizantes de lavanda.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-canvas-mid text-text-title font-body-strong text-[12px]">
+<span class="w-4 h-4 rounded-full bg-primary-container text-white text-[9px] flex items-center justify-center font-bold">H</span>
+<span>Hícaro Duarte</span>
+</div>
+</div>
+</div>
+<!-- Item 4: Telas da plataforma web (Em andamento) -->
+<div class="p-4 rounded-2xl bg-white/80 border-2 border-primary-container/40 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-7 h-7 rounded-lg bg-primary-container/15 border border-primary-container/40 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">pending</span>
+</div>
+<div>
+<h3 class="font-body-strong text-body-strong text-text-title flex items-center gap-2">
+                    Telas da plataforma web &amp; agendamento
+                    <span class="px-2.5 py-0.5 rounded-full bg-primary-container/10 text-brand-primary-text font-caption-badge text-[11px] font-bold">Em andamento</span>
+</h3>
+<p class="font-body-default text-[13px] text-text-support mt-0.5">Fluxo mobile prioritário de reserva de reformadores e perfil biométrico do aluno.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-token text-code-token text-brand-primary-text font-semibold">Entrega 26 Out</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Entregáveis & Assets -->
+<div class="warm-glass-card rounded-[24px] p-6">
+<div class="flex items-center justify-between mb-5">
+<div>
+<h2 class="font-title-card text-title-card text-text-title font-bold">Entregáveis da Fase de Criação</h2>
+<p class="font-body-default text-body-default text-text-support mt-0.5">Versões renderizadas e protótipos em teste de coerência visual</p>
+</div>
+<span class="font-code-token text-code-token text-text-support bg-surface-canvas-mid px-3 py-1 rounded-lg">Figma Sync v2.4</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Entregável 1 -->
+<article class="warm-glass-card-interactive bg-white/70 rounded-2xl p-4 border border-white/80 flex flex-col justify-between">
+<div>
+<div class="w-full h-40 rounded-xl overflow-hidden mb-3 relative bg-surface-canvas-mid">
+<img class="w-full h-full object-cover" data-alt="Warm studio aesthetic photography showing high-end bespoke branding stationery mockup with ceramic vase, travertine stone sample, clean sans serif typography on linen paper, sunny morning shadows in a high-end luxury wellness atelier." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPrPoZS3JyXbPVqDPldG2DZpXIrtTnrD9NXpx00A0FRnnsUAGURo87Jl1E9MayQ6M5HepGjDjmRzvKlLf42TgVV9s_CyfcNLbJfGStEi8RqoBgLbqMcuiCE-1-rwR_Yfp87MGQy5vy7m_Lhfbm1jGZFtNhC9S7iTLHJZem5fQ89FGqBRKQ6gin8JM2gsCzGYLvOT_eDOcEivciv-r6gwsTGtiRDpEQR3cxj4hZDKEOyo6k4UYLjl0O"/>
+<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-[#0F172A]/80 backdrop-blur-md text-white font-code-token text-[11px]">
+                    v1.2 · Identidade Core
+                  </span>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-title-section text-title-section text-text-title font-bold">Sistema Tipográfico &amp; Símbolo Lumina</h3>
+</div>
+<p class="font-body-default text-[13px] text-text-support">Apresentação com aplicações em baixo relevo em couro vegano e estamparia térmica.</p>
+</div>
+<div class="pt-4 mt-3 border-t border-border-divider/60 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-status-warning/10 text-status-warning font-caption-badge text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning"></span>
+                  Aguardando aprovação interna
+                </span>
+<button class="h-8 px-3 rounded-lg bg-white border border-border-divider text-text-title font-caption-badge text-[12px] font-semibold hover:border-text-title transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[15px]">visibility</span>
+                  Prévia
+                </button>
+</div>
+</article>
+<!-- Entregável 2 -->
+<article class="warm-glass-card-interactive bg-white/70 rounded-2xl p-4 border border-white/80 flex flex-col justify-between">
+<div>
+<div class="w-full h-40 rounded-xl overflow-hidden mb-3 relative bg-surface-canvas-mid">
+<img class="w-full h-full object-cover" data-alt="Refined UI UX design mockup of a pilates reformer booking mobile web application on sleek glass tablet, displaying architectural studio schedule, warm terracotta accents, delicate layout on light textured linen surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApO8ZYV4LkDjxORv9RrMXCEtD5zAJwdwPmJthnox_T9XM_GOXX1-TlSf5OL2fPN9XW02Ehr6wSZ2h8M_bYNYi03h9CkfVkd4hbu5hPZOc3g58Ta3A1Fm6UET3wjklFsNtJ2g_Nx-ahhIoYwmiUsKJXsQCYes5nau6oMuWDPJNW6g91h-RqL2pMN60y9rYi4q35J-GxQU9TluT_SdkL8tBjim-AFYQRCieHgqHzH9gAHJCFOt7gV47q"/>
+<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-[#0F172A]/80 backdrop-blur-md text-white font-code-token text-[11px]">
+                    v1.2 · Web App UX
+                  </span>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-title-section text-title-section text-text-title font-bold">Protótipo Funcional · Agenda do Aluno</h3>
+</div>
+<p class="font-body-default text-[13px] text-text-support">Fluxo de agendamento em 2 toques com seleção interativa de reformers e instrutor.</p>
+</div>
+<div class="pt-4 mt-3 border-t border-border-divider/60 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-status-warning/10 text-status-warning font-caption-badge text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning"></span>
+                  Aguardando aprovação interna
+                </span>
+<button class="h-8 px-3 rounded-lg bg-white border border-border-divider text-text-title font-caption-badge text-[12px] font-semibold hover:border-text-title transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[15px]">visibility</span>
+                  Prévia
+                </button>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- Right Column (4 / 12) -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<!-- Card de Segurança Teal: Escopo Travado (#0D9488) -->
+<div class="teal-scope-card rounded-[24px] p-6 text-on-surface">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-xl bg-tertiary/15 text-tertiary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</span>
+<div>
+<h2 class="font-title-section text-title-section text-text-title font-bold">Escopo Travado</h2>
+<p class="font-caption-badge text-[11px] text-[#0F766E] font-semibold uppercase tracking-wider">Contrato #CT-2026-LUM</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-white/70 text-tertiary font-code-token text-[11px] font-semibold border border-tertiary/20">
+              Assinado
+            </span>
+</div>
+<p class="font-body-default text-[13px] text-text-body mb-4">
+            Os 4 pilares contratuais garantem foco rigoroso no cronograma estipulado para inauguração nos Jardins.
+          </p>
+<ul class="space-y-2.5 mb-5 font-body-strong text-[13px]">
+<li class="flex items-center gap-2.5 text-text-title">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>Identidade Visual Completa</span>
+</li>
+<li class="flex items-center gap-2.5 text-text-title">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>Web Experience Reformer (Desktop &amp; Mobile)</span>
+</li>
+<li class="flex items-center gap-2.5 text-text-title">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>Kit Social Media &amp; Launch Guidelines</span>
+</li>
+<li class="flex items-center gap-2.5 text-text-title">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>Manual de Marca &amp; Aplicação Espacial</span>
+</li>
+</ul>
+<button class="w-full h-10 rounded-xl bg-white border border-tertiary/30 text-tertiary font-body-strong text-body-strong flex items-center justify-center gap-2 hover:bg-tertiary/5 transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[16px]">edit_document</span>
+            Solicitar aditivo de escopo
+          </button>
+</div>
+<!-- Card: Briefing de Origem & PIN Vinculado -->
+<div class="warm-glass-card rounded-[24px] p-6">
+<div class="flex items-center justify-between mb-3">
+<h2 class="font-title-section text-title-section text-text-title font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary-container">format_quote</span>
+              Briefing de Origem
+            </h2>
+<span class="font-caption-badge text-[11px] text-text-support font-semibold">18 Outubro</span>
+</div>
+<!-- Quote Block -->
+<blockquote class="p-4 rounded-xl bg-surface-canvas-mid border-l-4 border-primary-container mb-4">
+<p class="font-body-default text-[13px] text-text-title italic leading-relaxed">
+              “Atmosfera serena, arquitetônica, foco no público premium dos Jardins. Queremos que o aluno sinta a precisão do movimento antes mesmo de entrar no estúdio.”
+            </p>
+<footer class="mt-2 text-right">
+<span class="font-body-strong text-[12px] text-brand-primary-text font-bold">— Helena Vasconcellos</span>
+<span class="block text-[11px] text-text-support">Fundadora &amp; Diretora Clínica</span>
+</footer>
+</blockquote>
+<!-- PIN & Access Link -->
+<div class="pt-3 border-t border-border-divider/60 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-text-support text-[11px] font-caption-kpi-label uppercase">PIN Cripto:</span>
+<span class="font-code-pin text-[14px] text-text-title tracking-widest font-semibold bg-white/80 px-2 py-0.5 rounded border border-border-divider">
+                840 · 291
+              </span>
+</div>
+<a class="font-body-strong text-[13px] text-brand-primary-text hover:underline flex items-center gap-1 font-semibold" href="#briefing-detail">
+              Ver briefing original
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Card: Gestão de Tempo / Horas -->
+<div class="warm-glass-card rounded-[24px] p-6">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-title-section text-title-section text-text-title font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-support">timer</span>
+              Alocação de Tempo
+            </h2>
+<span class="font-caption-badge text-caption-badge font-semibold text-text-support">
+              45% consumido
+            </span>
+</div>
+<div class="my-4">
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="font-display-kpi text-display-kpi text-text-title font-bold">54h</span>
+<span class="text-text-support font-body-default text-body-default ml-1">consumidas</span>
+</div>
+<span class="font-body-strong text-body-strong text-text-support">de 120h contratadas</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-3 rounded-full bg-border-divider/70 overflow-hidden p-0.5">
+<div class="h-full rounded-full bg-gradient-to-r from-primary-container to-card-highlight-end" style="width: 45%;"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 pt-3 border-t border-border-divider/60 text-[12px]">
+<div>
+<span class="text-text-support block font-caption-kpi-label uppercase">Design Sprint</span>
+<strong class="text-text-title font-bold">38h gastas</strong>
+</div>
+<div>
+<span class="text-text-support block font-caption-kpi-label uppercase">Prototipagem</span>
+<strong class="text-text-title font-bold">16h gastas</strong>
+</div>
+</div>
+</div>
+<!-- Card: Próximo Marco Crítico -->
+<div class="warm-glass-card rounded-[24px] p-6 border-l-4 border-l-status-warning">
+<div class="flex items-center justify-between mb-3">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-status-warning/15 text-status-warning font-caption-badge text-[11px] font-bold">
+<span class="material-symbols-outlined text-[14px]">priority_high</span>
+              Próximo Marco Crítico
+            </span>
+<span class="font-code-token text-[12px] text-text-support font-semibold">Em 2 dias</span>
+</div>
+<h3 class="font-title-card text-title-card text-text-title font-bold mb-1">
+            Envio da v1 de Identidade
+          </h3>
+<p class="font-body-default text-[13px] text-text-support mb-4">
+            Apresentação executiva remota com a equipe diretiva do Lumina Movement para alinhamento dos arquétipos visuais.
+          </p>
+<div class="flex items-center justify-between p-3 rounded-xl bg-white/70 border border-border-divider text-[13px]">
+<div class="flex items-center gap-2 text-text-title font-body-strong">
+<span class="material-symbols-outlined text-[16px] text-primary-container">calendar_month</span>
+<span>28 out 2026 · 14h30</span>
+</div>
+<button class="text-brand-primary-text font-bold hover:underline" type="button">
+              Sincronizar
+            </button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

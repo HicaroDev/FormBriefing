@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Forms Hub · Editor de Modelo (Briefing Pilates v2.4) — Studio Suite</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#6bd8cb",
+            "status-info": "#0284C7",
+            "status-success": "#10B981",
+            "background": "#f8f9ff",
+            "on-surface-variant": "#584237",
+            "text-placeholder": "#94A3B8",
+            "on-surface": "#0d1c2e",
+            "outline-variant": "#e0c0b1",
+            "on-tertiary-fixed": "#00201d",
+            "on-tertiary": "#ffffff",
+            "surface-canvas-start": "#FBF8F3",
+            "status-warning": "#F59E0B",
+            "card-highlight-end": "#FBBF24",
+            "secondary": "#545f73",
+            "text-title": "#0F172A",
+            "text-body": "#475569",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#586377",
+            "primary": "#9d4300",
+            "text-support": "#64748B",
+            "brand-primary-text": "#C2410C",
+            "surface-bright": "#f8f9ff",
+            "on-secondary-fixed-variant": "#3c475a",
+            "status-urgent": "#EF4444",
+            "inverse-surface": "#233144",
+            "surface-canvas-mid": "#F5EFEB",
+            "primary-fixed": "#ffdbca",
+            "on-background": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#341100",
+            "on-secondary-fixed": "#111c2d",
+            "on-tertiary-fixed-variant": "#005049",
+            "surface-container-highest": "#d5e3fc",
+            "border-divider": "#E2E8F0",
+            "on-tertiary-container": "#003934",
+            "surface": "#f8f9ff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "surface-dim": "#ccdbf3",
+            "surface-canvas-end": "#ECE4DB",
+            "inverse-primary": "#ffb690",
+            "secondary-fixed": "#d8e3fb",
+            "tertiary-container": "#37ab9e",
+            "surface-container-low": "#eff4ff",
+            "surface-tint": "#9d4300",
+            "tertiary": "#006a61",
+            "focus-indigo": "#4F46E5",
+            "on-primary-container": "#582200",
+            "brand-gradient-end": "#E65100",
+            "secondary-fixed-dim": "#bcc7de",
+            "error-container": "#ffdad6",
+            "secondary-container": "#d5e0f8",
+            "surface-container-high": "#dce9ff",
+            "on-primary-fixed-variant": "#783200",
+            "primary-container": "#f97316",
+            "primary-fixed-dim": "#ffb690",
+            "brand-primary-hover": "#EA580C",
+            "surface-variant": "#d5e3fc",
+            "surface-container": "#e6eeff",
+            "outline": "#8c7164",
+            "tertiary-fixed": "#89f5e7",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "display-kpi-mobile": ["Plus Jakarta Sans"],
+            "body-strong": ["Plus Jakarta Sans"],
+            "caption-badge": ["Plus Jakarta Sans"],
+            "display-kpi": ["Plus Jakarta Sans"],
+            "title-card": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "code-pin": ["JetBrains Mono"],
+            "headline-screen": ["Plus Jakarta Sans"],
+            "headline-screen-mobile": ["Plus Jakarta Sans"],
+            "caption-kpi-label": ["Plus Jakarta Sans"],
+            "label-field": ["Plus Jakarta Sans"],
+            "title-section": ["Plus Jakarta Sans"],
+            "code-token": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "display-kpi-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-strong": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "caption-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "title-card": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-default": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "code-pin": ["24px", { "lineHeight": "32px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "headline-screen": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-screen-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "caption-kpi-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "label-field": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "title-section": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "code-token": ["13px", { "lineHeight": "18px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    /* Warm Glassmorphism Tokens */
+    .glass-surface {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 40px -15px rgba(230, 81, 0, 0.06), 0 10px 25px -5px rgba(0, 0, 0, 0.03);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 10px 30px -10px rgba(230, 81, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+    }
+    .glass-input {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid #E2E8F0;
+      transition: all 0.15s ease-in-out;
+    }
+    .glass-input:focus {
+      background: #FFFFFF;
+      border-color: #4F46E5;
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+    }
+    /* Custom subtle scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(140, 113, 100, 0.2);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(140, 113, 100, 0.35);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-text-title font-body-default antialiased selection:bg-primary-container/20 selection:text-brand-primary-text" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EFEB 50%, #ECE4DB 100%);">
+<div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;align-items:center;gap:10px;background:#1e293b;color:#fff;padding:8px 14px;border-radius:9999px;font-family:sans-serif;font-size:12px;box-shadow:0 8px 20px rgba(0,0,0,.25);"><span>&#128269; Pr&eacute;-visualiza&ccedil;&atilde;o &mdash; ainda sem dados reais</span><a href="index.html" style="color:#fff;background:#f97316;padding:4px 10px;border-radius:9999px;text-decoration:none;font-weight:600;">&larr; Dashboard</a></div>
+<!-- Desktop App Shell Container (1440px Canvas Focus) -->
+<div class="relative flex min-h-screen w-full max-w-[1440px] mx-auto overflow-hidden">
+<!-- FLOATING LEFT DOCK (72px Studio Navigation - Início, CRM, Forms Hub, Projetos, etc.) -->
+<aside class="fixed left-5 top-5 z-40 flex flex-col items-center justify-between py-6 rounded-3xl glass-surface w-[72px]" style="height: calc(100vh - 40px);">
+<!-- Top HD Atelier Monogram Logo -->
+<div class="flex flex-col items-center gap-4">
+<a class="group relative flex items-center justify-center w-11 h-11 rounded-2xl bg-text-title text-surface-container-lowest font-headline-screen text-[17px] font-bold tracking-tight shadow-md transition-all duration-200 hover:scale-105" href="#" title="Hícaro Duarte Atelier">
+<span>HD</span>
+<span class="absolute -bottom-1 -right-1 w-2.5 h-2.5 rounded-full bg-primary-container ring-2 ring-surface-container-lowest"></span>
+</a>
+<div class="w-8 h-[1px] bg-border-divider/70"></div>
+</div>
+<!-- Icon Navigation Stack (Forms Hub ATIVO com indicador terracota) -->
+<nav aria-label="Navegação do Atelier" class="flex flex-col items-center gap-3">
+<!-- Início / Dashboard -->
+<a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/80 transition-all duration-150" href="#" title="Início">
+<span class="material-symbols-outlined text-[22px]">home</span>
+</a>
+<!-- CRM Leads -->
+<a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/80 transition-all duration-150" href="#" title="CRM Leads">
+<span class="material-symbols-outlined text-[22px]">filter_alt</span>
+</a>
+<!-- Forms Hub (ITEM ATIVO: Orange square container #F97316 com ícone branco) -->
+<a class="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-primary-container text-surface-container-lowest shadow-md shadow-primary-container/30 transition-transform active:scale-95" href="#" title="Forms Hub (Ativo)">
+<span class="material-symbols-outlined text-[22px] fill">assignment</span>
+</a>
+<!-- Projetos & Delivery -->
+<a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/80 transition-all duration-150" href="#" title="Projetos & Delivery">
+<span class="material-symbols-outlined text-[22px]">tactic</span>
+</a>
+<!-- Agenda / Eventos -->
+<a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/80 transition-all duration-150" href="#" title="Agenda & Sessões">
+<span class="material-symbols-outlined text-[22px]">calendar_month</span>
+</a>
+<!-- Clientes & Contratos -->
+<a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/80 transition-all duration-150" href="#" title="Clientes">
+<span class="material-symbols-outlined text-[22px]">group</span>
+</a>
+<!-- Analytics -->
+<a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-text-support hover:text-text-title hover:bg-surface-container-lowest/80 transition-all duration-150" href="#" title="Analytics">
+<span class="material-symbols-outlined text-[22px]">monitoring</span>
+</a>
+</nav>
+<!-- Dock Footer: Theme Switcher & Personal User Avatar -->
+<div class="flex flex-col items-center gap-3">
+<button class="flex items-center justify-center w-9 h-9 rounded-full text-text-support hover:text-text-title hover:bg-surface-container-lowest/80 transition-colors" title="Alternar Modo de Cor" type="button">
+<span class="material-symbols-outlined text-[19px]">light_mode</span>
+</button>
+<a class="group relative flex items-center justify-center w-10 h-10 rounded-full border border-surface-container-lowest/90 overflow-hidden shadow-sm" href="#" title="Hícaro Duarte (Diretor de Criação)">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of creative director Hícaro Duarte in a sunlit architectural design studio in Sao Paulo, high-end warm natural lighting, confident warm expression, neutral textured linen shirt, luxury creative agency ambience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1tQg0jkqVmcX8Gk3kVdQSQ4ZL5n515fIJ11wQLdLntNMdqrWqfBp31hDAkFzbEBL7qxAHTFU6quaPUegWVQ5BWDU_DgAWUUuhPKy5YOBORpawojLA8_600SrShb7IdLxw6pYLKYfnAp6VBcjU4jqrB2zuyjAawZJLBVkTzgI-zS_mi65-X5_tIfxmn_4rRuJLg-LjPzTsci8UnQjTyVgYENq2_Be4P2L1QL7xrOI_7EoZ1KvUW62u"/>
+</a>
+</div>
+</aside>
+<!-- MAIN INTERFACE VIEWPORT (Offset for 72px left dock + 20px padding) -->
+<div class="flex-1 ml-[92px] flex flex-col min-h-screen pr-6 py-5">
+<!-- TOP BAR / BUILDER HEADER (Barra de topo da tela) -->
+<header class="glass-surface rounded-2xl px-6 py-4 mb-5 flex items-center justify-between gap-4">
+<!-- Left: Breadcrumb + Editable Title + Autosave Badge -->
+<div class="flex flex-col gap-1.5">
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-1.5 text-caption-kpi-label font-caption-kpi-label text-text-support uppercase tracking-wider">
+<a class="hover:text-primary transition-colors" href="#">Forms Hub</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Modelos</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-text-title font-bold">Briefing Pilates v2.4</span>
+</nav>
+<!-- Title & Badges Row -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 group">
+<h1 class="font-headline-screen text-[22px] font-bold text-text-title tracking-tight cursor-text border-b border-transparent hover:border-text-placeholder/60 transition-colors">
+                Briefing Pilates Reformer v2.4
+              </h1>
+<span class="material-symbols-outlined text-[16px] text-text-placeholder group-hover:text-text-body transition-colors">edit</span>
+</div>
+<div class="h-4 w-[1px] bg-border-divider"></div>
+<!-- Autosave Status Badge -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-status-success/10 text-status-success text-caption-badge font-caption-badge">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success animate-pulse"></span>
+<span>Rascunho salvo automaticamente</span>
+<span class="text-text-support/70 text-[11px] font-normal ml-0.5">· 22 out 2026, 14:32</span>
+</div>
+</div>
+</div>
+<!-- Right: Action CTAs -->
+<div class="flex items-center gap-2.5">
+<!-- Voltar aos modelos -->
+<a class="flex items-center gap-1.5 px-3.5 h-[40px] rounded-xl text-body-strong font-body-strong text-text-body hover:text-text-title hover:bg-surface-container-lowest/60 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Voltar aos modelos</span>
+</a>
+<!-- Pré-visualizar como cliente -->
+<button class="flex items-center gap-2 px-4 h-[40px] rounded-xl text-body-strong font-body-strong text-text-title bg-surface-container-lowest/90 border border-border-divider hover:bg-surface-container-lowest hover:border-slate-300 shadow-sm transition-all duration-150 active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-support">visibility</span>
+<span>Pré-visualizar como cliente</span>
+</button>
+<!-- Publicar versão v2.4 (Gradiente Terracota) -->
+<button class="flex items-center gap-2 px-5 h-[40px] rounded-xl text-body-strong font-body-strong text-surface-container-lowest shadow-md shadow-brand-gradient-end/25 hover:shadow-lg hover:shadow-brand-gradient-end/35 transition-all duration-150 active:scale-[0.98]" style="background: linear-gradient(135deg, #F97316 0%, #E65100 100%);" type="button">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+<span>Publicar versão v2.4</span>
+</button>
+</div>
+</header>
+<!-- 3-COLUMN WORKSPACE CANVAS (1440px Desktop Architecture) -->
+<main class="grid grid-cols-[260px_1fr_310px] gap-5 flex-1 items-start">
+<!-- ========================================== -->
+<!-- COLUNA 1 (ESQUERDA - 260px): Estrutura do Briefing -->
+<!-- ========================================== -->
+<section class="glass-surface rounded-2xl p-4 flex flex-col justify-between" style="min-height: calc(100vh - 150px);">
+<div>
+<!-- Header da Coluna -->
+<div class="flex items-center justify-between pb-3 mb-3 border-b border-border-divider/70">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-text-support">account_tree</span>
+<h2 class="font-title-section text-title-section font-semibold text-text-title">Seções do Briefing</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-surface-container-lowest text-text-support border border-border-divider/50">4 seções</span>
+</div>
+<!-- Botão Adicionar Seção -->
+<button class="w-full flex items-center justify-center gap-1.5 py-2 px-3 mb-3 rounded-xl border border-dashed border-border-divider bg-surface-container-lowest/50 text-brand-primary-text font-body-strong text-[13px] hover:bg-surface-container-lowest hover:border-primary-container transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+<span>Adicionar seção</span>
+</button>
+<!-- Lista de Seções do Formulário -->
+<div class="space-y-2">
+<!-- Item 1: Responsáveis & Contato (Concluído) -->
+<div class="group relative flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-lowest/60 hover:bg-surface-container-lowest border border-border-divider/60 hover:border-slate-300 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[18px] text-text-placeholder group-hover:text-text-support cursor-grab">drag_indicator</span>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<p class="font-body-strong text-[13px] text-text-title truncate">1. Responsáveis & Contato</p>
+<span class="material-symbols-outlined text-[16px] text-status-success fill">check_circle</span>
+</div>
+<p class="text-[11px] text-text-support">3 perguntas · Concluído</p>
+</div>
+</div>
+<!-- Item 2: Objetivos e Escopo (Concluído) -->
+<div class="group relative flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-lowest/60 hover:bg-surface-container-lowest border border-border-divider/60 hover:border-slate-300 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[18px] text-text-placeholder group-hover:text-text-support cursor-grab">drag_indicator</span>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<p class="font-body-strong text-[13px] text-text-title truncate">2. Objetivos e Escopo</p>
+<span class="material-symbols-outlined text-[16px] text-status-success fill">check_circle</span>
+</div>
+<p class="text-[11px] text-text-support">5 perguntas · Concluído</p>
+</div>
+</div>
+<!-- Item 3: Público e Estética (SELECIONADA - Destaque Fundo Suave Laranja + Borda Laranja #F97316) -->
+<div class="relative flex items-center gap-2.5 p-2.5 rounded-xl bg-primary-container/10 border-2 border-primary-container shadow-sm shadow-primary-container/10 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[18px] text-primary-container cursor-grab">drag_indicator</span>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<p class="font-body-strong text-[13px] text-brand-primary-text font-bold truncate">3. Público e Estética</p>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-primary-container text-surface-container-lowest">ATIVA</span>
+</div>
+<p class="text-[11px] text-brand-primary-text/80 font-medium">4 perguntas · Em edição</p>
+</div>
+<!-- Active Indicator dot -->
+<span class="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary-container ring-4 ring-primary-container/20"></span>
+</div>
+<!-- Item 4: Prazos, Orçamento & Anexos -->
+<div class="group relative flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-lowest/60 hover:bg-surface-container-lowest border border-border-divider/60 hover:border-slate-300 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[18px] text-text-placeholder group-hover:text-text-support cursor-grab">drag_indicator</span>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<p class="font-body-strong text-[13px] text-text-title truncate">4. Prazos, Orçamento & Anexos</p>
+<span class="w-1.5 h-1.5 rounded-full bg-text-placeholder"></span>
+</div>
+<p class="text-[11px] text-text-support">4 perguntas · Pendente</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Resumo Rápido no Rodapé -->
+<div class="pt-3 mt-4 border-t border-border-divider/70 bg-surface-container-lowest/40 -mx-1 -mb-1 p-3 rounded-xl">
+<div class="flex items-center justify-between text-caption-kpi-label font-caption-kpi-label text-text-support uppercase mb-1">
+<span>Métricas do Form</span>
+<span class="text-text-title font-bold">75% Concluído</span>
+</div>
+<!-- Progress Mini Bar -->
+<div class="w-full h-1.5 bg-border-divider rounded-full overflow-hidden mb-2">
+<div class="h-full rounded-full bg-status-success" style="width: 75%;"></div>
+</div>
+<div class="flex items-center gap-1.5 text-[12px] text-text-body font-medium">
+<span class="material-symbols-outlined text-[15px] text-text-support">schedule</span>
+<span>Total 16 perguntas · ~14 min de preenchimento</span>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- COLUNA 2 (CENTRAL): Canvas do Form Builder -->
+<!-- ========================================== -->
+<section class="flex flex-col gap-5">
+<!-- Cabeçalho da Seção Ativa -->
+<div class="glass-surface rounded-2xl p-5 border-l-4 border-l-primary-container">
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-primary-container/15 text-brand-primary-text uppercase tracking-wide">Seção 03 de 04</span>
+<span class="text-caption-badge font-caption-badge text-text-support">Atributos Sensoriais</span>
+</div>
+<button class="text-text-support hover:text-text-title p-1 rounded-lg hover:bg-surface-container-lowest/80 transition-colors" title="Editar propriedades da seção" type="button">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+</button>
+</div>
+<h2 class="font-headline-screen text-[20px] font-bold text-text-title">Seção 3 · Público e Estética Visual</h2>
+<p class="font-body-default text-text-body text-[13px] mt-0.5">Definição de personas, atmosfera sensorial e benchmarks estéticos para o posicionamento da marca.</p>
+</div>
+<!-- PERGUNTA 1 (SELECIONADA COM TOOLBAR FLUTUANTE RÁPIDA E BORDA LARANJA) -->
+<div class="relative rounded-2xl bg-surface-container-lowest/90 border-2 border-primary-container p-6 shadow-xl shadow-primary-container/10 transition-all">
+<!-- TOOLBAR FLUTUANTE RÁPIDA (Duplicar, Excluir, Mover) -->
+<div class="absolute -top-4 right-6 flex items-center gap-1 px-2.5 py-1 rounded-full bg-text-title text-surface-container-lowest shadow-lg shadow-black/15 border border-white/20 z-10">
+<button class="flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium text-surface-container-lowest hover:bg-white/20 transition-colors" title="Duplicar Pergunta" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Duplicar</span>
+</button>
+<div class="h-3 w-[1px] bg-white/20"></div>
+<button class="flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium text-surface-container-lowest hover:bg-white/20 transition-colors" title="Mover Pergunta" type="button">
+<span class="material-symbols-outlined text-[14px]">drag_pan</span>
+<span>Mover</span>
+</button>
+<div class="h-3 w-[1px] bg-white/20"></div>
+<button class="flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium text-red-300 hover:bg-red-500/20 transition-colors" title="Excluir Pergunta" type="button">
+<span class="material-symbols-outlined text-[14px]">delete</span>
+<span>Excluir</span>
+</button>
+</div>
+<!-- Pergunta 1: Enunciado & Helper -->
+<div class="flex items-start justify-between gap-4 mb-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-lg bg-primary-container text-surface-container-lowest text-[12px] font-bold flex items-center justify-center">1</span>
+<h3 class="font-title-card text-title-card font-bold text-text-title">
+                    Qual a atmosfera visual pretendida para o novo estúdio?
+                    <span class="text-status-urgent ml-0.5">*</span>
+</h3>
+</div>
+<p class="text-[13px] text-text-support ml-8">Selecione o arquétipo visual que melhor dialoga com o propósito e clientela do espaço.</p>
+</div>
+<span class="px-2 py-1 rounded-lg bg-surface-canvas-mid text-[11px] font-semibold text-text-body border border-border-divider">
+                Cards Visuais
+              </span>
+</div>
+<!-- Opções em Cards Visuais (Bento / Grid 3 Cards) -->
+<div class="grid grid-cols-3 gap-3.5 mt-2">
+<!-- Card 1: Sereno & Arquitetônico (Selecionado de exemplo) -->
+<div class="group relative rounded-xl border-2 border-primary-container bg-surface-container-lowest p-3 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+<div class="absolute top-2.5 right-2.5 z-10 w-5 h-5 rounded-full bg-primary-container text-surface-container-lowest flex items-center justify-center shadow">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</div>
+<div class="h-28 w-full rounded-lg overflow-hidden mb-2.5 bg-slate-100 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Minimalist luxury pilates studio interior with warm concrete textured walls, natural architectural skylight, white oak reformer beds, tranquil zen lighting, linen drapery, bespoke architectural design photograph in bright daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDFTTjoLfChiP4ctw1pFYO8rjIHpLIoq7YzWkU1Ez5qXdos5fNB6BdXKWSl-2GTZ0W7jLboo-3BLvFtYEkI5INRJfRvn5fwhD1DXLX_npjgXbktPSc9UIfvbGBexZn8G97tbIyLJX0-OhOcybjyfMnbROgL3V3qVtWGVjbtu3RtQNh8b-hoBZ3Ikm3gZWi-l9TdR1uxFji2SE9Et7PEF4P5E6rJiS-rxzN--6-zplYW8GsKdDXNXJi"/>
+<span class="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-black/60 backdrop-blur-md text-white">Opção A</span>
+</div>
+<div>
+<h4 class="font-body-strong text-[13px] text-text-title font-bold">Sereno & Arquitetônico</h4>
+<p class="text-[11px] text-text-support line-clamp-2 mt-0.5">Linhas puras, luz natural suave, concreto calcário e madeiras nobres claras.</p>
+</div>
+</div>
+<!-- Card 2: Terroso & Acolhedor -->
+<div class="group relative rounded-xl border border-border-divider hover:border-text-placeholder bg-surface-container-lowest/80 p-3 flex flex-col justify-between overflow-hidden hover:shadow-md transition-all cursor-pointer">
+<div class="absolute top-2.5 right-2.5 z-10 w-5 h-5 rounded-full border border-border-divider bg-white flex items-center justify-center group-hover:border-slate-400">
+</div>
+<div class="h-28 w-full rounded-lg overflow-hidden mb-2.5 bg-slate-100 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High-end boutique wellness clinic with warm terracotta plastered walls, arched doorways, soft ambient glow, natural ceramic pottery, linen pillows, warm cozy tactile sanctuary aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZs2w4I0F6tOOfUFSRRqpAczfe0jJOthvkAxJhAH_NQB3QDdQcip1xcfxhMi9PCPT9Zh1EsHzqGtKptMOqDbwUQZ6H_IFrUqZJAAlLE1AYglfQbW3XxZslf07V09sIQlF-SRHWu14L33niRohKfM9VUivi4AihZEBmt7iTYE0TiDl5IKQplrVLvvYoBkyOU_vDZCrp8_3ydlMXf-n3wVjMIk9WhFvND3leRb_3hMKaMsdS8tr6XlUJ"/>
+<span class="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-black/60 backdrop-blur-md text-white">Opção B</span>
+</div>
+<div>
+<h4 class="font-body-strong text-[13px] text-text-title font-bold">Terroso & Acolhedor</h4>
+<p class="text-[11px] text-text-support line-clamp-2 mt-0.5">Tons de argila, cerâmica orgânica, tecidos de linho e sensação de refúgio.</p>
+</div>
+</div>
+<!-- Card 3: Vibrante & Energético -->
+<div class="group relative rounded-xl border border-border-divider hover:border-text-placeholder bg-surface-container-lowest/80 p-3 flex flex-col justify-between overflow-hidden hover:shadow-md transition-all cursor-pointer">
+<div class="absolute top-2.5 right-2.5 z-10 w-5 h-5 rounded-full border border-border-divider bg-white flex items-center justify-center group-hover:border-slate-400">
+</div>
+<div class="h-28 w-full rounded-lg overflow-hidden mb-2.5 bg-slate-100 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Dynamic boutique contemporary movement studio with bold architectural accents, subtle illuminated neon linear fixtures, high energy refined atmosphere, polished microcement floors and polished mirrors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWZPtvs1QaSe4gSj4YkkxG3WRKbjltINLkNzRIe7ueDDL4ZQl58ZXJVH9bT1HF78ml1k5vfYXQ5SgOtzax3s1FfPcRupez0ybnGYB_1eZJ7BclYPUhK34ITvNwxwGoNp8wGqo_2juL_ww6jbRthwgl4VyrqhhX1KmAIh88w5JBHLFcaI1MdbwW7IugPX98ukXpuY0owf1gC35sgVMPHhIeOpBbMj4ADMs_4GvdF1jiGWGOh8dvBkSR"/>
+<span class="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-black/60 backdrop-blur-md text-white">Opção C</span>
+</div>
+<div>
+<h4 class="font-body-strong text-[13px] text-text-title font-bold">Vibrante & Energético</h4>
+<p class="text-[11px] text-text-support line-clamp-2 mt-0.5">Pontos de cor contrastantes, iluminação rítmica contemporânea e dinamismo.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- PERGUNTA 2: Faixa Etária Predominante (Chips de Seleção) -->
+<div class="glass-card rounded-2xl p-5 hover:border-slate-300 transition-all cursor-pointer">
+<div class="flex items-start justify-between gap-4 mb-3">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-lg bg-surface-container-high text-text-title text-[12px] font-bold flex items-center justify-center">2</span>
+<h3 class="font-title-card text-title-card font-bold text-text-title">
+                  Qual é a faixa etária predominante dos seus alunos/clientes?
+                </h3>
+</div>
+<span class="px-2 py-1 rounded-lg bg-surface-canvas-mid text-[11px] font-semibold text-text-body border border-border-divider">
+                Seleção Única
+              </span>
+</div>
+<p class="text-[13px] text-text-support ml-8 mb-3">Define o tom da comunicação verbal e o tamanho tipográfico das sinalizações físicas.</p>
+<!-- Chips de Opção -->
+<div class="flex flex-wrap items-center gap-2.5 ml-8">
+<button class="px-4 py-2 rounded-xl text-[13px] font-body-strong font-medium bg-surface-container-lowest border border-border-divider text-text-body hover:border-primary-container hover:text-primary transition-all" type="button">
+                18 a 25 anos
+              </button>
+<button class="px-4 py-2 rounded-xl text-[13px] font-body-strong font-semibold bg-primary-container/15 border-2 border-primary-container text-brand-primary-text shadow-sm transition-all flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+                25 a 35 anos
+              </button>
+<button class="px-4 py-2 rounded-xl text-[13px] font-body-strong font-medium bg-surface-container-lowest border border-border-divider text-text-body hover:border-primary-container hover:text-primary transition-all" type="button">
+                35 a 50 anos
+              </button>
+<button class="px-4 py-2 rounded-xl text-[13px] font-body-strong font-medium bg-surface-container-lowest border border-border-divider text-text-body hover:border-primary-container hover:text-primary transition-all" type="button">
+                50+ anos
+              </button>
+</div>
+</div>
+<!-- PERGUNTA 3: Sensação em 3 Palavras (Texto Curto / Inputs) -->
+<div class="glass-card rounded-2xl p-5 hover:border-slate-300 transition-all cursor-pointer">
+<div class="flex items-start justify-between gap-4 mb-3">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-lg bg-surface-container-high text-text-title text-[12px] font-bold flex items-center justify-center">3</span>
+<h3 class="font-title-card text-title-card font-bold text-text-title">
+                  Descreva em 3 palavras a sensação ao entrar no seu espaço físico.
+                </h3>
+</div>
+<span class="px-2 py-1 rounded-lg bg-surface-canvas-mid text-[11px] font-semibold text-text-body border border-border-divider">
+                Texto Curto
+              </span>
+</div>
+<p class="text-[13px] text-text-support ml-8 mb-3">Exemplo: Equilíbrio, sofisticação, acolhimento.</p>
+<!-- 3 Mini Text Inputs para o Cliente Preencher -->
+<div class="grid grid-cols-3 gap-3 ml-8">
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-xl glass-input text-[13px] text-text-placeholder cursor-not-allowed" disabled="" placeholder="Palavra 1 (Ex: Vitalidade)" type="text"/>
+</div>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-xl glass-input text-[13px] text-text-placeholder cursor-not-allowed" disabled="" placeholder="Palavra 2 (Ex: Clareza)" type="text"/>
+</div>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-xl glass-input text-[13px] text-text-placeholder cursor-not-allowed" disabled="" placeholder="Palavra 3 (Ex: Exclusividade)" type="text"/>
+</div>
+</div>
+</div>
+<!-- BOTÃO PONTILHADO: Adicionar Nova Pergunta Nesta Seção -->
+<button class="w-full py-4 rounded-2xl border-2 border-dashed border-border-divider hover:border-primary-container bg-surface-container-lowest/40 hover:bg-surface-container-lowest/80 text-text-body hover:text-brand-primary-text font-body-strong text-body-strong flex items-center justify-center gap-2 transition-all duration-200 group" type="button">
+<span class="material-symbols-outlined text-[20px] text-primary-container group-hover:scale-110 transition-transform">add_circle</span>
+<span>Adicionar nova pergunta nesta seção</span>
+</button>
+</section>
+<!-- ========================================== -->
+<!-- COLUNA 3 (DIREITA - 300px): Painel de Propriedades -->
+<!-- ========================================== -->
+<aside class="glass-surface rounded-2xl p-4 flex flex-col gap-4 sticky top-5" style="max-height: calc(100vh - 120px); overflow-y: auto;">
+<!-- Header do Painel -->
+<div class="flex items-center justify-between pb-3 border-b border-border-divider/70">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary-container">tune</span>
+<h2 class="font-title-section text-title-section font-semibold text-text-title">Propriedades da Pergunta</h2>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-support cursor-pointer hover:text-text-title">help</span>
+</div>
+<!-- Campo: Tipo de Pergunta -->
+<div class="space-y-1.5">
+<label class="block font-label-field text-label-field text-text-title">
+              Tipo de Resposta
+            </label>
+<div class="relative">
+<select class="w-full h-11 pl-3.5 pr-10 rounded-xl glass-input text-[13px] text-text-title font-medium appearance-none cursor-pointer">
+<option selected="">Cards com Imagem / Múltipla Escolha</option>
+<option>Texto Curto</option>
+<option>Texto Longo</option>
+<option>Múltipla Escolha (Lista)</option>
+<option>Escala Numérica (NPS/Score)</option>
+<option>Upload de Arquivos</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[18px] text-text-support">
+                arrow_drop_down
+              </span>
+</div>
+</div>
+<!-- Campo: Rótulo da Pergunta (Editável) -->
+<div class="space-y-1.5">
+<label class="block font-label-field text-label-field text-text-title">
+              Rótulo da Pergunta
+            </label>
+<textarea class="w-full p-3 rounded-xl glass-input text-[13px] text-text-title font-medium resize-none leading-snug" rows="2">Qual a atmosfera visual pretendida para o novo estúdio?</textarea>
+</div>
+<!-- Campo: Texto de Ajuda / Placeholder -->
+<div class="space-y-1.5">
+<label class="block font-label-field text-label-field text-text-title">
+              Texto de Ajuda / Placeholder
+            </label>
+<textarea class="w-full p-3 rounded-xl glass-input text-[13px] text-text-body resize-none leading-snug" rows="2">Selecione a referência de atmosfera que mais traduz o espaço.</textarea>
+</div>
+<div class="h-[1px] bg-border-divider/70"></div>
+<!-- Regras & Toggles -->
+<div class="space-y-3">
+<h3 class="font-label-field text-[12px] font-bold text-text-support uppercase tracking-wider">Comportamento</h3>
+<!-- Toggle: Resposta Obrigatória (ATIVO) -->
+<div class="flex items-center justify-between py-1">
+<div>
+<p class="font-body-strong text-[13px] text-text-title">Resposta obrigatória</p>
+<p class="text-[11px] text-text-support">O cliente deve responder para avançar</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle: Permitir Seleção Múltipla (DESATIVADO) -->
+<div class="flex items-center justify-between py-1">
+<div>
+<p class="font-body-strong text-[13px] text-text-title">Permitir seleção múltipla</p>
+<p class="text-[11px] text-text-support">Permite marcar mais de um card</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<div class="h-[1px] bg-border-divider/70"></div>
+<!-- Bloco: Lógica Condicional -->
+<div class="p-3.5 rounded-xl bg-surface-canvas-mid/70 border border-border-divider space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">alt_route</span>
+<span class="font-label-field text-[12px] font-bold text-text-title">Lógica Condicional</span>
+</div>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-tertiary/10 text-tertiary">Ativa</span>
+</div>
+<p class="text-[12px] text-text-body leading-relaxed">
+              Mostrar esta pergunta se: <br/>
+<span class="font-mono font-semibold text-text-title bg-surface-container-lowest px-1.5 py-0.5 rounded border border-border-divider/80 inline-block mt-1">Escopo incluir 'Identidade Visual & Branding'</span>
+</p>
+<button class="text-[12px] font-semibold text-brand-primary-text hover:underline flex items-center gap-1 pt-1" type="button">
+<span>Editar regras de exibição</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<!-- Botão Gerenciar Opções de Resposta -->
+<button class="w-full py-2.5 px-4 rounded-xl bg-surface-container-lowest border border-border-divider hover:border-slate-300 text-text-title font-body-strong text-[13px] flex items-center justify-center gap-2 shadow-sm transition-all duration-150" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-support">imagesmode</span>
+<span>Gerenciar 3 opções de imagens</span>
+</button>
+</aside>
+</main>
+</div>
+</div>
+</body></html>
