@@ -1,13 +1,20 @@
 /**
  * StudioIntake — API de Instâncias de Briefing
- * GET    ?id=BRF-XXX           → busca uma instância pelo id
- * GET    ?cliente_id=...       → lista instâncias de um cliente
- * GET    (sem params)          → lista todas as instâncias
- * POST   { ...dados }          → cria uma instância
- * PATCH  { id, ...parcial }    → atualiza uma instância (usado pelo autosave)
- * DELETE ?id=BRF-XXX           → remove uma instância
+ * GET    ?id=BRF-XXX           → busca uma instância pelo id (admin, ou cliente pela própria instância)
+ * GET    ?cliente_id=...       → lista instâncias de um cliente (admin, ou cliente pelo próprio cliente_id)
+ * GET    (sem params)          → lista todas as instâncias (admin)
+ * POST   { ...dados }          → cria uma instância (admin)
+ * PATCH  { id, ...parcial }    → atualiza uma instância (admin, ou cliente na própria instância — usado pelo autosave)
+ * DELETE ?id=BRF-XXX           → remove uma instância (admin)
+ *
+ * Correção de RN-API-01: toda requisição exige sessão válida
+ * (`_auth-guard.js`). Sessão de cliente só lê/edita a própria instância —
+ * nunca lista tudo, cria ou exclui. Ver
+ * _reversa_forward/001-corrige-autenticacao-api/interfaces/clients-instances.md.
  */
 import { getSql, jsonResponse } from './_db.js';
+import { requireSession, isAdmin, clientScope } from './_auth-guard.js';
+import { logAction } from './_audit.js';
 
 function rowToInstance(row) {
   return {
@@ -31,10 +38,28 @@ function rowToInstance(row) {
 
 export default async function handler(req, res) {
   try {
+    const session = await requireSession(req, res);
+    if (!session) return; // requireSession já respondeu 401
+
     const sql = getSql();
+    const admin = isAdmin(session);
+    const scope = admin ? null : clientScope(session);
 
     if (req.method === 'GET') {
       const { id, cliente_id } = req.query;
+
+      if (!admin) {
+        if (id && id === scope?.instanciaId) {
+          const rows = await sql`SELECT * FROM instancias_briefing WHERE id = ${id} LIMIT 1`;
+          return jsonResponse(res, 200, { instance: rows[0] ? rowToInstance(rows[0]) : null });
+        }
+        if (cliente_id && cliente_id === scope?.clienteId) {
+          const rows = await sql`SELECT * FROM instancias_briefing WHERE cliente_id = ${cliente_id} ORDER BY criado_em DESC`;
+          return jsonResponse(res, 200, { instances: rows.map(rowToInstance) });
+        }
+        return jsonResponse(res, 403, { error: 'Acesso não autorizado a este recurso.' });
+      }
+
       if (id) {
         const rows = await sql`SELECT * FROM instancias_briefing WHERE id = ${id} LIMIT 1`;
         return jsonResponse(res, 200, { instance: rows[0] ? rowToInstance(rows[0]) : null });
@@ -48,6 +73,8 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'POST') {
+      if (!admin) return jsonResponse(res, 403, { error: 'Acesso não autorizado.' });
+
       const d = req.body || {};
       if (!d.id || !d.cliente_id || !d.template_id) {
         return jsonResponse(res, 400, { error: 'Campos obrigatórios: id, cliente_id, template_id' });
@@ -60,12 +87,18 @@ export default async function handler(req, res) {
           status = EXCLUDED.status,
           atualizado_em = NOW()
       `;
+      await logAction('admin', 'instancia.create', 'instancia', d.id);
       return jsonResponse(res, 201, { ok: true });
     }
 
     if (req.method === 'PATCH') {
       const d = req.body || {};
       if (!d.id) return jsonResponse(res, 400, { error: 'Campo obrigatório: id' });
+
+      if (!admin && d.id !== scope?.instanciaId) {
+        return jsonResponse(res, 403, { error: 'Acesso não autorizado a este recurso.' });
+      }
+
       await sql`
         UPDATE instancias_briefing SET
           status = COALESCE(${d.status}, status),
@@ -77,13 +110,17 @@ export default async function handler(req, res) {
           atualizado_em = NOW()
         WHERE id = ${d.id}
       `;
+      await logAction(admin ? 'admin' : scope.clienteId, 'instancia.update', 'instancia', d.id);
       return jsonResponse(res, 200, { ok: true });
     }
 
     if (req.method === 'DELETE') {
+      if (!admin) return jsonResponse(res, 403, { error: 'Acesso não autorizado.' });
+
       const { id } = req.query;
       if (!id) return jsonResponse(res, 400, { error: 'Parâmetro obrigatório: id' });
       await sql`DELETE FROM instancias_briefing WHERE id = ${id}`;
+      await logAction('admin', 'instancia.delete', 'instancia', id);
       return jsonResponse(res, 200, { ok: true });
     }
 

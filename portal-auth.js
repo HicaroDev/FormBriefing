@@ -7,12 +7,8 @@
 import {
   getClients,
   getClientByCode,
-  getBriefingInstances,
-  getBriefingsByClientId,
   saveClients,
-  saveBriefingInstances,
-  fetchClientByCodeRemote,
-  fetchInstancesByClientRemote
+  fetchClientByCodeRemote
 } from './store.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -20,15 +16,36 @@ document.addEventListener('DOMContentLoaded', async () => {
   const codeParam = params.get('code') || params.get('pin');
   const briefParam = params.get('brief') || params.get('id');
 
-  // Se já veio com código e briefing na URL, redireciona diretamente para o formulário
+  // Se já veio com código e briefing na URL (link direto, ex: WhatsApp),
+  // precisa estabelecer sessão no servidor ANTES de redirecionar — sem
+  // isso, `form-engine.js` seria bloqueado pelo guard de autenticação
+  // novo (RN-API-01) ao chamar api/clients e api/instances.
   if (codeParam && briefParam) {
     const langParam = params.get('lang');
     const langSuffix = langParam ? `&lang=${langParam}` : '';
-    window.location.href = `client-form.html?code=${codeParam}&brief=${briefParam}${langSuffix}`;
-    return;
+    try {
+      const res = await fetch('/api/client-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ codigo: codeParam, brief: briefParam })
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        window.location.href = `client-form.html?code=${codeParam}&brief=${briefParam}${langSuffix}`;
+        return;
+      }
+      // Link inválido/expirado — cai no fluxo normal de digitar o PIN em
+      // vez de travar a página numa tela sem explicação.
+    } catch (e) {
+      // Erro de rede — mesma lógica: cai no fluxo normal de PIN.
+    }
   }
 
-  // Se veio apenas com código, resolve o briefing e atualiza o card de boas-vindas
+  // Se veio apenas com código (sem brief), tenta personalizar o card de
+  // boas-vindas. Sem sessão ainda, a busca remota (fetchClientByCodeRemote)
+  // agora pode voltar vazia por falta de autenticação (RN-API-01) — nesse
+  // caso só não personaliza o banner; o formulário de PIN continua funcional.
   if (codeParam) {
     const client = await resolveClientByCode(codeParam);
     if (client) {
@@ -130,42 +147,35 @@ async function handlePortalAccess() {
   `;
   btn.disabled = true;
 
-  // Busca cliente pelo código CLI-XXXX (local e, se preciso, no banco remoto)
-  const formattedCode = `CLI-${digits.slice(0, 4)}`;
-  let client = await resolveClientByCode(formattedCode);
+  // Validação agora acontece no servidor (RN-API-01 / RF-05, RF-06, RF-07):
+  // correspondência exata, rate limiting, e emissão da sessão (cookie) que
+  // as próximas chamadas de form-engine.js vão precisar.
+  let data;
+  try {
+    const res = await fetch('/api/client-access', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ pin: digits })
+    });
+    data = await res.json();
 
-  if (!client) {
-    const allClients = getClients();
-    client = allClients.find(c => c.codigo_unico.includes(digits) || digits.includes(c.codigo_unico.replace('CLI-', '')));
-  }
-
-  if (!client) {
-    btn.innerHTML = `
-      <span class="material-symbols-outlined text-[20px]">error</span>
-      <span>Código não encontrado</span>
-    `;
-    btn.disabled = false;
-    alert('Não encontramos um cadastro com esse código. Confira o código recebido ou entre em contato com a agência.');
-    return;
-  }
-
-  let clientBriefs = getBriefingsByClientId(client.id);
-  if (clientBriefs.length === 0) {
-    const remoteInstances = await fetchInstancesByClientRemote(client.id);
-    if (remoteInstances.length > 0) {
-      const existing = getBriefingInstances();
-      saveBriefingInstances([...remoteInstances, ...existing.filter(i => !remoteInstances.some(r => r.id === i.id))]);
-      clientBriefs = remoteInstances;
+    if (!res.ok || !data.ok) {
+      btn.innerHTML = `
+        <span class="material-symbols-outlined text-[20px]">error</span>
+        <span>Código não encontrado</span>
+      `;
+      btn.disabled = false;
+      alert(data.error || 'Não encontramos um cadastro com esse código. Confira o código recebido ou entre em contato com a agência.');
+      return;
     }
-  }
-  const briefId = clientBriefs.length > 0 ? clientBriefs[0].id : null;
-
-  if (!briefId) {
+  } catch (err) {
     btn.innerHTML = `
       <span class="material-symbols-outlined text-[20px]">error</span>
-      <span>Nenhum briefing pendente</span>
+      <span>Erro de conexão</span>
     `;
     btn.disabled = false;
+    alert('Não foi possível validar o código agora. Tente novamente.');
     return;
   }
 
@@ -179,6 +189,6 @@ async function handlePortalAccess() {
   setTimeout(() => {
     const langParam = new URLSearchParams(window.location.search).get('lang');
     const langSuffix = langParam ? `&lang=${langParam}` : '';
-    window.location.href = `client-form.html?code=${client.codigo_unico}&brief=${briefId}${langSuffix}`;
+    window.location.href = `client-form.html?code=CLI-${digits.slice(0, 4)}&brief=${data.instanciaId}${langSuffix}`;
   }, 500);
 }

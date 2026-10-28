@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: FormBriefing / Studio Suite 2.0 — API interna
+  description: >
+    Reconstruída por engenharia reversa a partir de api/auth.js, api/clients.js,
+    api/instances.js, api/_db.js. 🟢 CONFIRMADO salvo indicação contrária.
+    ⚠️ Nenhum destes endpoints exige autenticação hoje (RN-API-01) — ver api-backend/questions.md.
+  version: "1.0.0-reversed"
+servers:
+  - url: /api
+paths:
+  /auth:
+    post:
+      summary: Login do admin e verificação de sessão
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action: { type: string, enum: [login, verify] }
+                email: { type: string }
+                password: { type: string }
+                token: { type: string }
+      responses:
+        "200":
+          description: Token emitido (login) ou validade do token (verify)
+        "400":
+          description: Ação inválida ou credenciais incorretas
+  /clients:
+    get:
+      summary: Busca cliente por código/id, ou lista todos
+      parameters:
+        - { name: code, in: query, schema: { type: string } }
+        - { name: id, in: query, schema: { type: string } }
+      responses:
+        "200": { description: "{client} ou {clients[]} — SEM autenticação (gap de segurança)" }
+    post:
+      summary: Cria ou faz upsert de um cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ClienteInput" }
+      responses:
+        "201": { description: ok }
+        "400": { description: "campos obrigatórios ausentes" }
+    patch:
+      summary: Atualiza parcialmente um cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: { id: { type: string } }
+              required: [id]
+      responses:
+        "200": { description: ok }
+  /instances:
+    get:
+      summary: Busca instância por id/cliente, ou lista todas
+      parameters:
+        - { name: id, in: query, schema: { type: string } }
+        - { name: cliente_id, in: query, schema: { type: string } }
+      responses:
+        "200": { description: "{instance} ou {instances[]} — SEM autenticação (gap de segurança)" }
+    post:
+      summary: Cria ou faz upsert PARCIAL de uma instância (RN-API-03)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BriefingInstanceInput" }
+      responses:
+        "201": { description: ok }
+        "400": { description: "campos obrigatórios ausentes" }
+    patch:
+      summary: Atualização completa de uma instância (usado pelo autosave)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: { id: { type: string } }
+              required: [id]
+      responses:
+        "200": { description: ok }
+    delete:
+      summary: Remove uma instância (não limpa clientes.briefings_ids — RN-API-04)
+      parameters:
+        - { name: id, in: query, required: true, schema: { type: string } }
+      responses:
+        "200": { description: ok }
+components:
+  schemas:
+    ClienteInput:
+      type: object
+      required: [id, codigo_unico, empresa]
+      properties:
+        id: { type: string }
+        codigo_unico: { type: string }
+        nome_responsavel: { type: string }
+        empresa: { type: string }
+        vertical: { type: string }
+        status_cliente: { type: string }
+    BriefingInstanceInput:
+      type: object
+      required: [id, cliente_id, template_id]
+      properties:
+        id: { type: string }
+        cliente_id: { type: string }
+        template_id: { type: string }
+        status: { type: string, enum: [rascunho, enviado, em_preenchimento, submetido, em_revisao, ajustes_solicitados, aprovado_kickoff] }

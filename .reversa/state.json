@@ -1,0 +1,123 @@
+{
+  "version": "1.0.0",
+  "project": "FormBriefing / Studio Suite 2.0",
+  "user_name": "Hícaro",
+  "chat_language": "pt-br",
+  "doc_language": "Português",
+  "answer_mode": "chat",
+  "doc_level": "completo",
+  "output_folder": "_reversa_sdd",
+  "phase": "concluido",
+  "completed": ["reconhecimento", "escavacao", "interpretacao", "geracao", "revisao"],
+  "pending": [],
+  "engines": ["claude-code"],
+  "agents": ["reversa", "reversa-scout", "reversa-archaeologist", "reversa-detective", "reversa-architect", "reversa-writer", "reversa-reviewer"],
+  "checkpoints": {
+    "archaeologist": {
+      "modules_analyzed": ["auth", "dashboard-core", "client-intake", "crm-funil", "forms-hub", "api-backend", "ai-briefing-generator", "telas-preview-v2", "design-reference-stitch"],
+      "modules_pending": []
+    },
+    "scout": {
+      "completed_at": "2026-10-26T19:50:00Z",
+      "files": [
+        "_reversa_sdd/inventory.md",
+        "_reversa_sdd/dependencies.md",
+        ".reversa/context/surface.json"
+      ]
+    },
+    "detective": {
+      "completed_at": "2026-10-26T21:50:00Z",
+      "files": [
+        "_reversa_sdd/domain.md",
+        "_reversa_sdd/state-machines.md",
+        "_reversa_sdd/permissions.md",
+        "_reversa_sdd/adrs/001-migracao-localstorage-para-postgres.md",
+        "_reversa_sdd/adrs/002-redesign-visual-com-telas-preview-adiadas.md",
+        "_reversa_sdd/adrs/003-zero-leakage-gate-apos-incidentes.md"
+      ]
+    },
+    "architect": {
+      "completed_at": "2026-10-26T22:05:00Z",
+      "files": [
+        "_reversa_sdd/architecture.md",
+        "_reversa_sdd/c4-context.md",
+        "_reversa_sdd/c4-containers.md",
+        "_reversa_sdd/c4-components.md",
+        "_reversa_sdd/erd-complete.md",
+        "_reversa_sdd/traceability/spec-impact-matrix.md"
+      ]
+    },
+    "writer": {
+      "completed_at": "2026-10-26T22:40:00Z",
+      "units_generated": 9,
+      "files": "34 arquivos de unit (auth, dashboard-core, client-intake, crm-funil, forms-hub, api-backend, ai-briefing-generator, telas-preview-v2, design-reference-stitch) + 3 globais (openapi, user-stories, traceability/code-spec-matrix.md)"
+    },
+    "reviewer": {
+      "completed_at": "2026-10-26T22:50:00Z",
+      "confianca_geral_pct": 63,
+      "perguntas_geradas": 14,
+      "files": [
+        "_reversa_sdd/confidence-report.md",
+        "_reversa_sdd/questions.md",
+        "_reversa_sdd/gaps.md"
+      ],
+      "respostas_processadas_em": "2026-10-27T05:30:00Z",
+      "confianca_geral_pct_pos_respostas": 90,
+      "arquivos_atualizados_pos_respostas": [
+        "_reversa_sdd/questions.md",
+        "_reversa_sdd/gaps.md",
+        "_reversa_sdd/confidence-report.md",
+        "_reversa_sdd/crm-funil/decisions.md",
+        "_reversa_sdd/security-architecture-decisions.md"
+      ]
+    }
+  },
+  "created_files": [
+    ".reversa/state.json",
+    ".reversa/plan.md",
+    ".reversa/config.toml",
+    ".reversa/context/surface.json",
+    ".reversa/context/modules.json",
+    "_reversa_sdd/inventory.md",
+    "_reversa_sdd/dependencies.md",
+    "_reversa_sdd/code-analysis.md",
+    "_reversa_sdd/data-dictionary.md",
+    "_reversa_sdd/domain.md",
+    "_reversa_sdd/state-machines.md",
+    "_reversa_sdd/permissions.md",
+    "_reversa_sdd/flowcharts/auth.md",
+    "_reversa_sdd/flowcharts/dashboard-core.md",
+    "_reversa_sdd/flowcharts/client-intake.md",
+    "_reversa_sdd/flowcharts/crm-funil.md",
+    "_reversa_sdd/flowcharts/forms-hub.md",
+    "_reversa_sdd/flowcharts/api-backend.md",
+    "_reversa_sdd/flowcharts/ai-briefing-generator.md",
+    "_reversa_sdd/flowcharts/telas-preview-v2.md",
+    "_reversa_sdd/flowcharts/design-reference-stitch.md",
+    "_reversa_sdd/adrs/001-migracao-localstorage-para-postgres.md",
+    "_reversa_sdd/adrs/002-redesign-visual-com-telas-preview-adiadas.md",
+    "_reversa_sdd/adrs/003-zero-leakage-gate-apos-incidentes.md",
+    "_reversa_sdd/architecture.md",
+    "_reversa_sdd/c4-context.md",
+    "_reversa_sdd/c4-containers.md",
+    "_reversa_sdd/c4-components.md",
+    "_reversa_sdd/erd-complete.md",
+    "_reversa_sdd/traceability/spec-impact-matrix.md",
+    "_reversa_sdd/auth/requirements.md", "_reversa_sdd/auth/design.md", "_reversa_sdd/auth/tasks.md",
+    "_reversa_sdd/dashboard-core/requirements.md", "_reversa_sdd/dashboard-core/design.md", "_reversa_sdd/dashboard-core/tasks.md",
+    "_reversa_sdd/client-intake/requirements.md", "_reversa_sdd/client-intake/design.md", "_reversa_sdd/client-intake/tasks.md",
+    "_reversa_sdd/crm-funil/requirements.md", "_reversa_sdd/crm-funil/design.md", "_reversa_sdd/crm-funil/tasks.md", "_reversa_sdd/crm-funil/decisions.md", "_reversa_sdd/crm-funil/questions.md",
+    "_reversa_sdd/forms-hub/requirements.md", "_reversa_sdd/forms-hub/design.md", "_reversa_sdd/forms-hub/tasks.md", "_reversa_sdd/forms-hub/questions.md",
+    "_reversa_sdd/api-backend/requirements.md", "_reversa_sdd/api-backend/design.md", "_reversa_sdd/api-backend/contracts.md", "_reversa_sdd/api-backend/tasks.md", "_reversa_sdd/api-backend/questions.md",
+    "_reversa_sdd/ai-briefing-generator/requirements.md", "_reversa_sdd/ai-briefing-generator/design.md", "_reversa_sdd/ai-briefing-generator/tasks.md", "_reversa_sdd/ai-briefing-generator/questions.md",
+    "_reversa_sdd/telas-preview-v2/requirements.md", "_reversa_sdd/telas-preview-v2/design.md", "_reversa_sdd/telas-preview-v2/tasks.md", "_reversa_sdd/telas-preview-v2/questions.md",
+    "_reversa_sdd/design-reference-stitch/requirements.md", "_reversa_sdd/design-reference-stitch/design.md", "_reversa_sdd/design-reference-stitch/tasks.md",
+    "_reversa_sdd/openapi/studiointake-api.yaml",
+    "_reversa_sdd/user-stories/fluxo-briefing-completo.md",
+    "_reversa_sdd/traceability/code-spec-matrix.md",
+    "_reversa_sdd/confidence-report.md",
+    "_reversa_sdd/questions.md",
+    "_reversa_sdd/gaps.md",
+    "_reversa_sdd/security-architecture-decisions.md"
+  ]
+}

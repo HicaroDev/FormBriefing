@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-10-26T19:50:00Z",
+  "project_root": "C:/DEV/FormBriefing",
+  "languages": [
+    { "name": "JavaScript", "extensions": [".js"], "file_count": 16 },
+    { "name": "HTML", "extensions": [".html"], "file_count": 14 },
+    { "name": "Markdown", "extensions": [".md"], "file_count": 13 }
+  ],
+  "primary_language": "JavaScript",
+  "frameworks": [
+    { "name": "Vite", "version": "^6.0.0", "source": "package.json" },
+    { "name": "@neondatabase/serverless", "version": "^0.10.4", "source": "package.json" }
+  ],
+  "package_manager": "npm",
+  "entry_points": [
+    { "path": "index.html", "type": "app_entry" },
+    { "path": "login.html", "type": "app_entry" },
+    { "path": "portal.html", "type": "app_entry" },
+    { "path": "client-form.html", "type": "app_entry" },
+    { "path": "crm.html", "type": "app_entry" },
+    { "path": "forms-hub.html", "type": "app_entry" },
+    { "path": "form-builder.html", "type": "app_entry_preview" },
+    { "path": "projects.html", "type": "app_entry_preview" },
+    { "path": "project-detail.html", "type": "app_entry_preview" },
+    { "path": "client-tracking.html", "type": "app_entry_preview" },
+    { "path": "api/auth.js", "type": "server_entry" },
+    { "path": "api/clients.js", "type": "server_entry" },
+    { "path": "api/instances.js", "type": "server_entry" },
+    { "path": "api/migrate.js", "type": "server_entry" }
+  ],
+  "config_files": [
+    "vite.config.js",
+    ".env.local",
+    "package.json"
+  ],
+  "ci_cd": [],
+  "docker": {},
+  "database_hints": [
+    { "path": "api/migrate.js", "type": "inline_ddl_create_table" },
+    { "path": "api/_db.js", "type": "neon_connection_helper" }
+  ],
+  "test_framework": null,
+  "test_file_count": 0,
+  "modules": [
+    "auth",
+    "dashboard-core",
+    "client-intake",
+    "crm-funil",
+    "forms-hub",
+    "api-backend",
+    "ai-briefing-generator",
+    "telas-preview-v2",
+    "design-reference-stitch"
+  ],
+  "total_files": 61,
+  "organization_suggestion": {
+    "granularity": "module",
+    "rationale": "A raiz do projeto já é organizada por tela/responsabilidade funcional (auth, dashboard, client-form, crm, forms-hub, api), sem roteamento centralizado nem specs BDD — o agrupamento por módulo é o sinal dominante.",
+    "signals": [
+      { "type": "top_level_domain_folders", "evidence": ["api/", "login.html", "portal.html", "client-form.html", "crm.html", "forms-hub.html", "dashboard.js", "store.js"] }
+    ],
+    "features": []
+  },
+  "notas": [
+    "Projeto Vite multi-página + funções serverless Vercel (/api) + Neon Postgres, sem framework de teste configurado.",
+    "modelo_site/ contém mockups de referência visual (Stitch), incluindo studio_suite_2.0/parte1 e parte2 — fonte de verdade do redesign. Não é código de produção, é referência de design intocável.",
+    "form-builder.html, projects.html, project-detail.html, client-tracking.html são cópias quase literais dos mockups Stitch, ainda sem dados reais nem lógica — módulo telas-preview-v2.",
+    "crm.html já foi implementado uma vez de forma simplificada e precisa ser reconstruído com mais fidelidade ao mockup studio_suite_2.0/parte2/studio_suite_2.0_crm_forms_hub_glassmorphic."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema-version": 1,
+  "feature-dir": "_reversa_forward/003-projeto-cadastro-mvp",
+  "feature-id": "003",
+  "short-name": "projeto-cadastro-mvp",
+  "started-at": "2026-10-27T17:05:00Z",
+  "current-stage": "requirements",
+  "stages-completed": [],
+  "paused-features": [
+    {
+      "feature-dir": "_reversa_forward/001-corrige-autenticacao-api",
+      "feature-id": "001",
+      "short-name": "corrige-autenticacao-api",
+      "started-at": "2026-10-27T10:20:00Z",
+      "current-stage": "to-do",
+      "stages-completed": [],
+      "paused-at": "2026-10-27T15:50:00Z",
+      "paused-from-stage": "coding-em-progresso"
+    },
+    {
+      "feature-dir": "_reversa_forward/002-crm-funil-lead-projeto",
+      "feature-id": "002",
+      "short-name": "crm-funil-lead-projeto",
+      "started-at": "2026-10-27T15:50:00Z",
+      "current-stage": "requirements",
+      "stages-completed": [],
+      "paused-at": "2026-10-27T17:05:00Z",
+      "paused-from-stage": "coding-em-progresso"
+    }
+  ]
+}

@@ -432,6 +432,23 @@
               Acesso exclusivo ao núcleo operacional do estúdio
             </p>
 </div>
+<!-- TOTP Step (exibido só depois do e-mail/senha, quando MFA está configurado) -->
+<form class="space-y-4 hidden" id="totpForm" onsubmit="event.preventDefault(); handleTotpSubmit(event);">
+<div class="space-y-1.5 text-left">
+<label class="font-label-field text-label-field text-text-title" for="totp-field">
+                  Código do app autenticador
+                </label>
+<input autocomplete="one-time-code" class="glass-input w-full h-11 px-3.5 text-text-title font-body-default text-body-default placeholder:text-text-placeholder focus:bg-white transition-all text-center font-code-token tracking-widest" id="totp-field" inputmode="numeric" maxlength="6" placeholder="000000" required="" type="text">
+<p class="font-caption-badge text-[11px] text-text-support">Abra o Google Authenticator ou Microsoft Authenticator e digite o código de 6 dígitos.</p>
+</div>
+<button class="btn-primary-gradient w-full h-11 rounded-xl text-white font-body-strong text-body-strong font-semibold flex items-center justify-center gap-2 mt-2" type="submit">
+<span class="">Confirmar</span>
+<span class="material-symbols-outlined" style="font-size: 18px;">verified_user</span>
+</button>
+<button class="font-body-default text-[12px] text-text-support hover:text-text-title transition-colors w-full text-center" onclick="event.preventDefault(); showLoginStep();" type="button">
+              Voltar
+            </button>
+</form>
 <!-- Login Form -->
 <form class="space-y-4" id="loginForm" onsubmit="event.preventDefault(); handleLoginSubmit(event);">
 <!-- Email Input -->
@@ -555,6 +572,23 @@
       document.getElementById('error-banner').classList.remove('hidden');
     }
 
+    // Guardado só em memória da página (nunca em localStorage) — serve
+    // apenas para completar a etapa de TOTP em seguida, expira em poucos
+    // minutos no servidor mesmo que a aba fique aberta.
+    let pendingLoginTicket = null;
+
+    function showTotpStep() {
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('totpForm').classList.remove('hidden');
+      document.getElementById('totp-field').focus();
+    }
+
+    function showLoginStep() {
+      pendingLoginTicket = null;
+      document.getElementById('totpForm').classList.add('hidden');
+      document.getElementById('loginForm').classList.remove('hidden');
+    }
+
     async function handleLoginSubmit(e) {
       const email = document.getElementById('email-field').value;
       const password = document.getElementById('password-field').value;
@@ -569,18 +603,69 @@
         const res = await fetch('/api/auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
           body: JSON.stringify({ action: 'login', email, password })
         });
         const data = await res.json();
 
-        if (!res.ok || !data.token) {
+        if (!res.ok) {
           showLoginError('Credenciais incorretas', data.error || 'Verifique seu e-mail do estúdio ou utilize o link de recuperação de acesso.');
           btn.innerHTML = origContent;
           btn.disabled = false;
           return;
         }
 
-        localStorage.setItem('studiointake_admin_token', data.token);
+        if (data.requiresTotp) {
+          pendingLoginTicket = data.loginTicket;
+          btn.innerHTML = origContent;
+          btn.disabled = false;
+          showTotpStep();
+          return;
+        }
+
+        // Sessão já criada pelo servidor (cookie) — login direto, MFA ainda
+        // não configurado neste ambiente (ver onboarding.md da feature).
+        if (data.mfaSetupRequired) {
+          console.warn('MFA ainda não configurado para o admin — configure ADMIN_TOTP_SECRET (ver scripts/generate-totp-secret.js) para exigir o segundo fator.');
+        }
+        btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px;">check</span><span>Acesso Autorizado</span>`;
+        btn.classList.remove('btn-primary-gradient');
+        btn.classList.add('bg-status-success', 'text-white');
+        setTimeout(() => { window.location.href = 'index.html'; }, 500);
+      } catch (err) {
+        showLoginError('Erro de conexão', 'Não foi possível contatar o servidor. Tente novamente.');
+        btn.innerHTML = origContent;
+        btn.disabled = false;
+      }
+    }
+
+    async function handleTotpSubmit(e) {
+      const code = document.getElementById('totp-field').value;
+      const btn = e.submitter || document.querySelector('#totpForm button[type="submit"]');
+      const origContent = btn.innerHTML;
+
+      document.getElementById('error-banner').classList.add('hidden');
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin" style="font-size: 18px;">progress_activity</span><span>Verificando...</span>`;
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ action: 'verify-totp', loginTicket: pendingLoginTicket, code })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.ok) {
+          showLoginError('Código inválido', data.error || 'Confira o código no app autenticador e tente de novo.');
+          btn.innerHTML = origContent;
+          btn.disabled = false;
+          document.getElementById('totp-field').value = '';
+          document.getElementById('totp-field').focus();
+          return;
+        }
+
         btn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px;">check</span><span>Acesso Autorizado</span>`;
         btn.classList.remove('btn-primary-gradient');
         btn.classList.add('bg-status-success', 'text-white');

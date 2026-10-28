@@ -1,0 +1,20 @@
+{"ts":"2026-10-27T16:00:00Z","action":"T001","status":"done","files":["api/migrate.js"]}
+{"ts":"2026-10-27T16:00:00Z","action":"T002","status":"done","files":["api/migrate.js"]}
+{"ts":"2026-10-27T16:00:00Z","action":"T003","status":"done","files":["api/migrate.js"]}
+{"ts":"2026-10-27T16:01:00Z","action":"T004","status":"done","files":["api/_leads-rules.js"]}
+{"ts":"2026-10-27T16:02:00Z","action":"T005","status":"done","files":["api/_leads-rules.test.js"],"note":"7/7 testes passaram (node --test); suíte completa do projeto agora em 23/23"}
+{"ts":"2026-10-27T16:05:00Z","action":"T006","status":"done","files":["api/leads.js"]}
+{"ts":"2026-10-27T16:05:00Z","action":"T007","status":"done","files":["api/leads.js"]}
+{"ts":"2026-10-27T16:05:00Z","action":"T008","status":"done","files":["api/leads.js"]}
+{"ts":"2026-10-27T16:06:00Z","action":"T009","status":"done","files":["api/leads.js"]}
+{"ts":"2026-10-27T16:06:00Z","action":"T010","status":"done","files":["api/leads.js"]}
+{"ts":"2026-10-27T16:06:00Z","action":"T011","status":"done","files":["api/leads.js"]}
+{"ts":"2026-10-27T16:07:00Z","action":"T012","status":"done","files":["api/leads.js"]}
+{"ts":"2026-10-27T16:07:00Z","action":"T013","status":"done","files":["api/leads.js"]}
+{"ts":"2026-10-27T16:12:00Z","action":"T014","status":"done","files":["index.html"],"note":"implementado como script inline independente em index.html, sem tocar dashboard.js (desvio do roadmap.md, registrado em actions.md e legacy-impact.md)"}
+{"ts":"2026-10-27T16:14:00Z","action":"T015","status":"done","files":["crm.html"]}
+{"ts":"2026-10-27T16:14:00Z","action":"T016","status":"done","files":["crm.html"]}
+{"ts":"2026-10-27T16:14:00Z","action":"T017","status":"done","files":["crm.html"]}
+{"ts":"2026-10-27T16:14:00Z","action":"T018","status":"done","files":["crm.html"],"note":"satisfeito pela mesma implementacao de T015-T017, sem retrabalho necessario"}
+{"ts":"2026-10-27T16:16:00Z","action":"T019","status":"done","files":["README.md"]}
+{"ts":"2026-10-27T16:16:00Z","action":"T020","status":"blocked","files":[],"note":"requer DATABASE_URL/deploy real (Vercel+Neon); mesma limitacao da feature 001, entregue como roteiro manual em onboarding.md"}

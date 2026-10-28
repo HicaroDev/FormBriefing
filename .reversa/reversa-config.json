@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "allowLegacyEdits": true,
+    "allowedPaths": [
+        "api/**",
+        "scripts/**",
+        "package.json",
+        "dashboard.js",
+        "portal-auth.js",
+        "login.html",
+        "README.md",
+        "index.html",
+        "crm.html",
+        "projects.html",
+        "project-detail.html"
+    ]
+}
+
+{
+    "hooks": {
+        "PostCompact": [
+            {
+                "matcher": "manual",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "py \"C:\\DEV\\.claude\\skills\\cerebro\\scripts\\compact_log.py\" manual",
+                        "shell": "powershell",
+                        "timeout": 20
+                    }
+                ]
+            },
+            {
+                "matcher": "auto",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "py \"C:\\DEV\\.claude\\skills\\cerebro\\scripts\\compact_log.py\" auto",
+                        "shell": "powershell",
+                        "timeout": 20
+                    }
+                ]
+            }
+        ]
+    }
+}

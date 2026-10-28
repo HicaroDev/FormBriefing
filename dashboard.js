@@ -57,27 +57,28 @@ let lastInstancesHash = '';
 // ============================================================================
 
 async function requireAuth() {
-  const token = localStorage.getItem('studiointake_admin_token');
-  if (!token) {
-    window.location.href = 'login.html';
-    return false;
-  }
+  // Sessão deixou de ser um token em localStorage e passou a ser um cookie
+  // HttpOnly/Secure/SameSite (correção de RN-API-01) — o navegador envia o
+  // cookie automaticamente em requisições same-origin, não precisamos ler
+  // nem gerenciar nada aqui além de perguntar ao servidor se é válida.
   try {
     const res = await fetch('/api/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'verify', token })
+      credentials: 'same-origin',
+      body: JSON.stringify({ action: 'verify' })
     });
     const data = await res.json();
     if (!data.valid) {
-      localStorage.removeItem('studiointake_admin_token');
       window.location.href = 'login.html';
       return false;
     }
     return true;
   } catch (e) {
-    // Falha de rede: não derruba a sessão, apenas segue (evita travar o
-    // dashboard offline por causa de uma checagem de auth que falhou).
+    // Falha de REDE (não resposta do servidor): não derruba a sessão, só
+    // segue — preserva RN-AUTH-05. Uma resposta explícita do servidor
+    // dizendo que a sessão não é válida (acima) sempre desloga; só a falha
+    // de conexão é tolerada.
     return true;
   }
 }
@@ -85,8 +86,17 @@ async function requireAuth() {
 function setupLogout() {
   const btn = document.getElementById('btn-logout');
   if (btn) {
-    btn.addEventListener('click', () => {
-      localStorage.removeItem('studiointake_admin_token');
+    btn.addEventListener('click', async () => {
+      try {
+        await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ action: 'logout' })
+        });
+      } catch (e) {
+        // segue para o login mesmo se a chamada de logout falhar por rede
+      }
       window.location.href = 'login.html';
     });
   }

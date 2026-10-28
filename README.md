@@ -91,6 +91,43 @@ c:/DEV/FormBriefing/
 
 ---
 
+## 🔐 Autenticação e Segurança da API
+
+Correção de RN-API-01 (`_reversa_forward/001-corrige-autenticacao-api/`): toda rota administrativa (`api/clients.js`, `api/instances.js`, `api/auth.js`) agora exige sessão válida no servidor — não existe mais acesso direto sem login.
+
+- **Login do admin:** e-mail/senha + segundo fator (TOTP), se `ADMIN_TOTP_SECRET` estiver configurado.
+- **Configurar o MFA (uma vez):**
+  ```bash
+  node scripts/generate-totp-secret.js
+  ```
+  Copie o valor gerado para a variável de ambiente `ADMIN_TOTP_SECRET` na Vercel, e cadastre a mesma chave no Google Authenticator / Microsoft Authenticator (opção "inserir chave manualmente"). Sem essa variável configurada, o login funciona normalmente, mas sem o segundo fator.
+- **Acesso do cliente (PIN):** validado no servidor via `POST /api/client-access`, com bloqueio temporário após tentativas demais.
+- **Testes automatizados:**
+  ```bash
+  npm test
+  ```
+  Roda a suíte `node --test` sobre `api/*.test.js` (TOTP, sessões, rate limiting). Veja o roteiro de teste manual completo em `_reversa_forward/001-corrige-autenticacao-api/onboarding.md`.
+
+---
+
+## 🧭 Funil de Lead/Deal (CRM)
+
+Correção de `_reversa_forward/002-crm-funil-lead-projeto/`: `crm.html` agora é o funil de Lead (6 estágios configuráveis, persistidos em `leads`/`lead_estagios`), não mais o Kanban de acompanhamento de briefing.
+
+- **Criar/mover/excluir Lead:** só o admin, via `crm.html` (arrastar o card entre colunas, ou botão "Novo Lead"). API protegida por sessão (`/api/leads`), mesma trava da feature 001.
+- **Converter em Cliente:** disponível nos estágios finais (`fechado`/`perdido`); cria um `Cliente` real vinculado ao Lead, sem apagar o Lead (histórico preservado em `clientes.lead_origem_id`).
+- **Kanban de acompanhamento de briefing** (o que antes vivia em `crm.html`): migrou para dentro do Dashboard — acesse em `index.html#kanban` ou pelo item "Acompanhamento de Briefings" no menu lateral. Nenhuma função foi perdida, só mudou de endereço.
+- Sem score de IA no card do Lead (decisão do usuário) e sem a ação "Transformar em Projeto" do mockup (entidade `Projeto` ainda não implementada — próxima feature do roadmap).
+
+## 🏗️ Projetos (MVP)
+
+Correção de `_reversa_forward/003-projeto-cadastro-mvp/`: `projects.html`/`project-detail.html` deixam de ser mockups estáticos e passam a mostrar Projetos reais, vinculados a um `Cliente` existente.
+
+- **Criar Projeto ("Transformar em Projeto"):** botão "Novo Projeto" em `projects.html`, disponível para qualquer Cliente cadastrado (não só os originados de Lead).
+- **6 fases** (briefing aprovado → imersão/conceito → criação → revisão do cliente → ajustes finais → entregue), movidas por drag-and-drop, sem validação de sequência obrigatória no MVP.
+- **Horas:** apontamento manual de horas consumidas em `project-detail.html`, com consulta planejado x realizado.
+- **Deliberadamente não implementado:** squads, SLA médio, Gantt/linha do tempo, matriz de capacidade de equipe e histórico de marcos — existiam só no mockup visual original, sem nenhuma entidade real por trás (mesma diretriz aplicada ao score de IA do Lead). Entregáveis e o portal de acompanhamento pós-kickoff do cliente ficam para uma feature futura.
+
 ## 📋 Clientes & Briefings Pré-Carregados (Seed Data)
 
 | Código | Empresa | Vertical | Responsável | Briefing ID | Status |

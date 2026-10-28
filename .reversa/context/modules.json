@@ -1,0 +1,345 @@
+{
+  "generated_at": "2026-10-26T20:20:00Z",
+  "modules": [
+    {
+      "name": "auth",
+      "path": "./",
+      "purpose": "Autenticação do admin do estúdio (login/senha) e autenticação do cliente final (código único CLI-XXXX / PIN), sem tabela de usuários.",
+      "primary_files": [
+        "login.html",
+        "portal.html",
+        "portal-auth.js",
+        "api/auth.js"
+      ],
+      "functions": [
+        { "name": "handler", "file": "api/auth.js", "params": ["req", "res"], "returns": "Promise<void>", "confidence": "confirmed" },
+        { "name": "signToken", "file": "api/auth.js", "params": ["expiry: number"], "returns": "string", "confidence": "confirmed" },
+        { "name": "verifyToken", "file": "api/auth.js", "params": ["token: string"], "returns": "boolean", "confidence": "confirmed" },
+        { "name": "verifyPassword", "file": "api/auth.js", "params": ["password: string"], "returns": "boolean", "confidence": "confirmed" },
+        { "name": "handleLoginSubmit", "file": "login.html", "params": ["e: SubmitEvent"], "returns": "Promise<void>", "confidence": "confirmed" },
+        { "name": "requireAuth", "file": "dashboard.js", "params": [], "returns": "Promise<boolean>", "confidence": "confirmed" },
+        { "name": "resolveClientByCode", "file": "portal-auth.js", "params": ["code: string"], "returns": "Promise<Cliente|null>", "confidence": "confirmed" },
+        { "name": "handlePortalAccess", "file": "portal-auth.js", "params": [], "returns": "Promise<void>", "confidence": "confirmed" },
+        { "name": "setupPinInputs", "file": "portal-auth.js", "params": [], "returns": "void", "confidence": "confirmed" }
+      ],
+      "entities": [],
+      "business_rules": [
+        { "description": "Sessão do admin dura 7 dias a partir do login", "location": "api/auth.js:13", "confidence": "confirmed" },
+        { "description": "Login falha como 'senha incorreta' se ADMIN_PASSWORD_SALT/HASH não configurados, nunca expõe erro de config", "location": "api/auth.js:41-42", "confidence": "confirmed" },
+        { "description": "Acesso do portal do cliente usa o primeiro briefing encontrado para o código, sem seleção quando há múltiplos", "location": "portal-auth.js:161", "confidence": "confirmed" },
+        { "description": "Fallback de busca de cliente por PIN usa includes() nos dois sentidos, pode casar substring de outro código", "location": "portal-auth.js:139", "confidence": "inferred" },
+        { "description": "Falha de rede na verificação de sessão do admin não desloga o usuário, assume sessão válida", "location": "dashboard.js:78-81", "confidence": "confirmed" }
+      ],
+      "dependencies": ["dashboard-core", "client-intake"],
+      "algorithms": [
+        "scrypt (Node default cost) para hash de senha do admin",
+        "HMAC-SHA256 sobre timestamp de expiração para assinatura do token de sessão",
+        "timingSafeEqual para comparação constant-time de senha e token",
+        "matching de PIN por substring bidirecional (fallback)"
+      ],
+      "complexity": "medium"
+    },
+    {
+      "name": "dashboard-core",
+      "path": "./",
+      "purpose": "Dashboard operacional da agência: métricas, tabela de briefings/clientes, inspetor lateral, modais de criação/disparo/ajuste/aprovação, síntese de resumo executivo e sincronização com o Neon.",
+      "primary_files": [
+        "index.html",
+        "dashboard.js",
+        "store.js"
+      ],
+      "functions": [
+        { "name": "generateProductionDigest", "file": "store.js", "params": ["briefingId: string"], "returns": "RespostaDigest|null", "confidence": "confirmed" },
+        { "name": "generateClientCode", "file": "store.js", "params": [], "returns": "string", "confidence": "confirmed" },
+        { "name": "generateBriefingId", "file": "store.js", "params": [], "returns": "string", "confidence": "confirmed" },
+        { "name": "getTemplates", "file": "store.js", "params": [], "returns": "BriefingTemplate[]", "confidence": "confirmed" },
+        { "name": "updateBriefingStatus", "file": "store.js", "params": ["id: string", "newStatus: string", "extraData?: object"], "returns": "BriefingInstance|null", "confidence": "confirmed" },
+        { "name": "syncAllFromRemote", "file": "store.js", "params": [], "returns": "Promise<void>", "confidence": "confirmed" },
+        { "name": "selectBrief", "file": "dashboard.js", "params": ["briefId: string", "reRenderTable?: boolean"], "returns": "void", "confidence": "confirmed" },
+        { "name": "renderTable", "file": "dashboard.js", "params": [], "returns": "void", "confidence": "confirmed" },
+        { "name": "approveBriefing", "file": "dashboard.js", "params": ["briefId: string"], "returns": "void", "confidence": "confirmed" },
+        { "name": "handleConfirmAdjustments", "file": "dashboard.js", "params": [], "returns": "void", "confidence": "confirmed" },
+        { "name": "confirmSendBriefing", "file": "dashboard.js", "params": ["action: 'copy'|'whatsapp'"], "returns": "void", "confidence": "confirmed" },
+        { "name": "handleCreateClientSubmit", "file": "dashboard.js", "params": [], "returns": "void", "confidence": "confirmed" },
+        { "name": "handleGenerateAITemplate", "file": "dashboard.js", "params": ["promptText: string", "presetVertical?: string"], "returns": "void", "confidence": "confirmed" }
+      ],
+      "entities": [
+        {
+          "name": "Cliente",
+          "fields": [
+            { "name": "id", "type": "string", "required": true },
+            { "name": "codigo_unico", "type": "string", "required": true },
+            { "name": "nome_responsavel", "type": "string", "required": true },
+            { "name": "cargo", "type": "string", "required": false },
+            { "name": "empresa", "type": "string", "required": true },
+            { "name": "email", "type": "string", "required": false },
+            { "name": "whatsapp", "type": "string", "required": false },
+            { "name": "vertical", "type": "string", "required": false },
+            { "name": "status_cliente", "type": "string", "required": false },
+            { "name": "briefings_ids", "type": "string[]", "required": false },
+            { "name": "data_cadastro", "type": "timestamptz", "required": false }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "BriefingInstance",
+          "fields": [
+            { "name": "id", "type": "string", "required": true },
+            { "name": "cliente_id", "type": "string (FK Cliente)", "required": true },
+            { "name": "template_id", "type": "string", "required": true },
+            { "name": "etapa_nome", "type": "string", "required": true },
+            { "name": "status", "type": "string (enum)", "required": false },
+            { "name": "link_token", "type": "string", "required": false },
+            { "name": "link_seguro", "type": "string", "required": false },
+            { "name": "respostas_brutas", "type": "jsonb", "required": false },
+            { "name": "anexos", "type": "jsonb[]", "required": false },
+            { "name": "progresso_percentual", "type": "int", "required": false },
+            { "name": "urgencia", "type": "string (enum)", "required": false },
+            { "name": "budget", "type": "string", "required": false },
+            { "name": "feedback_ajustes", "type": "text", "required": false },
+            { "name": "data_envio", "type": "timestamptz", "required": false },
+            { "name": "data_resposta", "type": "timestamptz", "required": false }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "BriefingTemplate",
+          "fields": [
+            { "name": "id", "type": "string", "required": true },
+            { "name": "titulo", "type": "string | {pt,it,en}", "required": true },
+            { "name": "vertical", "type": "string", "required": true },
+            { "name": "etapa", "type": "string", "required": false },
+            { "name": "versao", "type": "number", "required": false },
+            { "name": "secoes", "type": "Secao[]", "required": true }
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "name": "RespostaDigest",
+          "fields": [
+            { "name": "id", "type": "string", "required": false },
+            { "name": "briefing_id", "type": "string (FK BriefingInstance)", "required": true },
+            { "name": "cliente_nome", "type": "string", "required": true },
+            { "name": "objetivo_sintetizado", "type": "string", "required": true },
+            { "name": "pilares_design", "type": "string[]", "required": true },
+            { "name": "entregaveis_confirmados", "type": "string[]", "required": true },
+            { "name": "integracoes_tecnicas", "type": "string[]", "required": true },
+            { "name": "checklist_kickoff", "type": "{item,status}[]", "required": true },
+            { "name": "aprovado_por", "type": "string", "required": false },
+            { "name": "data_aprovacao", "type": "timestamp | null", "required": false }
+          ],
+          "confidence": "inferred"
+        }
+      ],
+      "business_rules": [
+        { "description": "getTemplates() sempre funde SEED_TEMPLATES do código por cima do cache local", "location": "store.js:846-848", "confidence": "confirmed" },
+        { "description": "Digest de produção é auto-gerado/resintetizado ao marcar submetido ou aprovado_kickoff", "location": "store.js:983-985", "confidence": "confirmed" },
+        { "description": "Checklist de kickoff: 3 primeiros itens sempre recalculados, itens de vertical preservam marcação manual", "location": "store.js:1100-1108", "confidence": "confirmed" },
+        { "description": "Não há validação de transição de status na máquina de estados — qualquer string é aceita", "location": "store.js:975", "confidence": "unknown" },
+        { "description": "generateBriefingId deriva sequência do tamanho atual da lista, não de contador persistente, risco de colisão", "location": "store.js:747-751", "confidence": "inferred" },
+        { "description": "Falhas de rede em sync remoto nunca quebram a UI, são fire-and-forget", "location": "store.js:1391-1400", "confidence": "confirmed" },
+        { "description": "syncAllFromRemote trata o banco remoto como fonte de verdade absoluta, substitui o cache local", "location": "store.js:1454-1457", "confidence": "confirmed" }
+      ],
+      "dependencies": ["auth", "client-intake", "ai-briefing-generator", "api-backend"],
+      "algorithms": [
+        "Geração de código de cliente CLI-XXXX com checagem de colisão (até 100 tentativas)",
+        "Geração de ID de briefing BRF-<ano>-<seq> derivado do tamanho da lista",
+        "Merge code-wins de templates (SEED_TEMPLATES sobrescreve cache)",
+        "Síntese de digest baseada em regras por tipo de campo do template + heurística por vertical",
+        "Cálculo de SLA médio e tempo de descoberta a partir de timestamps",
+        "Filtro many-to-one de status + busca textual simples (includes)"
+      ],
+      "complexity": "high"
+    },
+    {
+      "name": "client-intake",
+      "path": "./",
+      "purpose": "Portal onde o cliente final preenche o briefing: motor de renderização paramétrica, autosave, i18n PT/IT/EN, isolamento zero-leakage entre clientes e fluxo de submissão/travamento final.",
+      "primary_files": [
+        "client-form.html",
+        "form-engine.js"
+      ],
+      "functions": [
+        { "name": "initClientPortal", "file": "form-engine.js", "params": [], "returns": "Promise<void>", "confidence": "confirmed" },
+        { "name": "enforceRoleIsolation", "file": "form-engine.js", "params": [], "returns": "void", "confidence": "confirmed" },
+        { "name": "renderDynamicFormSections", "file": "form-engine.js", "params": [], "returns": "void", "confidence": "confirmed" },
+        { "name": "triggerAutosave", "file": "form-engine.js", "params": [], "returns": "void", "confidence": "confirmed" },
+        { "name": "handleFinalSubmission", "file": "form-engine.js", "params": [], "returns": "void", "confidence": "confirmed" },
+        { "name": "executeFinalSubmission", "file": "form-engine.js", "params": ["confirmadoNome: string", "confirmadoEmail: string"], "returns": "void", "confidence": "confirmed" },
+        { "name": "unlockForEditing", "file": "form-engine.js", "params": [], "returns": "void", "confidence": "confirmed" },
+        { "name": "t", "file": "form-engine.js", "params": ["val: string|object", "vars?: object"], "returns": "string", "confidence": "confirmed" }
+      ],
+      "entities": [],
+      "business_rules": [
+        { "description": "Nunca cair em fallback de 'primeiro cliente disponível' quando code/brief foi passado na URL mas não resolveu, previne vazamento cross-cliente", "location": "form-engine.js:182-185", "confidence": "confirmed" },
+        { "description": "enforceRoleIsolation roda antes de qualquer resolução de dados, inclusive na tela de erro", "location": "form-engine.js:142", "confidence": "confirmed" },
+        { "description": "Autosave promove rascunho para em_preenchimento automaticamente na primeira edição", "location": "form-engine.js:799", "confidence": "confirmed" },
+        { "description": "Edição pós-submissão só oferecida durante status submetido; aprovado_kickoff é terminal na UI do cliente", "location": "form-engine.js:839", "confidence": "confirmed" },
+        { "description": "Digest gerado na submissão é mais simples e fica obsoleto quando a agência abre o briefing no dashboard", "location": "form-engine.js:1044-1060", "confidence": "inferred" },
+        { "description": "Idioma do briefing é por navegador (localStorage), não persistido por cliente/instância no banco", "location": "form-engine.js:222-223", "confidence": "confirmed" }
+      ],
+      "dependencies": ["dashboard-core"],
+      "algorithms": [
+        "Motor de renderização paramétrica por tipo de campo (text, textarea, select, chips_multiselect, cards_single_select, slider, upload)",
+        "Resolução i18n com fallback em cascata (locale ativo -> pt -> it -> en -> primeiro disponível)",
+        "Cálculo de progresso percentual por campos preenchidos",
+        "Gate de isolamento zero-leakage (nunca fallback silencioso quando parâmetro explícito não resolve)",
+        "Autosave com debounce de 600ms"
+      ],
+      "complexity": "high"
+    },
+    {
+      "name": "crm-funil",
+      "path": "./",
+      "purpose": "Funil de vendas/briefings da agência. Módulo com a maior divergência entre implementação real (crm.html, simplificada) e o mockup de referência escolhido pelo usuário (studio_suite_2.0_crm_forms_hub_glassmorphic).",
+      "primary_files": [
+        "crm.html",
+        "modelo_site/studio_suite_2.0/parte2/studio_suite_2.0_crm_forms_hub_glassmorphic/code.html"
+      ],
+      "functions": [
+        { "name": "render", "file": "crm.html", "params": [], "returns": "void", "confidence": "confirmed" },
+        { "name": "columnForStatus", "file": "crm.html", "params": ["status: string"], "returns": "Column", "confidence": "confirmed" },
+        { "name": "attachDragHandlers", "file": "crm.html", "params": [], "returns": "void", "confidence": "confirmed" }
+      ],
+      "entities": [
+        {
+          "name": "Lead (candidata, não existe hoje)",
+          "fields": [
+            { "name": "valor_deal", "type": "numeric", "required": false },
+            { "name": "fonte_lead", "type": "string (enum)", "required": false },
+            { "name": "estagio_funil", "type": "string (enum)", "required": false },
+            { "name": "score_ia", "type": "int 0-100", "required": false },
+            { "name": "insight_ia", "type": "string", "required": false }
+          ],
+          "confidence": "unknown"
+        },
+        {
+          "name": "Projeto (candidata, não existe hoje)",
+          "fields": [],
+          "confidence": "unknown"
+        }
+      ],
+      "business_rules": [
+        { "description": "Implementação atual mapeia 4 colunas 1:1 aos status reais de BriefingInstance; mockup assume 3 estágios de funil de vendas que incluem um estágio pré-briefing (Lead) inexistente no backend", "location": "crm.html vs mockup", "confidence": "confirmed" },
+        { "description": "Todos os valores em R$, scores de IA e insights no mockup são decorativos/estáticos, sem lógica real por trás", "location": "modelo_site/.../crm_forms_hub_glassmorphic/code.html:835-858", "confidence": "confirmed" },
+        { "description": "Mockup funde CRM + Forms Hub em uma única tela; implementação real os mantém como páginas separadas e funcionais", "location": "crm.html + forms-hub.html vs mockup", "confidence": "confirmed" }
+      ],
+      "dependencies": ["dashboard-core", "forms-hub"],
+      "algorithms": [],
+      "complexity": "medium"
+    },
+    {
+      "name": "forms-hub",
+      "path": "forms-hub.html",
+      "purpose": "Catálogo somente-leitura de BriefingTemplate, agrupado por vertical, para consulta de estrutura antes de disparar um briefing.",
+      "primary_files": ["forms-hub.html"],
+      "functions": [
+        { "name": "render", "location": "forms-hub.html:123", "confidence": "confirmed" },
+        { "name": "templateLabel", "location": "forms-hub.html:116", "confidence": "confirmed" },
+        { "name": "getTemplates (import de store.js)", "location": "forms-hub.html:106", "confidence": "confirmed" }
+      ],
+      "entities": [],
+      "business_rules": [
+        { "description": "Tela é 100% somente-leitura: não cria, edita, duplica ou arquiva templates", "location": "forms-hub.html", "confidence": "confirmed" },
+        { "description": "VERTICAL_META é um mapa hardcoded local, duplicado/não sincronizado com qualquer fonte central de verticais", "location": "forms-hub.html:108-114", "confidence": "confirmed" },
+        { "description": "Contagem de seções/campos é sempre recalculada ao vivo a partir de tpl.secoes, nunca armazenada", "location": "forms-hub.html:132-133", "confidence": "confirmed" }
+      ],
+      "dependencies": ["dashboard-core"],
+      "algorithms": [],
+      "complexity": "low"
+    },
+    {
+      "name": "api-backend",
+      "path": "api/",
+      "purpose": "Funções serverless Vercel expondo CRUD sobre clientes e instancias_briefing via @neondatabase/serverless.",
+      "primary_files": ["api/_db.js", "api/clients.js", "api/instances.js"],
+      "functions": [
+        { "name": "getSql", "location": "api/_db.js:31", "confidence": "confirmed" },
+        { "name": "resolveConnectionString", "location": "api/_db.js:18", "confidence": "confirmed" },
+        { "name": "handler (clients.js)", "location": "api/clients.js:26", "confidence": "confirmed" },
+        { "name": "handler (instances.js)", "location": "api/instances.js:32", "confidence": "confirmed" }
+      ],
+      "entities": [],
+      "business_rules": [
+        { "description": "RN-API-01 SEVERIDADE ALTA: nenhum handler de clients.js/instances.js verifica autenticação — requireAuth é só client-side", "location": "api/clients.js, api/instances.js", "confidence": "confirmed" },
+        { "description": "RN-API-02: POST com id existente faz upsert silencioso em vez de recusar duplicidade", "location": "api/clients.js:49-62, api/instances.js:55-63", "confidence": "confirmed" },
+        { "description": "RN-API-03: ON CONFLICT DO UPDATE de POST /api/instances só atualiza etapa_nome/status/atualizado_em, ignorando outros campos enviados", "location": "api/instances.js:58-61", "confidence": "confirmed" },
+        { "description": "RN-API-04: DELETE de instância não limpa o array briefings_ids correspondente em clientes", "location": "api/instances.js:83-88", "confidence": "confirmed" },
+        { "description": "RN-API-05: queries usam SQL parametrizado (tagged template), sem risco de SQL injection", "location": "api/clients.js, api/instances.js", "confidence": "confirmed" }
+      ],
+      "dependencies": ["dashboard-core", "auth"],
+      "algorithms": [],
+      "complexity": "medium"
+    },
+    {
+      "name": "ai-briefing-generator",
+      "path": "ai-briefing-generator.js",
+      "purpose": "Gera novos BriefingTemplate por preset ou prompt livre usando correspondência de regras (não é um modelo de IA real); síntese de digest alternativa não utilizada.",
+      "primary_files": ["ai-briefing-generator.js"],
+      "functions": [
+        { "name": "generateTemplateFromPrompt", "location": "ai-briefing-generator.js:304", "confidence": "confirmed" },
+        { "name": "generateAISynthesis", "location": "ai-briefing-generator.js:413", "confidence": "confirmed" }
+      ],
+      "entities": [],
+      "business_rules": [
+        { "description": "RN-AI-01: a geração por IA é inteiramente simulada por regras/presets estáticos, sem nenhuma chamada de rede a um LLM real", "location": "ai-briefing-generator.js:304-403", "confidence": "confirmed" },
+        { "description": "RN-AI-02: generateAISynthesis é código morto (importado em dashboard.js, nunca chamado); generateProductionDigest (store.js) é a função de fato usada", "location": "ai-briefing-generator.js:413-455, dashboard.js:38-42", "confidence": "confirmed" },
+        { "description": "RN-AI-03: matching de preset é por substring bidirecional case-insensitive contra key/vertical/name", "location": "ai-briefing-generator.js:308-312", "confidence": "confirmed" },
+        { "description": "RN-AI-04: slug do fallback não translitera acentos antes do regex [^a-z0-9]", "location": "ai-briefing-generator.js:321", "confidence": "inferred" }
+      ],
+      "dependencies": ["dashboard-core"],
+      "algorithms": [
+        { "name": "Matching de preset por substring + fallback de síntese textual fixa", "location": "ai-briefing-generator.js:304-403", "confidence": "confirmed" }
+      ],
+      "complexity": "medium"
+    },
+    {
+      "name": "telas-preview-v2",
+      "path": "form-builder.html, projects.html, project-detail.html, client-tracking.html",
+      "purpose": "Quatro telas de preview visual sem lógica real: editor de template, hub de projetos pós-kickoff, detalhe de projeto, portal de acompanhamento do cliente.",
+      "primary_files": ["form-builder.html", "projects.html", "project-detail.html", "client-tracking.html"],
+      "functions": [
+        { "name": "openProcessDrawer/closeProcessDrawer (projects.html)", "location": "projects.html:852-861", "confidence": "confirmed" },
+        { "name": "openNoteDialog/closeNoteDialog/submitNote/handleApprove/showToast (client-tracking.html)", "location": "client-tracking.html:671-705", "confidence": "confirmed" }
+      ],
+      "entities": [
+        { "name": "Projeto (candidata, mesma lacuna do crm-funil)", "fields": [], "confidence": "unknown" },
+        { "name": "AcompanhamentoPosKickoff (candidata, nova)", "fields": [], "confidence": "unknown" }
+      ],
+      "business_rules": [
+        { "description": "RN-PREVIEW-01: nenhuma das 4 telas importa store.js, usa localStorage ou chama /api — confirmado por busca direta", "location": "form-builder.html, projects.html, project-detail.html, client-tracking.html", "confidence": "confirmed" },
+        { "description": "RN-PREVIEW-02: projects.html/project-detail.html pressupõem entidade Projeto, mesma lacuna do crm-funil", "location": "projects.html, project-detail.html", "confidence": "confirmed" },
+        { "description": "RN-PREVIEW-03: client-tracking.html implica um segundo portal de cliente, pós-kickoff, distinto do portal.html de intake", "location": "client-tracking.html", "confidence": "inferred" },
+        { "description": "RN-PREVIEW-04: form-builder.html implica CRUD de BriefingTemplate via UI, ainda inexistente", "location": "form-builder.html", "confidence": "inferred" }
+      ],
+      "dependencies": ["crm-funil", "forms-hub"],
+      "algorithms": [],
+      "complexity": "low"
+    },
+    {
+      "name": "design-reference-stitch",
+      "path": "modelo_site/",
+      "purpose": "Material de referência visual (HTML Stitch) e de intenção de produto (prompts e manual escritos pelo usuário) preservado como fonte de verdade.",
+      "primary_files": [
+        "modelo_site/studio_suite_2.0/parte1/prompts_stitch_studio_suite_2.1.md",
+        "modelo_site/studio_suite_2.0/parte2/manual_de_implementa_o_studio_suite_2.1_para_claude_code.md",
+        "modelo_site/studiointake_product_requirements_document_prd.md"
+      ],
+      "functions": [],
+      "entities": [
+        { "name": "Lead (referência do manual: tabela leads)", "fields": ["id", "company_name", "contact_name", "contact_email", "contact_phone", "segment", "stage", "estimated_value"], "confidence": "inferred" },
+        { "name": "Projeto (referência do manual: tabela projects)", "fields": ["id", "code", "lead_id", "title", "phase", "contracted_value", "allocated_hours", "consumed_hours", "scope_pillars"], "confidence": "inferred" },
+        { "name": "Entregavel (referência do manual: tabela deliverables)", "fields": ["id", "project_id", "title", "version", "status", "thumbnail_url", "file_url"], "confidence": "inferred" }
+      ],
+      "business_rules": [
+        { "description": "O funil de vendas (Lead, 6 estágios, valor estimado, origem) é pedido explícito e priorizado como MVP pelo próprio usuário, não invenção do mockup", "location": "prompts_stitch_studio_suite_2.1.md:7-24,77-89", "confidence": "confirmed" },
+        { "description": "Score de IA e insight textual no card de lead NÃO aparecem no prompt original do usuário, só no mockup glassmorphic — provável adição decorativa do gerador, a confirmar", "location": "prompts_stitch_studio_suite_2.1.md:77-89 vs crm_forms_hub_glassmorphic/code.html", "confidence": "inferred" },
+        { "description": "Entidade Projeto com fases/entregáveis/horas também é MVP priorizado pelo usuário (telas 09/10)", "location": "prompts_stitch_studio_suite_2.1.md:7-24,155-180", "confidence": "confirmed" },
+        { "description": "3 cópias de studio_intake_system/DESIGN.md são idênticas (diff sem diferenças) — sem conteúdo novo entre elas", "location": "modelo_site/studio_intake_system/DESIGN.md e cópias em parte1/parte2", "confidence": "confirmed" }
+      ],
+      "dependencies": ["crm-funil", "telas-preview-v2", "forms-hub"],
+      "algorithms": [],
+      "complexity": "low"
+    }
+  ]
+}
